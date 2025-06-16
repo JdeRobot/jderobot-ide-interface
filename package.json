@@ -1,13 +1,16 @@
 {
   "name": "jderobot-ide-interface",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.1.0",
+  "main": "dist/main.js",
+  "typings": "dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "start": "webpack serve --config ./webpack.config.js --mode development",
-    "build": "webpack --mode production --config ./webpack.config.js"
+    "build": "webpack --mode production --config ./webpack.config.js",
+    "postbuild": "cp package.json dist"
   },
   "keywords": [],
   "author": "",
