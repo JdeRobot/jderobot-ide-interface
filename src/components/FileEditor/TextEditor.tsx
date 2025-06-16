@@ -261,6 +261,7 @@ const FileEditor = ({
       onChange={(newContent: any) => {
         setFileContent(newContent);
       }}
+      // @ts-ignore
       options={editorOptions}
       beforeMount={handleEditorDidMount}
       onMount={handleEditorMount}

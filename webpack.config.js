@@ -24,17 +24,14 @@ module.exports = {
   },
   resolve: {
     alias: aliases(),
-    extensions: [".js", ".jsx",".ts", ".tsx", ".json"],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
     modules: ["node_modules", path.resolve(__dirname, "node_modules")],
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(js|jsx|ts|tsx)$/,
@@ -53,22 +50,28 @@ module.exports = {
         ],
       },
       {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+      {
         test: /\.(png|jpg|gif)$/,
         type: "asset/resource",
       },
       {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
-        use: [{
-          loader: '@svgr/webpack',
-          options: {
-            svgoConfig: {
-              plugins: [
-                { name: 'preset-default', removeViewBox: false },
-              ],
+        use: [
+          {
+            loader: "@svgr/webpack",
+            options: {
+              svgoConfig: {
+                plugins: [{ name: "preset-default", removeViewBox: false }],
+              },
             },
           },
-        }, 'file-loader']
+          "file-loader",
+        ],
       },
     ],
   },

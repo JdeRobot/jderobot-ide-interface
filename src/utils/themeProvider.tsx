@@ -35,10 +35,10 @@ const defaultTheme: Theme = {
 const ThemeContext = createContext(defaultTheme)
 export const useTheme = () => useContext(ThemeContext) ?? defaultTheme
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
+export const ThemeProvider = ({theme, children}:ThemeProviderProps) => {
   return (
-    <ThemeContext.Provider value={merge(defaultTheme, props.theme)}>
-      {props.children}
+    <ThemeContext.Provider value={merge(defaultTheme, theme)}>
+      {children}
     </ThemeContext.Provider>
   )
 }

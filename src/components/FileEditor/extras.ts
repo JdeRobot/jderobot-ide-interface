@@ -1,6 +1,7 @@
 import { Monaco } from "@monaco-editor/react";
 import { my_snippets, Snippet } from "./snippets";
 import {CommsManager} from "jderobot-commsmanager";
+import { ignoreSsrWarning } from "storybook/internal/theming";
 
 interface Position {
   lineNumber: number;
@@ -36,6 +37,7 @@ export const monacoEditorSnippet = (monaco: Monaco, manager: CommsManager| null)
   // Register a completion item provider for the new language
   monaco.languages.registerCompletionItemProvider("python", {
     triggerCharacters: [".", "("],
+    // @ts-ignore
     provideCompletionItems: async (model: any, position: Position) => {
       lock = true;
 

@@ -1,9 +1,11 @@
 {
   "name": "jderobot-ide-interface",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
@@ -48,6 +50,7 @@
     "re-resizable": "^6.11.2",
     "react-spinners": "^0.17.0",
     "sass-loader": "^16.0.5",
+    "ts-loader": "^9.5.2",
     "tsconfig-paths-webpack-plugin": "^4.2.0",
     "webpack-bundle-tracker": "^3.2.1"
   }

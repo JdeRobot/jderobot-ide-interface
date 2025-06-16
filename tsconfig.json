@@ -21,9 +21,7 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "declaration": true,
-    "emitDeclarationOnly": true,
     "outDir": "./dist",
-    "declarationDir": "types",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -32,10 +30,12 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
+    "emitDeclarationOnly": false
   },
   "include": [
     "src",
     "svg.d.ts"
   ]
 }
+
