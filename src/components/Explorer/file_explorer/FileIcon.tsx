@@ -1,0 +1,60 @@
+import {
+  ClosedArrowIcon,
+  OpenArrowIcon,
+  ClosedFolderIcon,
+  OpenFolderIcon,
+  BaseFileIcon,
+  ActionFileIcon,
+} from "Assets";
+
+function FileIcon({
+  is_dir,
+  is_collapsed,
+  name,
+  group,
+}: {
+  is_dir: boolean;
+  is_collapsed: boolean;
+  name: string;
+  group: string;
+}) {
+  var returnVal = (
+    <>
+      <BaseFileIcon className="bt-arrow-icon" fill={"var(--icon)"} />
+    </>
+  );
+
+  if (is_dir) {
+    if (is_collapsed) {
+      return (
+        <>
+          <ClosedArrowIcon className="bt-arrow-icon" stroke={"var(--icon)"} />
+          <ClosedFolderIcon className="bt-arrow-icon" fill={"var(--icon)"} />
+        </>
+      );
+    } else {
+      return (
+        <>
+          <OpenArrowIcon className="bt-arrow-icon" stroke={"var(--icon)"} />
+          <OpenFolderIcon className="bt-arrow-icon" fill={"var(--icon)"} />
+        </>
+      );
+    }
+  }
+
+  switch (group) {
+    case "Action":
+      returnVal = (
+        <>
+          <ActionFileIcon className="bt-arrow-icon" fill={"var(--icon)"} />
+        </>
+      );
+      break;
+
+    default:
+      break;
+  }
+  return returnVal;
+}
+
+export default FileIcon;
