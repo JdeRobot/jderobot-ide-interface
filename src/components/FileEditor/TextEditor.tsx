@@ -52,7 +52,7 @@ const FileEditor = ({
   // const settings = React.useContext(OptionsContext);
 
   const editorRef = useRef<any>(null);
-  const monacoRef = useRef<Monaco>(null);
+  const monacoRef = useRef<Monaco | null>(null);
 
   const [fontSize, setFontSize] = useState(14);
 
