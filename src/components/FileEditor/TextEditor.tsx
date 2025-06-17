@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Editor, { Monaco } from "@monaco-editor/react";
 import "./FileEditor.css";
+import type { editor } from "monaco-editor";
 
 // import { OptionsContext } from "../../options/Options";
-import {CommsManager} from "jderobot-commsmanager";
+import { CommsManager } from "jderobot-commsmanager";
 import { monacoEditorSnippet } from "./extras";
 
 const pylint_error: string[] = ["E0401", "E1101"];
@@ -166,7 +167,7 @@ const FileEditor = ({
         if (commsManager && fileContent) {
           commsManager.code_format(fileContent);
         }
-      },
+      }
     );
 
     return () => {
@@ -176,16 +177,36 @@ const FileEditor = ({
     };
   };
 
+  const lineNumbers: editor.LineNumbersType = "on";
+  const scrollbar: editor.IEditorScrollbarOptions = {
+    vertical: "auto",
+    horizontal: "auto",
+    verticalScrollbarSize: 8,
+    horizontalScrollbarSize: 8,
+  };
+  const hover: editor.IEditorHoverOptions = {
+    enabled: true,
+  };
+  const wordWrap: "on" | "off" | "wordWrapColumn" | "bounded" | undefined =
+    "wordWrapColumn";
+  const wrappingIndent: "indent" | "none" | "same" | "deepIndent" | undefined =
+    "indent";
+  const wordBasedSuggestions:
+    | "off"
+    | "currentDocument"
+    | "matchingDocuments"
+    | "allDocuments" = "currentDocument";
+
   const editorOptions = {
     //
     fontSize: fontSize,
-    lineNumbers: 'on',
+    lineNumbers: lineNumbers,
     roundedSelection: false,
     scrollBeyondLastLine: true,
     // word warp
-    wordWrap: "wordWrapColumn",
+    wordWrap: wordWrap,
     wordWrapColumn: 80,
-    wrappingIndent: "indent",
+    wrappingIndent: wrappingIndent,
     //
     minimap: { enabled: false },
     automaticLayout: true,
@@ -193,19 +214,14 @@ const FileEditor = ({
     rulers: [80],
     suggestOnTriggerCharacters: true,
     quickSuggestions: true,
-    wordBasedSuggestions: true,
+    wordBasedSuggestions: wordBasedSuggestions,
     //
-    hover: true,
+    hover: hover,
     glyphMargin: true,
     lineNumbersMinChars: 3,
     // scroll
     smoothScrolling: true,
-    scrollbar: {
-      vertical: "auto",
-      horizontal: "auto",
-      verticalScrollbarSize: 8,
-      horizontalScrollbarSize: 8,
-    },
+    scrollbar: scrollbar,
   };
 
   useEffect(() => {
@@ -233,7 +249,7 @@ const FileEditor = ({
         if (commsManager && fileContent) {
           commsManager.code_format(fileContent);
         }
-      },
+      }
     );
 
     if (language !== "python") return;
@@ -261,7 +277,6 @@ const FileEditor = ({
       onChange={(newContent: any) => {
         setFileContent(newContent);
       }}
-      // @ts-ignore
       options={editorOptions}
       beforeMount={handleEditorDidMount}
       onMount={handleEditorMount}

@@ -1,7 +1,7 @@
 import { Monaco } from "@monaco-editor/react";
 import { my_snippets, Snippet } from "./snippets";
 import {CommsManager} from "jderobot-commsmanager";
-import { ignoreSsrWarning } from "storybook/internal/theming";
+import type { languages } from 'monaco-editor';
 
 interface Position {
   lineNumber: number;
@@ -37,8 +37,7 @@ export const monacoEditorSnippet = (monaco: Monaco, manager: CommsManager| null)
   // Register a completion item provider for the new language
   monaco.languages.registerCompletionItemProvider("python", {
     triggerCharacters: [".", "("],
-    // @ts-ignore
-    provideCompletionItems: async (model: any, position: Position) => {
+    provideCompletionItems: async (model: any, position: Position): Promise<languages.CompletionList> => {
       lock = true;
 
       var word = model.getWordUntilPosition(position);
@@ -64,7 +63,7 @@ export const monacoEditorSnippet = (monaco: Monaco, manager: CommsManager| null)
       // Check if the Robotics Backend is connected
       // Call the RAM for autocompletion
       if (manager === null) {
-        return snippets;
+        return { suggestions: snippets };
       } 
 
       try {
@@ -74,7 +73,7 @@ export const monacoEditorSnippet = (monaco: Monaco, manager: CommsManager| null)
           word.endColumn - 1
         );
       } catch (error) {
-        return snippets;
+        return { suggestions: snippets };
       }
 
       const callback = (message: any) => {
