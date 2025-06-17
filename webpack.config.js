@@ -21,13 +21,28 @@ module.exports = {
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
-    libraryTarget: 'umd',
-    globalObject: 'this',
+    libraryTarget: "umd",
+    globalObject: "this",
   },
   resolve: {
     alias: aliases(),
     extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
     modules: ["node_modules", path.resolve(__dirname, "node_modules")],
+  },
+  externals: {
+    // Use external version of React
+    react: {
+      commonjs: "react",
+      commonjs2: "react",
+      amd: "react",
+      root: "React",
+    },
+    "react-dom": {
+      commonjs: "react-dom",
+      commonjs2: "react-dom",
+      amd: "react-dom",
+      root: "ReactDOM",
+    },
   },
   module: {
     rules: [
