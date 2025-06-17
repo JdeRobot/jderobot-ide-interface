@@ -1,3 +1,4 @@
+import { Resizable } from "re-resizable"
 import styled from "styled-components"
 
 const primaryColor = "#007bff"
@@ -7,7 +8,7 @@ interface StyledResizableHorizProps {
   hover?: string
 }
 
-export const StyledResizableHoriz = styled.div<StyledResizableHorizProps>`
+export const StyledResizableHoriz = styled(Resizable)<StyledResizableHorizProps>`
   .hresize-handle {
     position: absolute;
     width: 5px !important;
@@ -30,7 +31,7 @@ interface StyledResizableVertProps {
   hover?: string
 }
 
-export const StyledResizableVert = styled.div<StyledResizableVertProps>`
+export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
   .vresize-handle {
     position: absolute;
     height: 5px !important;
@@ -56,5 +57,54 @@ export const StyledHorizContiner = styled.div<StyledHorizContinerProps>`
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  background-color: ${(p) => p.bgColor ?? primaryColor};
+`
+
+interface StyledHorizFillerContinerProps {
+  bgColor?: string
+}
+
+export const StyledHorizFillerContiner = styled.div<StyledHorizFillerContinerProps>`
+  position: relative;
+  user-select: auto;
+  height: auto;
+  max-width: 100%;
+  min-width: 0%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  flex-grow: 1;
+  z-index: 1;
+  background-color: ${(p) => p.bgColor ?? primaryColor};
+`
+
+interface StyledVertContinerProps {
+  bgColor?: string
+}
+
+export const StyledVertContiner = styled.div<StyledVertContinerProps>`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-grow: 1;
+  z-index: 3;
+  background-color: ${(p) => p.bgColor ?? primaryColor};
+`
+
+interface StyledVertFillerContinerProps {
+  bgColor?: string
+}
+
+export const StyledVertFillerContiner = styled.div<StyledVertFillerContinerProps>`
+  position: relative;
+  user-select: auto;
+  width: auto;
+  max-height: 100%;
+  min-height: 0%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  flex-grow: 1;
+  z-index: 1;
   background-color: ${(p) => p.bgColor ?? primaryColor};
 `

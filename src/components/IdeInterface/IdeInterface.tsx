@@ -24,6 +24,7 @@ import {
   StyledIdeHorizContainer,
   StyledIdeVertContainer,
   StyledViewerMenu,
+  StyledViewerMenuButtons,
 } from "./IdeInterface.styles";
 
 export interface IdeInterfaceStyles {
@@ -57,7 +58,7 @@ const IdeInterface = ({
   const theme = useTheme();
 
   return (
-    <StyledIdeHorizContainer bgColor={theme.palette?.primary}>
+    <StyledIdeHorizContainer id="styled-ide-container" bgColor={theme.palette?.primary}>
       <ResizableRow
         baseWidth={[20, 40, 40]}
         maxWidth={[40, 60, 60]}
@@ -134,7 +135,7 @@ const ViewersContainer = ({
   return (
     <>
       <StyledViewerMenu bgColor={theme.palette?.primary}>
-        <div className="ide-viewer-buttons">
+        <StyledViewerMenuButtons>
           {viewers.map((viewer, index) => (
             <button
               className={`ide-viewer-toggle-button ${
@@ -145,7 +146,7 @@ const ViewersContainer = ({
               {viewer.icon}
             </button>
           ))}
-        </div>
+        </StyledViewerMenuButtons>
       </StyledViewerMenu>
       <CollapsableResizableColumn state={visibility}>
         {viewers.map((viewer) => viewer.component)}

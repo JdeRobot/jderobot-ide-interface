@@ -6,12 +6,13 @@ import {
   MonocolorSplashIcon,
   MonocolorUniboticsSplashIcon,
 } from "Assets";
-import { useError } from "Utils";
+import { useError, useTheme } from "Utils";
 // import { OptionsContext } from "../../options/Options";
 import {CommsManager} from "jderobot-commsmanager";
 import { Entry, EditorsEntry } from "Types";
 import TextEditor from "./TextEditor";
 import { Button } from "Components";
+import { StyledEditorMenu } from "./FileEditor.styles";
 
 const fileTypes = {
   json: "json",
@@ -46,6 +47,7 @@ const FileEditor = ({
   extraEditors: EditorsEntry[];
 }) => {
   const { error, warning } = useError();
+  const theme = useTheme();
   // const settings = React.useContext(OptionsContext);
 
   const [fileContent, setFileContent] = useState<string | undefined>(undefined);
@@ -205,7 +207,7 @@ const FileEditor = ({
 
   return (
     <>
-      <div className="bt-editor-menu">
+      <StyledEditorMenu bgColor={theme.palette?.primary}>
         <div className="bt-editor-buttons">
           {hasUnsavedChanges && <div className="bt-unsaved-dot"></div>}
           <Button
@@ -250,7 +252,7 @@ const FileEditor = ({
             return <></>;
           })()}
         </div>
-      </div>
+      </StyledEditorMenu>
       {fileContent ? (
         <>
           {(() => {

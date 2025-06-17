@@ -5,6 +5,9 @@ export interface Theme {
   palette?: {
     text?: string,
     placeholderText?: string,
+    success?: string,
+    warning?: string,
+    error?: string,
     background?: string,
     primary?: string
     secondary?: string
@@ -23,9 +26,12 @@ const defaultTheme: Theme = {
   palette: {
     text: "#ededf2",
     placeholderText: "#a6a6bf",
-    background: "#111116",
-    primary: "#666",
-    secondary: "#03daaf",
+    success: "#29ac29",
+    warning: "#f9e86d",
+    error: "#802626",
+    background: "#16161d",
+    primary: "#134f53",
+    secondary: "#1d777c",
   },
   roundness: 5,
   spacing: 8,
@@ -56,7 +62,7 @@ export const ThemeProvider = ({theme, children}:ThemeProviderProps) => {
 //   --background-700: #a9a9bc;
 //   --background-800: #c5c5d3;
 //   --background-900: #e2e2e9;
-//   --background-950: #f1f1f4;
+//   --background-950:#e79222;
 
 //   --primary: #12494c;
 //   --primary-50: #051415;
@@ -158,24 +164,4 @@ export const ThemeProvider = ({theme, children}:ThemeProviderProps) => {
 
 //   --progress-bar-bg: var(--background-300);
 //   --progress-bar-progress: var(--background-500);
-
-//   --bt-light-text: #ffffff;
-//   --bt-dark-text: #000000;
-//   --bt-selected-shadow-color: var(--background-50);
-//   --bt-action-default-color: red;
-//   --bt-tag-blackboard-background: #5ba498;
-//   --bt-tag-normal-background: #a45b67;
-
-//   --success: #29ac29;
-//   --success-hover: #49eb49;
-//   --running: #c4761e;
-//   --running-hover: #e6881c;
-
-//   --bt-status-running: var(--running);
-//   --bt-status-success: var(--success);
-//   --bt-status-failure: #b11111;
-//   --bt-status-invalid: #494949;
-
-//   --status-bar: var(--primary-100);
-//   --border-radius: 5px;
 // }

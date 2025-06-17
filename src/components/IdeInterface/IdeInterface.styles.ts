@@ -61,3 +61,9 @@ export const StyledViewerMenu = styled.div<StyledViewerMenuProps>`
   z-index: 5;
   background-color: ${(p) => p.bgColor ?? primaryColor};
 `
+
+export const StyledViewerMenuButtons = styled.div`
+  align-items: center;
+  display: flex;
+  height: 100%;
+`
