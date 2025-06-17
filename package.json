@@ -1,6 +1,6 @@
 {
   "name": "jderobot-ide-interface",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -48,6 +48,8 @@
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.9.2",
     "re-resizable": "^6.11.2",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-spinners": "^0.17.0",
     "sass-loader": "^16.0.5",
     "ts-loader": "^9.5.2",
