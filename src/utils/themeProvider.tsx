@@ -1,25 +1,25 @@
-import React, { createContext, useContext } from "react"
-import { merge } from "lodash"
+import React, { createContext, useContext } from "react";
+import { merge } from "lodash";
 
 export interface Theme {
-  palette?: {
-    text?: string,
-    placeholderText?: string,
-    success?: string,
-    warning?: string,
-    error?: string,
-    background?: string,
-    primary?: string
-    secondary?: string
-  }
-  roundness?: number
-  spacing?: number
-  transitionSpeed?: number
+  palette: {
+    text?: string;
+    placeholderText?: string;
+    success?: string;
+    warning?: string;
+    error?: string;
+    background: string;
+    primary?: string;
+    secondary?: string;
+  };
+  roundness?: number;
+  spacing?: number;
+  transitionSpeed?: number;
 }
 
 interface ThemeProviderProps {
-  theme?: Theme
-  children?: React.ReactNode
+  theme?: Theme;
+  children?: React.ReactNode;
 }
 
 const defaultTheme: Theme = {
@@ -36,18 +36,18 @@ const defaultTheme: Theme = {
   roundness: 5,
   spacing: 8,
   transitionSpeed: 200,
-}
+};
 
-const ThemeContext = createContext(defaultTheme)
-export const useTheme = () => useContext(ThemeContext) ?? defaultTheme
+const ThemeContext = createContext(defaultTheme);
+export const useTheme = () => useContext(ThemeContext) ?? defaultTheme;
 
-export const ThemeProvider = ({theme, children}:ThemeProviderProps) => {
+export const ThemeProvider = ({ theme, children }: ThemeProviderProps) => {
   return (
     <ThemeContext.Provider value={merge(defaultTheme, theme)}>
       {children}
     </ThemeContext.Provider>
-  )
-}
+  );
+};
 
 // :root,
 // .bt-App[data-theme="dark"] {

@@ -1,4 +1,3 @@
-import { Resizable } from "re-resizable";
 import { MonocolorSplashIcon } from "Assets";
 import {
   StyledHorizContiner,

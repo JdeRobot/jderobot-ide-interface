@@ -11,7 +11,7 @@ export interface ExplorerEntry {
     create(
       project: string,
       location: string,
-      data: newFileModalData
+      data: newFileModalData,
     ): Promise<void>;
     get(project: string, path: string): Promise<string>;
     rename(project: string, oldPath: string, newPath: string): Promise<void>;
@@ -63,4 +63,3 @@ export interface EditorsEntry {
 }
 
 export type Layout = "only-editor" | "only-viewers" | "both";
-

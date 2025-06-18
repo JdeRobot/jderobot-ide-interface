@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import {Error, ErrorType} from 'Types';
-
+import { Error, ErrorType } from "Types";
 
 const ErrorContext = createContext<Error>({
   isOpen: false,

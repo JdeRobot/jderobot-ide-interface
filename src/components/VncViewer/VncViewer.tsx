@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
-import {CommsManager} from "jderobot-commsmanager";
-import "./VncViewer.css";
+import { CommsManager } from "jderobot-commsmanager";
 import BounceLoader from "react-spinners/BounceLoader";
-import { subscribe, unsubscribe } from "Utils";
+import { subscribe, unsubscribe, useTheme } from "Utils";
+import {
+  StyledVNCScreen,
+  StyledVNCViewer,
+  StyledVNCViewerLoader,
+} from "./VncViewer.styles";
 
 const enabled = (state?: string): boolean => {
   if (
@@ -23,6 +27,7 @@ const VncViewer = ({
   commsManager: CommsManager | null;
   port: number;
 }) => {
+  const theme = useTheme();
   const [state, setState] = useState<string | undefined>(
     commsManager?.getState(),
   );
@@ -40,24 +45,23 @@ const VncViewer = ({
   }, []);
 
   return (
-    <div className="bt-viewer">
+    <StyledVNCViewer bgColor={theme.palette.background}>
       {enabled(state) ? (
-        <iframe
-          title="Gazebo"
-          id={"iframe"}
-          style={{
-            width: "100%",
-            height: "100%",
-            border: 0,
-          }}
+        <StyledVNCScreen
+          title="VNC viewer"
+          id={"vnc-viewer"}
           src={`http://127.0.0.1:${port}/vnc.html?resize=remote&autoconnect=true`}
         />
       ) : (
-        <div className="bt-loader">
-          <BounceLoader color="var(--header)" size={80} speedMultiplier={0.7} />
-        </div>
+        <StyledVNCViewerLoader>
+          <BounceLoader
+            color={theme.palette.primary}
+            size={80}
+            speedMultiplier={0.7}
+          />
+        </StyledVNCViewerLoader>
       )}
-    </div>
+    </StyledVNCViewer>
   );
 };
 

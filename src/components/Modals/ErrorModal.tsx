@@ -3,7 +3,6 @@ import { ErrorType } from "Types";
 import "./ErrorModal.css";
 import Modal from "./Modal";
 
-
 const ErrorModal = () => {
   const { isOpen, msg, type, close } = useError();
 
@@ -73,6 +72,5 @@ const ErrorModal = () => {
     </Modal>
   );
 };
-
 
 export default ErrorModal;

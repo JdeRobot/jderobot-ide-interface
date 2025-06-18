@@ -11,13 +11,34 @@ const meta: Meta<typeof Button> = {
 export default meta;
 
 export const Main: Story = {
-  render: (args) => <Button {...args}> <SaveIcon className="bt-icon" fill={"black"} /> </Button>,
+  render: (args) => (
+    <Button {...args}>
+      <SaveIcon />
+    </Button>
+  ),
   args: {
     active: false,
     variant: "standard",
     title: "My Button",
     id: "id",
-    onClick: () => {console.log("click")},
+    onClick: () => {
+      console.log("click");
+    },
     children: undefined,
   },
+};
+
+export const Tabbed: Story = {
+  args: {
+    active: true,
+    variant: "tab",
+    title: "My Button",
+    id: "id",
+  },
+
+  render: (args) => (
+    <Button {...args}>
+      <SaveIcon />
+    </Button>
+  ),
 };

@@ -8,11 +8,15 @@ import {
 } from "Assets";
 import { useError, useTheme } from "Utils";
 // import { OptionsContext } from "../../options/Options";
-import {CommsManager} from "jderobot-commsmanager";
+import { CommsManager } from "jderobot-commsmanager";
 import { Entry, EditorsEntry } from "Types";
 import TextEditor from "./TextEditor";
-import { Button } from "Components";
-import { StyledEditorMenu } from "./FileEditor.styles";
+import {
+  MenuButton,
+  StyledButtonsContainer,
+  StyledSeparatedButtonsContainer,
+} from "Components";
+import { StyledChangeIndicator, StyledEditorMenu } from "./FileEditor.styles";
 
 const fileTypes = {
   json: "json",
@@ -208,42 +212,45 @@ const FileEditor = ({
   return (
     <>
       <StyledEditorMenu bgColor={theme.palette?.primary}>
-        <div className="bt-editor-buttons">
-          {hasUnsavedChanges && <div className="bt-unsaved-dot"></div>}
-          <Button
-            active={false}
-            variant="standard"
+        <StyledButtonsContainer color={theme.palette?.secondary}>
+          {hasUnsavedChanges && (
+            <StyledChangeIndicator
+              color={theme.palette?.text}
+              id="unsaved-dot"
+            />
+          )}
+          <MenuButton
             id="save-button"
             onClick={handleSaveFile}
             title="Save File"
           >
-            <SaveIcon className="bt-icon" fill={"var(--icon)"} />
-          </Button>
-          <Button
-            active={false}
-            variant="standard"
+            <SaveIcon />
+          </MenuButton>
+          <MenuButton
             id="zoom-in-button"
             onClick={handleZoomIn}
             title="Increase Zoom"
           >
             +
-          </Button>
-          <Button
-            active={false}
-            variant="standard"
+          </MenuButton>
+          <MenuButton
             id="zoom-out-button"
-            onClick={handleZoomOut}
             title="Decrease Zoom"
+            onClick={handleZoomOut}
           >
             -
-          </Button>
+          </MenuButton>
           {(() => {
             for (const editor of extraEditors) {
               if (editor.language === language) {
                 var list: any[] = [];
                 for (const b of editor.buttons) {
                   list.push(
-                    <div className="bt-editor-buttons-container">{b}</div>
+                    <StyledSeparatedButtonsContainer
+                      color={theme.palette?.secondary}
+                    >
+                      {b}
+                    </StyledSeparatedButtonsContainer>,
                   );
                 }
                 return <>{list}</>;
@@ -251,7 +258,7 @@ const FileEditor = ({
             }
             return <></>;
           })()}
-        </div>
+        </StyledButtonsContainer>
       </StyledEditorMenu>
       {fileContent ? (
         <>

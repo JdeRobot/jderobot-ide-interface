@@ -1,7 +1,7 @@
 import "./StatusBar.css";
 
 import { ResetIcon } from "Assets";
-import {CommsManager} from "jderobot-commsmanager";
+import { CommsManager } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
 // import {
 //   getFileList,

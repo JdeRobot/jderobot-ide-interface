@@ -1,14 +1,16 @@
-import { Resizable } from "re-resizable"
-import styled from "styled-components"
+import { Resizable } from "re-resizable";
+import styled from "styled-components";
 
-const primaryColor = "#007bff"
+const primaryColor = "#007bff";
 
 interface StyledResizableHorizProps {
-  color?: string
-  hover?: string
+  color?: string;
+  hover?: string;
 }
 
-export const StyledResizableHoriz = styled(Resizable)<StyledResizableHorizProps>`
+export const StyledResizableHoriz = styled(
+  Resizable,
+)<StyledResizableHorizProps>`
   .hresize-handle {
     position: absolute;
     width: 5px !important;
@@ -24,11 +26,11 @@ export const StyledResizableHoriz = styled(Resizable)<StyledResizableHorizProps>
     }
     background-color: ${(p) => p.color ?? primaryColor};
   }
-`
+`;
 
 interface StyledResizableVertProps {
-  color?: string
-  hover?: string
+  color?: string;
+  hover?: string;
 }
 
 export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
@@ -46,10 +48,10 @@ export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
     }
     background-color: ${(p) => p.color ?? primaryColor};
   }
-`
+`;
 
 interface StyledHorizContinerProps {
-  bgColor?: string
+  bgColor?: string;
 }
 
 export const StyledHorizContiner = styled.div<StyledHorizContinerProps>`
@@ -58,10 +60,10 @@ export const StyledHorizContiner = styled.div<StyledHorizContinerProps>`
   flex-direction: row;
   overflow: hidden;
   background-color: ${(p) => p.bgColor ?? primaryColor};
-`
+`;
 
 interface StyledHorizFillerContinerProps {
-  bgColor?: string
+  bgColor?: string;
 }
 
 export const StyledHorizFillerContiner = styled.div<StyledHorizFillerContinerProps>`
@@ -75,10 +77,10 @@ export const StyledHorizFillerContiner = styled.div<StyledHorizFillerContinerPro
   flex-grow: 1;
   z-index: 1;
   background-color: ${(p) => p.bgColor ?? primaryColor};
-`
+`;
 
 interface StyledVertContinerProps {
-  bgColor?: string
+  bgColor?: string;
 }
 
 export const StyledVertContiner = styled.div<StyledVertContinerProps>`
@@ -90,10 +92,10 @@ export const StyledVertContiner = styled.div<StyledVertContinerProps>`
   flex-grow: 1;
   z-index: 3;
   background-color: ${(p) => p.bgColor ?? primaryColor};
-`
+`;
 
 interface StyledVertFillerContinerProps {
-  bgColor?: string
+  bgColor?: string;
 }
 
 export const StyledVertFillerContiner = styled.div<StyledVertFillerContinerProps>`
@@ -107,4 +109,4 @@ export const StyledVertFillerContiner = styled.div<StyledVertFillerContinerProps
   flex-grow: 1;
   z-index: 1;
   background-color: ${(p) => p.bgColor ?? primaryColor};
-`
+`;

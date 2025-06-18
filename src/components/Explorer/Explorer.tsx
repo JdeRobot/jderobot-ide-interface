@@ -22,7 +22,6 @@ import {
 } from "Assets";
 import { useError } from "Utils";
 
-
 function getParentDir(file: Entry) {
   // Check if is a directory and if not get the parent directory of the file
   if (file.is_dir) {
@@ -50,7 +49,7 @@ const Explorer = ({
   const [deleteEntry, setDeleteEntry] = useState<Entry | undefined>(undefined);
   const [renameEntry, setRenameEntry] = useState<Entry | undefined>(undefined);
   const [selectedEntry, setSelectedEntry] = useState<Entry | undefined>(
-    undefined
+    undefined,
   );
   const [selectedLocation, setSelectedLocation] = useState("");
 
@@ -118,7 +117,7 @@ const Explorer = ({
 
   const handleNewActionSubmit = async (
     location: string,
-    data: newFileModalData
+    data: newFileModalData,
   ) => {
     handleCloseNewFileModal();
 
@@ -210,7 +209,7 @@ const Explorer = ({
 
   const handleCreateFolderSubmit = async (
     location: string,
-    folder_name: string
+    folder_name: string,
   ) => {
     if (folder_name !== "") {
       try {

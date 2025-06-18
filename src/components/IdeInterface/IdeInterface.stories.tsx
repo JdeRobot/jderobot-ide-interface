@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import IdeInterface from "./IdeInterface";
-import { newFileModalData } from "Types";
+import { VncViewer } from "Components";
+import { SaveIcon } from "Assets";
 
 type Story = StoryObj<typeof IdeInterface>;
 
@@ -30,6 +31,22 @@ const meta: Meta<typeof IdeInterface> = {
 
 export default meta;
 
+const gazeboViewer = {
+  component: <VncViewer commsManager={null} port={6080} />,
+  icon: <SaveIcon />,
+  name: "Gazebo",
+  active: false,
+  activate: () => {},
+};
+
+const terminalViewer = {
+  component: <VncViewer commsManager={null} port={1108} />,
+  icon: <SaveIcon />,
+  name: "Terminal",
+  active: false,
+  activate: () => {},
+};
+
 export const Main: Story = {
   render: (args) => (
     <div style={{ width: "100vw", height: "100vh" }}>
@@ -41,7 +58,7 @@ export const Main: Story = {
         explorers={[]}
         editorApi={[]}
         extraEditors={[]}
-        viewers={[]}
+        viewers={[gazeboViewer, terminalViewer]}
         options={[]}
       />
     </div>

@@ -4,10 +4,7 @@ import { ActionIcon } from "Assets";
 import FileIcon from "./FileIcon";
 // import { OptionsContext } from "../../../options/Options";
 import { ContextMenuProps } from "./MoreActionsMenu";
-import {
-  subscribe,
-  unsubscribe,
-} from "Utils";
+import { subscribe, unsubscribe } from "Utils";
 import { Entry, AccentColorEventData } from "Types";
 
 function TreeNode({
@@ -118,4 +115,3 @@ function TreeNode({
 }
 
 export default TreeNode;
-

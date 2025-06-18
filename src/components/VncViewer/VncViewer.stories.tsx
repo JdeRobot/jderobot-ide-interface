@@ -11,7 +11,7 @@ export default meta;
 
 export const Main: Story = {
   render: () => (
-    <div style={{ width: "100vh", height: "100vh" }}>
+    <div style={{ width: "100%", height: "50vh" }}>
       <VncViewer commsManager={null} port={0} />
     </div>
   ),

@@ -1,9 +1,9 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
-const primaryColor = "#666"
+const primaryColor = "#666";
 
 interface StyledIdeHorizContainerProps {
-  bgColor?: string
+  bgColor?: string;
 }
 
 export const StyledIdeHorizContainer = styled.div<StyledIdeHorizContainerProps>`
@@ -14,10 +14,10 @@ export const StyledIdeHorizContainer = styled.div<StyledIdeHorizContainerProps>`
   width: 100%;
   height: 100%;
   background-color: ${(p) => p.bgColor ?? primaryColor};
-`
+`;
 
 interface StyledIdeVertContainerProps {
-  bgColor?: string
+  bgColor?: string;
 }
 
 export const StyledIdeVertContainer = styled.div<StyledIdeVertContainerProps>`
@@ -29,10 +29,10 @@ export const StyledIdeVertContainer = styled.div<StyledIdeVertContainerProps>`
   flex-grow: 1;
   z-index: 3;
   background-color: ${(p) => p.bgColor ?? primaryColor};
-`
+`;
 
 interface StyledIdeContainerProps {
-  bgColor?: string
+  bgColor?: string;
 }
 
 export const StyledIdeContainer = styled.div<StyledIdeContainerProps>`
@@ -45,10 +45,10 @@ export const StyledIdeContainer = styled.div<StyledIdeContainerProps>`
   justify-content: center;
   z-index: 3;
   background-color: ${(p) => p.bgColor ?? primaryColor};
-`
+`;
 
 interface StyledViewerMenuProps {
-  bgColor?: string
+  bgColor?: string;
 }
 
 export const StyledViewerMenu = styled.div<StyledViewerMenuProps>`
@@ -59,11 +59,7 @@ export const StyledViewerMenu = styled.div<StyledViewerMenuProps>`
   max-height: 32px;
   width: 100%;
   z-index: 5;
+  padding-left: 10px;
+  padding-right: 5px;
   background-color: ${(p) => p.bgColor ?? primaryColor};
-`
-
-export const StyledViewerMenuButtons = styled.div`
-  align-items: center;
-  display: flex;
-  height: 100%;
-`
+`;

@@ -12,7 +12,8 @@
     "build-storybook": "storybook build",
     "start": "webpack serve --config ./webpack.config.js --mode development",
     "build": "webpack --mode production --config ./webpack.config.js",
-    "postbuild": "cp package.json dist"
+    "postbuild": "cp package.json dist",
+    "format": "prettier --write src/**/*.{css,tsx,ts,html}"
   },
   "keywords": [],
   "author": "",
@@ -44,7 +45,8 @@
     "webpack": "^5.99.9",
     "webpack-bundle-tracker": "^3.2.1",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.2"
+    "webpack-dev-server": "^5.2.2",
+    "prettier": "^3.5.3"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",

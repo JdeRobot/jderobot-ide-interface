@@ -1,1 +1,1 @@
-export { default as VncViewer } from "./VncViewer"
+export { default as VncViewer } from "./VncViewer";

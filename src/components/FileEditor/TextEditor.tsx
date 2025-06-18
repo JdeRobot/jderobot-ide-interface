@@ -6,6 +6,7 @@ import type { editor } from "monaco-editor";
 // import { OptionsContext } from "../../options/Options";
 import { CommsManager } from "jderobot-commsmanager";
 import { monacoEditorSnippet } from "./extras";
+import { useTheme } from "Utils";
 
 const pylint_error: string[] = ["E0401", "E1101"];
 const pylint_warning: string[] = ["W0611"];
@@ -50,6 +51,7 @@ const FileEditor = ({
   zoomLevel: number;
 }) => {
   // const settings = React.useContext(OptionsContext);
+  const theme = useTheme();
 
   const editorRef = useRef<any>(null);
   const monacoRef = useRef<Monaco | null>(null);
@@ -136,7 +138,7 @@ const FileEditor = ({
       inherit: true,
       rules: [],
       colors: {
-        "editor.background": "#16161d",
+        "editor.background": theme.palette.background,
       },
     });
     monaco.editor.defineTheme("light-theme", {
@@ -144,7 +146,7 @@ const FileEditor = ({
       inherit: true,
       rules: [],
       colors: {
-        "editor.background": "#e2e2e9",
+        "editor.background": theme.palette.background,
       },
     });
   };
@@ -167,7 +169,7 @@ const FileEditor = ({
         if (commsManager && fileContent) {
           commsManager.code_format(fileContent);
         }
-      }
+      },
     );
 
     return () => {
@@ -249,7 +251,7 @@ const FileEditor = ({
         if (commsManager && fileContent) {
           commsManager.code_format(fileContent);
         }
-      }
+      },
     );
 
     if (language !== "python") return;

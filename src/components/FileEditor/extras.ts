@@ -1,7 +1,7 @@
 import { Monaco } from "@monaco-editor/react";
 import { my_snippets, Snippet } from "./snippets";
-import {CommsManager} from "jderobot-commsmanager";
-import type { languages } from 'monaco-editor';
+import { CommsManager } from "jderobot-commsmanager";
+import type { languages } from "monaco-editor";
 
 interface Position {
   lineNumber: number;
@@ -26,7 +26,10 @@ interface CompletionItem {
 }
 
 // Main Editor Snippets
-export const monacoEditorSnippet = (monaco: Monaco, manager: CommsManager| null) => {
+export const monacoEditorSnippet = (
+  monaco: Monaco,
+  manager: CommsManager | null,
+) => {
   monaco.languages.register({ id: "python" });
 
   const EventEmitter = require("events");
@@ -37,7 +40,10 @@ export const monacoEditorSnippet = (monaco: Monaco, manager: CommsManager| null)
   // Register a completion item provider for the new language
   monaco.languages.registerCompletionItemProvider("python", {
     triggerCharacters: [".", "("],
-    provideCompletionItems: async (model: any, position: Position): Promise<languages.CompletionList> => {
+    provideCompletionItems: async (
+      model: any,
+      position: Position,
+    ): Promise<languages.CompletionList> => {
       lock = true;
 
       var word = model.getWordUntilPosition(position);
@@ -64,13 +70,13 @@ export const monacoEditorSnippet = (monaco: Monaco, manager: CommsManager| null)
       // Call the RAM for autocompletion
       if (manager === null) {
         return { suggestions: snippets };
-      } 
+      }
 
       try {
         manager.code_autocomplete(
           model.getValue(),
           position.lineNumber,
-          word.endColumn - 1
+          word.endColumn - 1,
         );
       } catch (error) {
         return { suggestions: snippets };

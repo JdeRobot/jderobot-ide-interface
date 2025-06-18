@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { CommsManager } from "jderobot-commsmanager";
 
-import "./IdeInterface.css";
 import {
   StatusBar,
   Explorer,
@@ -9,6 +8,8 @@ import {
   ResizableColumn,
   ResizableRow,
   FileEditor,
+  Button,
+  StyledButtonsContainer,
 } from "Components";
 import { useTheme } from "Utils";
 import {
@@ -24,7 +25,6 @@ import {
   StyledIdeHorizContainer,
   StyledIdeVertContainer,
   StyledViewerMenu,
-  StyledViewerMenuButtons,
 } from "./IdeInterface.styles";
 
 export interface IdeInterfaceStyles {
@@ -58,7 +58,10 @@ const IdeInterface = ({
   const theme = useTheme();
 
   return (
-    <StyledIdeHorizContainer id="styled-ide-container" bgColor={theme.palette?.primary}>
+    <StyledIdeHorizContainer
+      id="styled-ide-container"
+      bgColor={theme.palette?.primary}
+    >
       <ResizableRow
         baseWidth={[20, 40, 40]}
         maxWidth={[40, 60, 60]}
@@ -116,7 +119,7 @@ const ViewersContainer = ({
   options: any;
 }) => {
   const [visibility, setVisibility] = useState<boolean[]>(
-    Array(viewers.length).fill(false)
+    Array(viewers.length).fill(false),
   );
   const theme = useTheme();
 
@@ -128,25 +131,26 @@ const ViewersContainer = ({
         } else {
           return state;
         }
-      })
+      }),
     );
   };
 
   return (
     <>
       <StyledViewerMenu bgColor={theme.palette?.primary}>
-        <StyledViewerMenuButtons>
+        <StyledButtonsContainer>
           {viewers.map((viewer, index) => (
-            <button
-              className={`ide-viewer-toggle-button ${
-                visibility[index] ? "active" : ""
-              }`}
+            <Button
+              active={visibility[index]}
+              variant="tab"
+              title={`Toggle ${viewer.name}`}
+              id={`${viewer.name}-toggle`}
               onClick={() => toggleVisibility(index)}
             >
               {viewer.icon}
-            </button>
+            </Button>
           ))}
-        </StyledViewerMenuButtons>
+        </StyledButtonsContainer>
       </StyledViewerMenu>
       <CollapsableResizableColumn state={visibility}>
         {viewers.map((viewer) => viewer.component)}

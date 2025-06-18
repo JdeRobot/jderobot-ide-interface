@@ -1,6 +1,7 @@
 import { useTheme } from "Utils";
 import { StyledButton } from "./Button.styles";
-export type ButtonVariant = "standard" | "outlined";
+export type ButtonVariant = "standard" | "colored" | "tab";
+
 const Button = ({
   active = false,
   variant = "standard",
@@ -10,7 +11,7 @@ const Button = ({
   children,
 }: {
   active: boolean;
-  variant: "standard" | "outlined";
+  variant: ButtonVariant;
   title: string;
   id: string;
   onClick: Function;
@@ -20,10 +21,10 @@ const Button = ({
 
   return (
     <StyledButton
-      bgColor={theme.palette?.primary}
-      color={theme.palette?.secondary}
+      bgColor={theme.palette?.secondary}
+      color={theme.palette?.text}
       roundness={theme.roundness}
-      variant="standard"
+      variant={variant}
       title={title}
       id={id}
       active={active}
@@ -35,3 +36,27 @@ const Button = ({
 };
 
 export default Button;
+
+export const MenuButton = ({
+  title,
+  id,
+  onClick,
+  children,
+}: {
+  title: string;
+  id: string;
+  onClick: Function;
+  children: any;
+}) => {
+  return (
+    <Button
+      active={false}
+      variant="standard"
+      title={title}
+      id={id}
+      onClick={() => onClick()}
+    >
+      {children}
+    </Button>
+  );
+};

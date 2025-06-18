@@ -54,7 +54,8 @@ export const my_snippets: Snippet[] = [
     type: "snippet",
     label: "ifelif",
     code: "elif ${1:condition}:\n\t${2:# code}",
-    docstring: "if ${1:condition}:\n\t${2:# code}\nelif ${3:condition}:\n\t${4:# code}",
+    docstring:
+      "if ${1:condition}:\n\t${2:# code}\nelif ${3:condition}:\n\t${4:# code}",
   },
   {
     type: "snippet",
@@ -146,8 +147,7 @@ export const my_snippets: Snippet[] = [
     type: "snippet",
     label: "compile",
     code: "compile(source, filename, mode, flag, dont_inherit, optimize)",
-    docstring:
-      "compile(source, filename, mode, flag, dont_inherit, optimize)",
+    docstring: "compile(source, filename, mode, flag, dont_inherit, optimize)",
   },
   {
     type: "snippet",
@@ -502,8 +502,7 @@ export const my_snippets: Snippet[] = [
     type: "snippet",
     label: "ifelifelse",
     code: "if condition:\n  pass\nelif condition:\n  pass\nelse:\n  pass",
-    docstring:
-      "if condition:\n  pass\nelif condition:\n  pass\nelse:\n  pass",
+    docstring: "if condition:\n  pass\nelif condition:\n  pass\nelse:\n  pass",
   },
   {
     type: "snippet",
@@ -1109,8 +1108,7 @@ export const my_snippets: Snippet[] = [
     type: "snippet",
     label: "__next__",
     code: "def __next__(self):\n  x = self.a\n  self.a += 1\n  return x",
-    docstring:
-      "def __next__(self):\n  x = self.a\n  self.a += 1\n  return x",
+    docstring: "def __next__(self):\n  x = self.a\n  self.a += 1\n  return x",
   },
   {
     type: "snippet",
@@ -1140,70 +1138,70 @@ export const my_snippets: Snippet[] = [
   {
     type: "snippet",
     label: "readImgColor",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.imread(${1:image_path}, cv2.IMREAD_COLOR)",
     docstring: "This method is used to read an image from its path.",
   },
   {
     type: "snippet",
     label: "readImgBW",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.imread(${1:image_path}, cv2.IMREAD_GRAYSCALE)",
     docstring: "This method is used to read an image from its path.",
   },
   {
     type: "snippet",
     label: "line",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.line(${1:img}, ${2:start_coordinates}, ${3:end_coordinate}, ${4:color_in_bgr}, ${5:thickness})",
     docstring: "Draws a line segment connecting two points.",
   },
   {
     type: "snippet",
     label: "rectangle",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.rectangle(${1:img},${2:top_left_vertex_coordinates}, ${3:lower_right_vertex_coordinates}, ${4:color_in_bgr}, ${5:thickness})",
     docstring: "Draws a simple, thick, or filled up-right rectangle.",
   },
   {
     type: "snippet",
     label: "circle",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.circle(${1:img}, ${2:center_coordinates}, ${3:radius}, ${4:color}, ${5:thickness})",
     docstring: "Draws a circle",
   },
   {
     type: "snippet",
     label: "polylines",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.polylines(${1:img}, ${2:[pts]}, ${3:isClosed}, ${4:color}, ${5:thickness})",
     docstring: "Draws several polygonal curves.",
   },
   {
     type: "snippet",
     label: "text",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.putText(${1:img}, ${2:‘TextContent’}, ${3:‘text_starting_point_coordinates’})",
     docstring: "Draws a text string.",
   },
   {
     type: "snippet",
     label: "addImg",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.add(${1:img1}, ${2:img2})",
     docstring: "This function is used to add two images.",
   },
   {
     type: "snippet",
     label: "subtractImg",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.subtract(${1:img1}, ${2:img2})",
     docstring: "This function is used to subtract two images.",
   },
   {
     type: "snippet",
     label: "addWeightedImg",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.addWeighted(${1:img1}, ${2:weight1}, ${3:img2}, ${4:weight2}, ${5:gammaValue})",
     docstring:
       "This is also known as Alpha Blending. This is nothing but a weighted blending process of two images.",
@@ -1211,7 +1209,7 @@ export const my_snippets: Snippet[] = [
   {
     type: "snippet",
     label: "bitwise_and",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.bitwise_and(${1:img1}, ${2:img2}, ${3:destination}, ${4:mask})",
     docstring:
       "This performs bitwise and logical operations between two images.",
@@ -1219,7 +1217,7 @@ export const my_snippets: Snippet[] = [
   {
     type: "snippet",
     label: "bitwise_or",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.bitwise_or(${1:img1}, ${2:img2}, ${3:destination}, ${4:mask})",
     docstring:
       "This performs bitwise or logical operations between two images.",
@@ -1227,7 +1225,7 @@ export const my_snippets: Snippet[] = [
   {
     type: "snippet",
     label: "bitwise_not",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.bitwise_not(${1:img}, ${2:destination}, ${3:mask})",
     docstring:
       "This performs bitwise not logical operations between an image and a mask.",
@@ -1235,7 +1233,7 @@ export const my_snippets: Snippet[] = [
   {
     type: "snippet",
     label: "bitwise_xor",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.bitwise_xor(${1:img1}, ${2:img2}, ${3:destination}, ${4:mask})",
     docstring:
       "This performs bitwise xor logical operations between two images.",
@@ -1243,7 +1241,7 @@ export const my_snippets: Snippet[] = [
   {
     type: "snippet",
     label: "inRange",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.inRange(${1:raw_img}, ${2:lower}, ${3:upper})",
     docstring:
       "Checks if array elements lie between the elements of two other arrays.",
@@ -1251,15 +1249,15 @@ export const my_snippets: Snippet[] = [
   {
     type: "snippet",
     label: "bgr2gray",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.cvtColor(${1:img}, cv2.COLOR_BGR2GRAY)",
     docstring: "Converts an image from one BGR color space to GRAY.",
   },
   {
     type: "snippet",
     label: "bgr2hsv",
-    detail:"cv2",
+    detail: "cv2",
     code: "cv2.cvtColor(${1:img}, cv2.COLOR_BGR2HSV)",
     docstring: "Converts an image from one BGR color space to HSV.",
-  }
+  },
 ];
