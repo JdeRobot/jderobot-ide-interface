@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
-
-import { ActionIcon } from "Assets";
+import { useEffect, useState } from "react";
 import FileIcon from "./FileIcon";
 // import { OptionsContext } from "../../../options/Options";
 import { ContextMenuProps } from "./MoreActionsMenu";
-import { subscribe, unsubscribe } from "Utils";
+import { subscribe, unsubscribe, useTheme } from "Utils";
 import { Entry, AccentColorEventData } from "Types";
+import {
+  StyledActionIcon,
+  StyledExplorerItem,
+  StyledExplorerItemContainer,
+} from "./TreeNode.styles";
 
 function TreeNode({
   node,
@@ -22,6 +25,7 @@ function TreeNode({
   handleFolderClick: Function;
   menuProps: ContextMenuProps;
 }) {
+  const theme = useTheme();
   const [isCollapsed, setCollapsed] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
   const [accentColor, setAccentColor] = useState<string | undefined>(undefined);
@@ -65,14 +69,13 @@ function TreeNode({
 
   return (
     <>
-      <div
-        className={`bt-file-item-container ${currentFile && currentFile.path === node.path ? "bt-file-item-selected-container" : ""}`}
+      <StyledExplorerItemContainer
+        active={currentFile && currentFile.path === node.path}
+        bgColor={theme.palette.primary}
+        hoverColor={theme.palette.primary}
         onClick={() => handleClick()}
       >
-        <div
-          className={"bt-file-item"}
-          style={{ paddingLeft: depth * 20 + "px" }}
-        >
+        <StyledExplorerItem color={theme.palette.text} depth={depth}>
           <FileIcon
             is_dir={node.is_dir}
             is_collapsed={isCollapsed}
@@ -80,25 +83,19 @@ function TreeNode({
             group={node.group}
           />
           <label>{node.name}</label>
-          {/* Add menu button */}
-          <ActionIcon
-            className="bt-more-action-icon bt-arrow-icon"
-            stroke={"var(--icon)"}
+          <StyledActionIcon
+            stroke={theme.palette.text}
+            id="explorer-action-button"
             title={"More"}
             onClick={(e) => {
               menuProps.showMoreActionsMenu(e, node);
             }}
           />
           {/* {settings.editorShowAccentColors.value && (
-            <div
-              className="bt-accent-color"
-              style={{
-                backgroundColor: accentColor ? accentColor : "none",
-              }}
-            />
+            <StyledExplorerAccent color={accentColor ? accentColor : "none"} />
           )} */}
-        </div>
-      </div>
+        </StyledExplorerItem>
+      </StyledExplorerItemContainer>
       {!isCollapsed &&
         node.files.map((x) => (
           <TreeNode

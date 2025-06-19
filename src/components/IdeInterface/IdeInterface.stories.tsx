@@ -67,3 +67,46 @@ export const Main: Story = {
     layout: "both",
   },
 };
+
+
+// const explorer: ExplorerEntry = {
+//   name: "string";
+//   list(project: string): Promise<string>;
+//   file: {
+//     create(
+//       project: string,
+//       location: string,
+//       data: newFileModalData,
+//     ): Promise<void>;
+//     get(project: string, path: string): Promise<string>;
+//     rename(project: string, oldPath: string, newPath: string): Promise<void>;
+//     delete(project: string, path: string): Promise<void>;
+//   };
+//   folder: {
+//     create(project: string, location: string, name: string): Promise<void>;
+//     rename(project: string, oldPath: string, newPath: string): Promise<void>;
+//     delete(project: string, path: string): Promise<void>;
+//   };
+// }
+
+
+// export const WithExplorers: Story = {
+//   render: (args) => (
+//     <div style={{ width: "100vw", height: "100vh" }}>
+//       <IdeInterface
+//         {...args}
+//         commsManager={null}
+//         resetManager={() => {}}
+//         project={"currentProjectname"}
+//         explorers={[]}
+//         editorApi={[]}
+//         extraEditors={[]}
+//         viewers={[gazeboViewer, terminalViewer]}
+//         options={[]}
+//       />
+//     </div>
+//   ),
+//   args: {
+//     layout: "both",
+//   },
+// };

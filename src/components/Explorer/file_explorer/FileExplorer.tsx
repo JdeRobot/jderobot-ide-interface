@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-
-import "./FileExplorer.css";
 import TreeNode from "./TreeNode";
 import MoreActionsMenu, { ContextMenuProps } from "./MoreActionsMenu";
 import { Entry } from "Types";
+import { StyledSidebarEntryContainer } from "./FileExplorer.styles";
 
 const FileExplorer = ({
   setCurrentFile,
@@ -66,7 +65,7 @@ const FileExplorer = ({
 
   if (Array.isArray(fileList)) {
     return (
-      <div className="bt-sidebar-entry-contents">
+      <StyledSidebarEntryContainer>
         {fileList.map((file) => (
           <TreeNode
             node={file}
@@ -88,7 +87,7 @@ const FileExplorer = ({
             onRename={onRename}
           />
         )}
-      </div>
+      </StyledSidebarEntryContainer>
     );
   } else {
     return (

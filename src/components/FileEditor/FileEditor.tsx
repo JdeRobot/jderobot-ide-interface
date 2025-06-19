@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./FileEditor.css";
+import { useEffect, useRef, useState } from "react";
 
 import {
   SaveIcon,

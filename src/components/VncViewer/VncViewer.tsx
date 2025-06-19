@@ -50,7 +50,7 @@ const VncViewer = ({
         <StyledVNCScreen
           title="VNC viewer"
           id={"vnc-viewer"}
-          src={`http://127.0.0.1:${port}/vnc.html?resize=remote&autoconnect=true`}
+          src={`http://127.0.0.1:${port}/vnc.html?resize=remote&autoconnect=true&reconnect=true`}
         />
       ) : (
         <StyledVNCViewerLoader>

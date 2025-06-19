@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import JSZip from "jszip";
-import "./Explorer.css";
 import {
   NewFileModal,
   RenameModal,
   NewFolderModal,
   UploadModal,
   DeleteModal,
-  Button,
+  MenuButton,
 } from "Components";
 import FileExplorer from "./file_explorer/FileExplorer";
 
@@ -20,7 +19,9 @@ import {
   RefreshIcon,
   RenameIcon,
 } from "Assets";
-import { useError } from "Utils";
+import { useError, useTheme } from "Utils";
+import { StyledSidebarContainer, StyledSidebarEntry, StyledSidebarEntryMenu } from "./Explorer.styles";
+import { MenuButtonStroke } from "../Button/Button";
 
 function getParentDir(file: Entry) {
   // Check if is a directory and if not get the parent directory of the file
@@ -44,6 +45,7 @@ const Explorer = ({
   api: ExplorerEntry;
 }) => {
   const { warning, error } = useError();
+  const theme = useTheme();
 
   const [fileList, setFileList] = useState<Entry[]>([]);
   const [deleteEntry, setDeleteEntry] = useState<Entry | undefined>(undefined);
@@ -347,52 +349,50 @@ const Explorer = ({
   };
 
   return (
-    <div className="bt-sidebar-content" id={api.name}>
-      <div className="bt-sidebar-entry">
-        <div className="bt-sidebar-entry-menu">
-          <Button
-            active={false}
-            variant="standard"
-            id="create-file-open"
+    <StyledSidebarContainer id={api.name}>
+      <StyledSidebarEntry>
+        <StyledSidebarEntryMenu bgColor={theme.palette.secondary}>
+          <MenuButton
+            id="new-file-button"
             onClick={() => handleCreateFile(undefined)}
             title="Create a new file"
           >
             <AddIcon className="bt-icon" fill={"var(--icon)"} />
-          </Button>
-          <button
-            className="bt-sidebar-button"
+          </MenuButton>
+          <MenuButtonStroke
+            id="new-folder-button"
             onClick={() => handleCreateFolder(undefined)}
             title="Create a new folder"
           >
             <AddFolderIcon className="bt-icon" stroke={"var(--icon)"} />
-          </button>
-          <button
-            className="bt-sidebar-button"
+          </MenuButtonStroke>
+          <MenuButtonStroke
+            id="refresh-explorer-button"
             onClick={() => fetchFileList()}
             title="Refresh View"
           >
             <RefreshIcon className="bt-icon" stroke={"var(--icon)"} />
-          </button>
+          </MenuButtonStroke>
           <div style={{ marginLeft: "auto" }} />
           {currentFile && (
             <>
-              <button
-                className="bt-sidebar-button"
+              <MenuButtonStroke
+                id="rename-file-button"
                 onClick={handleRenameCurrentFile}
                 title="Rename file"
               >
                 <RenameIcon className="bt-icon" stroke={"var(--icon)"} />
-              </button>
-              <button
-                className="bt-sidebar-button"
+              </MenuButtonStroke>
+              <MenuButton
+                id="delete-file-button"
                 onClick={handleDeleteCurrentFile}
                 title="Delete file"
               >
                 <DeleteIcon className="bt-icon" fill={"var(--icon)"} />
-              </button>
+              </MenuButton>
             </>
           )}
-        </div>
+        </StyledSidebarEntryMenu>
         <FileExplorer
           setCurrentFile={setCurrentFile}
           currentFile={currentFile}
@@ -407,7 +407,7 @@ const Explorer = ({
           onDownload={handleDownload}
           onRename={handleRename}
         />
-      </div>
+      </StyledSidebarEntry>
       <NewFileModal
         isOpen={isNewFileModalOpen}
         onSubmit={handleNewActionSubmit}
@@ -446,7 +446,7 @@ const Explorer = ({
           selectedEntry={deleteEntry}
         />
       )}
-    </div>
+    </StyledSidebarContainer>
   );
 };
 

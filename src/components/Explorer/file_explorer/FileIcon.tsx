@@ -6,6 +6,7 @@ import {
   BaseFileIcon,
   ActionFileIcon,
 } from "Assets";
+import { useTheme } from "Utils";
 
 function FileIcon({
   is_dir,
@@ -18,9 +19,11 @@ function FileIcon({
   name: string;
   group: string;
 }) {
+  const theme = useTheme();
+
   var returnVal = (
     <>
-      <BaseFileIcon className="bt-arrow-icon" fill={"var(--icon)"} />
+      <BaseFileIcon fill={theme.palette.text} />
     </>
   );
 
@@ -28,15 +31,15 @@ function FileIcon({
     if (is_collapsed) {
       return (
         <>
-          <ClosedArrowIcon className="bt-arrow-icon" stroke={"var(--icon)"} />
-          <ClosedFolderIcon className="bt-arrow-icon" fill={"var(--icon)"} />
+          <ClosedArrowIcon stroke={theme.palette.text} />
+          <ClosedFolderIcon fill={theme.palette.text} />
         </>
       );
     } else {
       return (
         <>
-          <OpenArrowIcon className="bt-arrow-icon" stroke={"var(--icon)"} />
-          <OpenFolderIcon className="bt-arrow-icon" fill={"var(--icon)"} />
+          <OpenArrowIcon stroke={theme.palette.text} />
+          <OpenFolderIcon fill={theme.palette.text} />
         </>
       );
     }
@@ -46,7 +49,7 @@ function FileIcon({
     case "Action":
       returnVal = (
         <>
-          <ActionFileIcon className="bt-arrow-icon" fill={"var(--icon)"} />
+          <ActionFileIcon fill={theme.palette.text} />
         </>
       );
       break;

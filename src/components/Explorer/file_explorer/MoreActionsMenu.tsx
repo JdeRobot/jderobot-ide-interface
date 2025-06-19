@@ -1,7 +1,12 @@
 import { useEffect, useRef } from "react";
-
-import "./MoreActionsMenu.css";
 import { Entry } from "Types";
+import {
+  StyledExplorerExtraMenu,
+  StyledExplorerExtraMenuBackdrop,
+  StyledExplorerExtraMenuDivider,
+  StyledExplorerExtraMenuEntry,
+} from "./MoreActionsMenu.styles";
+import { useTheme } from "Utils";
 
 function MoreActionsMenu({
   menuProps,
@@ -21,6 +26,7 @@ function MoreActionsMenu({
   onRename: Function;
 }) {
   const menuRef = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
 
   useEffect(() => {
     if (menuProps.isShown) {
@@ -41,53 +47,54 @@ function MoreActionsMenu({
   };
 
   return (
-    <div
-      className="bt-menu-backdrop"
-      style={{ display: menuProps.isShown ? "inline-block" : "none" }}
-      ref={menuRef}
-    >
-      <div
-        className="bt-more-actions-menu"
-        style={{ top: menuProps.position.y, left: menuProps.position.x }}
+    <StyledExplorerExtraMenuBackdrop active={menuProps.isShown} ref={menuRef}>
+      <StyledExplorerExtraMenu
+        bgColor={theme.palette.background}
+        borderColor={theme.palette.secondary}
+        roundness={theme.roundness}
+        top={menuProps.position.y}
+        left={menuProps.position.x}
       >
         {menuProps.file?.group !== "Trees" && (
-          <div
-            className="bt-more-actions-menu-entry"
+          <StyledExplorerExtraMenuEntry
+            hoverColor={theme.palette.secondary}
             onClick={() => {
               onRename(menuProps.file);
               closeMenu();
             }}
           >
             <label>Rename</label>
-          </div>
+          </StyledExplorerExtraMenuEntry>
         )}
         {true && (
-          <div
-            className="bt-more-actions-menu-entry"
+          <StyledExplorerExtraMenuEntry
+            hoverColor={theme.palette.secondary}
             onClick={() => {
               onDownload(menuProps.file);
               closeMenu();
             }}
           >
             <label>Download</label>
-          </div>
+          </StyledExplorerExtraMenuEntry>
         )}
-        <div
-          className="bt-more-actions-menu-entry"
+        <StyledExplorerExtraMenuEntry
+          hoverColor={theme.palette.secondary}
           onClick={() => {
             onDelete(menuProps.file!.path, menuProps.file!.is_dir);
             closeMenu();
           }}
         >
           <label>Delete</label>
-        </div>
+        </StyledExplorerExtraMenuEntry>
         {!menuProps.file!.is_dir &&
           menuProps.file?.group === "Action" &&
           false && ( // TODO: disabled
             <>
-              <div className="bt-more-actions-menu-divider" />
-              <div
-                className="bt-more-actions-menu-entry"
+              <StyledExplorerExtraMenuDivider
+                bgColor={theme.palette.secondary}
+              />
+              <StyledExplorerExtraMenuEntry
+                hoverColor={theme.palette.secondary}
                 onClick={() => {
                   // TODO open the same menu that in the diagram
                   console.log("Edit Action");
@@ -95,43 +102,43 @@ function MoreActionsMenu({
                 }}
               >
                 <label>Edit Action</label>
-              </div>
+              </StyledExplorerExtraMenuEntry>
             </>
           )}
         {menuProps.file?.group !== "Trees" && (
           <>
-            <div className="bt-more-actions-menu-divider" />
-            <div
-              className="bt-more-actions-menu-entry"
+            <StyledExplorerExtraMenuDivider bgColor={theme.palette.secondary} />
+            <StyledExplorerExtraMenuEntry
+              hoverColor={theme.palette.secondary}
               onClick={() => {
                 onCreateFile(menuProps.file);
                 closeMenu();
               }}
             >
               <label>New File</label>
-            </div>
-            <div
-              className="bt-more-actions-menu-entry"
+            </StyledExplorerExtraMenuEntry>
+            <StyledExplorerExtraMenuEntry
+              hoverColor={theme.palette.secondary}
               onClick={() => {
                 onCreateFolder(menuProps.file);
                 closeMenu();
               }}
             >
               <label>New Folder</label>
-            </div>
-            <div
-              className="bt-more-actions-menu-entry"
+            </StyledExplorerExtraMenuEntry>
+            <StyledExplorerExtraMenuEntry
+              hoverColor={theme.palette.secondary}
               onClick={() => {
                 onUpload(menuProps.file);
                 closeMenu();
               }}
             >
               <label>Upload</label>
-            </div>
+            </StyledExplorerExtraMenuEntry>
           </>
         )}
-      </div>
-    </div>
+      </StyledExplorerExtraMenu>
+    </StyledExplorerExtraMenuBackdrop>
   );
 }
 
@@ -151,7 +158,7 @@ export class ContextMenuProps {
     position: { x: number; y: number },
     setPositionCallback: Function,
     file: Entry | undefined,
-    setFile: Function,
+    setFile: Function
   ) {
     this.isShown = isShown;
     this.showCallback = showCallback;
