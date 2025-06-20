@@ -91,6 +91,7 @@ export const ModalTitlebar = ({
     <StyledModalTitlebar
       color={theme.palette.text}
       hoverColor={theme.palette.secondary}
+      roundness={theme.roundness}
     >
       {hasBack && (
         <StyledModalBackButton

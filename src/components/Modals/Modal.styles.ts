@@ -38,6 +38,7 @@ export const StyledModalContent = styled.div`
 interface StyledModalTitlebarProps {
   color?: string;
   hoverColor?: string;
+  roundness?: number;
 }
 
 export const StyledModalTitlebar = styled.div<StyledModalTitlebarProps>`
@@ -57,9 +58,10 @@ export const StyledModalTitlebar = styled.div<StyledModalTitlebarProps>`
 
   & svg {
     height: 100%;
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    border-radius: ${(p) => p.roundness ?? 1}px;
     background-color: transparent;
 
     &:hover {

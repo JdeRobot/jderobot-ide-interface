@@ -84,5 +84,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
     width: 20px;
     height: 20px;
     opacity: 100%;
+    viewBox: 0 0 20 20;
   }
 `;

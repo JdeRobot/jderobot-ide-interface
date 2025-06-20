@@ -361,21 +361,21 @@ const Explorer = ({
             onClick={() => handleCreateFile(undefined)}
             title="Create a new file"
           >
-            <AddIcon />
+            <AddIcon viewBox="0 0 20 20"/>
           </MenuButton>
           <MenuButtonStroke
             id="new-folder-button"
             onClick={() => handleCreateFolder(undefined)}
             title="Create a new folder"
           >
-            <AddFolderIcon />
+            <AddFolderIcon viewBox="0 0 20 20"/>
           </MenuButtonStroke>
           <MenuButtonStroke
             id="refresh-explorer-button"
             onClick={() => fetchFileList()}
             title="Refresh View"
           >
-            <ResetIcon />
+            <ResetIcon viewBox="0 0 20 20"/>
           </MenuButtonStroke>
           <div style={{ marginLeft: "auto" }} />
           {currentFile && (
@@ -385,14 +385,14 @@ const Explorer = ({
                 onClick={handleRenameCurrentFile}
                 title="Rename file"
               >
-                <RenameIcon />
+                <RenameIcon viewBox="0 0 20 20"/>
               </MenuButtonStroke>
               <MenuButton
                 id="delete-file-button"
                 onClick={handleDeleteCurrentFile}
                 title="Delete file"
               >
-                <DeleteIcon />
+                <DeleteIcon viewBox="0 0 20 20"/>
               </MenuButton>
             </>
           )}

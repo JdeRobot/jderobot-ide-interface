@@ -23,7 +23,7 @@ function FileIcon({
 
   var returnVal = (
     <>
-      <BaseFileIcon fill={theme.palette.text} />
+      <BaseFileIcon viewBox="0 0 20 20" fill={theme.palette.text} />
     </>
   );
 
@@ -31,15 +31,15 @@ function FileIcon({
     if (is_collapsed) {
       return (
         <>
-          <ClosedArrowIcon stroke={theme.palette.text} />
-          <ClosedFolderIcon fill={theme.palette.text} />
+          <ClosedArrowIcon viewBox="0 0 20 20" stroke={theme.palette.text} />
+          <ClosedFolderIcon viewBox="0 0 20 20" fill={theme.palette.text} />
         </>
       );
     } else {
       return (
         <>
-          <OpenArrowIcon stroke={theme.palette.text} />
-          <OpenFolderIcon fill={theme.palette.text} />
+          <OpenArrowIcon viewBox="0 0 20 20" stroke={theme.palette.text} />
+          <OpenFolderIcon viewBox="0 0 20 20" fill={theme.palette.text} />
         </>
       );
     }
@@ -49,7 +49,7 @@ function FileIcon({
     case "Action":
       returnVal = (
         <>
-          <ActionFileIcon fill={theme.palette.text} />
+          <ActionFileIcon viewBox="0 0 20 20" fill={theme.palette.text} />
         </>
       );
       break;

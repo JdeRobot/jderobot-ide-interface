@@ -1,4 +1,3 @@
-import { MonocolorSplashIcon } from "Assets";
 import {
   StyledHorizContiner,
   StyledHorizFillerContiner,

@@ -87,6 +87,7 @@ function TreeNode({
             stroke={theme.palette.text}
             id="explorer-action-button"
             title={"More"}
+            viewBox="0 0 20 20"
             onClick={(e) => {
               menuProps.showMoreActionsMenu(e, node);
             }}

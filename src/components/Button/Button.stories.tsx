@@ -57,7 +57,7 @@ export const Tabbed: Story = {
 
   render: (args) => (
     <Button {...args}>
-      <SaveIcon />
+      <SaveIcon/>
     </Button>
   ),
 };

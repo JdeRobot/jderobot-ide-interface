@@ -86,7 +86,7 @@ const StatusBar = ({
           }}
           title="Reconnect with Robotics Backend"
         >
-          <ResetIcon stroke={theme.palette.darkText} />
+          <ResetIcon viewBox="0 0 20 20" stroke={theme.palette.darkText} />
           <label>Reconnect</label>
         </StyledStatusBarButton>
       )}

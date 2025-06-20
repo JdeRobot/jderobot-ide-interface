@@ -65,13 +65,13 @@ const NewFileModal = ({
   const plain = new CardEntryProps(
     "plain",
     "plainType",
-    <ActionTeplateIcon fill={theme.palette.text} />,
+    <ActionTeplateIcon viewBox="0 0 20 20" fill={theme.palette.text} />,
     "Plain File",
   );
   const actions = new CardEntryProps(
     "actions",
     "actionsType",
-    <IOTeplateIcon fill={theme.palette.text} />,
+    <IOTeplateIcon viewBox="0 0 20 20" fill={theme.palette.text} />,
     "Action",
   );
 
@@ -79,19 +79,19 @@ const NewFileModal = ({
   const empty = new CardEntryProps(
     "empty",
     "emptyTemplate",
-    <EmptyTeplateIcon stroke={theme.palette.text} />,
+    <EmptyTeplateIcon viewBox="0 0 20 20" stroke={theme.palette.text} />,
     "Empty",
   );
   const action = new CardEntryProps(
     "action",
     "actionTemplate",
-    <ActionTeplateIcon fill={theme.palette.text} />,
+    <ActionTeplateIcon viewBox="0 0 20 20" fill={theme.palette.text} />,
     "Action",
   );
   const io = new CardEntryProps(
     "io",
     "ioTemplate",
-    <IOTeplateIcon fill={theme.palette.text} />,
+    <IOTeplateIcon viewBox="0 0 20 20" fill={theme.palette.text} />,
     "I/O",
   );
 

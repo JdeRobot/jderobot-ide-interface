@@ -40,7 +40,7 @@ export const StyledModalCardsEntry = styled.div<StyledModalCardsEntryProps>`
 
     & svg {
       height: 90px;
-      width: 30px;
+      width: 100%;
     }
   }
 

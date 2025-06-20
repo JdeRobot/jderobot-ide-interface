@@ -1,4 +1,3 @@
-import { ActionIcon } from "Assets";
 import styled from "styled-components";
 
 const primaryColor = "#666";

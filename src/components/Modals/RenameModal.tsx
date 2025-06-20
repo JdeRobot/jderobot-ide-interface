@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import Modal, { ModalTitlebar } from "./Modal";
-import { CloseIcon } from "Assets";
 import { Entry } from "Types";
 import { useTheme } from "Utils";
 import {
