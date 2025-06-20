@@ -4,6 +4,14 @@ import Modal, { ModalTitlebar } from "./Modal";
 
 import { EmptyTeplateIcon, ActionTeplateIcon, IOTeplateIcon } from "Assets";
 import { Entry } from "Types";
+import { useTheme } from "Utils";
+import {
+  StyledModalButtonRow,
+  StyledModalInput,
+  StyledModalInputContainer,
+  StyledModalInputRowContainer,
+  StyledModalRow,
+} from "./Modal.styles";
 
 const initialNewFileModalData = {
   fileType: "plain",
@@ -30,13 +38,13 @@ const plain = new CardEntryProps(
   "plain",
   "plainType",
   <ActionTeplateIcon className="bt-icon" fill={"var(--icon)"} />,
-  "Plain File",
+  "Plain File"
 );
 const actions = new CardEntryProps(
   "actions",
   "actionsType",
   <IOTeplateIcon className="bt-icon" fill={"var(--icon)"} />,
-  "Action",
+  "Action"
 );
 
 ///////////////////////// ACTIONS //////////////////////////////////////////////
@@ -44,19 +52,19 @@ const empty = new CardEntryProps(
   "empty",
   "emptyTemplate",
   <EmptyTeplateIcon className="bt-icon" stroke={"var(--icon)"} />,
-  "Empty",
+  "Empty"
 );
 const action = new CardEntryProps(
   "action",
   "actionTemplate",
   <ActionTeplateIcon className="bt-icon" fill={"var(--icon)"} />,
-  "Action",
+  "Action"
 );
 const io = new CardEntryProps(
   "io",
   "ioTemplate",
   <IOTeplateIcon className="bt-icon" fill={"var(--icon)"} />,
-  "I/O",
+  "I/O"
 );
 
 const NewFileModal = ({
@@ -72,6 +80,7 @@ const NewFileModal = ({
   fileList: Entry[];
   location: string;
 }) => {
+  const theme = useTheme();
   const focusInputRef = useRef<HTMLInputElement>(null);
   const [formState, setFormState] = useState(initialNewFileModalData);
   const [template, setTemplate] = useState<string>("empty");
@@ -122,7 +131,7 @@ const NewFileModal = ({
 
       for (let index = 0; index < path.length; index++) {
         search_list = search_list.find(
-          (entry) => entry.name === path[index] && entry.is_dir,
+          (entry) => entry.name === path[index] && entry.is_dir
         )!.files;
       }
     }
@@ -212,30 +221,32 @@ const NewFileModal = ({
         <ModalTitlebar
           title="Create new file"
           htmlFor="fileName"
-          handleCancel={handleCancel}
+          hasClose
+          handleClose={handleCancel}
         />
-        <div className="bt-modal-complex-input-row-container">
-          <div className="bt-modal-complex-input-container">
-            <input
+        <StyledModalInputRowContainer>
+          <StyledModalInputContainer>
+            <StyledModalInput
               ref={focusInputRef}
               type="text"
               id="fileName"
               name="fileName"
-              className={
-                isCreationAllowed || formState.fileName === ""
-                  ? "bt-modal-complex-input"
-                  : "bt-modal-complex-input bt-modal-complex-input-invalid"
-              }
               onChange={handleInputChange}
               autoComplete="off"
               placeholder="File Name"
               required
+              color={theme.palette.text}
+              placeholderColor={theme.palette.placeholderText}
+              bgColor={theme.palette.background}
+              borderColor={theme.palette.background}
+              focusBorderColor={theme.palette.background}
+              invalidBorderColor={theme.palette.background}
+              roundness={theme.roundness}
+              valid={isCreationAllowed || formState.fileName === ""}
             />
-            <label htmlFor="fileName" className="bt-modal-complex-input-label">
-              File Name
-            </label>
-          </div>
-        </div>
+            <label htmlFor="fileName">File Name</label>
+          </StyledModalInputContainer>
+        </StyledModalInputRowContainer>
         <CardSelector
           contentArray={typesCardEntryProps}
           title="Select File Type"
@@ -254,8 +265,16 @@ const NewFileModal = ({
             checkedCallback={onOptionTemplateChange}
           />
         )}
-        <div className="bt-form-row">
-          <div className="bt-button-row">
+        <StyledModalRow
+          color={theme.palette.text}
+          buttonColor={theme.palette.primary}
+          roundness={theme.roundness}
+        >
+          <StyledModalButtonRow
+            color={theme.palette.text}
+            buttonColor={theme.palette.primary}
+            roundness={theme.roundness}
+          >
             <button
               type="submit"
               id="create-new-action"
@@ -263,8 +282,8 @@ const NewFileModal = ({
             >
               Create
             </button>
-          </div>
-        </div>
+          </StyledModalButtonRow>
+        </StyledModalRow>
       </form>
     </Modal>
   );
@@ -287,8 +306,14 @@ const CardSelector = ({
   checkedVariable: string;
   checkedCallback: (e: any) => void;
 }) => {
+  const theme = useTheme();
   return (
-    <div className="bt-form-row" id={id}>
+    <StyledModalRow
+      color={theme.palette.text}
+      buttonColor={theme.palette.primary}
+      roundness={theme.roundness}
+      id={id}
+    >
       <label htmlFor="templateType" className="bt-templates-list-title">
         {title}
       </label>
@@ -302,7 +327,7 @@ const CardSelector = ({
           />
         ))}
       </div>
-    </div>
+    </StyledModalRow>
   );
 };
 

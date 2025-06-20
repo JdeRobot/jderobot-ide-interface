@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import Modal from "./Modal";
+import Modal, { ModalTitlebar } from "./Modal";
 import { CloseIcon } from "Assets";
 import { Entry } from "Types";
+import { useTheme } from "Utils";
+import { StyledModalButtonRow, StyledModalInput, StyledModalInputContainer, StyledModalInputRowContainer, StyledModalRow } from "./Modal.styles";
 
 const initialNewFolderModalData = {
   renameData: "",
@@ -20,6 +22,7 @@ const RenameModal = ({
   fileList: Entry[];
   selectedEntry: Entry;
 }) => {
+  const theme = useTheme();
   const focusInputRef = useRef<HTMLInputElement>(null);
   const [formState, setFormState] = useState(initialNewFolderModalData);
   const [isCreationAllowed, allowCreation] = useState(false);
@@ -54,7 +57,7 @@ const RenameModal = ({
 
       for (let index = 0; index < path.length - 1; index++) {
         search_list = search_list.find(
-          (entry) => entry.name === path[index] && entry.is_dir,
+          (entry) => entry.name === path[index] && entry.is_dir
         )!.files;
       }
 
@@ -131,51 +134,53 @@ const RenameModal = ({
       onClose={onClose}
     >
       <form onSubmit={handleSubmit} onReset={handleCancel}>
-        <div className="bt-modal-titlebar">
-          <label
-            className="bt-modal-titlebar-title"
-            htmlFor="renameData"
-            style={{ textAlign: "center" }}
-          >
-            Rename {selectedEntry.is_dir ? "Folder" : "File"}
-          </label>
-          <CloseIcon
-            className="bt-modal-titlebar-close bt-icon"
-            onClick={() => {
-              handleCancel(undefined);
-            }}
-            fill={"var(--icon)"}
-          />
-        </div>
-        <div className="bt-modal-complex-input-row-container">
-          <div className="bt-modal-complex-input-container">
-            <input
+        <ModalTitlebar
+          title={`Rename ${selectedEntry.is_dir ? "Folder" : "File"}`}
+          htmlFor="renameData"
+          hasClose
+          handleClose={() => {
+            handleCancel(undefined);
+          }}
+        />
+        <StyledModalInputRowContainer>
+          <StyledModalInputContainer>
+            <StyledModalInput
               ref={focusInputRef}
               type="text"
               id="renameData"
               name="renameData"
-              className={
-                isCreationAllowed
-                  ? "bt-modal-complex-input"
-                  : "bt-modal-complex-input bt-modal-complex-input-invalid"
-              }
               onChange={handleInputChange}
               autoComplete="off"
               placeholder={
                 selectedEntry.is_dir ? "Rename Folder" : "Rename File"
               }
               required
+              color={theme.palette.text}
+              placeholderColor={theme.palette.placeholderText}
+              bgColor={theme.palette.background}
+              borderColor={theme.palette.background}
+              focusBorderColor={theme.palette.background}
+              invalidBorderColor={theme.palette.background}
+              roundness={theme.roundness}
+              valid={isCreationAllowed}
             />
             <label
               htmlFor="renameData"
-              className="bt-modal-complex-input-label"
             >
               Rename {selectedEntry.is_dir ? "Folder" : "File"}
             </label>
-          </div>
-        </div>
-        <div className="bt-form-row">
-          <div className="bt-button-row">
+          </StyledModalInputContainer>
+        </StyledModalInputRowContainer>
+        <StyledModalRow
+          color={theme.palette.text}
+          buttonColor={theme.palette.primary}
+          roundness={theme.roundness}
+        >
+          <StyledModalButtonRow
+            color={theme.palette.text}
+            buttonColor={theme.palette.primary}
+            roundness={theme.roundness}
+          >
             <button type="reset">Cancel</button>
             <button
               type="submit"
@@ -184,8 +189,8 @@ const RenameModal = ({
             >
               Create
             </button>
-          </div>
-        </div>
+          </StyledModalButtonRow>
+        </StyledModalRow>
       </form>
     </Modal>
   );

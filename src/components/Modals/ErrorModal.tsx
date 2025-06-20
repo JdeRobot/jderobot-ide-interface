@@ -1,12 +1,20 @@
-import { useError } from "Utils";
+import { useError, useTheme } from "Utils";
 import { ErrorType } from "Types";
 import "./ErrorModal.css";
-import Modal from "./Modal";
+import { StyledModalRow } from "./Modal.styles";
+import {
+  StyledModalError,
+  StyledModalErrorRow,
+  StyledModalErrorTitlebar,
+} from "./ErrorModal.styles";
+
+export type ErrorVariant = "error" | "warning" | "info";
 
 const ErrorModal = () => {
+  const theme = useTheme();
   const { isOpen, msg, type, close } = useError();
 
-  var type_str = "error";
+  var type_str: ErrorVariant = "error";
   var type_header = "Error";
 
   var onClose = () => close();
@@ -37,39 +45,69 @@ const ErrorModal = () => {
   }
 
   return (
-    <Modal
+    <StyledModalError
       id={`${type_str}-modal`}
       hasCloseBtn={true}
       isOpen={isOpen}
       onClose={onClose}
+      variant={type_str}
+      error={theme.palette.error}
+      errorBorder={theme.palette.border.info}
+      info={theme.palette.background}
+      infoBorder={theme.palette.border.info}
+      warning={theme.palette.warning}
+      warningBorder={theme.palette.border.warning}
     >
-      <div className="bt-modal-titlebar">
-        <label
-          className="bt-modal-titlebar-title"
-          htmlFor="actionName"
-          style={{ textAlign: "center" }}
+      <StyledModalErrorTitlebar
+        color={theme.palette.text}
+        darkColor={theme.palette.text}
+        title={type_header}
+        htmlFor="actionName"
+        variant={type_str}
+      />
+      <StyledModalRow
+        color={theme.palette.text}
+        buttonColor={theme.palette.primary}
+        roundness={theme.roundness}
+      >
+        <StyledModalErrorRow
+          roundness={theme.roundness}
+          variant={type_str}
+          errorButtonColor={theme.palette.button.error}
+          errorHoverColor={theme.palette.button.hoverError}
+          errorTextColor={theme.palette.text}
+          infoButtonColor={theme.palette.button.info}
+          infoHoverColor={theme.palette.button.hoverInfo}
+          infoTextColor={theme.palette.text}
+          warningButtonColor={theme.palette.button.warning}
+          warningHoverColor={theme.palette.button.hoverWarning}
+          warningTextColor={theme.palette.darkText}
         >
-          {type_header}
-        </label>
-      </div>
-      <div className="bt-form-row">
-        <div className="bt-error-modal-buttons-container">
-          <label className={`bt-modal-${type_str}-label`} id="errorMsg">
-            {msg}
-          </label>
-        </div>
-      </div>
-      <div className="bt-form-row">
-        <div className="bt-error-modal-buttons-container">
-          <div
-            className={`bt-${type_str}-modal-button`}
-            onClick={() => onClose()}
-          >
-            Close
-          </div>
-        </div>
-      </div>
-    </Modal>
+          <label id="errorMsg">{msg}</label>
+        </StyledModalErrorRow>
+      </StyledModalRow>
+      <StyledModalRow
+        color={theme.palette.text}
+        buttonColor={theme.palette.primary}
+        roundness={theme.roundness}
+      >
+        <StyledModalErrorRow
+          roundness={theme.roundness}
+          variant={type_str}
+          errorButtonColor={theme.palette.button.error}
+          errorHoverColor={theme.palette.button.hoverError}
+          errorTextColor={theme.palette.text}
+          infoButtonColor={theme.palette.button.info}
+          infoHoverColor={theme.palette.button.hoverInfo}
+          infoTextColor={theme.palette.text}
+          warningButtonColor={theme.palette.button.warning}
+          warningHoverColor={theme.palette.button.hoverWarning}
+          warningTextColor={theme.palette.darkText}
+        >
+          <div onClick={() => onClose()}>Close</div>
+        </StyledModalErrorRow>
+      </StyledModalRow>
+    </StyledModalError>
   );
 };
 

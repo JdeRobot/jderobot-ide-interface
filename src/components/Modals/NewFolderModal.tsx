@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import Modal from "./Modal";
+import Modal, { ModalTitlebar } from "./Modal";
 import { CloseIcon } from "Assets";
+import { useTheme } from "Utils";
+import { StyledModalButtonRow, StyledModalInput, StyledModalInputContainer, StyledModalInputRowContainer, StyledModalRow } from "./Modal.styles";
 
 const initialNewFolderModalData = {
   folderName: "",
@@ -26,6 +28,7 @@ const NewFolderModal = ({
   fileList: Entry[];
   location: string;
 }) => {
+  const theme = useTheme();
   const focusInputRef = useRef<HTMLInputElement>(null);
   const [formState, setFormState] = useState(initialNewFolderModalData);
   const [isCreationAllowed, allowCreation] = useState(false);
@@ -46,7 +49,7 @@ const NewFolderModal = ({
 
         for (let index = 0; index < path.length; index++) {
           search_list = search_list.find(
-            (entry: Entry) => entry.name === path[index] && entry.is_dir,
+            (entry: Entry) => entry.name === path[index] && entry.is_dir
           )!.files;
         }
       }
@@ -110,49 +113,51 @@ const NewFolderModal = ({
       onClose={onClose}
     >
       <form onSubmit={handleSubmit} onReset={handleCancel}>
-        <div className="bt-modal-titlebar">
-          <label
-            className="bt-modal-titlebar-title"
-            htmlFor="folderName"
-            style={{ textAlign: "center" }}
-          >
-            Create new folder
-          </label>
-          <CloseIcon
-            className="bt-modal-titlebar-close bt-icon"
-            onClick={() => {
-              handleCancel(null);
-            }}
-            fill={"var(--icon)"}
-          />
-        </div>
-        <div className="bt-modal-complex-input-row-container">
-          <div className="bt-modal-complex-input-container">
-            <input
+        <ModalTitlebar
+          title="Create new folder"
+          htmlFor="folderName"
+          hasClose
+          handleClose={() => {
+            handleCancel(null);
+          }}
+        />
+        <StyledModalInputRowContainer>
+          <StyledModalInputContainer>
+            <StyledModalInput
               ref={focusInputRef}
               type="text"
               id="folderName"
               name="folderName"
-              className={
-                isCreationAllowed || formState.folderName === ""
-                  ? "bt-modal-complex-input"
-                  : "bt-modal-complex-input bt-modal-complex-input-invalid"
-              }
               onChange={handleInputChange}
               autoComplete="off"
               placeholder="Folder Name"
               required
+              color={theme.palette.text}
+              placeholderColor={theme.palette.placeholderText}
+              bgColor={theme.palette.background}
+              borderColor={theme.palette.background}
+              focusBorderColor={theme.palette.background}
+              invalidBorderColor={theme.palette.background}
+              roundness={theme.roundness}
+              valid={isCreationAllowed || formState.folderName === ""}
             />
             <label
               htmlFor="folderName"
-              className="bt-modal-complex-input-label"
             >
               Folder Name
             </label>
-          </div>
-        </div>
-        <div className="bt-form-row">
-          <div className="bt-button-row">
+          </StyledModalInputContainer>
+        </StyledModalInputRowContainer>
+        <StyledModalRow
+          color={theme.palette.text}
+          buttonColor={theme.palette.primary}
+          roundness={theme.roundness}
+        >
+          <StyledModalButtonRow
+            color={theme.palette.text}
+            buttonColor={theme.palette.primary}
+            roundness={theme.roundness}
+          >
             <button
               type="submit"
               id="create-new-action"
@@ -160,8 +165,8 @@ const NewFolderModal = ({
             >
               Create
             </button>
-          </div>
-        </div>
+          </StyledModalButtonRow>
+        </StyledModalRow>
       </form>
     </Modal>
   );

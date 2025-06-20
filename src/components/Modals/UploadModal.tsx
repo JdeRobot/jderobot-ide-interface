@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import "./UploadModal.css";
-import Modal from "./Modal";
+import Modal, { ModalTitlebar } from "./Modal";
 // import ProgressBar from "../../../progress_bar/ProgressBar";
 
 import { CloseIcon } from "Assets";
 // import { uploadFile } from "../../../../api_helper/TreeWrapper";
-import { useError } from "Utils";
+import { useError, useTheme } from "Utils";
+import { StyledModalRow } from "./Modal.styles";
 
 const UploadModal = ({
   onSubmit,
@@ -21,6 +22,7 @@ const UploadModal = ({
   location: string;
   currentProject: string;
 }) => {
+  const theme = useTheme();
   const { error } = useError();
 
   const [uploadStatus, setUploadStatus] = useState("");
@@ -110,23 +112,19 @@ const UploadModal = ({
       onClose={onClose}
     >
       <form onSubmit={handleSubmit} onReset={handleCancel}>
-        <div className="bt-modal-titlebar">
-          <label
-            className="bt-modal-titlebar-title"
-            htmlFor="uploadName"
-            style={{ textAlign: "center" }}
-          >
-            Upload
-          </label>
-          <CloseIcon
-            className="bt-modal-titlebar-close bt-icon"
-            onClick={(e: any) => {
-              handleCancel(e);
-            }}
-            fill={"var(--icon)"}
-          />
-        </div>
-        <div className="bt-form-row">
+        <ModalTitlebar
+          title="Upload"
+          htmlFor="uploadName"
+          hasClose
+          handleClose={(e: any) => {
+            handleCancel(e);
+          }}
+        />
+        <StyledModalRow
+          color={theme.palette.text}
+          buttonColor={theme.palette.primary}
+          roundness={theme.roundness}
+        >
           <label
             ref={uploadAreaRef}
             htmlFor="uploadDropInput"
@@ -155,7 +153,7 @@ const UploadModal = ({
               required
             />
           </label>
-        </div>
+        </StyledModalRow>
         {/* {uploadStatus !== "" && (
           <ProgressBar completed={uploadPercentage} />
         )} */}

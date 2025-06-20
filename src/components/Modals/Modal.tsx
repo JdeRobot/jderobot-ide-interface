@@ -1,6 +1,13 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import "./Modal.css";
-import { CloseIcon } from "Assets";
+import {
+  StyledModal,
+  StyledModalBackButton,
+  StyledModalCloseButton,
+  StyledModalContent,
+  StyledModalTitlebar,
+} from "./Modal.styles";
+import { useTheme } from "Utils";
 
 const Modal = ({
   id = "modal",
@@ -15,6 +22,7 @@ const Modal = ({
   onClose: Function;
   children: any;
 }) => {
+  const theme = useTheme();
   const [isModalOpen, setModalOpen] = useState<boolean>(isOpen);
   const modalRef = useRef<HTMLDialogElement>(null);
 
@@ -49,14 +57,16 @@ const Modal = ({
   }, [isModalOpen]);
 
   return (
-    <dialog
+    <StyledModal
       id={id}
       ref={modalRef}
       onKeyDown={handleKeyDown}
-      className="bt-modal"
+      bgColor={theme.palette.background}
+      borderColor={theme.palette.secondary}
+      roundness={theme.roundness}
     >
-      <div className="bt-modal-contents">{children}</div>
-    </dialog>
+      <StyledModalContent id="bt-modal-contents">{children}</StyledModalContent>
+    </StyledModal>
   );
 };
 
@@ -65,29 +75,50 @@ export default Modal;
 export const ModalTitlebar = ({
   title,
   htmlFor,
-  handleCancel,
+  hasClose,
+  hasBack,
+  handleClose,
+  handleBack,
 }: {
   title: string;
   htmlFor: string;
-  handleCancel: Function;
+  hasClose: boolean;
+  hasBack: boolean;
+  handleClose: Function;
+  handleBack: Function;
 }) => {
+  const theme = useTheme();
   return (
-    <div className="bt-modal-titlebar">
-      <label
-        className="bt-modal-titlebar-title"
-        htmlFor={htmlFor}
-        style={{ textAlign: "center" }}
-      >
-        {title}
-      </label>
-      <CloseIcon
-        className="bt-modal-titlebar-close bt-icon"
-        id="close-modal"
-        onClick={() => {
-          handleCancel();
-        }}
-        fill={"var(--icon)"}
-      />
-    </div>
+    <StyledModalTitlebar
+      color={theme.palette.text}
+      hoverColor={theme.palette.secondary}
+    >
+      {hasBack && (
+        <StyledModalBackButton
+          id="back-modal"
+          onClick={() => {
+            handleBack();
+          }}
+          color={theme.palette.text}
+        />
+      )}
+      <label htmlFor={htmlFor}>{title}</label>
+      {hasClose && (
+        <StyledModalCloseButton
+          id="close-modal"
+          onClick={() => {
+            handleClose();
+          }}
+          color={theme.palette.text}
+        />
+      )}
+    </StyledModalTitlebar>
   );
+};
+
+ModalTitlebar.defaultProps = {
+  hasClose: false,
+  hasBack: false,
+  handleClose: () => {},
+  handleBack: () => {},
 };

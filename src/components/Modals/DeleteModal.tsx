@@ -1,8 +1,18 @@
 import { useEffect } from "react";
 import "./DeleteModal.css";
-import Modal from "./Modal";
-import { CloseIcon } from "Assets";
+import Modal, { ModalTitlebar } from "./Modal";
 import { Entry } from "Types";
+import {
+  StyledModalButtonDelete,
+  StyledModalButtonRow,
+  StyledModalRow,
+} from "./Modal.styles";
+import { useTheme } from "Utils";
+import styled from "styled-components";
+
+const StyledModal = styled(Modal)`
+  width: fit-content;
+`;
 
 // TODO add a way to select if plain text file
 const DeleteModal = ({
@@ -16,6 +26,7 @@ const DeleteModal = ({
   onClose: Function;
   selectedEntry: Entry;
 }) => {
+  const theme = useTheme();
   //TODO: use relative path instead of absolute one
 
   useEffect(() => {
@@ -39,43 +50,48 @@ const DeleteModal = ({
   };
 
   return (
-    <Modal
+    <StyledModal
       id="delete-modal"
       hasCloseBtn={true}
       isOpen={isOpen}
       onClose={onClose}
     >
       <form onSubmit={handleSubmit} onReset={handleCancel}>
-        <div className="bt-modal-titlebar">
-          <label
-            className="bt-modal-titlebar-title"
-            style={{ textAlign: "center" }}
-          >
-            Delete confirmation
-          </label>
-          <CloseIcon
-            className="bt-modal-titlebar-close bt-icon"
-            onClick={() => {
-              handleCancel(undefined);
-            }}
-            fill={"var(--icon)"}
-          />
-        </div>
-        <div className="bt-form-row">
-          <div className="bt-delete-modal-prompt">
+        <ModalTitlebar
+          title="Delete confirmation"
+          htmlFor="delete-modal"
+          hasClose
+          handleClose={() => {
+            handleCancel(undefined);
+          }}
+        />
+        <StyledModalRow
+          color={theme.palette.text}
+          buttonColor={theme.palette.primary}
+          roundness={theme.roundness}
+        >
+          <div>
             <label> Do you want to delete {selectedEntry.name} ?</label>
           </div>
-        </div>
-        <div className="bt-button-row">
+        </StyledModalRow>
+        <StyledModalButtonRow
+          color={theme.palette.text}
+          buttonColor={theme.palette.primary}
+          roundness={theme.roundness}
+        >
           <button type="reset" id="cancel-delete-selected">
             Cancel
           </button>
-          <button type="submit" id="delete-selected-button">
+          <StyledModalButtonDelete
+            bgColor={theme.palette.primary}
+            type="submit"
+            id="delete-selected-button"
+          >
             Delete
-          </button>
-        </div>
+          </StyledModalButtonDelete>
+        </StyledModalButtonRow>
       </form>
-    </Modal>
+    </StyledModal>
   );
 };
 

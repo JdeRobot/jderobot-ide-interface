@@ -4,6 +4,7 @@ import { merge } from "lodash";
 export interface Theme {
   palette: {
     text?: string;
+    darkText?: string;
     placeholderText?: string;
     success?: string;
     warning?: string;
@@ -11,6 +12,21 @@ export interface Theme {
     background: string;
     primary?: string;
     secondary?: string;
+    border: {
+      warning: string,
+      error: string,
+      info: string,
+    }
+    button: {
+      error: string;
+      success: string;
+      warning: string;
+      info: string;
+      hoverError: string;
+      hoverSuccess: string;
+      hoverWarning: string;
+      hoverInfo: string;
+    }
   };
   roundness?: number;
   spacing?: number;
@@ -25,6 +41,7 @@ interface ThemeProviderProps {
 const defaultTheme: Theme = {
   palette: {
     text: "#ededf2",
+    darkText: "#000000",
     placeholderText: "#a6a6bf",
     success: "#29ac29",
     warning: "#f9e86d",
@@ -32,6 +49,21 @@ const defaultTheme: Theme = {
     background: "#16161d",
     primary: "#134f53",
     secondary: "#1d777c",
+    border: {
+      warning: "#ffe100",
+      error: "#772222",
+      info: "#134f53",
+    },
+    button: {
+      error: "#9e2e2e",
+      success: "#29ac29",
+      warning: "#ffe100",
+      info: "#134f53",
+      hoverError: "#c63939",
+      hoverSuccess: "#29ac29",
+      hoverWarning: "#ccb400",
+      hoverInfo: "#1d777c",
+    }
   },
   roundness: 5,
   spacing: 8,
