@@ -351,27 +351,27 @@ const Explorer = ({
   return (
     <StyledSidebarContainer id={api.name}>
       <StyledSidebarEntry>
-        <StyledSidebarEntryMenu bgColor={theme.palette.secondary}>
+        <StyledSidebarEntryMenu bgColor={theme.palette.primary}>
           <MenuButton
             id="new-file-button"
             onClick={() => handleCreateFile(undefined)}
             title="Create a new file"
           >
-            <AddIcon className="bt-icon" fill={"var(--icon)"} />
+            <AddIcon fill={theme.palette.text} />
           </MenuButton>
           <MenuButtonStroke
             id="new-folder-button"
             onClick={() => handleCreateFolder(undefined)}
             title="Create a new folder"
           >
-            <AddFolderIcon className="bt-icon" stroke={"var(--icon)"} />
+            <AddFolderIcon stroke={theme.palette.text} />
           </MenuButtonStroke>
           <MenuButtonStroke
             id="refresh-explorer-button"
             onClick={() => fetchFileList()}
             title="Refresh View"
           >
-            <RefreshIcon className="bt-icon" stroke={"var(--icon)"} />
+            <RefreshIcon stroke={theme.palette.text} />
           </MenuButtonStroke>
           <div style={{ marginLeft: "auto" }} />
           {currentFile && (
@@ -381,14 +381,14 @@ const Explorer = ({
                 onClick={handleRenameCurrentFile}
                 title="Rename file"
               >
-                <RenameIcon className="bt-icon" stroke={"var(--icon)"} />
+                <RenameIcon stroke={theme.palette.text} />
               </MenuButtonStroke>
               <MenuButton
                 id="delete-file-button"
                 onClick={handleDeleteCurrentFile}
                 title="Delete file"
               >
-                <DeleteIcon className="bt-icon" fill={"var(--icon)"} />
+                <DeleteIcon fill={theme.palette.text} />
               </MenuButton>
             </>
           )}

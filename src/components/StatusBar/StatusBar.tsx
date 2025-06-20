@@ -66,10 +66,10 @@ const StatusBar = ({
           <StyledStatusBarEntry text={theme.palette.text} title="ROS 2 version">
             <label>{`ROS 2: ${dockerData.ros_version}`}</label>
           </StyledStatusBarEntry>
-          <StyledStatusBarEntry title="GPU status">
+          <StyledStatusBarEntry text={theme.palette.text} title="GPU status">
             <label>{`GPU: ${dockerData.gpu_avaliable}`}</label>
           </StyledStatusBarEntry>
-          <StyledStatusBarEntry title="Robotics Backend version">
+          <StyledStatusBarEntry text={theme.palette.text} title="Robotics Backend version">
             <label>{`Robotics Backend: ${dockerData.robotics_backend_version}`}</label>
           </StyledStatusBarEntry>
         </>

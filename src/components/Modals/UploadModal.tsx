@@ -127,7 +127,6 @@ const UploadModal = ({
           <StyledModalDrop
             ref={uploadAreaRef}
             htmlFor="uploadDropInput"
-            className="bt-modal-drop-container"
             onDragOver={(e) => {
               e.preventDefault();
             }}

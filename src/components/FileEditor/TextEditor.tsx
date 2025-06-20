@@ -266,7 +266,6 @@ const FileEditor = ({
 
   return (
     <Editor
-      className="file-editor"
       width="100%"
       height="100%"
       defaultLanguage="python"

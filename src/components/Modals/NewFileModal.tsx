@@ -38,40 +38,6 @@ class CardEntryProps {
   }
 }
 
-///////////////////////// TYPES ////////////////////////////////////////////////
-const plain = new CardEntryProps(
-  "plain",
-  "plainType",
-  <ActionTeplateIcon className="bt-icon" fill={"var(--icon)"} />,
-  "Plain File"
-);
-const actions = new CardEntryProps(
-  "actions",
-  "actionsType",
-  <IOTeplateIcon className="bt-icon" fill={"var(--icon)"} />,
-  "Action"
-);
-
-///////////////////////// ACTIONS //////////////////////////////////////////////
-const empty = new CardEntryProps(
-  "empty",
-  "emptyTemplate",
-  <EmptyTeplateIcon className="bt-icon" stroke={"var(--icon)"} />,
-  "Empty"
-);
-const action = new CardEntryProps(
-  "action",
-  "actionTemplate",
-  <ActionTeplateIcon className="bt-icon" fill={"var(--icon)"} />,
-  "Action"
-);
-const io = new CardEntryProps(
-  "io",
-  "ioTemplate",
-  <IOTeplateIcon className="bt-icon" fill={"var(--icon)"} />,
-  "I/O"
-);
-
 const NewFileModal = ({
   onSubmit,
   isOpen,
@@ -94,6 +60,40 @@ const NewFileModal = ({
   // Search lists for valid names
   const [searchActionsList, setSearchActionsList] = useState<Entry[]>([]);
   const [searchPlainList, setSearchPlainList] = useState<Entry[]>([]);
+
+///////////////////////// TYPES ////////////////////////////////////////////////
+const plain = new CardEntryProps(
+  "plain",
+  "plainType",
+  <ActionTeplateIcon fill={theme.palette.text} />,
+  "Plain File"
+);
+const actions = new CardEntryProps(
+  "actions",
+  "actionsType",
+  <IOTeplateIcon fill={theme.palette.text} />,
+  "Action"
+);
+
+///////////////////////// ACTIONS //////////////////////////////////////////////
+const empty = new CardEntryProps(
+  "empty",
+  "emptyTemplate",
+  <EmptyTeplateIcon stroke={theme.palette.text} />,
+  "Empty"
+);
+const action = new CardEntryProps(
+  "action",
+  "actionTemplate",
+  <ActionTeplateIcon fill={theme.palette.text} />,
+  "Action"
+);
+const io = new CardEntryProps(
+  "io",
+  "ioTemplate",
+  <IOTeplateIcon fill={theme.palette.text} />,
+  "I/O"
+);
 
   const typesCardEntryProps = [plain, actions];
   const actionsCardEntryProps = [empty, action, io];
