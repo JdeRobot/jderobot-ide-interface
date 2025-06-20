@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 
-import "./UploadModal.css";
 import Modal, { ModalTitlebar } from "./Modal";
-// import ProgressBar from "../../../progress_bar/ProgressBar";
+import { ProgressBar } from "Components";
 // import { uploadFile } from "../../../../api_helper/TreeWrapper";
 import { useError, useTheme } from "Utils";
 import { StyledModalRow } from "./Modal.styles";
+import { StyledModalDrop } from "./UploadModal.styles";
 
 const UploadModal = ({
   onSubmit,
@@ -25,6 +25,7 @@ const UploadModal = ({
 
   const [uploadStatus, setUploadStatus] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
+  const [dropActive, setDropActive] = useState<boolean>(false);
 
   const uploadInputRef = useRef<any>(null);
   const uploadAreaRef = useRef<any>(null);
@@ -123,26 +124,29 @@ const UploadModal = ({
           buttonColor={theme.palette.primary}
           roundness={theme.roundness}
         >
-          <label
+          <StyledModalDrop
             ref={uploadAreaRef}
             htmlFor="uploadDropInput"
             className="bt-modal-drop-container"
             onDragOver={(e) => {
               e.preventDefault();
             }}
-            onDragEnter={() =>
-              uploadAreaRef.current.classList.add("bt-drag-active")
-            }
-            onDragLeave={() =>
-              uploadAreaRef.current.classList.remove("bt-drag-active")
-            }
+            onDragEnter={() => setDropActive(true)}
+            onDragLeave={() => setDropActive(false)}
             onDrop={(e) => handleDrop(e)}
+            text={theme.palette.text}
+            bgColor={theme.palette.background}
+            buttonColor={theme.palette.primary}
+            hoverColor={theme.palette.secondary}
+            borderColor={theme.palette.primary}
+            hoverBorderColor={theme.palette.background}
+            roundness={theme.roundness}
+            active={dropActive}
           >
-            <span className="bt-modal-drop-title">Drop files here</span>
+            <span>Drop files here</span>
             or
             <input
               ref={uploadInputRef}
-              className="bt-modal-button"
               id="uploadDropInput"
               onChange={(e) => handleAcceptedFiles(e.target.files)}
               type="file"
@@ -150,11 +154,9 @@ const UploadModal = ({
               multiple
               required
             />
-          </label>
+          </StyledModalDrop>
         </StyledModalRow>
-        {/* {uploadStatus !== "" && (
-          <ProgressBar completed={uploadPercentage} />
-        )} */}
+        {uploadStatus !== "" && <ProgressBar completed={uploadPercentage} />}
       </form>
     </Modal>
   );

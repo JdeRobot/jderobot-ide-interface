@@ -24,8 +24,10 @@ import {
   StyledIdeContainer,
   StyledIdeHorizContainer,
   StyledIdeVertContainer,
+  StyledMonocolorSplashIcon,
   StyledViewerMenu,
 } from "./IdeInterface.styles";
+import { MonocolorSplashIcon } from "Assets";
 
 export interface IdeInterfaceStyles {
   bgColor?: string;
@@ -41,6 +43,7 @@ interface IdeInterfaceProps {
   viewers: ViewersEntry[];
   layout: Layout;
   options: any;
+  splashIcon?: JSX.Element;
 }
 
 const IdeInterface = ({
@@ -53,9 +56,14 @@ const IdeInterface = ({
   viewers,
   layout,
   options,
+  splashIcon,
 }: IdeInterfaceProps) => {
   const [currentFile, setCurrentFile] = useState<Entry | undefined>(undefined);
   const theme = useTheme();
+
+  if (splashIcon === undefined) {
+    splashIcon = <StyledMonocolorSplashIcon color={theme.palette.primary} />;
+  }
 
   return (
     <StyledIdeHorizContainer
@@ -67,6 +75,7 @@ const IdeInterface = ({
         maxWidth={[40, 60, 60]}
         showExplorer={explorers.length > 0}
         layout={layout}
+        splashIcon={splashIcon}
       >
         {explorers.length > 0 && (
           <ResizableColumn>
@@ -86,17 +95,21 @@ const IdeInterface = ({
               currentFile={currentFile}
               changeCurrentFile={setCurrentFile}
               currentProjectname={project}
-              isUnibotics={false}
               autosave={true}
               manager={commsManager}
               api={editorApi}
               extraEditors={extraEditors}
+              splashIcon={splashIcon}
             />
           </StyledIdeContainer>
         </StyledIdeVertContainer>
         <StyledIdeVertContainer bgColor={theme.palette?.primary}>
           <StyledIdeContainer bgColor={theme.palette?.background}>
-            <ViewersContainer viewers={viewers} options={options} />
+            <ViewersContainer
+              viewers={viewers}
+              splashIcon={splashIcon}
+              options={options}
+            />
           </StyledIdeContainer>
         </StyledIdeVertContainer>
       </ResizableRow>
@@ -113,13 +126,15 @@ export default IdeInterface;
 
 const ViewersContainer = ({
   viewers,
+  splashIcon,
   options,
 }: {
   viewers: ViewersEntry[];
+  splashIcon: JSX.Element;
   options: any;
 }) => {
   const [visibility, setVisibility] = useState<boolean[]>(
-    Array(viewers.length).fill(false),
+    Array(viewers.length).fill(false)
   );
   const theme = useTheme();
 
@@ -131,7 +146,7 @@ const ViewersContainer = ({
         } else {
           return state;
         }
-      }),
+      })
     );
   };
 
@@ -153,7 +168,7 @@ const ViewersContainer = ({
           ))}
         </StyledButtonsContainer>
       </StyledViewerMenu>
-      <CollapsableResizableColumn state={visibility}>
+      <CollapsableResizableColumn state={visibility} splashIcon={splashIcon}>
         {viewers.map((viewer) => viewer.component)}
       </CollapsableResizableColumn>
     </>

@@ -149,12 +149,14 @@ export const ResizableRow = ({
   maxWidth,
   showExplorer,
   layout,
+  splashIcon,
   children,
 }: {
   baseWidth: number[];
   maxWidth: number[];
   showExplorer: boolean;
   layout: string;
+  splashIcon: JSX.Element;
   children: any[];
 }) => {
   const theme = useTheme();
@@ -182,7 +184,9 @@ export const ResizableRow = ({
 
   if (children.length === 0) {
     return (
-      <MonocolorSplashIcon className="bt-splash-icon" fill="var(--header)" />
+      <>
+        {splashIcon}
+      </>
     );
   }
 
@@ -213,9 +217,11 @@ export const ResizableRow = ({
 
 export const CollapsableResizableColumn = ({
   state,
+  splashIcon,
   children,
 }: {
   state: boolean[];
+  splashIcon: JSX.Element;
   children: any[];
 }) => {
   const theme = useTheme();
@@ -228,7 +234,9 @@ export const CollapsableResizableColumn = ({
 
   if (children.length === 0) {
     return (
-      <MonocolorSplashIcon className="bt-splash-icon" fill="var(--header)" />
+      <>
+        {splashIcon}
+      </>
     );
   }
 

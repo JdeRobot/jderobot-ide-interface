@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from "react";
 import { merge } from "lodash";
+import { background } from "storybook/internal/theming";
 
 export interface Theme {
   palette: {
@@ -16,6 +17,10 @@ export interface Theme {
       warning: string;
       error: string;
       info: string;
+    };
+    progressBar: {
+      background: string,
+      color: string,
     };
     button: {
       error: string;
@@ -54,6 +59,10 @@ const defaultTheme: Theme = {
       warning: "#ffe100",
       error: "#772222",
       info: "#134f53",
+    },
+    progressBar: {
+      background: "#ffe100",
+      color: "#772222",
     },
     button: {
       error: "#9e2e2e",

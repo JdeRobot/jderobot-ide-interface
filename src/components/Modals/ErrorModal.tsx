@@ -1,6 +1,5 @@
 import { useError, useTheme } from "Utils";
 import { ErrorType } from "Types";
-import "./ErrorModal.css";
 import { StyledModalRow } from "./Modal.styles";
 import {
   StyledModalError,

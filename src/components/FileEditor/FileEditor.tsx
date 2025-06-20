@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from "react";
 
 import {
   SaveIcon,
-  MonocolorSplashIcon,
-  MonocolorUniboticsSplashIcon,
 } from "Assets";
 import { useError, useTheme } from "Utils";
 // import { OptionsContext } from "../../options/Options";
@@ -34,19 +32,19 @@ const FileEditor = ({
   currentFile,
   changeCurrentFile,
   currentProjectname,
-  isUnibotics,
   autosave,
   manager,
   api,
   extraEditors,
+  splashIcon,
 }: {
   currentFile?: Entry;
   changeCurrentFile: Function;
   currentProjectname: string;
-  isUnibotics: boolean;
   autosave: boolean;
   manager: CommsManager | null;
   api: any;
+  splashIcon: JSX.Element;
   extraEditors: EditorsEntry[];
 }) => {
   const { error, warning } = useError();
@@ -294,17 +292,7 @@ const FileEditor = ({
         </>
       ) : (
         <>
-          {isUnibotics ? (
-            <MonocolorUniboticsSplashIcon
-              className="bt-splash-icon"
-              fill="var(--header)"
-            />
-          ) : (
-            <MonocolorSplashIcon
-              className="bt-splash-icon"
-              fill="var(--header)"
-            />
-          )}
+          {splashIcon}
         </>
       )}
     </>

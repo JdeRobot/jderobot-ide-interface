@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import "./NewFileModal.css";
+import { useState, useEffect, useRef } from "react";
 import Modal, { ModalTitlebar } from "./Modal";
 
 import { EmptyTeplateIcon, ActionTeplateIcon, IOTeplateIcon } from "Assets";

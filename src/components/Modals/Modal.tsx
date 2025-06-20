@@ -1,5 +1,4 @@
 import { useRef, useEffect, useState } from "react";
-import "./Modal.css";
 import {
   StyledModal,
   StyledModalBackButton,

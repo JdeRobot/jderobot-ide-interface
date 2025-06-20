@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import IdeInterface from "./IdeInterface";
 import { VncViewer } from "Components";
-import { SaveIcon } from "Assets";
+import { MonocolorSplashIcon, SaveIcon } from "Assets";
 
 type Story = StoryObj<typeof IdeInterface>;
 
@@ -68,7 +68,6 @@ export const Main: Story = {
   },
 };
 
-
 // const explorer: ExplorerEntry = {
 //   name: "string";
 //   list(project: string): Promise<string>;
@@ -88,7 +87,6 @@ export const Main: Story = {
 //     delete(project: string, path: string): Promise<void>;
 //   };
 // }
-
 
 // export const WithExplorers: Story = {
 //   render: (args) => (

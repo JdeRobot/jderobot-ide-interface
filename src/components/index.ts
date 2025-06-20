@@ -7,3 +7,4 @@ export * from "./FileEditor";
 export * from "./Modals";
 export * from "./Button";
 export * from "./ButtonsContainer";
+export * from "./ProgressBar";

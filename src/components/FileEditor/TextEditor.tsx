@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Editor, { Monaco } from "@monaco-editor/react";
-import "./FileEditor.css";
 import type { editor } from "monaco-editor";
 
 // import { OptionsContext } from "../../options/Options";

@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import "./DeleteModal.css";
 import Modal, { ModalTitlebar } from "./Modal";
 import { Entry } from "Types";
 import {

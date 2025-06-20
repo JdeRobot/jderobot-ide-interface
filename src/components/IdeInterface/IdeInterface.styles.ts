@@ -1,3 +1,4 @@
+import { MonocolorSplashIcon, SplashIcon } from "Assets";
 import styled from "styled-components";
 
 const primaryColor = "#666";
@@ -62,4 +63,24 @@ export const StyledViewerMenu = styled.div<StyledViewerMenuProps>`
   padding-left: 10px;
   padding-right: 5px;
   background-color: ${(p) => p.bgColor ?? primaryColor};
+`;
+
+interface StyledSplashIcon {
+  color?: string;
+}
+
+export const StyledMonocolorSplashIcon = styled(
+  MonocolorSplashIcon 
+)<StyledSplashIcon>`
+  fill: ${(p) => p.color ?? primaryColor};
+  width: 33vh;
+  height: 100%;
+`;
+
+export const StyledSplashIcon = styled(
+  SplashIcon
+)<StyledSplashIcon>`
+  fill: ${(p) => p.color ?? primaryColor};
+  width: 33vh;
+  height: 100%;
 `;
