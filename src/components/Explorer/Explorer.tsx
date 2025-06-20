@@ -10,7 +10,7 @@ import {
 } from "Components";
 import FileExplorer from "./file_explorer/FileExplorer";
 
-import { newFileModalData, Entry, ExplorerEntry } from "Types";
+import { newFileData, Entry, ExplorerEntry } from "Types";
 
 import {
   AddIcon,
@@ -123,7 +123,7 @@ const Explorer = ({
 
   const handleNewActionSubmit = async (
     location: string,
-    data: newFileModalData,
+    data: newFileData,
   ) => {
     handleCloseNewFileModal();
 

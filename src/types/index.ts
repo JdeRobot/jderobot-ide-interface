@@ -1,6 +1,6 @@
 export type {
   Entry,
-  newFileModalData,
+  newFileData,
   ExplorerEntry,
   EditorsEntry,
   ViewersEntry,

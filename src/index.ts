@@ -1,4 +1,7 @@
-export { VncViewer, IdeInterface } from "./components";
+import { IdeInterface } from "./components";
+export default IdeInterface;
+
+export { VncViewer } from "./components";
 export { ThemeProvider, useTheme } from "./utils/themeProvider";
 export type { Theme } from "./utils/themeProvider";
 export type {
@@ -8,4 +11,5 @@ export type {
   ExplorerEntry,
   EditorsEntry,
   ViewersEntry,
+  newFileData
 } from "./types";

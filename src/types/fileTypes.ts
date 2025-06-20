@@ -1,4 +1,4 @@
-export interface newFileModalData {
+export interface newFileData {
   fileType: string;
   fileName: string;
   templateType: string;
@@ -11,7 +11,7 @@ export interface ExplorerEntry {
     create(
       project: string,
       location: string,
-      data: newFileModalData,
+      data: newFileData,
     ): Promise<void>;
     get(project: string, path: string): Promise<string>;
     rename(project: string, oldPath: string, newPath: string): Promise<void>;
