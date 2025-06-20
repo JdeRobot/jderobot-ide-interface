@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import "./UploadModal.css";
 import Modal, { ModalTitlebar } from "./Modal";
 // import ProgressBar from "../../../progress_bar/ProgressBar";
-
-import { CloseIcon } from "Assets";
 // import { uploadFile } from "../../../../api_helper/TreeWrapper";
 import { useError, useTheme } from "Utils";
 import { StyledModalRow } from "./Modal.styles";

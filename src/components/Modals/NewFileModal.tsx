@@ -12,6 +12,12 @@ import {
   StyledModalInputRowContainer,
   StyledModalRow,
 } from "./Modal.styles";
+import styled from "styled-components";
+import {
+  StyledModalCardsContainer,
+  StyledModalCardsEntry,
+  StyledModalCardsTitle,
+} from "./NewFileModal.styles";
 
 const initialNewFileModalData = {
   fileType: "plain",
@@ -256,7 +262,7 @@ const NewFileModal = ({
           checkedCallback={onOptionTypeChange}
         />
         {creationType === "actions" && (
-          <CardSelector
+          <TemplatesCardSelector
             contentArray={actionsCardEntryProps}
             title="Select Template Type"
             id="templates-list"
@@ -314,10 +320,10 @@ const CardSelector = ({
       roundness={theme.roundness}
       id={id}
     >
-      <label htmlFor="templateType" className="bt-templates-list-title">
+      <StyledModalCardsTitle htmlFor="templateType">
         {title}
-      </label>
-      <div className="bt-templates-list-container">
+      </StyledModalCardsTitle>
+      <StyledModalCardsContainer>
         {contentArray.map((x) => (
           <CardEntry
             cardEntryProp={x}
@@ -326,10 +332,14 @@ const CardSelector = ({
             checkedCallback={checkedCallback}
           />
         ))}
-      </div>
+      </StyledModalCardsContainer>
     </StyledModalRow>
   );
 };
+
+const TemplatesCardSelector = styled(CardSelector)`
+  height: 170px;
+`;
 
 const CardEntry = ({
   cardEntryProp,
@@ -342,22 +352,27 @@ const CardEntry = ({
   checkedVariable: string;
   checkedCallback: (e: any) => void;
 }) => {
+  const theme = useTheme();
+
   return (
-    <div className="bt-templates-col">
-      <label>
-        <input
-          type="radio"
-          name={name}
-          value={cardEntryProp.value}
-          id={cardEntryProp.id}
-          checked={checkedVariable === cardEntryProp.value}
-          onChange={checkedCallback}
-        />
-        <div id={"button-" + cardEntryProp.id}>
-          {cardEntryProp.icon}
-          <p> {cardEntryProp.text} </p>
-        </div>
-      </label>
-    </div>
+    <StyledModalCardsEntry
+      hoverColor={theme.palette.secondary}
+      selectedColor={theme.palette.selectedGradient}
+      color={theme.palette.text}
+      roundness={theme.roundness}
+    >
+      <input
+        type="radio"
+        name={name}
+        value={cardEntryProp.value}
+        id={cardEntryProp.id}
+        checked={checkedVariable === cardEntryProp.value}
+        onChange={checkedCallback}
+      />
+      <div id={"button-" + cardEntryProp.id}>
+        {cardEntryProp.icon}
+        <p> {cardEntryProp.text} </p>
+      </div>
+    </StyledModalCardsEntry>
   );
 };

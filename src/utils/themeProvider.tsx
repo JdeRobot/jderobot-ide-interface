@@ -13,10 +13,10 @@ export interface Theme {
     primary?: string;
     secondary?: string;
     border: {
-      warning: string,
-      error: string,
-      info: string,
-    }
+      warning: string;
+      error: string;
+      info: string;
+    };
     button: {
       error: string;
       success: string;
@@ -26,7 +26,8 @@ export interface Theme {
       hoverSuccess: string;
       hoverWarning: string;
       hoverInfo: string;
-    }
+    };
+    selectedGradient: string;
   };
   roundness?: number;
   spacing?: number;
@@ -63,7 +64,9 @@ const defaultTheme: Theme = {
       hoverSuccess: "#29ac29",
       hoverWarning: "#ccb400",
       hoverInfo: "#1d777c",
-    }
+    },
+    selectedGradient:
+      "linear-gradient( -45deg, #12494c 0%, #584f42 50%, #909c7b 100%)",
   },
   roundness: 5,
   spacing: 8,
