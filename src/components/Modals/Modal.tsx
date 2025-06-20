@@ -95,6 +95,7 @@ export const ModalTitlebar = ({
     >
       {hasBack && (
         <StyledModalBackButton
+          viewBox="-2.4 -2.4 36 36"
           id="back-modal"
           onClick={() => {
             handleBack();
@@ -105,6 +106,7 @@ export const ModalTitlebar = ({
       <label htmlFor={htmlFor}>{title}</label>
       {hasClose && (
         <StyledModalCloseButton
+          viewBox="0 0 20 20"
           id="close-modal"
           onClick={() => {
             handleClose();

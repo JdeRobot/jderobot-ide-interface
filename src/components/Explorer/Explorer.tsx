@@ -392,7 +392,7 @@ const Explorer = ({
                 onClick={handleDeleteCurrentFile}
                 title="Delete file"
               >
-                <DeleteIcon viewBox="0 0 20 20"/>
+                <DeleteIcon viewBox="0 0 .9375 .9375"/>
               </MenuButton>
             </>
           )}

@@ -65,7 +65,7 @@ const NewFileModal = ({
   const plain = new CardEntryProps(
     "plain",
     "plainType",
-    <ActionTeplateIcon viewBox="0 0 20 20" fill={theme.palette.text} />,
+    <ActionTeplateIcon viewBox="0 0 6.4 6.4" fill={theme.palette.text} />,
     "Plain File",
   );
   const actions = new CardEntryProps(
@@ -85,7 +85,7 @@ const NewFileModal = ({
   const action = new CardEntryProps(
     "action",
     "actionTemplate",
-    <ActionTeplateIcon viewBox="0 0 20 20" fill={theme.palette.text} />,
+    <ActionTeplateIcon viewBox="0 0 6.4 6.4" fill={theme.palette.text} />,
     "Action",
   );
   const io = new CardEntryProps(

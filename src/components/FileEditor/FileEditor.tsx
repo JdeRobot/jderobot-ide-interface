@@ -219,7 +219,7 @@ const FileEditor = ({
             onClick={handleSaveFile}
             title="Save File"
           >
-            <SaveIcon viewBox="0 0 20 20"/>
+            <SaveIcon viewBox="0 0 .9375 .9375"/>
           </MenuButton>
           <MenuButton
             id="zoom-in-button"
