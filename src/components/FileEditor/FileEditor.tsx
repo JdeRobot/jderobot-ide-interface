@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import {
-  SaveIcon,
-} from "Assets";
+import { SaveIcon } from "Assets";
 import { useError, useTheme } from "Utils";
 // import { OptionsContext } from "../../options/Options";
 import { CommsManager } from "jderobot-commsmanager";
@@ -291,9 +289,7 @@ const FileEditor = ({
           })()}
         </>
       ) : (
-        <>
-          {splashIcon}
-        </>
+        <>{splashIcon}</>
       )}
     </>
   );

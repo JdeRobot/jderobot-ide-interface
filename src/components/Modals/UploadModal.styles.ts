@@ -36,7 +36,9 @@ export const StyledModalDrop = styled.label<StyledModelDropProps>`
   border: 2px dashed ${(p) => p.borderColor ?? primaryColor};
   color: ${(p) => p.text ?? primaryColor};
   cursor: pointer;
-  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+  transition:
+    background 0.2s ease-in-out,
+    border 0.2s ease-in-out;
   &:hover {
     background: ${(p) => p.borderColor ?? primaryColor};
     border-color: ${(p) => p.hoverBorderColor ?? primaryColor};

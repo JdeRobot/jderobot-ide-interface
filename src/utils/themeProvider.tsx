@@ -19,8 +19,8 @@ export interface Theme {
       info: string;
     };
     progressBar: {
-      background: string,
-      color: string,
+      background: string;
+      color: string;
     };
     button: {
       error: string;

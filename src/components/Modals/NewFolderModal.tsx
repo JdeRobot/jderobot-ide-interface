@@ -2,7 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import Modal, { ModalTitlebar } from "./Modal";
 import { CloseIcon } from "Assets";
 import { useTheme } from "Utils";
-import { StyledModalButtonRow, StyledModalInput, StyledModalInputContainer, StyledModalInputRowContainer, StyledModalRow } from "./Modal.styles";
+import {
+  StyledModalButtonRow,
+  StyledModalInput,
+  StyledModalInputContainer,
+  StyledModalInputRowContainer,
+  StyledModalRow,
+} from "./Modal.styles";
 
 const initialNewFolderModalData = {
   folderName: "",
@@ -49,7 +55,7 @@ const NewFolderModal = ({
 
         for (let index = 0; index < path.length; index++) {
           search_list = search_list.find(
-            (entry: Entry) => entry.name === path[index] && entry.is_dir
+            (entry: Entry) => entry.name === path[index] && entry.is_dir,
           )!.files;
         }
       }
@@ -141,11 +147,7 @@ const NewFolderModal = ({
               roundness={theme.roundness}
               valid={isCreationAllowed || formState.folderName === ""}
             />
-            <label
-              htmlFor="folderName"
-            >
-              Folder Name
-            </label>
+            <label htmlFor="folderName">Folder Name</label>
           </StyledModalInputContainer>
         </StyledModalInputRowContainer>
         <StyledModalRow

@@ -183,11 +183,7 @@ export const ResizableRow = ({
   }
 
   if (children.length === 0) {
-    return (
-      <>
-        {splashIcon}
-      </>
-    );
+    return <>{splashIcon}</>;
   }
 
   if (children.length === 1) {
@@ -233,11 +229,7 @@ export const CollapsableResizableColumn = ({
   }
 
   if (children.length === 0) {
-    return (
-      <>
-        {splashIcon}
-      </>
-    );
+    return <>{splashIcon}</>;
   }
 
   if (children.length === 1) {

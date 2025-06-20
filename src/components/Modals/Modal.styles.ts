@@ -73,7 +73,7 @@ interface StyledModalCloseButtonProps {
 }
 
 export const StyledModalCloseButton = styled(
-  CloseIcon
+  CloseIcon,
 )<StyledModalCloseButtonProps>`
   fill: ${(p) => p.color ?? primaryColor};
   margin-left: auto;
@@ -84,7 +84,7 @@ interface StyledModalBackButtonProps {
 }
 
 export const StyledModalBackButton = styled(
-  BackIcon
+  BackIcon,
 )<StyledModalBackButtonProps>`
   fill: ${(p) => p.color ?? primaryColor};
   margin-right: auto;

@@ -61,39 +61,39 @@ const NewFileModal = ({
   const [searchActionsList, setSearchActionsList] = useState<Entry[]>([]);
   const [searchPlainList, setSearchPlainList] = useState<Entry[]>([]);
 
-///////////////////////// TYPES ////////////////////////////////////////////////
-const plain = new CardEntryProps(
-  "plain",
-  "plainType",
-  <ActionTeplateIcon fill={theme.palette.text} />,
-  "Plain File"
-);
-const actions = new CardEntryProps(
-  "actions",
-  "actionsType",
-  <IOTeplateIcon fill={theme.palette.text} />,
-  "Action"
-);
+  ///////////////////////// TYPES ////////////////////////////////////////////////
+  const plain = new CardEntryProps(
+    "plain",
+    "plainType",
+    <ActionTeplateIcon fill={theme.palette.text} />,
+    "Plain File",
+  );
+  const actions = new CardEntryProps(
+    "actions",
+    "actionsType",
+    <IOTeplateIcon fill={theme.palette.text} />,
+    "Action",
+  );
 
-///////////////////////// ACTIONS //////////////////////////////////////////////
-const empty = new CardEntryProps(
-  "empty",
-  "emptyTemplate",
-  <EmptyTeplateIcon stroke={theme.palette.text} />,
-  "Empty"
-);
-const action = new CardEntryProps(
-  "action",
-  "actionTemplate",
-  <ActionTeplateIcon fill={theme.palette.text} />,
-  "Action"
-);
-const io = new CardEntryProps(
-  "io",
-  "ioTemplate",
-  <IOTeplateIcon fill={theme.palette.text} />,
-  "I/O"
-);
+  ///////////////////////// ACTIONS //////////////////////////////////////////////
+  const empty = new CardEntryProps(
+    "empty",
+    "emptyTemplate",
+    <EmptyTeplateIcon stroke={theme.palette.text} />,
+    "Empty",
+  );
+  const action = new CardEntryProps(
+    "action",
+    "actionTemplate",
+    <ActionTeplateIcon fill={theme.palette.text} />,
+    "Action",
+  );
+  const io = new CardEntryProps(
+    "io",
+    "ioTemplate",
+    <IOTeplateIcon fill={theme.palette.text} />,
+    "I/O",
+  );
 
   const typesCardEntryProps = [plain, actions];
   const actionsCardEntryProps = [empty, action, io];
@@ -136,7 +136,7 @@ const io = new CardEntryProps(
 
       for (let index = 0; index < path.length; index++) {
         search_list = search_list.find(
-          (entry) => entry.name === path[index] && entry.is_dir
+          (entry) => entry.name === path[index] && entry.is_dir,
         )!.files;
       }
     }

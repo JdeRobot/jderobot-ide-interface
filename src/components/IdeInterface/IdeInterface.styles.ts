@@ -70,16 +70,14 @@ interface StyledSplashIcon {
 }
 
 export const StyledMonocolorSplashIcon = styled(
-  MonocolorSplashIcon 
+  MonocolorSplashIcon,
 )<StyledSplashIcon>`
   fill: ${(p) => p.color ?? primaryColor};
   width: 33vh;
   height: 100%;
 `;
 
-export const StyledSplashIcon = styled(
-  SplashIcon
-)<StyledSplashIcon>`
+export const StyledSplashIcon = styled(SplashIcon)<StyledSplashIcon>`
   fill: ${(p) => p.color ?? primaryColor};
   width: 33vh;
   height: 100%;

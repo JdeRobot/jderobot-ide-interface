@@ -31,4 +31,3 @@ export const StyledSidebarEntryMenu = styled.div<StyledSidebarEntryMenuProps>`
   gap: 5px;
   background-color: ${(p) => p.bgColor ?? primaryColor};
 `;
-

@@ -134,7 +134,7 @@ const ViewersContainer = ({
   options: any;
 }) => {
   const [visibility, setVisibility] = useState<boolean[]>(
-    Array(viewers.length).fill(false)
+    Array(viewers.length).fill(false),
   );
   const theme = useTheme();
 
@@ -146,7 +146,7 @@ const ViewersContainer = ({
         } else {
           return state;
         }
-      })
+      }),
     );
   };
 

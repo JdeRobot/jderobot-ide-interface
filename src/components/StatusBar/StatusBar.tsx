@@ -1,4 +1,3 @@
-
 import { ResetIcon } from "Assets";
 import { CommsManager } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
@@ -28,10 +27,10 @@ const StatusBar = ({
 }) => {
   const theme = useTheme();
   const [dockerData, setDockerData] = useState<any>(
-    commsManager?.getHostData()
+    commsManager?.getHostData(),
   );
   const [state, setState] = useState<string | undefined>(
-    commsManager?.getState()
+    commsManager?.getState(),
   );
 
   const connectWithRetry = async () => {
@@ -69,7 +68,10 @@ const StatusBar = ({
           <StyledStatusBarEntry text={theme.palette.text} title="GPU status">
             <label>{`GPU: ${dockerData.gpu_avaliable}`}</label>
           </StyledStatusBarEntry>
-          <StyledStatusBarEntry text={theme.palette.text} title="Robotics Backend version">
+          <StyledStatusBarEntry
+            text={theme.palette.text}
+            title="Robotics Backend version"
+          >
             <label>{`Robotics Backend: ${dockerData.robotics_backend_version}`}</label>
           </StyledStatusBarEntry>
         </>

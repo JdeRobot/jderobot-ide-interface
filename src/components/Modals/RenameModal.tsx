@@ -3,7 +3,13 @@ import Modal, { ModalTitlebar } from "./Modal";
 import { CloseIcon } from "Assets";
 import { Entry } from "Types";
 import { useTheme } from "Utils";
-import { StyledModalButtonRow, StyledModalInput, StyledModalInputContainer, StyledModalInputRowContainer, StyledModalRow } from "./Modal.styles";
+import {
+  StyledModalButtonRow,
+  StyledModalInput,
+  StyledModalInputContainer,
+  StyledModalInputRowContainer,
+  StyledModalRow,
+} from "./Modal.styles";
 
 const initialNewFolderModalData = {
   renameData: "",
@@ -57,7 +63,7 @@ const RenameModal = ({
 
       for (let index = 0; index < path.length - 1; index++) {
         search_list = search_list.find(
-          (entry) => entry.name === path[index] && entry.is_dir
+          (entry) => entry.name === path[index] && entry.is_dir,
         )!.files;
       }
 
@@ -164,9 +170,7 @@ const RenameModal = ({
               roundness={theme.roundness}
               valid={isCreationAllowed}
             />
-            <label
-              htmlFor="renameData"
-            >
+            <label htmlFor="renameData">
               Rename {selectedEntry.is_dir ? "Folder" : "File"}
             </label>
           </StyledModalInputContainer>

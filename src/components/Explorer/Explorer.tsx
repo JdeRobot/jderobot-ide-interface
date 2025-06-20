@@ -16,11 +16,15 @@ import {
   AddIcon,
   AddFolderIcon,
   DeleteIcon,
-  RefreshIcon,
+  ResetIcon,
   RenameIcon,
 } from "Assets";
 import { useError, useTheme } from "Utils";
-import { StyledSidebarContainer, StyledSidebarEntry, StyledSidebarEntryMenu } from "./Explorer.styles";
+import {
+  StyledSidebarContainer,
+  StyledSidebarEntry,
+  StyledSidebarEntryMenu,
+} from "./Explorer.styles";
 import { MenuButtonStroke } from "../Button/Button";
 
 function getParentDir(file: Entry) {
@@ -357,21 +361,21 @@ const Explorer = ({
             onClick={() => handleCreateFile(undefined)}
             title="Create a new file"
           >
-            <AddIcon fill={theme.palette.text} />
+            <AddIcon />
           </MenuButton>
           <MenuButtonStroke
             id="new-folder-button"
             onClick={() => handleCreateFolder(undefined)}
             title="Create a new folder"
           >
-            <AddFolderIcon stroke={theme.palette.text} />
+            <AddFolderIcon />
           </MenuButtonStroke>
           <MenuButtonStroke
             id="refresh-explorer-button"
             onClick={() => fetchFileList()}
             title="Refresh View"
           >
-            <RefreshIcon stroke={theme.palette.text} />
+            <ResetIcon />
           </MenuButtonStroke>
           <div style={{ marginLeft: "auto" }} />
           {currentFile && (
@@ -381,14 +385,14 @@ const Explorer = ({
                 onClick={handleRenameCurrentFile}
                 title="Rename file"
               >
-                <RenameIcon stroke={theme.palette.text} />
+                <RenameIcon />
               </MenuButtonStroke>
               <MenuButton
                 id="delete-file-button"
                 onClick={handleDeleteCurrentFile}
                 title="Delete file"
               >
-                <DeleteIcon fill={theme.palette.text} />
+                <DeleteIcon />
               </MenuButton>
             </>
           )}

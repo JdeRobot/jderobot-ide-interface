@@ -44,7 +44,6 @@ export const StyledExplorerItemContainer = styled.div<StyledExplorerItemContaine
   ${handleActive}
 `;
 
-
 interface StyledExplorerItemProps {
   color?: string;
   depth: number;
@@ -63,7 +62,7 @@ export const StyledExplorerItem = styled.div<StyledExplorerItemProps>`
   overflow: hidden;
   position: relative;
   z-index: 1;
-  padding-left: ${(p) => 20 * p.depth }px;
+  padding-left: ${(p) => 20 * p.depth}px;
 
   & label {
     cursor: pointer;
@@ -88,17 +87,19 @@ interface StyledActionIconProps {
 export const StyledActionIcon = styled(ActionIcon)<StyledActionIconProps>`
   margin-left: auto;
   visibility: hidden;
-  stroke:${(p) => p.color ?? primaryColor};
+  stroke: ${(p) => p.color ?? primaryColor};
 `;
 
 interface StyledExplorerAccentProps {
   color?: string;
 }
 
-export const StyledExplorerAccent = styled(ActionIcon)<StyledExplorerAccentProps>`
+export const StyledExplorerAccent = styled(
+  ActionIcon,
+)<StyledExplorerAccentProps>`
   position: relative;
   z-index: 10;
   width: 5px;
   height: 100%;
-  background-color:${(p) => p.color ?? primaryColor};
+  background-color: ${(p) => p.color ?? primaryColor};
 `;

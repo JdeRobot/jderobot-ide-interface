@@ -41,7 +41,7 @@ const handleIcon = (p: StyledButtonProps) => {
     case "stroke":
       return `
         & svg {
-          strike: ${p.color ?? primaryColor};
+          stroke: ${p.color ?? primaryColor};
         }
       `;
   }

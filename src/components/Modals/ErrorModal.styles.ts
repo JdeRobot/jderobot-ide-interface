@@ -153,8 +153,8 @@ const handleVariantTitlebar = (p: StyledModalErrorTitlebarProps) => {
   }
 };
 
-export const StyledModalErrorTitlebar = styled(ModalTitlebar)<StyledModalErrorTitlebarProps>`
+export const StyledModalErrorTitlebar = styled(
+  ModalTitlebar,
+)<StyledModalErrorTitlebarProps>`
   ${handleVariantTitlebar}
 `;
-
-
