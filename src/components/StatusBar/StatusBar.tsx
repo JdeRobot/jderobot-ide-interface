@@ -1,4 +1,3 @@
-import "./StatusBar.css";
 
 import { ResetIcon } from "Assets";
 import { CommsManager } from "jderobot-commsmanager";
@@ -11,7 +10,12 @@ import { useEffect, useState } from "react";
 // } from "../../../api_helper/TreeWrapper";
 import JSZip from "jszip";
 // import UniverseModal from "./universe_modal/UniverseModal";
-import { subscribe, unsubscribe } from "Utils";
+import { subscribe, unsubscribe, useTheme } from "Utils";
+import {
+  StyledStatusBarButton,
+  StyledStatusBarContainer,
+  StyledStatusBarEntry,
+} from "./StatusBar.style";
 
 const StatusBar = ({
   project,
@@ -22,11 +26,12 @@ const StatusBar = ({
   commsManager: CommsManager | null;
   resetManager: Function;
 }) => {
+  const theme = useTheme();
   const [dockerData, setDockerData] = useState<any>(
-    commsManager?.getHostData(),
+    commsManager?.getHostData()
   );
   const [state, setState] = useState<string | undefined>(
-    commsManager?.getState(),
+    commsManager?.getState()
   );
 
   const connectWithRetry = async () => {
@@ -55,37 +60,42 @@ const StatusBar = ({
   }, []);
 
   return (
-    <div className="bt-status-bar-container">
+    <StyledStatusBarContainer bgColor={theme.palette.primary}>
       {dockerData ? (
         <>
-          <div className="bt-status-bar-div" title="ROS 2 version">
-            <label className="bt-status-bar-label">{`ROS 2: ${dockerData.ros_version}`}</label>
-          </div>
-          <div className="bt-status-bar-div" title="GPU status">
-            <label className="bt-status-bar-label">{`GPU: ${dockerData.gpu_avaliable}`}</label>
-          </div>
-          <div className="bt-status-bar-div" title="Robotics Backend version">
-            <label className="bt-status-bar-label">{`Robotics Backend: ${dockerData.robotics_backend_version}`}</label>
-          </div>
+          <StyledStatusBarEntry text={theme.palette.text} title="ROS 2 version">
+            <label>{`ROS 2: ${dockerData.ros_version}`}</label>
+          </StyledStatusBarEntry>
+          <StyledStatusBarEntry title="GPU status">
+            <label>{`GPU: ${dockerData.gpu_avaliable}`}</label>
+          </StyledStatusBarEntry>
+          <StyledStatusBarEntry title="Robotics Backend version">
+            <label>{`Robotics Backend: ${dockerData.robotics_backend_version}`}</label>
+          </StyledStatusBarEntry>
         </>
       ) : (
-        <button
-          className={`bt-status-bar-button`}
+        <StyledStatusBarButton
+          text={theme.palette.darkText}
+          bgColor={theme.palette.warning}
+          hoverColor={theme.palette.button.hoverWarning}
           id={`reset-connection`}
           onClick={() => {
             resetManager();
           }}
           title="Reconnect with Robotics Backend"
         >
-          <ResetIcon className="bt-status-bar-icon" stroke={"var(--icon)"} />
-          <label className="bt-status-bar-label">Reconnect</label>
-        </button>
+          <ResetIcon stroke={theme.palette.darkText} />
+          <label>Reconnect</label>
+        </StyledStatusBarButton>
       )}
-      <div className="bt-status-bar-div" title="Robotics Backend state">
-        <label className="bt-status-bar-label">{state}</label>
-      </div>
+      <StyledStatusBarEntry
+        text={theme.palette.text}
+        title="Robotics Backend state"
+      >
+        <label>{state}</label>
+      </StyledStatusBarEntry>
       {/* <ModalUniverseSelector project={project} commsManager={commsManager} /> */}
-    </div>
+    </StyledStatusBarContainer>
   );
 };
 

@@ -35,7 +35,6 @@ export interface Theme {
     selectedGradient: string;
   };
   roundness?: number;
-  spacing?: number;
   transitionSpeed?: number;
 }
 
@@ -78,7 +77,6 @@ const defaultTheme: Theme = {
       "linear-gradient( -45deg, #12494c 0%, #584f42 50%, #909c7b 100%)",
   },
   roundness: 5,
-  spacing: 8,
   transitionSpeed: 200,
 };
 

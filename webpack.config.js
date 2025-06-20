@@ -1,4 +1,3 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
 const aliases = () => {
@@ -46,10 +45,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
       {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
