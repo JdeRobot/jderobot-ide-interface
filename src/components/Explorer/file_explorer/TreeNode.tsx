@@ -92,7 +92,7 @@ function TreeNode({
               menuProps.showMoreActionsMenu(e, node);
             }}
           />
-          {settings.editor.showAccentColors && (
+          {settings.explorer.showAccentColors && (
             <StyledExplorerAccent color={accentColor ? accentColor : "none"} />
           )}
         </StyledExplorerItem>

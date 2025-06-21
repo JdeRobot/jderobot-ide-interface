@@ -2,7 +2,7 @@ import React, { createContext, useContext } from "react";
 import { merge } from "lodash";
 
 export interface Options {
-  editor: {
+  explorer: {
     showAccentColors?: boolean;
   };
 }
@@ -13,7 +13,7 @@ interface OptionsProviderProps {
 }
 
 const defaultOptions: Options = {
-  editor: {
+  explorer: {
     showAccentColors: false,
   },
 };
