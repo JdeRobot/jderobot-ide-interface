@@ -15,8 +15,6 @@ export const Main: Story = {
       style={{
         width: "100vw",
         height: "100vh",
-        fontFamily:
-          '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
       }}
     >
       <NewFileModal
