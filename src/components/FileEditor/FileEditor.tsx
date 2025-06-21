@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 
 import { SaveIcon } from "Assets";
 import { useError, useTheme } from "Utils";
-// import { OptionsContext } from "../../options/Options";
 import { CommsManager } from "jderobot-commsmanager";
 import { Entry, EditorsEntry } from "Types";
 import TextEditor from "./TextEditor";
@@ -47,7 +46,6 @@ const FileEditor = ({
 }) => {
   const { error, warning } = useError();
   const theme = useTheme();
-  // const settings = React.useContext(OptionsContext);
 
   const [fileContent, setFileContent] = useState<string | undefined>(undefined);
   const [zoomLevel, changeZoomLevel] = useState(0);

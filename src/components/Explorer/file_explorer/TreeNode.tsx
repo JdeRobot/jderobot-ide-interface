@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import FileIcon from "./FileIcon";
-// import { OptionsContext } from "../../../options/Options";
 import { ContextMenuProps } from "./MoreActionsMenu";
-import { subscribe, unsubscribe, useTheme } from "Utils";
+import { subscribe, unsubscribe, useOptions, useTheme } from "Utils";
 import { Entry, AccentColorEventData } from "Types";
 import {
   StyledActionIcon,
+  StyledExplorerAccent,
   StyledExplorerItem,
   StyledExplorerItemContainer,
 } from "./TreeNode.styles";
@@ -29,7 +29,7 @@ function TreeNode({
   const [isCollapsed, setCollapsed] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
   const [accentColor, setAccentColor] = useState<string | undefined>(undefined);
-  // const settings = React.useContext(OptionsContext);
+  const settings = useOptions();
 
   const callback = (e: AccentColorEventData) => {
     if (e.detail === undefined) {
@@ -92,9 +92,9 @@ function TreeNode({
               menuProps.showMoreActionsMenu(e, node);
             }}
           />
-          {/* {settings.editorShowAccentColors.value && (
+          {settings.editor.showAccentColors && (
             <StyledExplorerAccent color={accentColor ? accentColor : "none"} />
-          )} */}
+          )}
         </StyledExplorerItem>
       </StyledExplorerItemContainer>
       {!isCollapsed &&

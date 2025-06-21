@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Editor, { Monaco } from "@monaco-editor/react";
 import type { editor } from "monaco-editor";
-
-// import { OptionsContext } from "../../options/Options";
 import { CommsManager } from "jderobot-commsmanager";
 import { monacoEditorSnippet } from "./extras";
 import { useTheme } from "Utils";
@@ -49,7 +47,6 @@ const FileEditor = ({
   language: string;
   zoomLevel: number;
 }) => {
-  // const settings = React.useContext(OptionsContext);
   const theme = useTheme();
 
   const editorRef = useRef<any>(null);
@@ -272,7 +269,7 @@ const FileEditor = ({
       defaultValue=""
       language={language}
       value={fileContent}
-      // theme={`${settings.theme.value}-theme`}
+      // theme={`${settings.theme.value}-theme`} TODO:add theme
       theme={`dark-theme`}
       onChange={(newContent: any) => {
         setFileContent(newContent);
