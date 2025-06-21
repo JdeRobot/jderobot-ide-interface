@@ -7,7 +7,6 @@ import { useTheme } from "Utils";
 import {
   StyledModalButtonRow,
   StyledModalInput,
-  StyledModalInputContainer,
   StyledModalInputRowContainer,
   StyledModalRow,
 } from "./Modal.styles";
@@ -99,6 +98,7 @@ const NewFileModal = ({
   const actionsCardEntryProps = [empty, action, io];
 
   const onOptionTypeChange = (e: any) => {
+    console.log(e);
     setCreationType(e.target.value);
     handleInputChange(e);
   };
@@ -135,13 +135,17 @@ const NewFileModal = ({
       var path = orig_path.split("/");
 
       for (let index = 0; index < path.length; index++) {
-        search_list = search_list.find(
+        const find = search_list.find(
           (entry) => entry.name === path[index] && entry.is_dir,
-        )!.files;
+        );
+
+        if (find !== undefined) {
+          search_list = find.files;
+        } else {
+          search_list = [];
+        }
       }
     }
-
-    console.log(search_list);
 
     if (search_list) {
       callback(search_list);
@@ -230,8 +234,17 @@ const NewFileModal = ({
           handleClose={handleCancel}
         />
         <StyledModalInputRowContainer>
-          <StyledModalInputContainer>
-            <StyledModalInput
+          <StyledModalInput
+            color={theme.palette.text}
+            placeholderColor={theme.palette.placeholderText}
+            bgColor={theme.palette.primary}
+            borderColor={theme.palette.text}
+            focusBorderColor={theme.palette.secondary}
+            invalidBorderColor={theme.palette.error}
+            roundness={theme.roundness}
+            valid={isCreationAllowed || formState.fileName === ""}
+          >
+            <input
               ref={focusInputRef}
               type="text"
               id="fileName"
@@ -240,17 +253,9 @@ const NewFileModal = ({
               autoComplete="off"
               placeholder="File Name"
               required
-              color={theme.palette.text}
-              placeholderColor={theme.palette.placeholderText}
-              bgColor={theme.palette.background}
-              borderColor={theme.palette.background}
-              focusBorderColor={theme.palette.background}
-              invalidBorderColor={theme.palette.background}
-              roundness={theme.roundness}
-              valid={isCreationAllowed || formState.fileName === ""}
             />
             <label htmlFor="fileName">File Name</label>
-          </StyledModalInputContainer>
+          </StyledModalInput>
         </StyledModalInputRowContainer>
         <CardSelector
           contentArray={typesCardEntryProps}
@@ -356,22 +361,28 @@ const CardEntry = ({
   return (
     <StyledModalCardsEntry
       hoverColor={theme.palette.secondary}
-      selectedColor={theme.palette.selectedGradient}
+      selectedColor={theme.palette.primary}
       color={theme.palette.text}
       roundness={theme.roundness}
+      active={checkedVariable === cardEntryProp.value}
     >
-      <input
-        type="radio"
-        name={name}
-        value={cardEntryProp.value}
-        id={cardEntryProp.id}
-        checked={checkedVariable === cardEntryProp.value}
-        onChange={checkedCallback}
-      />
-      <div id={"button-" + cardEntryProp.id}>
-        {cardEntryProp.icon}
-        <p> {cardEntryProp.text} </p>
-      </div>
+      <label>
+        <input
+          type="radio"
+          name={name}
+          value={cardEntryProp.value}
+          id={cardEntryProp.id}
+          checked={checkedVariable === cardEntryProp.value}
+          onChange={(e: any) => {
+            checkedCallback(e);
+            console.log(e);
+          }}
+        />
+        <div id={"button-" + cardEntryProp.id}>
+          {cardEntryProp.icon}
+          <p> {cardEntryProp.text} </p>
+        </div>
+      </label>
     </StyledModalCardsEntry>
   );
 };

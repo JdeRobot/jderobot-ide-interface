@@ -8,11 +8,7 @@ export interface ExplorerEntry {
   name: string;
   list(project: string): Promise<string>;
   file: {
-    create(
-      project: string,
-      location: string,
-      data: newFileData,
-    ): Promise<void>;
+    create(project: string, location: string, data: newFileData): Promise<void>;
     get(project: string, path: string): Promise<string>;
     rename(project: string, oldPath: string, newPath: string): Promise<void>;
     delete(project: string, path: string): Promise<void>;

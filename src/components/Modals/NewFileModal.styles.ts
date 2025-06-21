@@ -24,7 +24,18 @@ interface StyledModalCardsEntryProps {
   selectedColor?: string;
   color?: string;
   roundness?: number;
+  active?: boolean;
 }
+
+const handleActive = (p: StyledModalCardsEntryProps) => {
+  if (p.active) {
+    return `
+      & div {
+        background-color: ${p.selectedColor ?? primaryColor} !important;
+      }
+    `;
+  }
+};
 
 export const StyledModalCardsEntry = styled.div<StyledModalCardsEntryProps>`
   float: left;
@@ -58,7 +69,5 @@ export const StyledModalCardsEntry = styled.div<StyledModalCardsEntryProps>`
     z-index: 100;
   }
 
-  input[type="radio"]:checked + div {
-    background-color: ${(p) => p.selectedColor ?? primaryColor} !important;
-  }
+  ${handleActive}
 `;

@@ -178,10 +178,6 @@ export const StyledModalInputRowContainer = styled.div`
   justify-content: space-evenly;
 `;
 
-export const StyledModalInputContainer = styled.div`
-  position: relative;
-`;
-
 interface StyledModalInputProps {
   color?: string;
   placeholderColor?: string;
@@ -196,27 +192,16 @@ interface StyledModalInputProps {
 const handleValid = (p: StyledModalInputProps) => {
   if (p.valid) {
     return `
-        border-color: ${p.invalidBorderColor ?? primaryColor} !important;
-      `;
+      border: 2px solid ${p.borderColor ?? primaryColor};
+    `;
   }
   return `
-    border-color: ${p.borderColor ?? primaryColor} !important;
-  `;
+      border: 2px solid ${p.invalidBorderColor ?? primaryColor} !important;
+    `;
 };
 
-export const StyledModalInput = styled.input<StyledModalInputProps>`
-  padding-left: 1em;
-  padding-top: 13px;
-  width: 100%;
-  align-self: center;
-  height: 50px;
-  outline: 0;
-  font-size: 1rem;
-  transition: border-color 0.2s;
-  border: 2px solid;
-  background-color: ${(p) => p.bgColor ?? primaryColor} !important;
-  border-radius: ${(p) => p.roundness ?? 1}px;
-  color: ${(p) => p.color ?? primaryColor};
+export const StyledModalInput = styled.div<StyledModalInputProps>`
+  position: relative;
 
   & label {
     position: absolute;
@@ -229,27 +214,22 @@ export const StyledModalInput = styled.input<StyledModalInputProps>`
     user-select: none;
   }
 
-  &:required,
-  :invalid {
-    box-shadow: none;
-  }
-
-  &:focus ~ label {
+  & input:focus ~ label {
     position: absolute;
-    top: 5px;
+    top: 5px !important;
     display: block;
     transition: 0.2s;
-    font-size: 0.9rem;
+    font-size: 0.9rem !important;
     font-weight: 700;
   }
 
-  &:placeholder-shown ~ label {
+  & input:placeholder-shown ~ label {
     font-size: 1rem;
     cursor: text;
     top: 15px;
   }
 
-  &:not(placeholder-shown) ~ label {
+  & input:not(placeholder-shown) ~ label {
     position: absolute;
     top: 5px;
     display: block;
@@ -259,20 +239,39 @@ export const StyledModalInput = styled.input<StyledModalInputProps>`
     cursor: text;
   }
 
-  &:focus {
-    border-color: ${(p) => p.focusBorderColor ?? primaryColor};
-    outline: none !important;
-  }
+  & input {
+    padding-left: 1em;
+    padding-top: 13px;
+    width: 100%;
+    height: 50px;
+    outline: 0;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    background-color: ${(p) => p.bgColor ?? primaryColor} !important;
+    border-radius: ${(p) => p.roundness ?? 1}px;
+    color: ${(p) => p.color ?? primaryColor};
+    box-sizing: border-box;
 
-  &::placeholder {
-    color: transparent;
-    user-select: none;
+    &:required,
+    :invalid {
+      box-shadow: none;
+    }
+
+    &:focus {
+      border-color: ${(p) => p.focusBorderColor ?? primaryColor};
+      outline: none !important;
+    }
+
+    &::placeholder {
+      color: transparent;
+      user-select: none;
+    }
+
+    ${handleValid}
   }
 
   .bt-modal-complex-input-indications {
     color: var(--input-placeholder-text);
     font-size: 0.7rem;
   }
-
-  ${handleValid}
 `;

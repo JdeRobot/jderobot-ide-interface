@@ -61,7 +61,12 @@ const IdeInterface = ({
   const theme = useTheme();
 
   if (splashIcon === undefined) {
-    splashIcon = <StyledMonocolorSplashIcon color={theme.palette.primary} viewBox="0 0 200 200"/>;
+    splashIcon = (
+      <StyledMonocolorSplashIcon
+        color={theme.palette.primary}
+        viewBox="0 0 200 200"
+      />
+    );
   }
 
   return (

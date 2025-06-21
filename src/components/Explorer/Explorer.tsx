@@ -121,10 +121,7 @@ const Explorer = ({
     }
   };
 
-  const handleNewActionSubmit = async (
-    location: string,
-    data: newFileData,
-  ) => {
+  const handleNewActionSubmit = async (location: string, data: newFileData) => {
     handleCloseNewFileModal();
 
     if (data.fileName !== "") {
@@ -361,21 +358,21 @@ const Explorer = ({
             onClick={() => handleCreateFile(undefined)}
             title="Create a new file"
           >
-            <AddIcon viewBox="0 0 20 20"/>
+            <AddIcon viewBox="0 0 20 20" />
           </MenuButton>
           <MenuButtonStroke
             id="new-folder-button"
             onClick={() => handleCreateFolder(undefined)}
             title="Create a new folder"
           >
-            <AddFolderIcon viewBox="0 0 20 20"/>
+            <AddFolderIcon viewBox="0 0 20 20" />
           </MenuButtonStroke>
           <MenuButtonStroke
             id="refresh-explorer-button"
             onClick={() => fetchFileList()}
             title="Refresh View"
           >
-            <ResetIcon viewBox="0 0 20 20"/>
+            <ResetIcon viewBox="0 0 20 20" />
           </MenuButtonStroke>
           <div style={{ marginLeft: "auto" }} />
           {currentFile && (
@@ -385,14 +382,14 @@ const Explorer = ({
                 onClick={handleRenameCurrentFile}
                 title="Rename file"
               >
-                <RenameIcon viewBox="0 0 20 20"/>
+                <RenameIcon viewBox="0 0 20 20" />
               </MenuButtonStroke>
               <MenuButton
                 id="delete-file-button"
                 onClick={handleDeleteCurrentFile}
                 title="Delete file"
               >
-                <DeleteIcon viewBox="0 0 .9375 .9375"/>
+                <DeleteIcon viewBox="0 0 .9375 .9375" />
               </MenuButton>
             </>
           )}

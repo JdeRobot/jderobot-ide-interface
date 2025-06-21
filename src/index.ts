@@ -11,5 +11,5 @@ export type {
   ExplorerEntry,
   EditorsEntry,
   ViewersEntry,
-  newFileData
+  newFileData,
 } from "./types";
