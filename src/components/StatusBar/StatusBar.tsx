@@ -1,38 +1,39 @@
 import { ResetIcon } from "Assets";
 import { CommsManager } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
-// import {
-//   getFileList,
-//   getRoboticsBackendUniverse,
-//   getUniverseConfig,
-//   getUniverseFile,
-// } from "../../../api_helper/TreeWrapper";
-import JSZip from "jszip";
-// import UniverseModal from "./universe_modal/UniverseModal";
 import { subscribe, unsubscribe, useTheme } from "Utils";
 import {
   StyledStatusBarButton,
   StyledStatusBarContainer,
   StyledStatusBarEntry,
 } from "./StatusBar.style";
+import { DropdownStatusBar } from "Components";
+
+interface StatusBarApi {
+  universes: {
+    list(project: string): Promise<string[]>;
+    get_config(universe: string): Promise<any>;
+  };
+}
 
 const StatusBar = ({
   project,
   commsManager,
   resetManager,
+  api,
 }: {
   project: string;
   commsManager: CommsManager | null;
   resetManager: Function;
+  api: StatusBarApi;
 }) => {
   const theme = useTheme();
   const [dockerData, setDockerData] = useState<any>(
-    commsManager?.getHostData(),
+    commsManager?.getHostData()
   );
   const [state, setState] = useState<string | undefined>(
-    commsManager?.getState(),
+    commsManager?.getState()
   );
-
   const connectWithRetry = async () => {
     const data = commsManager?.getHostData();
     if (data) {
@@ -96,485 +97,140 @@ const StatusBar = ({
       >
         <label>{state}</label>
       </StyledStatusBarEntry>
-      {/* <ModalUniverseSelector project={project} commsManager={commsManager} /> */}
+      <DefaultUniverseSelector
+        project={project}
+        commsManager={commsManager}
+        api={api}
+      />
     </StyledStatusBarContainer>
   );
 };
 
 export default StatusBar;
 
-// const DefaultUniverseSelector = ({
-//   project,
-//   commsManager,
-// }: {
-//   project: string;
-//   commsManager: CommsManager | null;
-// }) => {
-//   const [universe, setUniverse] = useState<string | undefined>(
-//     commsManager?.getUniverse(),
-//   );
-
-//   const [isUniversesModalOpen, setUniversesModalOpen] = useState(false);
-
-//   useEffect(() => {
-//     if (commsManager) {
-//       console.log("Change Universe", commsManager.getUniverse());
-//       setUniverse(commsManager.getUniverse());
-//     }
-//   }, [commsManager?.getUniverse()]);
-
-//   const terminateUniverse = async () => {
-//     if (!commsManager) {
-//       // warning(
-//       //   "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
-//       // );
-//       return;
-//     }
-//     // Down the RB ladder
-//     await commsManager.terminateApplication();
-//     await commsManager.terminateVisualization();
-//     await commsManager.terminateUniverse();
-//   };
-
-//   const zipFile = async (
-//     zip: JSZip,
-//     universe_name: string,
-//     file_path: string,
-//     file_name: string,
-//   ) => {
-//     var content = await getUniverseFile(project, universe_name, file_path);
-//     zip.file(file_name, content);
-//   };
-
-//   const zipFolder = async (zip: JSZip, file: Entry, universe_name: string) => {
-//     const folder = zip.folder(file.name);
-
-//     if (folder === null) {
-//       return;
-//     }
-
-//     for (let index = 0; index < file.files.length; index++) {
-//       const element = file.files[index];
-//       console.log(element);
-//       if (element.is_dir) {
-//         await zipFolder(folder, element, universe_name);
-//       } else {
-//         await zipFile(folder, universe_name, element.path, element.name);
-//       }
-//     }
-//   };
-
-//   const zipToData = (zip: JSZip) => {
-//     return new Promise((resolve) => {
-//       const reader = new FileReader();
-//       reader.onloadend = () => resolve(reader.result);
-//       zip.generateAsync({ type: "blob" }).then(function (content) {
-//         reader.readAsDataURL(content);
-//       });
-//     });
-//   };
-
-//   const launchUniverse = async (universeConfig: string) => {
-//     if (!commsManager) {
-//       // warning(
-//       //   "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
-//       // );
-//       return;
-//     }
-
-//     if (project === "") {
-//       // error("Failed to find the current project name.");
-//       return;
-//     }
-
-//     console.log("UC: " + universeConfig);
-//     const configJson = JSON.parse(universeConfig);
-
-//     try {
-//       if (configJson.type === "robotics_backend") {
-//         const dockerUniverseInfo = await getRoboticsBackendUniverse(
-//           configJson.id,
-//         );
-
-//         let visualization = "bt_studio";
-
-//         if (dockerUniverseInfo.visualization === "gzsim_rae") {
-//           visualization = "bt_studio_gz";
-//         }
-
-//         const world_config = dockerUniverseInfo.world;
-
-//         const robot_config = dockerUniverseInfo.robot;
-
-//         const universe_config = {
-//           name: configJson.name,
-//           world: world_config,
-//           robot: robot_config,
-//         };
-
-//         await commsManager.launchWorld(universe_config);
-//         console.log("RB universe launched!");
-//         await commsManager.prepareVisualization(
-//           visualization,
-//           dockerUniverseInfo.visualization_config,
-//         );
-//         console.log("Viz ready!");
-//       } else {
-//         const file_list = await getFileList(project, configJson.name);
-
-//         const files: Entry[] = JSON.parse(file_list);
-
-//         const universe: Entry = {
-//           name: configJson.name,
-//           is_dir: true,
-//           path: "",
-//           files: files,
-//         };
-
-//         const zip = new JSZip();
-
-//         for (let index = 0; index < universe.files.length; index++) {
-//           const element = universe.files[index];
-//           console.log(element);
-//           if (element.is_dir) {
-//             await zipFolder(zip, element, universe.name);
-//           } else {
-//             await zipFile(zip, universe.name, element.path, element.name);
-//           }
-//         }
-
-//         const base64data = await zipToData(zip);
-
-//         const world_config = {
-//           name: configJson.name,
-//           launch_file_path: configJson.ram_config.launch_file_path,
-//           ros_version: configJson.ram_config.ros_version,
-//           world: configJson.ram_config.world,
-//           zip: base64data,
-//         };
-
-//         const robot_config = {
-//           name: null,
-//           launch_file_path: null,
-//           ros_version: null,
-//           visualization: null,
-//           world: null,
-//           start_pose: null,
-//         };
-
-//         const universe_config = {
-//           name: configJson.name,
-//           world: world_config,
-//           robot: robot_config,
-//         };
-
-//         const visualization_config = configJson.ram_config
-//           .visualization_config_path
-//           ? configJson.ram_config.visualization_config_path
-//           : null;
-
-//         await commsManager.launchWorld(universe_config);
-//         console.log("RB universe launched!");
-//         await commsManager.prepareVisualization(
-//           "bt_studio_gz",
-//           visualization_config,
-//         );
-//         console.log("Viz ready!");
-//       }
-//     } catch (e: unknown) {
-//       throw e; // rethrow
-//     }
-//   };
-
-//   const onCloseUniverseModal = async (universeName: string) => {
-//     // First, close the modal for reactivity
-//     setUniversesModalOpen(false);
-
-//     if (!universeName) return;
-
-//     // Get the config from the backend
-//     try {
-//       const universeConfig = await getUniverseConfig(universeName, project);
-//       try {
-//         // Launch if new universe selected
-//         if (universeName !== universe) {
-//           if (universe) await terminateUniverse();
-//           await launchUniverse(universeConfig);
-//           console.log("Launch universe successful");
-//         }
-//       } catch (e: unknown) {
-//         if (e instanceof Error) {
-//           console.error("Unable to launch selected universe: " + e.message);
-//           // error("Unable to launch selected universe: " + e.message);
-//         }
-//       }
-//     } catch (e: unknown) {
-//       if (e instanceof Error) {
-//         console.error("Unable to retrieve universe config: " + e.message);
-//         // error("Unable to retrieve universe config: " + e.message);
-//       }
-//     }
-//   };
-
-//   const onOpenUniverseModal = (e: any) => {
-//     setUniversesModalOpen(true);
-//   };
-
-//   return (
-//     <>
-//       <div
-//         className="bt-status-bar-div"
-//         title="Select Universe"
-//         onClick={onOpenUniverseModal}
-//       >
-//         <label className="bt-status-bar-label">
-//           {universe ? `Universe: ${universe}` : "Click to select universe"}
-//         </label>
-//       </div>
-//       <UniverseModal
-//         isOpen={isUniversesModalOpen}
-//         onSubmit={(data: unknown) => {}}
-//         onClose={onCloseUniverseModal}
-//         currentProject={project}
-//       />
-//     </>
-//   );
-// };
-
-// const ModalUniverseSelector = ({
-//   project,
-//   commsManager,
-// }: {
-//   project: string;
-//   commsManager: CommsManager | null;
-// }) => {
-//   const [universe, setUniverse] = useState<string | undefined>(
-//     commsManager?.getUniverse(),
-//   );
-
-//   const [isUniversesModalOpen, setUniversesModalOpen] = useState(false);
-
-//   useEffect(() => {
-//     if (commsManager) {
-//       console.log("Change Universe", commsManager.getUniverse());
-//       setUniverse(commsManager.getUniverse());
-//     }
-//   }, [commsManager?.getUniverse()]);
-
-//   const terminateUniverse = async () => {
-//     if (!commsManager) {
-//       // warning(
-//       //   "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
-//       // );
-//       return;
-//     }
-//     // Down the RB ladder
-//     await commsManager.terminateApplication();
-//     await commsManager.terminateVisualization();
-//     await commsManager.terminateUniverse();
-//   };
-
-//   const zipFile = async (
-//     zip: JSZip,
-//     universe_name: string,
-//     file_path: string,
-//     file_name: string,
-//   ) => {
-//     var content = await getUniverseFile(project, universe_name, file_path);
-//     zip.file(file_name, content);
-//   };
-
-//   const zipFolder = async (zip: JSZip, file: Entry, universe_name: string) => {
-//     const folder = zip.folder(file.name);
-
-//     if (folder === null) {
-//       return;
-//     }
-
-//     for (let index = 0; index < file.files.length; index++) {
-//       const element = file.files[index];
-//       console.log(element);
-//       if (element.is_dir) {
-//         await zipFolder(folder, element, universe_name);
-//       } else {
-//         await zipFile(folder, universe_name, element.path, element.name);
-//       }
-//     }
-//   };
-
-//   const zipToData = (zip: JSZip) => {
-//     return new Promise((resolve) => {
-//       const reader = new FileReader();
-//       reader.onloadend = () => resolve(reader.result);
-//       zip.generateAsync({ type: "blob" }).then(function (content) {
-//         reader.readAsDataURL(content);
-//       });
-//     });
-//   };
-
-//   const launchUniverse = async (universeConfig: string) => {
-//     if (!commsManager) {
-//       // warning(
-//       //   "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
-//       // );
-//       return;
-//     }
-
-//     if (project === "") {
-//       // error("Failed to find the current project name.");
-//       return;
-//     }
-
-//     console.log("UC: " + universeConfig);
-//     const configJson = JSON.parse(universeConfig);
-
-//     try {
-//       if (configJson.type === "robotics_backend") {
-//         const dockerUniverseInfo = await getRoboticsBackendUniverse(
-//           configJson.id,
-//         );
-
-//         let visualization = "bt_studio";
-
-//         if (dockerUniverseInfo.visualization === "gzsim_rae") {
-//           visualization = "bt_studio_gz";
-//         }
-
-//         const world_config = dockerUniverseInfo.world;
-
-//         const robot_config = dockerUniverseInfo.robot;
-
-//         const universe_config = {
-//           name: configJson.name,
-//           world: world_config,
-//           robot: robot_config,
-//         };
-
-//         await commsManager.launchWorld(universe_config);
-//         console.log("RB universe launched!");
-//         await commsManager.prepareVisualization(
-//           visualization,
-//           dockerUniverseInfo.visualization_config,
-//         );
-//         console.log("Viz ready!");
-//       } else {
-//         const file_list = await getFileList(project, configJson.name);
-
-//         const files: Entry[] = JSON.parse(file_list);
-
-//         const universe: Entry = {
-//           name: configJson.name,
-//           is_dir: true,
-//           path: "",
-//           files: files,
-//         };
-
-//         const zip = new JSZip();
-
-//         for (let index = 0; index < universe.files.length; index++) {
-//           const element = universe.files[index];
-//           console.log(element);
-//           if (element.is_dir) {
-//             await zipFolder(zip, element, universe.name);
-//           } else {
-//             await zipFile(zip, universe.name, element.path, element.name);
-//           }
-//         }
-
-//         const base64data = await zipToData(zip);
-
-//         const world_config = {
-//           name: configJson.name,
-//           launch_file_path: configJson.ram_config.launch_file_path,
-//           ros_version: configJson.ram_config.ros_version,
-//           world: configJson.ram_config.world,
-//           zip: base64data,
-//         };
-
-//         const robot_config = {
-//           name: null,
-//           launch_file_path: null,
-//           ros_version: null,
-//           visualization: null,
-//           world: null,
-//           start_pose: null,
-//         };
-
-//         const universe_config = {
-//           name: configJson.name,
-//           world: world_config,
-//           robot: robot_config,
-//         };
-
-//         const visualization_config = configJson.ram_config
-//           .visualization_config_path
-//           ? configJson.ram_config.visualization_config_path
-//           : null;
-
-//         await commsManager.launchWorld(universe_config);
-//         console.log("RB universe launched!");
-//         await commsManager.prepareVisualization(
-//           "bt_studio_gz",
-//           visualization_config,
-//         );
-//         console.log("Viz ready!");
-//       }
-//     } catch (e: unknown) {
-//       throw e; // rethrow
-//     }
-//   };
-
-//   const onCloseUniverseModal = async (universeName: string) => {
-//     // First, close the modal for reactivity
-//     setUniversesModalOpen(false);
-
-//     if (!universeName) return;
-
-//     // Get the config from the backend
-//     try {
-//       const universeConfig = await getUniverseConfig(universeName, project);
-//       try {
-//         // Launch if new universe selected
-//         if (universeName !== universe) {
-//           if (universe) await terminateUniverse();
-//           await launchUniverse(universeConfig);
-//           console.log("Launch universe successful");
-//         }
-//       } catch (e: unknown) {
-//         if (e instanceof Error) {
-//           console.error("Unable to launch selected universe: " + e.message);
-//           // error("Unable to launch selected universe: " + e.message);
-//         }
-//       }
-//     } catch (e: unknown) {
-//       if (e instanceof Error) {
-//         console.error("Unable to retrieve universe config: " + e.message);
-//         // error("Unable to retrieve universe config: " + e.message);
-//       }
-//     }
-//   };
-
-//   const onOpenUniverseModal = (e: any) => {
-//     setUniversesModalOpen(true);
-//   };
-
-//   return (
-//     <>
-//       <div
-//         className="bt-status-bar-div"
-//         title="Select Universe"
-//         onClick={onOpenUniverseModal}
-//       >
-//         <label className="bt-status-bar-label">
-//           {universe ? `Universe: ${universe}` : "Click to select universe"}
-//         </label>
-//       </div>
-//       <UniverseModal
-//         isOpen={isUniversesModalOpen}
-//         onSubmit={(data: unknown) => {}}
-//         onClose={onCloseUniverseModal}
-//         currentProject={project}
-//       />
-//     </>
-//   );
-// };
+const DefaultUniverseSelector = ({
+  project,
+  commsManager,
+  api,
+}: {
+  project: string;
+  commsManager: CommsManager | null;
+  api: StatusBarApi;
+}) => {
+  const [universe, setUniverse] = useState<string | undefined>(
+    commsManager?.getUniverse()
+  );
+
+  const [universeList, setUniverseList] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (commsManager) {
+      console.log("Change Universe", commsManager.getUniverse());
+      setUniverse(commsManager.getUniverse());
+    }
+  }, [commsManager?.getUniverse()]);
+
+  useEffect(() => {
+    const get_universe_list = async () => {
+      var list = await api.universes.list(project);
+      setUniverseList(list);
+    };
+    get_universe_list();
+  }, []);
+
+  const terminateUniverse = async () => {
+    if (!commsManager) {
+      // warning(
+      //   "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+      // );
+      return;
+    }
+    // Down the RB ladder
+    await commsManager.terminateApplication();
+    await commsManager.terminateVisualization();
+    await commsManager.terminateUniverse();
+  };
+
+  const launchUniverse = async (universe: string) => {
+    if (!commsManager) {
+      // warning(
+      //   "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+      // );
+      return;
+    }
+
+    if (project === "") {
+      // error("Failed to find the current project name.");
+      return;
+    }
+
+    try {
+      const universeConfig = await api.universes.get_config(universe);
+
+      let visualization = "bt_studio";
+
+      if (universeConfig.visualization === "gzsim_rae") {
+        visualization = "bt_studio_gz";
+      }
+
+      const world_config = universeConfig.world;
+
+      const robot_config = universeConfig.robot;
+
+      const universe_config = {
+        name: universe,
+        world: world_config,
+        robot: robot_config,
+      };
+
+      await commsManager.launchWorld(universe_config);
+      console.log("RB universe launched!");
+      // TODO: update to tools
+      await commsManager.prepareVisualization(
+        visualization,
+        universeConfig.visualization_config
+      );
+      console.log("Viz ready!");
+    } catch (e: unknown) {
+      throw e; // rethrow
+    }
+  };
+
+  const selectUniverse = async (universeName: string) => {
+    console.log(universeName);
+
+    if (!universeName) return;
+
+    // Get the config from the backend
+    try {
+      // Launch if new universe selected
+      if (universeName !== universe) {
+        if (universe) await api.universes.list(project);
+        if (universe) await terminateUniverse();
+        await launchUniverse(universeName);
+        console.log("Launch universe successful");
+      }
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        console.error("Unable to retrieve universe config: " + e.message);
+        // error("Unable to retrieve universe config: " + e.message);
+      }
+    }
+  };
+
+  return (
+    <DropdownStatusBar
+      id="open-settings-manager"
+      title="Layout"
+      width={120}
+      baseHeight={24}
+      down={false}
+      setter={selectUniverse}
+      possibleValues={universeList}
+    >
+      <label>
+        {universe ? `Universe: ${universe}` : universeList.length === 0 ? `No universes to select` : "Click to select universe"}
+      </label>
+    </DropdownStatusBar>
+  );
+};
