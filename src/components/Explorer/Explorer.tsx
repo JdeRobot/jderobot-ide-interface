@@ -436,6 +436,7 @@ const Explorer = ({
         isOpen={isUploadModalOpen}
         onSubmit={handleCloseUploadModal}
         onClose={handleCloseUploadModal}
+        upload={api.file.upload}
         location={selectedLocation}
         currentProject={project}
       />
