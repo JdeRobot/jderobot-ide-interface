@@ -8,13 +8,7 @@ import {
   StyledStatusBarEntry,
 } from "./StatusBar.style";
 import { DropdownStatusBar } from "Components";
-
-interface StatusBarApi {
-  universes: {
-    list(project: string): Promise<string[]>;
-    get_config(universe: string): Promise<any>;
-  };
-}
+import { ExtraApi } from "src/types/fileTypes";
 
 const StatusBar = ({
   project,
@@ -25,7 +19,7 @@ const StatusBar = ({
   project: string;
   commsManager: CommsManager | null;
   resetManager: Function;
-  api: StatusBarApi;
+  api: ExtraApi;
 }) => {
   const theme = useTheme();
   const [dockerData, setDockerData] = useState<any>(
@@ -115,7 +109,7 @@ const DefaultUniverseSelector = ({
 }: {
   project: string;
   commsManager: CommsManager | null;
-  api: StatusBarApi;
+  api: ExtraApi;
 }) => {
   const [universe, setUniverse] = useState<string | undefined>(
     commsManager?.getUniverse(),

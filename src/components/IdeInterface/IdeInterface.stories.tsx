@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import IdeInterface from "./IdeInterface";
 import { VncViewer } from "Components";
-import { MonocolorSplashIcon, SaveIcon } from "Assets";
+import { SaveIcon } from "Assets";
+import { ExtraApi, Entry } from "Types";
 
 type Story = StoryObj<typeof IdeInterface>;
 
@@ -31,6 +32,25 @@ const meta: Meta<typeof IdeInterface> = {
 
 export default meta;
 
+const api: ExtraApi = {
+  file: {
+    save: (project: string, file: Entry, content: string) => {
+      return new Promise(() => {});
+    },
+    get: (project: string, file: Entry) => {
+      return new Promise(() => {});
+    },
+  },
+  universes: {
+    list: (project: string) => {
+      return new Promise(() => {});
+    },
+    get_config: (universe: string) => {
+      return new Promise(() => {});
+    },
+  },
+};
+
 const gazeboViewer = {
   component: <VncViewer commsManager={null} port={6080} />,
   icon: <SaveIcon />,
@@ -56,10 +76,9 @@ export const Main: Story = {
         resetManager={() => {}}
         project={"currentProjectname"}
         explorers={[]}
-        editorApi={[]}
+        api={api}
         extraEditors={[]}
         viewers={[gazeboViewer, terminalViewer]}
-        options={[]}
       />
     </div>
   ),

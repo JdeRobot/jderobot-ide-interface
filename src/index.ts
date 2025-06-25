@@ -15,8 +15,10 @@ export type {
   ExtraEditorProps,
   Layout,
   Entry,
+  Options,
   ExplorerEntry,
   EditorsEntry,
   ViewersEntry,
   newFileData,
+  ExtraApi,
 } from "./types";

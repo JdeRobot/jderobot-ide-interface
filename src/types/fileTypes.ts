@@ -26,6 +26,17 @@ export interface ExplorerEntry {
   };
 }
 
+export interface ExtraApi {
+  file: {
+    save(project: string, file: Entry, content: string): Promise<void>;
+    get(project: string, file: Entry): Promise<string>;
+  };
+  universes: {
+    list(project: string): Promise<string[]>;
+    get_config(universe: string): Promise<any>;
+  };
+}
+
 export interface ViewersEntry {
   component: JSX.Element;
   icon: JSX.Element;

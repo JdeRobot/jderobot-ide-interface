@@ -11,6 +11,7 @@ import {
   StyledSeparatedButtonsContainer,
 } from "Components";
 import { StyledChangeIndicator, StyledEditorMenu } from "./FileEditor.styles";
+import { ExtraApi } from "src/types/fileTypes";
 
 const fileTypes = {
   json: "json",
@@ -40,7 +41,7 @@ const FileEditor = ({
   currentProjectname: string;
   autosave: boolean;
   manager: CommsManager | null;
-  api: any;
+  api: ExtraApi;
   splashIcon: JSX.Element;
   extraEditors: EditorsEntry[];
 }) => {
@@ -57,6 +58,10 @@ const FileEditor = ({
 
   const initFile = async (file: Entry) => {
     try {
+      if (currentFile === undefined) {
+        throw Error("No current file");
+      }
+
       console.log("Loading new file...");
       const content = await api.file.get(currentProjectname, currentFile);
       const extension = file.name.split(".").pop();
@@ -118,6 +123,11 @@ const FileEditor = ({
 
     if (contentRef.current !== "") {
       content = contentRef.current;
+    }
+
+    if (content === undefined) {
+      console.log("No content to save");
+      return;
     }
 
     try {
