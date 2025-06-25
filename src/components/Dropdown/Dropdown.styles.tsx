@@ -20,7 +20,7 @@ const handleDown = (p: StyledDropdownProps) => {
     `;
   }
   return `
-    margin-top: ${- (p.height ?? 1) - 10}px;
+    margin-top: ${-(p.height ?? 1) - 10}px;
   `;
 };
 

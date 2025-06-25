@@ -12,7 +12,12 @@ export interface ExplorerEntry {
     get(project: string, path: string): Promise<string>;
     rename(project: string, oldPath: string, newPath: string): Promise<void>;
     delete(project: string, path: string): Promise<void>;
-    upload(project: string, path: string, name:string, content:string): Promise<void>;
+    upload(
+      project: string,
+      path: string,
+      name: string,
+      content: string,
+    ): Promise<void>;
   };
   folder: {
     create(project: string, location: string, name: string): Promise<void>;
