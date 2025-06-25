@@ -269,8 +269,7 @@ const FileEditor = ({
       defaultValue=""
       language={language}
       value={fileContent}
-      // theme={`${settings.theme.value}-theme`} TODO:add theme
-      theme={`dark-theme`}
+      theme={`${theme.monacoTheme}-theme`}
       onChange={(newContent: any) => {
         setFileContent(newContent);
       }}
