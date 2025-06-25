@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 
 import Modal, { ModalTitlebar } from "./Modal";
 import { ProgressBar } from "Components";
-// import { uploadFile } from "../../../../api_helper/TreeWrapper";
 import { useError, useTheme } from "Utils";
 import { StyledModalRow } from "./Modal.styles";
 import { StyledModalDrop } from "./UploadModal.styles";
@@ -11,12 +10,14 @@ const UploadModal = ({
   onSubmit,
   isOpen,
   onClose,
+  upload,
   location,
   currentProject,
 }: {
   onSubmit: () => void;
   isOpen: boolean;
   onClose: Function;
+  upload: Function;
   location: string;
   currentProject: string;
 }) => {
@@ -71,7 +72,7 @@ const UploadModal = ({
       reader.onload = (e: any) => {
         const base64String = e.target.result.split(",")[1]; // Remove the data URL prefix
         try {
-          // uploadFile(currentProject, file.name, location, base64String);
+          upload(currentProject, location, file.name, base64String);
           console.log("Uploading file Completed");
         } catch (e) {
           if (e instanceof Error) {

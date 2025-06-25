@@ -60,7 +60,7 @@ export const DropdownStatusBar = ({
       <StyledStatusBarEntry
         id={id}
         title={title}
-        onClick={(e:any) => {
+        onClick={(e: any) => {
           checkPosition(e.clientX);
           e.preventDefault();
           setOpen(!open);
@@ -143,7 +143,7 @@ export const DropdownIcon = ({
       <MenuButton
         id={id}
         title={title}
-        onClick={(e:any) => {
+        onClick={(e: any) => {
           checkPosition(e.clientX);
           e.preventDefault();
           setOpen(!open);

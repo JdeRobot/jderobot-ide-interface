@@ -29,10 +29,10 @@ const StatusBar = ({
 }) => {
   const theme = useTheme();
   const [dockerData, setDockerData] = useState<any>(
-    commsManager?.getHostData()
+    commsManager?.getHostData(),
   );
   const [state, setState] = useState<string | undefined>(
-    commsManager?.getState()
+    commsManager?.getState(),
   );
   const connectWithRetry = async () => {
     const data = commsManager?.getHostData();
@@ -118,7 +118,7 @@ const DefaultUniverseSelector = ({
   api: StatusBarApi;
 }) => {
   const [universe, setUniverse] = useState<string | undefined>(
-    commsManager?.getUniverse()
+    commsManager?.getUniverse(),
   );
 
   const [universeList, setUniverseList] = useState<string[]>([]);
@@ -188,7 +188,7 @@ const DefaultUniverseSelector = ({
       // TODO: update to tools
       await commsManager.prepareVisualization(
         visualization,
-        universeConfig.visualization_config
+        universeConfig.visualization_config,
       );
       console.log("Viz ready!");
     } catch (e: unknown) {
@@ -229,7 +229,11 @@ const DefaultUniverseSelector = ({
       possibleValues={universeList}
     >
       <label>
-        {universe ? `Universe: ${universe}` : universeList.length === 0 ? `No universes to select` : "Click to select universe"}
+        {universe
+          ? `Universe: ${universe}`
+          : universeList.length === 0
+            ? `No universes to select`
+            : "Click to select universe"}
       </label>
     </DropdownStatusBar>
   );
