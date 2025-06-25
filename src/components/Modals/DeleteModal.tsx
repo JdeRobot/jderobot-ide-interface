@@ -13,7 +13,6 @@ const StyledModal = styled(Modal)`
   width: fit-content;
 `;
 
-// TODO add a way to select if plain text file
 const DeleteModal = ({
   onSubmit,
   isOpen,
@@ -26,7 +25,6 @@ const DeleteModal = ({
   selectedEntry: Entry;
 }) => {
   const theme = useTheme();
-  //TODO: use relative path instead of absolute one
 
   useEffect(() => {
     // if (isOpen && focusInputRef.current) {

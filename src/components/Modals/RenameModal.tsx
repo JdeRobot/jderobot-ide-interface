@@ -108,7 +108,7 @@ const RenameModal = ({
   };
 
   const getNewPath = (new_name: string) => {
-    var split_path = selectedEntry.path.split("/"); // TODO: add for windows
+    var split_path = selectedEntry.path.split("/");
     var parent_path = split_path.slice(0, split_path.length - 1).join("/");
     return parent_path + "/" + new_name;
   };
