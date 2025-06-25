@@ -5,7 +5,6 @@ import { useTheme } from "Utils";
 import {
   StyledModalButtonRow,
   StyledModalInput,
-  StyledModalInputContainer,
   StyledModalInputRowContainer,
   StyledModalRow,
 } from "./Modal.styles";
@@ -109,7 +108,7 @@ const RenameModal = ({
   };
 
   const getNewPath = (new_name: string) => {
-    var split_path = selectedEntry.path.split("/"); // TODO: add for windows
+    var split_path = selectedEntry.path.split("/");
     var parent_path = split_path.slice(0, split_path.length - 1).join("/");
     return parent_path + "/" + new_name;
   };
@@ -148,8 +147,17 @@ const RenameModal = ({
           }}
         />
         <StyledModalInputRowContainer>
-          <StyledModalInputContainer>
-            <StyledModalInput
+          <StyledModalInput
+            color={theme.palette.text}
+            placeholderColor={theme.palette.placeholderText}
+            bgColor={theme.palette.background}
+            borderColor={theme.palette.background}
+            focusBorderColor={theme.palette.background}
+            invalidBorderColor={theme.palette.background}
+            roundness={theme.roundness}
+            valid={isCreationAllowed}
+          >
+            <input
               ref={focusInputRef}
               type="text"
               id="renameData"
@@ -160,19 +168,11 @@ const RenameModal = ({
                 selectedEntry.is_dir ? "Rename Folder" : "Rename File"
               }
               required
-              color={theme.palette.text}
-              placeholderColor={theme.palette.placeholderText}
-              bgColor={theme.palette.background}
-              borderColor={theme.palette.background}
-              focusBorderColor={theme.palette.background}
-              invalidBorderColor={theme.palette.background}
-              roundness={theme.roundness}
-              valid={isCreationAllowed}
             />
             <label htmlFor="renameData">
               Rename {selectedEntry.is_dir ? "Folder" : "File"}
             </label>
-          </StyledModalInputContainer>
+          </StyledModalInput>
         </StyledModalInputRowContainer>
         <StyledModalRow
           color={theme.palette.text}

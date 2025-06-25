@@ -4,7 +4,6 @@ import { useTheme } from "Utils";
 import {
   StyledModalButtonRow,
   StyledModalInput,
-  StyledModalInputContainer,
   StyledModalInputRowContainer,
   StyledModalRow,
 } from "./Modal.styles";
@@ -127,8 +126,17 @@ const NewFolderModal = ({
           }}
         />
         <StyledModalInputRowContainer>
-          <StyledModalInputContainer>
-            <StyledModalInput
+          <StyledModalInput
+            color={theme.palette.text}
+            placeholderColor={theme.palette.placeholderText}
+            bgColor={theme.palette.background}
+            borderColor={theme.palette.background}
+            focusBorderColor={theme.palette.background}
+            invalidBorderColor={theme.palette.background}
+            roundness={theme.roundness}
+            valid={isCreationAllowed || formState.folderName === ""}
+          >
+            <input
               ref={focusInputRef}
               type="text"
               id="folderName"
@@ -137,17 +145,9 @@ const NewFolderModal = ({
               autoComplete="off"
               placeholder="Folder Name"
               required
-              color={theme.palette.text}
-              placeholderColor={theme.palette.placeholderText}
-              bgColor={theme.palette.background}
-              borderColor={theme.palette.background}
-              focusBorderColor={theme.palette.background}
-              invalidBorderColor={theme.palette.background}
-              roundness={theme.roundness}
-              valid={isCreationAllowed || formState.folderName === ""}
             />
             <label htmlFor="folderName">Folder Name</label>
-          </StyledModalInputContainer>
+          </StyledModalInput>
         </StyledModalInputRowContainer>
         <StyledModalRow
           color={theme.palette.text}

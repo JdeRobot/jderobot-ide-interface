@@ -1,11 +1,6 @@
 import React, { createContext, useContext } from "react";
 import { merge } from "lodash";
-
-export interface Options {
-  explorer: {
-    showAccentColors?: boolean;
-  };
-}
+import { Options } from "Types";
 
 interface OptionsProviderProps {
   options?: Options;
