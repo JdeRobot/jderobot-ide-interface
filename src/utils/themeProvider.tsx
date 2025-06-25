@@ -42,7 +42,7 @@ const defaultTheme: Theme = {
   },
   roundness: 5,
   transitionSpeed: 200,
-  monacoTheme: "dark"
+  monacoTheme: "dark",
 };
 
 const ThemeContext = createContext(defaultTheme);
