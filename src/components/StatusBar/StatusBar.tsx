@@ -8,25 +8,27 @@ import {
   StyledStatusBarEntry,
 } from "./StatusBar.style";
 import { DropdownStatusBar } from "Components";
-import { ExtraApi } from "src/types/fileTypes";
+import { StatusBarComponents, ExtraApi } from "Types";
 
 const StatusBar = ({
   project,
   commsManager,
   resetManager,
   api,
+  extraComponents,
 }: {
   project: string;
   commsManager: CommsManager | null;
   resetManager: Function;
   api: ExtraApi;
+  extraComponents: StatusBarComponents;
 }) => {
   const theme = useTheme();
   const [dockerData, setDockerData] = useState<any>(
-    commsManager?.getHostData(),
+    commsManager?.getHostData()
   );
   const [state, setState] = useState<string | undefined>(
-    commsManager?.getState(),
+    commsManager?.getState()
   );
   const connectWithRetry = async () => {
     const data = commsManager?.getHostData();
@@ -91,11 +93,15 @@ const StatusBar = ({
       >
         <label>{state}</label>
       </StyledStatusBarEntry>
-      <DefaultUniverseSelector
-        project={project}
-        commsManager={commsManager}
-        api={api}
-      />
+      {extraComponents.universeSelector ? (
+        <>{extraComponents.universeSelector}</>
+      ) : (
+        <DefaultUniverseSelector
+          project={project}
+          commsManager={commsManager}
+          api={api}
+        />
+      )}
     </StyledStatusBarContainer>
   );
 };
@@ -113,7 +119,7 @@ const DefaultUniverseSelector = ({
 }) => {
   const { warning, error } = useError();
   const [universe, setUniverse] = useState<string | undefined>(
-    commsManager?.getUniverse(),
+    commsManager?.getUniverse()
   );
 
   const [universeList, setUniverseList] = useState<string[]>([]);
@@ -136,7 +142,7 @@ const DefaultUniverseSelector = ({
   const terminateUniverse = async () => {
     if (!commsManager) {
       warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected."
       );
       return;
     }
@@ -149,7 +155,7 @@ const DefaultUniverseSelector = ({
   const launchUniverse = async (universe: string) => {
     if (!commsManager) {
       warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected."
       );
       return;
     }
@@ -165,7 +171,7 @@ const DefaultUniverseSelector = ({
       var tools = universeConfig.tools;
 
       if (!tools.includes("state_monitor")) {
-        tools.push("state_monitor")
+        tools.push("state_monitor");
       }
 
       const world_config = universeConfig.world;
@@ -183,7 +189,7 @@ const DefaultUniverseSelector = ({
       // TODO: update to tools
       await commsManager.prepareTools(
         tools,
-        universeConfig.visualization_config,
+        universeConfig.visualization_config
       );
       console.log("Viz ready!");
     } catch (e: unknown) {
