@@ -1,7 +1,7 @@
 import { ResetIcon } from "Assets";
 import { CommsManager } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
-import { subscribe, unsubscribe, useTheme } from "Utils";
+import { subscribe, unsubscribe, useError, useTheme } from "Utils";
 import {
   StyledStatusBarButton,
   StyledStatusBarContainer,
@@ -111,6 +111,7 @@ const DefaultUniverseSelector = ({
   commsManager: CommsManager | null;
   api: ExtraApi;
 }) => {
+  const { warning, error } = useError();
   const [universe, setUniverse] = useState<string | undefined>(
     commsManager?.getUniverse(),
   );
@@ -134,9 +135,9 @@ const DefaultUniverseSelector = ({
 
   const terminateUniverse = async () => {
     if (!commsManager) {
-      // warning(
-      //   "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
-      // );
+      warning(
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+      );
       return;
     }
     // Down the RB ladder
@@ -147,14 +148,14 @@ const DefaultUniverseSelector = ({
 
   const launchUniverse = async (universe: string) => {
     if (!commsManager) {
-      // warning(
-      //   "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
-      // );
+      warning(
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+      );
       return;
     }
 
     if (project === "") {
-      // error("Failed to find the current project name.");
+      error("Failed to find the current project name.");
       return;
     }
 
@@ -195,7 +196,6 @@ const DefaultUniverseSelector = ({
 
     if (!universeName) return;
 
-    // Get the config from the backend
     try {
       // Launch if new universe selected
       if (universeName !== universe) {
@@ -207,7 +207,7 @@ const DefaultUniverseSelector = ({
     } catch (e: unknown) {
       if (e instanceof Error) {
         console.error("Unable to retrieve universe config: " + e.message);
-        // error("Unable to retrieve universe config: " + e.message);
+        error("Unable to retrieve universe config: " + e.message);
       }
     }
   };
