@@ -141,7 +141,7 @@ const DefaultUniverseSelector = ({
     }
     // Down the RB ladder
     await commsManager.terminateApplication();
-    await commsManager.terminateVisualization();
+    await commsManager.terminateTools();
     await commsManager.terminateUniverse();
   };
 
@@ -161,10 +161,10 @@ const DefaultUniverseSelector = ({
     try {
       const universeConfig = await api.universes.get_config(universe);
 
-      let visualization = "bt_studio";
+      var tools = universeConfig.tools;
 
-      if (universeConfig.visualization === "gzsim_rae") {
-        visualization = "bt_studio_gz";
+      if (!tools.includes("state_monitor")) {
+        tools.push("state_monitor")
       }
 
       const world_config = universeConfig.world;
@@ -180,8 +180,8 @@ const DefaultUniverseSelector = ({
       await commsManager.launchWorld(universe_config);
       console.log("RB universe launched!");
       // TODO: update to tools
-      await commsManager.prepareVisualization(
-        visualization,
+      await commsManager.prepareTools(
+        tools,
         universeConfig.visualization_config,
       );
       console.log("Viz ready!");
