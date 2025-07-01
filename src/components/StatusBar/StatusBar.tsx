@@ -25,10 +25,10 @@ const StatusBar = ({
 }) => {
   const theme = useTheme();
   const [dockerData, setDockerData] = useState<any>(
-    commsManager?.getHostData()
+    commsManager?.getHostData(),
   );
   const [state, setState] = useState<string | undefined>(
-    commsManager?.getState()
+    commsManager?.getState(),
   );
   const connectWithRetry = async () => {
     const data = commsManager?.getHostData();
@@ -119,7 +119,7 @@ const DefaultUniverseSelector = ({
 }) => {
   const { warning, error } = useError();
   const [universe, setUniverse] = useState<string | undefined>(
-    commsManager?.getUniverse()
+    commsManager?.getUniverse(),
   );
 
   const [universeList, setUniverseList] = useState<string[]>([]);
@@ -142,7 +142,7 @@ const DefaultUniverseSelector = ({
   const terminateUniverse = async () => {
     if (!commsManager) {
       warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected."
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
       );
       return;
     }
@@ -155,7 +155,7 @@ const DefaultUniverseSelector = ({
   const launchUniverse = async (universe: string) => {
     if (!commsManager) {
       warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected."
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
       );
       return;
     }
@@ -189,7 +189,7 @@ const DefaultUniverseSelector = ({
       // TODO: update to tools
       await commsManager.prepareTools(
         tools,
-        universeConfig.visualization_config
+        universeConfig.visualization_config,
       );
       console.log("Viz ready!");
     } catch (e: unknown) {
