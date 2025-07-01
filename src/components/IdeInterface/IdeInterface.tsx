@@ -28,7 +28,7 @@ import {
   StyledMonocolorSplashIcon,
   StyledViewerMenu,
 } from "./IdeInterface.styles";
-import { ExtraApi } from "src/types/fileTypes";
+import { ExtraApi, StatusBarComponents } from "Types";
 
 export interface IdeInterfaceStyles {
   bgColor?: string;
@@ -41,6 +41,7 @@ interface IdeInterfaceProps {
   explorers: ExplorerEntry[];
   api: ExtraApi;
   extraEditors: EditorsEntry[];
+  statusBarComponents: StatusBarComponents;
   viewers: ViewersEntry[];
   layout: Layout;
   options?: Options;
@@ -54,6 +55,7 @@ const IdeInterface = ({
   explorers,
   api,
   extraEditors,
+  statusBarComponents,
   viewers,
   layout,
   options,
@@ -120,6 +122,7 @@ const IdeInterface = ({
           project={project}
           commsManager={commsManager}
           resetManager={resetManager}
+          extraComponents={statusBarComponents}
           api={api}
         />
       </StyledIdeHorizContainer>

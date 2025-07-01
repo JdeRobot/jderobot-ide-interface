@@ -1,25 +1,27 @@
 import { ResetIcon } from "Assets";
 import { CommsManager } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
-import { subscribe, unsubscribe, useTheme } from "Utils";
+import { subscribe, unsubscribe, useError, useTheme } from "Utils";
 import {
   StyledStatusBarButton,
   StyledStatusBarContainer,
   StyledStatusBarEntry,
 } from "./StatusBar.style";
 import { DropdownStatusBar } from "Components";
-import { ExtraApi } from "src/types/fileTypes";
+import { StatusBarComponents, ExtraApi } from "Types";
 
 const StatusBar = ({
   project,
   commsManager,
   resetManager,
   api,
+  extraComponents,
 }: {
   project: string;
   commsManager: CommsManager | null;
   resetManager: Function;
   api: ExtraApi;
+  extraComponents: StatusBarComponents;
 }) => {
   const theme = useTheme();
   const [dockerData, setDockerData] = useState<any>(
@@ -91,11 +93,15 @@ const StatusBar = ({
       >
         <label>{state}</label>
       </StyledStatusBarEntry>
-      <DefaultUniverseSelector
-        project={project}
-        commsManager={commsManager}
-        api={api}
-      />
+      {extraComponents.universeSelector ? (
+        <>{extraComponents.universeSelector}</>
+      ) : (
+        <DefaultUniverseSelector
+          project={project}
+          commsManager={commsManager}
+          api={api}
+        />
+      )}
     </StyledStatusBarContainer>
   );
 };
@@ -111,6 +117,7 @@ const DefaultUniverseSelector = ({
   commsManager: CommsManager | null;
   api: ExtraApi;
 }) => {
+  const { warning, error } = useError();
   const [universe, setUniverse] = useState<string | undefined>(
     commsManager?.getUniverse(),
   );
@@ -134,37 +141,37 @@ const DefaultUniverseSelector = ({
 
   const terminateUniverse = async () => {
     if (!commsManager) {
-      // warning(
-      //   "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
-      // );
+      warning(
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+      );
       return;
     }
     // Down the RB ladder
     await commsManager.terminateApplication();
-    await commsManager.terminateVisualization();
+    await commsManager.terminateTools();
     await commsManager.terminateUniverse();
   };
 
   const launchUniverse = async (universe: string) => {
     if (!commsManager) {
-      // warning(
-      //   "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
-      // );
+      warning(
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+      );
       return;
     }
 
     if (project === "") {
-      // error("Failed to find the current project name.");
+      error("Failed to find the current project name.");
       return;
     }
 
     try {
       const universeConfig = await api.universes.get_config(universe);
 
-      let visualization = "bt_studio";
+      var tools = universeConfig.tools;
 
-      if (universeConfig.visualization === "gzsim_rae") {
-        visualization = "bt_studio_gz";
+      if (!tools.includes("state_monitor")) {
+        tools.push("state_monitor");
       }
 
       const world_config = universeConfig.world;
@@ -180,8 +187,8 @@ const DefaultUniverseSelector = ({
       await commsManager.launchWorld(universe_config);
       console.log("RB universe launched!");
       // TODO: update to tools
-      await commsManager.prepareVisualization(
-        visualization,
+      await commsManager.prepareTools(
+        tools,
         universeConfig.visualization_config,
       );
       console.log("Viz ready!");
@@ -195,7 +202,6 @@ const DefaultUniverseSelector = ({
 
     if (!universeName) return;
 
-    // Get the config from the backend
     try {
       // Launch if new universe selected
       if (universeName !== universe) {
@@ -207,7 +213,7 @@ const DefaultUniverseSelector = ({
     } catch (e: unknown) {
       if (e instanceof Error) {
         console.error("Unable to retrieve universe config: " + e.message);
-        // error("Unable to retrieve universe config: " + e.message);
+        error("Unable to retrieve universe config: " + e.message);
       }
     }
   };

@@ -22,4 +22,5 @@ export type {
   ViewersEntry,
   newFileData,
   ExtraApi,
+  StatusBarComponents,
 } from "./types";

@@ -7,6 +7,7 @@ export type {
   ExtraApi,
   Layout,
   ExtraEditorProps,
+  StatusBarComponents,
 } from "./fileTypes";
 
 export type { EventData, AccentColorEventData } from "./events";
