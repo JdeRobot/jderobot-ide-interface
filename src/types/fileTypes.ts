@@ -33,7 +33,7 @@ export interface ExtraApi {
   };
   universes: {
     list(project: string): Promise<string[]>;
-    get_config(universe: string): Promise<any>;
+    get_config(project: string, universe: string): Promise<any>;
   };
 }
 

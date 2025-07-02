@@ -166,7 +166,7 @@ const DefaultUniverseSelector = ({
     }
 
     try {
-      const universeConfig = await api.universes.get_config(universe);
+      const universeConfig = await api.universes.get_config(project, universe);
 
       var tools = universeConfig.tools;
 
