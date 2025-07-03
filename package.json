@@ -1,6 +1,6 @@
 {
   "name": "jderobot-ide-interface",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -46,7 +46,7 @@
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
     "@storybook/react": "^9.0.12",
-    "jderobot-commsmanager": "^1.0.1",
+    "jderobot-commsmanager": "^1.0.2",
     "jszip": "^3.10.1",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.52.2",
