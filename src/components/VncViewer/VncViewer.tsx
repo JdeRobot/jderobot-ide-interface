@@ -10,7 +10,7 @@ import {
 
 const enabled = (state?: string): boolean => {
   if (
-    state === "visualization_ready" ||
+    state === "tools_ready" ||
     state === "application_running" ||
     state === "paused"
   ) {
