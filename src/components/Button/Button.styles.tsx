@@ -63,6 +63,11 @@ const handleLabel = (p: StyledButtonProps) => {
   if (!p.isLabel) {
     return `
       width: 24px;
+      color: ${p.color ?? primaryColor};
+      height: 100%;
+      font-size: 15px;
+      margin: 0 5px 0 5px;
+      white-space: nowrap;
     `;
   }
 };
@@ -94,13 +99,5 @@ export const StyledButton = styled.button<StyledButtonProps>`
     width: 20px;
     height: 20px;
     opacity: 100%;
-  }
-
-  & label {
-    color: ${(p) => p.color ?? primaryColor};
-    height: 100%;
-    font-size: 15px;
-    margin: 0 5px 0 5px;
-    white-space: nowrap;
   }
 `;
