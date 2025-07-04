@@ -165,6 +165,7 @@ const ViewersContainer = ({
               active={visibility[index]}
               variant="tab"
               iconType="fill"
+              isLabel={false}
               title={`Toggle ${viewer.name}`}
               id={`${viewer.name}-toggle`}
               onClick={() => toggleVisibility(index)}

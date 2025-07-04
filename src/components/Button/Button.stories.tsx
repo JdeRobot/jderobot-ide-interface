@@ -35,6 +35,7 @@ export const Main: Story = {
   ),
   args: {
     active: false,
+    isLabel: false,
     variant: "standard",
     title: "My Button",
     id: "id",
