@@ -2,6 +2,7 @@ import { IdeInterface } from "./components";
 export default IdeInterface;
 
 export { VncViewer } from "./components";
+export { Button, MenuButton, MenuButtonStroke } from "./components";
 export {
   ThemeProvider,
   useTheme,

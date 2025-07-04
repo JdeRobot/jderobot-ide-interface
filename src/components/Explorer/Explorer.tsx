@@ -25,7 +25,7 @@ import {
   StyledSidebarEntry,
   StyledSidebarEntryMenu,
 } from "./Explorer.styles";
-import { MenuButtonStroke } from "../Button/Button";
+import { MenuButtonStroke } from "Components";
 
 function getParentDir(file: Entry) {
   // Check if is a directory and if not get the parent directory of the file
@@ -55,7 +55,7 @@ const Explorer = ({
   const [deleteEntry, setDeleteEntry] = useState<Entry | undefined>(undefined);
   const [renameEntry, setRenameEntry] = useState<Entry | undefined>(undefined);
   const [selectedEntry, setSelectedEntry] = useState<Entry | undefined>(
-    undefined,
+    undefined
   );
   const [selectedLocation, setSelectedLocation] = useState("");
 
@@ -100,6 +100,23 @@ const Explorer = ({
         if (e instanceof Error) {
           console.error("Error fetching files:", e);
           error("Error fetching files: " + e.message);
+        }
+      }
+    }
+  };
+
+  const inFileList = (list: Entry[], file?: Entry) => {
+    if (file === undefined) {
+      return false
+    }
+
+    for (const entry of list) {
+      if (entry === file) {
+        return true;
+      }
+      if (entry.is_dir) {
+        if (inFileList(entry.files, file)) {
+          return true;
         }
       }
     }
@@ -188,7 +205,9 @@ const Explorer = ({
   const handleDeleteCurrentFile = () => {
     //currentFile === Absolute File path
     if (currentFile) {
+      if (inFileList(fileList, currentFile)) {
       handleDeleteModal(currentFile, false);
+      }
     } else {
       warning("No file is currently selected.");
     }
@@ -212,7 +231,7 @@ const Explorer = ({
 
   const handleCreateFolderSubmit = async (
     location: string,
-    folder_name: string,
+    folder_name: string
   ) => {
     if (folder_name !== "") {
       try {
@@ -276,7 +295,9 @@ const Explorer = ({
 
   const handleRenameCurrentFile = async () => {
     if (currentFile) {
-      handleRename(currentFile);
+      if (inFileList(fileList, currentFile)) {
+        handleRename(currentFile);
+      }
     } else {
       warning("No file is currently selected.");
     }
