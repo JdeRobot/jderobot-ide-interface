@@ -20,5 +20,6 @@ export const StyledSeparatedButtonsContainer = styled.div<StyledSeparatedButtons
   flex-direction: row;
   height: 100%;
   gap: 5px;
+  padding: 0 5px 0 5px;
   border-left: 1px solid ${(p) => p.color ?? primaryColor};
 `;
