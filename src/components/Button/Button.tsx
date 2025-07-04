@@ -35,7 +35,7 @@ const Button = ({
       title={title}
       id={id}
       active={active}
-      onClick={() => onClick()}
+      onClick={(e:any) => onClick(e)}
     >
       {children}
     </StyledButton>
