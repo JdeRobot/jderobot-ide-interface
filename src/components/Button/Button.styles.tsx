@@ -67,9 +67,8 @@ const handleLabel = (p: StyledButtonProps) => {
   }
   return `
       color: ${p.color ?? primaryColor};
-      height: 100%;
       font-size: 15px;
-      margin: 0 5px 0 5px;
+      padding: 0 5px 0 5px;
       white-space: nowrap;
     `;
 };
