@@ -26,7 +26,7 @@ const handleVariant = (p: StyledButtonProps) => {
     case "tab":
       return `
         background-color: transparent;
-        width: 48px;
+        width: 48px !important;
       `;
   }
 };
@@ -90,10 +90,10 @@ export const StyledButton = styled.button<StyledButtonProps>`
     }
   }
 
+  ${handleLabel}
   ${handleVariant}
   ${handleActive}
   ${handleIcon}
-  ${handleLabel}
 
   & svg {
     width: 20px;
