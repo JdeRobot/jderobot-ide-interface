@@ -5,6 +5,7 @@ export type IconVariant = "fill" | "stroke";
 
 const Button = ({
   active = false,
+  isLabel = false,
   variant = "standard",
   iconType,
   title,
@@ -13,6 +14,7 @@ const Button = ({
   children,
 }: {
   active: boolean;
+  isLabel: boolean;
   variant: ButtonVariant;
   iconType: IconVariant;
   title: string;
@@ -28,6 +30,7 @@ const Button = ({
       color={theme.palette?.text}
       roundness={theme.roundness}
       variant={variant}
+      isLabel={isLabel}
       iconType={iconType}
       title={title}
       id={id}
@@ -57,6 +60,7 @@ export const MenuButton = ({
       active={false}
       variant="standard"
       iconType="fill"
+      isLabel={false}
       title={title}
       id={id}
       onClick={() => onClick()}
@@ -82,6 +86,33 @@ export const MenuButtonStroke = ({
       active={false}
       variant="standard"
       iconType="stroke"
+      isLabel={false}
+      title={title}
+      id={id}
+      onClick={() => onClick()}
+    >
+      {children}
+    </Button>
+  );
+};
+
+export const MenuButtonLabel = ({
+  title,
+  id,
+  onClick,
+  children,
+}: {
+  title: string;
+  id: string;
+  onClick: Function;
+  children: any;
+}) => {
+  return (
+    <Button
+      active={false}
+      variant="standard"
+      iconType="fill"
+      isLabel={true}
       title={title}
       id={id}
       onClick={() => onClick()}

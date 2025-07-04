@@ -10,6 +10,7 @@ interface StyledButtonProps {
   variant: ButtonVariant;
   iconType: IconVariant;
   active: boolean;
+  isLabel: boolean;
 }
 
 const handleVariant = (p: StyledButtonProps) => {
@@ -58,11 +59,19 @@ const handleActive = (p: StyledButtonProps) => {
   }
 };
 
+const handleLabel = (p: StyledButtonProps) => {
+  if (!p.isLabel) {
+    return `
+      width: 24px;
+    `;
+  }
+};
+
+
 export const StyledButton = styled.button<StyledButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 24px;
   height: 24px;
   border: 0;
   padding: 0 0 0 0;
@@ -79,6 +88,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   ${handleVariant}
   ${handleActive}
   ${handleIcon}
+  ${handleLabel}
 
   & svg {
     width: 20px;
