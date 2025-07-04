@@ -63,7 +63,7 @@ export const MenuButton = ({
       isLabel={false}
       title={title}
       id={id}
-      onClick={() => onClick()}
+      onClick={(e:any) => onClick(e)}
     >
       {children}
     </Button>
@@ -89,7 +89,7 @@ export const MenuButtonStroke = ({
       isLabel={false}
       title={title}
       id={id}
-      onClick={() => onClick()}
+      onClick={(e:any) => onClick(e)}
     >
       {children}
     </Button>
@@ -115,7 +115,7 @@ export const MenuButtonLabel = ({
       isLabel={true}
       title={title}
       id={id}
-      onClick={() => onClick()}
+      onClick={(e:any) => onClick(e)}
     >
       {children}
     </Button>
