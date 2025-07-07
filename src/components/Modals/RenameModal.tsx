@@ -150,10 +150,10 @@ const RenameModal = ({
           <StyledModalInput
             color={theme.palette.text}
             placeholderColor={theme.palette.placeholderText}
-            bgColor={theme.palette.background}
-            borderColor={theme.palette.background}
-            focusBorderColor={theme.palette.background}
-            invalidBorderColor={theme.palette.background}
+            bgColor={theme.palette.primary}
+            borderColor={theme.palette.text}
+            focusBorderColor={theme.palette.secondary}
+            invalidBorderColor={theme.palette.error}
             roundness={theme.roundness}
             valid={isCreationAllowed}
           >

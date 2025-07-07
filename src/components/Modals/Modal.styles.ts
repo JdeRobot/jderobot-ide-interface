@@ -173,6 +173,7 @@ export const StyledModalButtonDelete = styled.button<StyledModalButtonDeleteProp
 
 export const StyledModalInputRowContainer = styled.div`
   width: 100%;
+  margin: 10px 0px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

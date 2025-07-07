@@ -9,7 +9,7 @@ export const StyledModalCardsTitle = styled.label`
   font-size: large;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 10px;
+  margin: 10px 0px;
 `;
 
 export const StyledModalCardsContainer = styled.div`
