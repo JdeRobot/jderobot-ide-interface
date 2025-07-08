@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
-import Modal, { ModalTitlebar } from "./Modal";
+import Modal, { ModalRow, ModalTitlebar } from "./Modal";
 import { ProgressBar } from "Components";
 import { useError, useTheme } from "Utils";
-import { StyledModalRow } from "./Modal.styles";
 import { StyledModalDrop } from "./UploadModal.styles";
 
 const UploadModal = ({
@@ -107,57 +106,52 @@ const UploadModal = ({
   return (
     <Modal
       id="upload-modal"
-      hasCloseBtn={true}
       isOpen={isOpen}
       onClose={onClose}
+      onSubmit={handleSubmit}
+      onReset={handleCancel}
     >
-      <form onSubmit={handleSubmit} onReset={handleCancel}>
-        <ModalTitlebar
-          title="Upload"
-          htmlFor="uploadName"
-          hasClose
-          handleClose={(e: any) => {
-            handleCancel(e);
+      <ModalTitlebar
+        title="Upload"
+        htmlFor="uploadName"
+        hasClose
+        handleClose={(e: any) => {
+          handleCancel(e);
+        }}
+      />
+      <ModalRow>
+        <StyledModalDrop
+          ref={uploadAreaRef}
+          htmlFor="uploadDropInput"
+          onDragOver={(e) => {
+            e.preventDefault();
           }}
-        />
-        <StyledModalRow
-          color={theme.palette.text}
+          onDragEnter={() => setDropActive(true)}
+          onDragLeave={() => setDropActive(false)}
+          onDrop={(e) => handleDrop(e)}
+          text={theme.palette.text}
+          bgColor={theme.palette.background}
           buttonColor={theme.palette.primary}
+          hoverColor={theme.palette.secondary}
+          borderColor={theme.palette.primary}
+          hoverBorderColor={theme.palette.background}
           roundness={theme.roundness}
+          active={dropActive}
         >
-          <StyledModalDrop
-            ref={uploadAreaRef}
-            htmlFor="uploadDropInput"
-            onDragOver={(e) => {
-              e.preventDefault();
-            }}
-            onDragEnter={() => setDropActive(true)}
-            onDragLeave={() => setDropActive(false)}
-            onDrop={(e) => handleDrop(e)}
-            text={theme.palette.text}
-            bgColor={theme.palette.background}
-            buttonColor={theme.palette.primary}
-            hoverColor={theme.palette.secondary}
-            borderColor={theme.palette.primary}
-            hoverBorderColor={theme.palette.background}
-            roundness={theme.roundness}
-            active={dropActive}
-          >
-            <span>Drop files here</span>
-            or
-            <input
-              ref={uploadInputRef}
-              id="uploadDropInput"
-              onChange={(e) => handleAcceptedFiles(e.target.files)}
-              type="file"
-              title="Upload folder contents"
-              multiple
-              required
-            />
-          </StyledModalDrop>
-        </StyledModalRow>
-        {uploadStatus !== "" && <ProgressBar completed={uploadPercentage} />}
-      </form>
+          <span>Drop files here</span>
+          or
+          <input
+            ref={uploadInputRef}
+            id="uploadDropInput"
+            onChange={(e) => handleAcceptedFiles(e.target.files)}
+            type="file"
+            title="Upload folder contents"
+            multiple
+            required
+          />
+        </StyledModalDrop>
+      </ModalRow>
+      {uploadStatus !== "" && <ProgressBar completed={uploadPercentage} />}
     </Modal>
   );
 };

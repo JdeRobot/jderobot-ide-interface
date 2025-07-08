@@ -1,11 +1,11 @@
 import { useError, useTheme } from "Utils";
 import { ErrorType } from "Types";
-import { StyledModalRow } from "./Modal.styles";
 import {
   StyledModalError,
   StyledModalErrorRow,
   StyledModalErrorTitlebar,
 } from "./ErrorModal.styles";
+import { ModalRow } from "./Modal";
 
 export type ErrorVariant = "error" | "warning" | "info";
 
@@ -46,7 +46,6 @@ const ErrorModal = () => {
   return (
     <StyledModalError
       id={`${type_str}-modal`}
-      hasCloseBtn={true}
       isOpen={isOpen}
       onClose={onClose}
       variant={type_str}
@@ -64,11 +63,7 @@ const ErrorModal = () => {
         htmlFor="actionName"
         variant={type_str}
       />
-      <StyledModalRow
-        color={theme.palette.text}
-        buttonColor={theme.palette.primary}
-        roundness={theme.roundness}
-      >
+      <ModalRow>
         <StyledModalErrorRow
           roundness={theme.roundness}
           variant={type_str}
@@ -84,12 +79,8 @@ const ErrorModal = () => {
         >
           <label id="errorMsg">{msg}</label>
         </StyledModalErrorRow>
-      </StyledModalRow>
-      <StyledModalRow
-        color={theme.palette.text}
-        buttonColor={theme.palette.primary}
-        roundness={theme.roundness}
-      >
+      </ModalRow>
+      <ModalRow>
         <StyledModalErrorRow
           roundness={theme.roundness}
           variant={type_str}
@@ -105,7 +96,7 @@ const ErrorModal = () => {
         >
           <div onClick={() => onClose()}>Close</div>
         </StyledModalErrorRow>
-      </StyledModalRow>
+      </ModalRow>
     </StyledModalError>
   );
 };

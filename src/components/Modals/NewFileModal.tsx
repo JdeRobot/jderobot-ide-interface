@@ -1,15 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import Modal, { ModalTitlebar } from "./Modal";
+import Modal, { ModalInputBox, ModalRow, ModalTitlebar } from "./Modal";
 
 import { EmptyTeplateIcon, ActionTeplateIcon, IOTeplateIcon } from "Assets";
 import { Entry } from "Types";
 import { useTheme } from "Utils";
-import {
-  StyledModalButtonRow,
-  StyledModalInput,
-  StyledModalInputRowContainer,
-  StyledModalRow,
-} from "./Modal.styles";
 import styled from "styled-components";
 import {
   StyledModalCardsContainer,
@@ -65,13 +59,13 @@ const NewFileModal = ({
     "plain",
     "plainType",
     <ActionTeplateIcon viewBox="0 0 6.4 6.4" fill={theme.palette.text} />,
-    "Plain File",
+    "Plain File"
   );
   const actions = new CardEntryProps(
     "actions",
     "actionsType",
     <IOTeplateIcon viewBox="0 0 20 20" fill={theme.palette.text} />,
-    "Action",
+    "Action"
   );
 
   ///////////////////////// ACTIONS //////////////////////////////////////////////
@@ -79,19 +73,19 @@ const NewFileModal = ({
     "empty",
     "emptyTemplate",
     <EmptyTeplateIcon viewBox="0 0 20 20" stroke={theme.palette.text} />,
-    "Empty",
+    "Empty"
   );
   const action = new CardEntryProps(
     "action",
     "actionTemplate",
     <ActionTeplateIcon viewBox="0 0 6.4 6.4" fill={theme.palette.text} />,
-    "Action",
+    "Action"
   );
   const io = new CardEntryProps(
     "io",
     "ioTemplate",
     <IOTeplateIcon viewBox="0 0 20 20" fill={theme.palette.text} />,
-    "I/O",
+    "I/O"
   );
 
   const typesCardEntryProps = [plain, actions];
@@ -136,7 +130,7 @@ const NewFileModal = ({
 
       for (let index = 0; index < path.length; index++) {
         const find = search_list.find(
-          (entry) => entry.name === path[index] && entry.is_dir,
+          (entry) => entry.name === path[index] && entry.is_dir
         );
 
         if (find !== undefined) {
@@ -222,79 +216,56 @@ const NewFileModal = ({
   return (
     <Modal
       id="new-action-modal"
-      hasCloseBtn={true}
       isOpen={isOpen}
       onClose={handleCancel}
+      onSubmit={handleSubmit}
+      onReset={handleCancel}
     >
-      <form onSubmit={handleSubmit} onReset={handleCancel}>
-        <ModalTitlebar
-          title="Create new file"
-          htmlFor="fileName"
-          hasClose
-          handleClose={handleCancel}
+      <ModalTitlebar
+        title="Create new file"
+        htmlFor="fileName"
+        hasClose
+        handleClose={handleCancel}
+      />
+      <ModalRow type="input">
+        <ModalInputBox
+          isInputValid={isCreationAllowed || formState.fileName === ""}
+          ref={focusInputRef}
+          id="renameData"
+          placeholder="File Name"
+          onChange={handleInputChange}
+          type="text"
+          autoComplete="off"
+          required
         />
-        <StyledModalInputRowContainer>
-          <StyledModalInput
-            color={theme.palette.text}
-            placeholderColor={theme.palette.placeholderText}
-            bgColor={theme.palette.primary}
-            borderColor={theme.palette.text}
-            focusBorderColor={theme.palette.secondary}
-            invalidBorderColor={theme.palette.error}
-            roundness={theme.roundness}
-            valid={isCreationAllowed || formState.fileName === ""}
-          >
-            <input
-              ref={focusInputRef}
-              type="text"
-              id="fileName"
-              name="fileName"
-              onChange={handleInputChange}
-              autoComplete="off"
-              placeholder="File Name"
-              required
-            />
-            <label htmlFor="fileName">File Name</label>
-          </StyledModalInput>
-        </StyledModalInputRowContainer>
-        <CardSelector
-          contentArray={typesCardEntryProps}
-          title="Select File Type"
-          id="types-list"
-          name="fileType"
-          checkedVariable={creationType}
-          checkedCallback={onOptionTypeChange}
+      </ModalRow>
+      <CardSelector
+        contentArray={typesCardEntryProps}
+        title="Select File Type"
+        id="types-list"
+        name="fileType"
+        checkedVariable={creationType}
+        checkedCallback={onOptionTypeChange}
+      />
+      {creationType === "actions" && (
+        <TemplatesCardSelector
+          contentArray={actionsCardEntryProps}
+          title="Select Template Type"
+          id="templates-list"
+          name="templateType"
+          checkedVariable={template}
+          checkedCallback={onOptionTemplateChange}
         />
-        {creationType === "actions" && (
-          <TemplatesCardSelector
-            contentArray={actionsCardEntryProps}
-            title="Select Template Type"
-            id="templates-list"
-            name="templateType"
-            checkedVariable={template}
-            checkedCallback={onOptionTemplateChange}
-          />
-        )}
-        <StyledModalRow
-          color={theme.palette.text}
-          buttonColor={theme.palette.primary}
-          roundness={theme.roundness}
+      )}
+      <ModalRow type="buttons">
+        <button
+          type="submit"
+          id="create-new-action"
+          disabled={!isCreationAllowed}
         >
-          <StyledModalButtonRow
-            color={theme.palette.text}
-            buttonColor={theme.palette.primary}
-            roundness={theme.roundness}
-          >
-            <button
-              type="submit"
-              id="create-new-action"
-              disabled={!isCreationAllowed}
-            >
-              Create
-            </button>
-          </StyledModalButtonRow>
-        </StyledModalRow>
-      </form>
+          Create
+        </button>
+      </ModalRow>
     </Modal>
   );
 };
@@ -318,12 +289,7 @@ const CardSelector = ({
 }) => {
   const theme = useTheme();
   return (
-    <StyledModalRow
-      color={theme.palette.text}
-      buttonColor={theme.palette.primary}
-      roundness={theme.roundness}
-      id={id}
-    >
+    <ModalRow>
       <StyledModalCardsTitle htmlFor="templateType">
         {title}
       </StyledModalCardsTitle>
@@ -337,7 +303,7 @@ const CardSelector = ({
           />
         ))}
       </StyledModalCardsContainer>
-    </StyledModalRow>
+    </ModalRow>
   );
 };
 

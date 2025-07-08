@@ -33,6 +33,13 @@ export const StyledModalContent = styled.div`
   flex-direction: column;
   gap: 1rem;
   flex-grow: 1;
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-grow: 1;
+  }
 `;
 
 interface StyledModalTitlebarProps {
@@ -47,6 +54,7 @@ export const StyledModalTitlebar = styled.div<StyledModalTitlebarProps>`
   grid-template-columns: 1fr auto 1fr;
   grid-column-gap: 5px;
   justify-items: center;
+  align-items: center;
 
   & label {
     color: ${(p) => p.color ?? primaryColor};
@@ -58,8 +66,8 @@ export const StyledModalTitlebar = styled.div<StyledModalTitlebarProps>`
 
   & svg {
     height: 100%;
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     padding: 2px;
     border-radius: ${(p) => p.roundness ?? 1}px;
     background-color: transparent;
@@ -99,6 +107,10 @@ interface StyledModalRowProps {
 }
 
 export const StyledModalRow = styled.div<StyledModalRowProps>`
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+
   & select,
   button {
     width: 100%;
@@ -110,7 +122,6 @@ export const StyledModalRow = styled.div<StyledModalRowProps>`
 
   & button {
     background-color: ${(p) => p.buttonColor ?? primaryColor};
-    margin-bottom: 10px;
     border-radius: ${(p) => p.roundness ?? 1}px;
     height: 2em;
     font-size: medium;
@@ -133,12 +144,12 @@ interface StyledModalButtonRowProps {
 }
 
 export const StyledModalButtonRow = styled.div<StyledModalButtonRowProps>`
-  margin-top: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
   gap: 10px;
+  width: 100%;
 
   & button {
     width: 100px;
@@ -148,7 +159,6 @@ export const StyledModalButtonRow = styled.div<StyledModalButtonRowProps>`
     font-size: medium;
     background-color: ${(p) => p.buttonColor ?? primaryColor};
     opacity: 0.6;
-    margin-bottom: 10px;
     border-radius: ${(p) => p.roundness ?? 1}px;
     height: 2em;
     font-size: medium;
@@ -164,16 +174,11 @@ interface StyledModalButtonDeleteProps {
 }
 
 export const StyledModalButtonDelete = styled.button<StyledModalButtonDeleteProps>`
-  opacity: 0.6;
-  background-color: ${(p) => p.bgColor ?? primaryColor};
-  &:hover:enabled {
-    opacity: 1;
-  }
+  background-color: ${(p) => p.bgColor ?? primaryColor} !important;
 `;
 
 export const StyledModalInputRowContainer = styled.div`
   width: 100%;
-  margin: 10px 0px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

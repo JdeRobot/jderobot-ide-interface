@@ -1,13 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import Modal, { ModalTitlebar } from "./Modal";
+import Modal, { ModalInputBox, ModalRow, ModalTitlebar } from "./Modal";
 import { Entry } from "Types";
 import { useTheme } from "Utils";
-import {
-  StyledModalButtonRow,
-  StyledModalInput,
-  StyledModalInputRowContainer,
-  StyledModalRow,
-} from "./Modal.styles";
 
 const initialNewFolderModalData = {
   renameData: "",
@@ -26,7 +20,6 @@ const RenameModal = ({
   fileList: Entry[];
   selectedEntry: Entry;
 }) => {
-  const theme = useTheme();
   const focusInputRef = useRef<HTMLInputElement>(null);
   const [formState, setFormState] = useState(initialNewFolderModalData);
   const [isCreationAllowed, allowCreation] = useState(false);
@@ -61,7 +54,7 @@ const RenameModal = ({
 
       for (let index = 0; index < path.length - 1; index++) {
         search_list = search_list.find(
-          (entry) => entry.name === path[index] && entry.is_dir,
+          (entry) => entry.name === path[index] && entry.is_dir
         )!.files;
       }
 
@@ -133,68 +126,41 @@ const RenameModal = ({
   return (
     <Modal
       id="new-folder-modal"
-      hasCloseBtn={true}
       isOpen={isOpen}
       onClose={onClose}
+      onSubmit={handleSubmit}
+      onReset={handleCancel}
     >
-      <form onSubmit={handleSubmit} onReset={handleCancel}>
-        <ModalTitlebar
-          title={`Rename ${selectedEntry.is_dir ? "Folder" : "File"}`}
-          htmlFor="renameData"
-          hasClose
-          handleClose={() => {
-            handleCancel(undefined);
-          }}
+      <ModalTitlebar
+        title={`Rename ${selectedEntry.is_dir ? "Folder" : "File"}`}
+        htmlFor="renameData"
+        hasClose
+        handleClose={() => {
+          handleCancel(undefined);
+        }}
+      />
+      <ModalRow type="input">
+        <ModalInputBox
+          isInputValid={isCreationAllowed}
+          ref={focusInputRef}
+          id="renameData"
+          placeholder={selectedEntry.is_dir ? "Rename Folder" : "Rename File"}
+          onChange={handleInputChange}
+          type="text"
+          autoComplete="off"
+          required
         />
-        <StyledModalInputRowContainer>
-          <StyledModalInput
-            color={theme.palette.text}
-            placeholderColor={theme.palette.placeholderText}
-            bgColor={theme.palette.primary}
-            borderColor={theme.palette.text}
-            focusBorderColor={theme.palette.secondary}
-            invalidBorderColor={theme.palette.error}
-            roundness={theme.roundness}
-            valid={isCreationAllowed}
-          >
-            <input
-              ref={focusInputRef}
-              type="text"
-              id="renameData"
-              name="renameData"
-              onChange={handleInputChange}
-              autoComplete="off"
-              placeholder={
-                selectedEntry.is_dir ? "Rename Folder" : "Rename File"
-              }
-              required
-            />
-            <label htmlFor="renameData">
-              Rename {selectedEntry.is_dir ? "Folder" : "File"}
-            </label>
-          </StyledModalInput>
-        </StyledModalInputRowContainer>
-        <StyledModalRow
-          color={theme.palette.text}
-          buttonColor={theme.palette.primary}
-          roundness={theme.roundness}
+      </ModalRow>
+      <ModalRow type="buttons">
+        <button type="reset">Cancel</button>
+        <button
+          type="submit"
+          id="create-new-action"
+          disabled={!isCreationAllowed}
         >
-          <StyledModalButtonRow
-            color={theme.palette.text}
-            buttonColor={theme.palette.primary}
-            roundness={theme.roundness}
-          >
-            <button type="reset">Cancel</button>
-            <button
-              type="submit"
-              id="create-new-action"
-              disabled={!isCreationAllowed}
-            >
-              Create
-            </button>
-          </StyledModalButtonRow>
-        </StyledModalRow>
-      </form>
+          Create
+        </button>
+      </ModalRow>
     </Modal>
   );
 };

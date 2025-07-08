@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import Modal, { ModalTitlebar } from "./Modal";
+import Modal, { ModalInputBox, ModalRow, ModalTitlebar } from "./Modal";
 import { useTheme } from "Utils";
-import {
-  StyledModalButtonRow,
-  StyledModalInput,
-  StyledModalInputRowContainer,
-  StyledModalRow,
-} from "./Modal.styles";
 
 const initialNewFolderModalData = {
   folderName: "",
@@ -32,7 +26,6 @@ const NewFolderModal = ({
   fileList: Entry[];
   location: string;
 }) => {
-  const theme = useTheme();
   const focusInputRef = useRef<HTMLInputElement>(null);
   const [formState, setFormState] = useState(initialNewFolderModalData);
   const [isCreationAllowed, allowCreation] = useState(false);
@@ -53,7 +46,7 @@ const NewFolderModal = ({
 
         for (let index = 0; index < path.length; index++) {
           search_list = search_list.find(
-            (entry: Entry) => entry.name === path[index] && entry.is_dir,
+            (entry: Entry) => entry.name === path[index] && entry.is_dir
           )!.files;
         }
       }
@@ -112,63 +105,40 @@ const NewFolderModal = ({
   return (
     <Modal
       id="new-folder-modal"
-      hasCloseBtn={true}
       isOpen={isOpen}
       onClose={onClose}
+      onSubmit={handleSubmit}
+      onReset={handleCancel}
     >
-      <form onSubmit={handleSubmit} onReset={handleCancel}>
-        <ModalTitlebar
-          title="Create new folder"
-          htmlFor="folderName"
-          hasClose
-          handleClose={() => {
-            handleCancel(null);
-          }}
+      <ModalTitlebar
+        title="Create new folder"
+        htmlFor="folderName"
+        hasClose
+        handleClose={() => {
+          handleCancel(null);
+        }}
+      />
+      <ModalRow type="input">
+        <ModalInputBox
+          isInputValid={isCreationAllowed || formState.folderName === ""}
+          ref={focusInputRef}
+          id="folderName"
+          placeholder="Folder Name"
+          onChange={handleInputChange}
+          type="text"
+          autoComplete="off"
+          required
         />
-        <StyledModalInputRowContainer>
-          <StyledModalInput
-            color={theme.palette.text}
-            placeholderColor={theme.palette.placeholderText}
-            bgColor={theme.palette.primary}
-            borderColor={theme.palette.text}
-            focusBorderColor={theme.palette.secondary}
-            invalidBorderColor={theme.palette.error}
-            roundness={theme.roundness}
-            valid={isCreationAllowed || formState.folderName === ""}
-          >
-            <input
-              ref={focusInputRef}
-              type="text"
-              id="folderName"
-              name="folderName"
-              onChange={handleInputChange}
-              autoComplete="off"
-              placeholder="Folder Name"
-              required
-            />
-            <label htmlFor="folderName">Folder Name</label>
-          </StyledModalInput>
-        </StyledModalInputRowContainer>
-        <StyledModalRow
-          color={theme.palette.text}
-          buttonColor={theme.palette.primary}
-          roundness={theme.roundness}
+      </ModalRow>
+      <ModalRow type="buttons">
+        <button
+          type="submit"
+          id="create-new-action"
+          disabled={!isCreationAllowed}
         >
-          <StyledModalButtonRow
-            color={theme.palette.text}
-            buttonColor={theme.palette.primary}
-            roundness={theme.roundness}
-          >
-            <button
-              type="submit"
-              id="create-new-action"
-              disabled={!isCreationAllowed}
-            >
-              Create
-            </button>
-          </StyledModalButtonRow>
-        </StyledModalRow>
-      </form>
+          Create
+        </button>
+      </ModalRow>
     </Modal>
   );
 };

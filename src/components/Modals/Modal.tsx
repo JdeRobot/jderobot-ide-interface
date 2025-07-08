@@ -1,25 +1,32 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, ReactNode } from "react";
 import {
   StyledModal,
   StyledModalBackButton,
+  StyledModalButtonRow,
   StyledModalCloseButton,
   StyledModalContent,
+  StyledModalInput,
+  StyledModalInputRowContainer,
+  StyledModalRow,
   StyledModalTitlebar,
 } from "./Modal.styles";
 import { useTheme } from "Utils";
+import { ModelRowTypes } from "Types";
 
 const Modal = ({
   id = "modal",
   isOpen,
-  hasCloseBtn = true,
   onClose,
   children,
+  onSubmit,
+  onReset,
 }: {
   id: string;
   isOpen: boolean;
-  hasCloseBtn: boolean;
   onClose: Function;
   children: any;
+  onSubmit?: (event: any) => void;
+  onReset?: (event: any) => void;
 }) => {
   const theme = useTheme();
   const [isModalOpen, setModalOpen] = useState<boolean>(isOpen);
@@ -64,7 +71,15 @@ const Modal = ({
       borderColor={theme.palette.secondary}
       roundness={theme.roundness}
     >
-      <StyledModalContent id="bt-modal-contents">{children}</StyledModalContent>
+      <StyledModalContent id="bt-modal-contents">
+        {onSubmit !== undefined && onReset !== undefined ? (
+          <form onSubmit={onSubmit} onReset={onReset}>
+            {children}
+          </form>
+        ) : (
+          <>{children}</>
+        )}
+      </StyledModalContent>
     </StyledModal>
   );
 };
@@ -123,4 +138,95 @@ ModalTitlebar.defaultProps = {
   hasBack: false,
   handleClose: () => {},
   handleBack: () => {},
+};
+
+export const ModalRow = ({
+  type,
+  children,
+}: {
+  type: ModelRowTypes;
+  children?: ReactNode;
+}) => {
+  const theme = useTheme();
+
+  switch (type) {
+    case "buttons":
+      return (
+        <StyledModalRow
+          color={theme.palette.text}
+          buttonColor={theme.palette.primary}
+          roundness={theme.roundness}
+        >
+          <StyledModalButtonRow
+            color={theme.palette.text}
+            buttonColor={theme.palette.primary}
+            roundness={theme.roundness}
+          >
+            {children}
+          </StyledModalButtonRow>
+        </StyledModalRow>
+      );
+    case "input":
+      return (
+        <StyledModalInputRowContainer>{children}</StyledModalInputRowContainer>
+      );
+
+    default:
+      return (
+        <StyledModalRow
+          color={theme.palette.text}
+          buttonColor={theme.palette.primary}
+          roundness={theme.roundness}
+        >
+          {children}
+        </StyledModalRow>
+      );
+  }
+};
+
+ModalRow.defaultProps = {
+  type: "all",
+};
+
+interface ModalInputBoxProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  ref: React.RefObject<HTMLInputElement>;
+  id: string;
+  placeholder: string;
+  onChange: (event: any) => void;
+  isInputValid: boolean;
+}
+
+export const ModalInputBox = ({
+  ref,
+  id,
+  placeholder,
+  onChange,
+  isInputValid,
+  ...props
+}: ModalInputBoxProps) => {
+  const theme = useTheme();
+
+  return (
+    <StyledModalInput
+      color={theme.palette.text}
+      placeholderColor={theme.palette.placeholderText}
+      bgColor={theme.palette.primary}
+      borderColor={theme.palette.text}
+      focusBorderColor={theme.palette.secondary}
+      invalidBorderColor={theme.palette.error}
+      roundness={theme.roundness}
+      valid={isInputValid}
+    >
+      <input
+        ref={ref}
+        id={id}
+        name={id}
+        onChange={onChange}
+        placeholder={placeholder}
+        {...props}
+      />
+      <label htmlFor="renameData">{placeholder}</label>
+    </StyledModalInput>
+  );
 };
