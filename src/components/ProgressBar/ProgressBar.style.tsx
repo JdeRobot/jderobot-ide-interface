@@ -10,7 +10,7 @@ interface StyledProgressBarProps {
   progress?: number;
 }
 
-export const StyledModalCardsEntry = styled.div<StyledProgressBarProps>`
+export const StyledProgressBar= styled.div<StyledProgressBarProps>`
   height: 20px;
   background-color: ${(p) => p.bgColor ?? primaryColor};
   border-radius: ${(p) => p.roundness ?? 50}px;

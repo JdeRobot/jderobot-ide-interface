@@ -2,7 +2,22 @@ import { IdeInterface } from "./components";
 export default IdeInterface;
 
 export { VncViewer } from "./components";
-export { Button, MenuButton, MenuButtonStroke, MenuButtonLabel } from "./components";
+export { ProgressBar } from "./components";
+export {
+  Button,
+  MenuButton,
+  MenuButtonStroke,
+  MenuButtonLabel,
+} from "./components";
+export {
+  Modal,
+  ModalTitlebar,
+  StyledModalButtonRow,
+  StyledModalInput,
+  StyledModalInputRowContainer,
+  StyledModalButtonDelete,
+  StyledModalRow,
+} from "./components";
 export {
   ThemeProvider,
   useTheme,

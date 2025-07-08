@@ -1,11 +1,11 @@
 import { useTheme } from "Utils";
-import { StyledModalCardsEntry } from "./ProgressBar.style";
+import { StyledProgressBar } from "./ProgressBar.style";
 
 const ProgressBar = ({ completed }: { completed: number }) => {
   const theme = useTheme();
 
   return (
-    <StyledModalCardsEntry
+    <StyledProgressBar
       text={theme.palette.text}
       color={theme.palette.progressBar.color}
       bgColor={theme.palette.progressBar.background}
@@ -14,7 +14,7 @@ const ProgressBar = ({ completed }: { completed: number }) => {
       <div>
         <span>{`${completed.toFixed(2)}%`}</span>
       </div>
-    </StyledModalCardsEntry>
+    </StyledProgressBar>
   );
 };
 
