@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import ErrorModal from "src/components/Modals/ErrorModal";
+import { ErrorModal } from "Components";
 import { Error, ErrorType } from "Types";
 
 const ErrorContext = createContext<Error>({
