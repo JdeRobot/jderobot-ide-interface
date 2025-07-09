@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import ErrorModal from "src/components/Modals/ErrorModal";
 import { Error, ErrorType } from "Types";
 
 const ErrorContext = createContext<Error>({
@@ -57,7 +58,10 @@ export const ErrorProvider = ({ children }: { children: any }) => {
   };
 
   return (
-    <ErrorContext.Provider value={context}>{children}</ErrorContext.Provider>
+    <ErrorContext.Provider value={context}>
+      {children}
+      <ErrorModal />
+    </ErrorContext.Provider>
   );
 };
 
