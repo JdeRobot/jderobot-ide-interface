@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ErrorVariant } from "./ErrorModal";
 import Modal, { ModalTitlebar } from "./Modal";
+import { StyledModalTitlebar } from "./Modal.styles";
 
 const primaryColor = "#666";
 
@@ -98,11 +99,15 @@ interface StyledModalErrorProps {
   infoBorder?: string;
   warning?: string;
   warningBorder?: string;
+  bgColor?: string;
+  borderColor?: string;
+  roundness?: number;
 }
 
 const handleVariantModal = (p: StyledModalErrorProps) => {
   switch (p.variant) {
     case "error":
+      console.log("Error");
       return `
         background-color: ${p.error ?? primaryColor} !important;
         border-color: ${p.errorBorder ?? primaryColor} !important;
@@ -120,7 +125,23 @@ const handleVariantModal = (p: StyledModalErrorProps) => {
   }
 };
 
-export const StyledModalError = styled(Modal)<StyledModalErrorProps>`
+export const StyledModalError = styled.dialog<StyledModalErrorProps>`
+  width: 500px;
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+  position: relative;
+
+  border: 2px solid;
+  border-radius: ${(p) => p.roundness ?? 1}px;
+  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+
+  &::backdrop {
+    background: hsla(0, 0%, 0%, 0.5);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
   ${handleVariantModal}
 `;
 
@@ -128,33 +149,40 @@ interface StyledModalErrorTitlebarProps {
   variant: ErrorVariant;
   color?: string;
   darkColor?: string;
+  hoverColor?: string;
+  roundness?: number;
 }
 
 const handleVariantTitlebar = (p: StyledModalErrorTitlebarProps) => {
   switch (p.variant) {
     case "error":
       return `
-        & label {
-          color: ${p.color ?? primaryColor} !important;
-        }
+        color: ${p.color ?? primaryColor} !important;
       `;
     case "warning":
       return `
-        & label {
-          color: ${p.darkColor ?? primaryColor} !important;
-        }
+        color: ${p.darkColor ?? primaryColor} !important;
       `;
     case "info":
       return `
-        & label {
-          color: ${p.color ?? primaryColor} !important;
-        }
+        color: ${p.color ?? primaryColor} !important;
       `;
   }
 };
 
-export const StyledModalErrorTitlebar = styled(
-  ModalTitlebar,
-)<StyledModalErrorTitlebarProps>`
-  ${handleVariantTitlebar}
+export const StyledModalErrorTitlebar = styled.div<StyledModalErrorTitlebarProps>`
+  font-size: large;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-column-gap: 5px;
+  justify-items: center;
+  align-items: center;
+
+  & label {
+    ${handleVariantTitlebar}
+    font-weight: 600;
+    align-self: center;
+    grid-column-start: 2;
+    text-align: center;
+  }
 `;

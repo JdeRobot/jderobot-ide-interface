@@ -315,13 +315,13 @@ export const ModalInputDropdown = ({
         ref={ref}
         id={id}
         name={id}
-        list={id + '-list'}
+        list={id + "-list"}
         onChange={onChange}
         placeholder={placeholder}
         {...props}
       />
       <label htmlFor={id}>{placeholder}</label>
-      <datalist id={id + '-list'}>
+      <datalist id={id + "-list"}>
         {entries && entries.map((name) => <option value={name} />)}
       </datalist>
       {description && <div>{description}</div>}
