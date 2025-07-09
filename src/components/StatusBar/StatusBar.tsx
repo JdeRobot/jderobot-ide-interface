@@ -94,7 +94,12 @@ const StatusBar = ({
         <label>{state}</label>
       </StyledStatusBarEntry>
       {extraComponents.universeSelector ? (
-        <>{extraComponents.universeSelector}</>
+        <StatusBarCustomUniverseSelector
+          project={project}
+          commsManager={commsManager}
+          api={api}
+          components={extraComponents}
+        />
       ) : (
         <DefaultUniverseSelector
           project={project}
@@ -233,5 +238,130 @@ const DefaultUniverseSelector = ({
             : "Click to select universe"}
       </label>
     </DropdownStatusBar>
+  );
+};
+
+export const StatusBarCustomUniverseSelector = ({
+  project,
+  commsManager,
+  api,
+  components,
+}: {
+  project: string;
+  commsManager: CommsManager | null;
+  api: ExtraApi;
+  components: any;
+}) => {
+  const theme = useTheme();
+  const [open, setOpen] = useState<boolean>(false);
+  const { warning, error } = useError();
+  const [universe, setUniverse] = useState<string | undefined>(
+    commsManager?.getUniverse(),
+  );
+
+  useEffect(() => {
+    if (commsManager) {
+      console.log("Change Universe", commsManager.getUniverse());
+      setUniverse(commsManager.getUniverse());
+    }
+  }, [commsManager?.getUniverse()]);
+
+  const terminateUniverse = async () => {
+    if (!commsManager) {
+      warning(
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+      );
+      return;
+    }
+    // Down the RB ladder
+    await commsManager.terminateApplication();
+    await commsManager.terminateTools();
+    await commsManager.terminateUniverse();
+  };
+
+  const launchUniverse = async (universe: string) => {
+    if (!commsManager) {
+      warning(
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+      );
+      return;
+    }
+
+    if (project === "") {
+      error("Failed to find the current project name.");
+      return;
+    }
+
+    try {
+      const universeConfig = await api.universes.get_config(project, universe);
+
+      var tools = universeConfig.tools;
+
+      if (!tools.includes("state_monitor")) {
+        tools.push("state_monitor");
+      }
+
+      const world_config = universeConfig.world;
+
+      const robot_config = universeConfig.robot;
+
+      const universe_config = {
+        name: universe,
+        world: world_config,
+        robot: robot_config,
+      };
+
+      await commsManager.launchWorld(universe_config);
+      console.log("RB universe launched!");
+      // TODO: update to tools
+      await commsManager.prepareTools(tools, universeConfig.tools_config);
+      console.log("Viz ready!");
+    } catch (e: unknown) {
+      throw e; // rethrow
+    }
+  };
+
+  const selectUniverse = async (universeName: string) => {
+    console.log(universeName);
+
+    if (!universeName) return;
+
+    try {
+      // Launch if new universe selected
+      if (universeName !== universe) {
+        if (universe) await api.universes.list(project);
+        if (universe) await terminateUniverse();
+        await launchUniverse(universeName);
+        console.log("Launch universe successful");
+      }
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        console.error("Unable to retrieve universe config: " + e.message);
+        error("Unable to retrieve universe config: " + e.message);
+      }
+    }
+  };
+
+  return (
+    <div>
+      <StyledStatusBarEntry
+        id="universe-selector"
+        title="Universe selector"
+        onClick={() => setOpen(true)}
+        text={theme.palette.text}
+      >
+        <label>
+          {universe ? `Universe: ${universe}` : "Click to select universe"}
+        </label>
+      </StyledStatusBarEntry>
+      {open && (
+        <components.universeSelector
+          isOpen={open}
+          onSelect={selectUniverse}
+          onClose={() => setOpen(false)}
+          project={project}
+        />
+      )}
+    </div>
   );
 };
