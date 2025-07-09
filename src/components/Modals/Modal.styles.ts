@@ -33,6 +33,7 @@ export const StyledModalContent = styled.div`
   flex-direction: column;
   gap: 1rem;
   flex-grow: 1;
+  height: 100%;
 
   & form {
     display: flex;

@@ -323,6 +323,7 @@ export const StatusBarCustomUniverseSelector = ({
 
   const selectUniverse = async (universeName: string) => {
     console.log(universeName);
+    setOpen(false)
 
     if (!universeName) return;
 
