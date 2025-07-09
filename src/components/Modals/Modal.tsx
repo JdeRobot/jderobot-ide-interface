@@ -5,6 +5,7 @@ import {
   StyledModalButtonRow,
   StyledModalCloseButton,
   StyledModalContent,
+  StyledModalEditableList,
   StyledModalInput,
   StyledModalInputRowContainer,
   StyledModalRow,
@@ -170,6 +171,10 @@ export const ModalRow = ({
       return (
         <StyledModalInputRowContainer>{children}</StyledModalInputRowContainer>
       );
+    case "list":
+      return (
+        <StyledModalInputRowContainer>{children}</StyledModalInputRowContainer>
+      );
 
     default:
       return (
@@ -192,6 +197,7 @@ interface ModalInputBoxProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   ref: React.RefObject<HTMLInputElement>;
   id: string;
+  description?: string;
   placeholder: string;
   onChange: (event: any) => void;
   isInputValid: boolean;
@@ -203,6 +209,7 @@ export const ModalInputBox = ({
   placeholder,
   onChange,
   isInputValid,
+  description,
   ...props
 }: ModalInputBoxProps) => {
   const theme = useTheme();
@@ -226,7 +233,91 @@ export const ModalInputBox = ({
         placeholder={placeholder}
         {...props}
       />
-      <label htmlFor="renameData">{placeholder}</label>
+      <label htmlFor={id}>{placeholder}</label>
+      {description && <div>{description}</div>}
+    </StyledModalInput>
+  );
+};
+
+export const ModalEditableList = ({
+  list,
+  onSelect,
+  onDelete,
+}: {
+  list: string[];
+  onSelect: (event: any) => void;
+  onDelete: (event: any) => void;
+}) => {
+  const theme = useTheme();
+
+  return (
+    <StyledModalEditableList
+      bgColor={theme.palette.background}
+      color={theme.palette.text}
+      scrollBarColor={theme.palette.scrollbar}
+      entryColor={theme.palette.primary}
+      hoverColor={theme.palette.secondary}
+      deleteColor={theme.palette.button.error}
+      roundness={theme.roundness}
+    >
+      {list.map((entry) => {
+        return (
+          <div id={"project-" + entry} onClick={onSelect}>
+            <label>{entry}</label>
+            <StyledModalCloseButton
+              viewBox="0 0 20 20"
+              title="Delete"
+              id={"delete-" + entry}
+              onClick={onDelete}
+              color={theme.palette.text}
+            />
+          </div>
+        );
+      })}
+    </StyledModalEditableList>
+  );
+};
+
+interface ModalInputDropdownProps extends ModalInputBoxProps {
+  entries?: string[];
+}
+
+export const ModalInputDropdown = ({
+  ref,
+  id,
+  placeholder,
+  onChange,
+  isInputValid,
+  description,
+  entries,
+  ...props
+}: ModalInputDropdownProps) => {
+  const theme = useTheme();
+
+  return (
+    <StyledModalInput
+      color={theme.palette.text}
+      placeholderColor={theme.palette.placeholderText}
+      bgColor={theme.palette.primary}
+      borderColor={theme.palette.text}
+      focusBorderColor={theme.palette.secondary}
+      invalidBorderColor={theme.palette.error}
+      roundness={theme.roundness}
+      valid={isInputValid}
+    >
+      <input
+        ref={ref}
+        id={id}
+        name={id}
+        onChange={onChange}
+        placeholder={placeholder}
+        {...props}
+      />
+      <label htmlFor={id}>{placeholder}</label>
+      <datalist>
+        {entries && entries.map((name) => <option value={name} />)}
+      </datalist>
+      {description && <div>{description}</div>}
     </StyledModalInput>
   );
 };

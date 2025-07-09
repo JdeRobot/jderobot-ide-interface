@@ -13,7 +13,9 @@ export {
   Modal,
   ModalTitlebar,
   ModalRow,
-  ModalInputBox
+  ModalInputBox,
+  ModalInputDropdown,
+  ModalEditableList,
 } from "./components";
 export {
   ThemeProvider,
@@ -36,5 +38,5 @@ export type {
   newFileData,
   ExtraApi,
   StatusBarComponents,
-  ModelRowTypes
+  ModelRowTypes,
 } from "./types";

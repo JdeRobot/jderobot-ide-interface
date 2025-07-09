@@ -108,7 +108,7 @@ interface StyledModalRowProps {
 
 export const StyledModalRow = styled.div<StyledModalRowProps>`
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
 
   & select,
@@ -208,6 +208,7 @@ const handleValid = (p: StyledModalInputProps) => {
 
 export const StyledModalInput = styled.div<StyledModalInputProps>`
   position: relative;
+  width: 80%;
 
   & label {
     position: absolute;
@@ -276,8 +277,94 @@ export const StyledModalInput = styled.div<StyledModalInputProps>`
     ${handleValid}
   }
 
-  .bt-modal-complex-input-indications {
-    color: var(--input-placeholder-text);
+  & div {
+    color: ${(p) => p.placeholderColor ?? primaryColor};
     font-size: 0.7rem;
+    margin: 5px;
+  }
+`;
+
+interface StyledModalEditableListProps {
+  color?: string;
+  scrollBarColor?: string;
+  bgColor?: string;
+  entryColor?: string;
+  hoverColor?: string;
+  deleteColor?: string;
+  roundness?: number;
+}
+
+export const StyledModalEditableList = styled.ul<StyledModalEditableListProps>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  overflow-y: auto;
+  max-height: 60vh;
+  width: 100%;
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px ${(p) => p.scrollBarColor ?? primaryColor};
+    border-radius: ${(p) => p.roundness ?? 1}px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${(p) => p.scrollBarColor ?? primaryColor};
+    border-radius: ${(p) => p.roundness ?? 1}px;
+  }
+
+  & div {
+    width: 90%;
+    height: 3rem;
+    min-height: 3rem;
+    background-color: ${(p) => p.entryColor ?? primaryColor};
+    padding: 5px;
+    align-content: center;
+    color: ${(p) => p.color ?? primaryColor};
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: auto 20px;
+
+    &:hover {
+      background-color: ${(p) => p.hoverColor ?? primaryColor};
+
+      & svg {
+        visibility: visible;
+      }
+    }
+
+    & label {
+      background-color: transparent !important;
+      margin-bottom: 0px !important;
+    }
+
+    & svg {
+      height: 100%;
+      opacity: 0.4;
+      width: 16px;
+      height: 16px;
+      padding: 2px;
+      border-radius: ${(p) => p.roundness ?? 1}px;
+      background-color: ${(p) => p.deleteColor ?? primaryColor};
+      visibility: hidden;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  & div:first-of-type {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+
+  & div:last-of-type {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
   }
 `;

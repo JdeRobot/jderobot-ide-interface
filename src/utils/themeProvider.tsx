@@ -18,6 +18,7 @@ const defaultTheme: Theme = {
     background: "#16161d",
     primary: "#134f53",
     secondary: "#1d777c",
+    scrollbar: "#6f6f90",
     border: {
       warning: "#ffe100",
       error: "#772222",

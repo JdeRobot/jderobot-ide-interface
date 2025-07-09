@@ -1,1 +1,1 @@
-export type ModelRowTypes = "all" | "buttons" | "input";
+export type ModelRowTypes = "all" | "buttons" | "input" | "list";

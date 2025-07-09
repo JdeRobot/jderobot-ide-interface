@@ -1,4 +1,11 @@
-export { default as Modal, ModalTitlebar, ModalInputBox, ModalRow } from "./Modal";
+export {
+  default as Modal,
+  ModalTitlebar,
+  ModalInputBox,
+  ModalRow,
+  ModalInputDropdown,
+  ModalEditableList,
+} from "./Modal";
 export { default as DeleteModal } from "./DeleteModal";
 export { default as NewFileModal } from "./NewFileModal";
 export { default as NewFolderModal } from "./NewFolderModal";

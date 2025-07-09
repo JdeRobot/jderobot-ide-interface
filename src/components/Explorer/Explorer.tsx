@@ -55,7 +55,7 @@ const Explorer = ({
   const [deleteEntry, setDeleteEntry] = useState<Entry | undefined>(undefined);
   const [renameEntry, setRenameEntry] = useState<Entry | undefined>(undefined);
   const [selectedEntry, setSelectedEntry] = useState<Entry | undefined>(
-    undefined
+    undefined,
   );
   const [selectedLocation, setSelectedLocation] = useState("");
 
@@ -107,7 +107,7 @@ const Explorer = ({
 
   const inFileList = (list: Entry[], file?: Entry) => {
     if (file === undefined) {
-      return false
+      return false;
     }
 
     for (const entry of list) {
@@ -206,7 +206,7 @@ const Explorer = ({
     //currentFile === Absolute File path
     if (currentFile) {
       if (inFileList(fileList, currentFile)) {
-      handleDeleteModal(currentFile, false);
+        handleDeleteModal(currentFile, false);
       }
     } else {
       warning("No file is currently selected.");
@@ -231,7 +231,7 @@ const Explorer = ({
 
   const handleCreateFolderSubmit = async (
     location: string,
-    folder_name: string
+    folder_name: string,
   ) => {
     if (folder_name !== "") {
       try {

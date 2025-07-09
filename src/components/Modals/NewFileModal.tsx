@@ -59,13 +59,13 @@ const NewFileModal = ({
     "plain",
     "plainType",
     <ActionTeplateIcon viewBox="0 0 6.4 6.4" fill={theme.palette.text} />,
-    "Plain File"
+    "Plain File",
   );
   const actions = new CardEntryProps(
     "actions",
     "actionsType",
     <IOTeplateIcon viewBox="0 0 20 20" fill={theme.palette.text} />,
-    "Action"
+    "Action",
   );
 
   ///////////////////////// ACTIONS //////////////////////////////////////////////
@@ -73,19 +73,19 @@ const NewFileModal = ({
     "empty",
     "emptyTemplate",
     <EmptyTeplateIcon viewBox="0 0 20 20" stroke={theme.palette.text} />,
-    "Empty"
+    "Empty",
   );
   const action = new CardEntryProps(
     "action",
     "actionTemplate",
     <ActionTeplateIcon viewBox="0 0 6.4 6.4" fill={theme.palette.text} />,
-    "Action"
+    "Action",
   );
   const io = new CardEntryProps(
     "io",
     "ioTemplate",
     <IOTeplateIcon viewBox="0 0 20 20" fill={theme.palette.text} />,
-    "I/O"
+    "I/O",
   );
 
   const typesCardEntryProps = [plain, actions];
@@ -130,7 +130,7 @@ const NewFileModal = ({
 
       for (let index = 0; index < path.length; index++) {
         const find = search_list.find(
-          (entry) => entry.name === path[index] && entry.is_dir
+          (entry) => entry.name === path[index] && entry.is_dir,
         );
 
         if (find !== undefined) {
