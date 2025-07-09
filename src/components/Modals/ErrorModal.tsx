@@ -13,12 +13,7 @@ export type ErrorVariant = "error" | "warning" | "info";
 
 const ErrorModal = () => {
   const theme = useTheme();
-  const { isOpen, msg, type, close } = {
-    isOpen: true,
-    msg: "Error",
-    type: ErrorType.INFO,
-    close: () => {},
-  };
+  const { isOpen, msg, type, close } = useError();
 
   const [isModalOpen, setModalOpen] = useState<boolean>(isOpen);
   const modalRef = useRef<HTMLDialogElement>(null);
