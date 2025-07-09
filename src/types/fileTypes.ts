@@ -78,6 +78,6 @@ export interface EditorsEntry {
 export type Layout = "only-editor" | "only-viewers" | "both";
 
 export interface StatusBarComponents {
-  universeSelector?: string;
+  universeSelector?: any;
   extras: JSX.Element[];
 }
