@@ -143,9 +143,11 @@ ModalTitlebar.defaultProps = {
 
 export const ModalRow = ({
   type,
+  id,
   children,
 }: {
   type: ModelRowTypes;
+  id?: string;
   children?: ReactNode;
 }) => {
   const theme = useTheme();
@@ -154,6 +156,7 @@ export const ModalRow = ({
     case "buttons":
       return (
         <StyledModalRow
+          id={id}
           color={theme.palette.text}
           buttonColor={theme.palette.primary}
           roundness={theme.roundness}
@@ -169,16 +172,19 @@ export const ModalRow = ({
       );
     case "input":
       return (
-        <StyledModalInputRowContainer>{children}</StyledModalInputRowContainer>
+        <StyledModalInputRowContainer id={id}>
+          {children}
+        </StyledModalInputRowContainer>
       );
     case "list":
       return (
-        <StyledModalInputRowContainer>{children}</StyledModalInputRowContainer>
+        <StyledModalEditableList id={id}>{children}</StyledModalEditableList>
       );
 
     default:
       return (
         <StyledModalRow
+          id={id}
           color={theme.palette.text}
           buttonColor={theme.palette.primary}
           roundness={theme.roundness}

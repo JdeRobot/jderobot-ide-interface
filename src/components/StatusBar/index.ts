@@ -1,1 +1,4 @@
-export { default as StatusBar, StatusBarCustomUniverseSelector } from "./StatusBar";
+export {
+  default as StatusBar,
+  StatusBarCustomUniverseSelector,
+} from "./StatusBar";
