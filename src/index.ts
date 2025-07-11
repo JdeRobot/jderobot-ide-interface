@@ -17,6 +17,7 @@ export {
   ModalInputBox,
   ModalInputDropdown,
   ModalEditableList,
+  ModalInputDropArea,
 } from "./components";
 export {
   ThemeProvider,

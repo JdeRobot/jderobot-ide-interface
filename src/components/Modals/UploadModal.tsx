@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
-import Modal, { ModalRow, ModalTitlebar } from "./Modal";
+import Modal, { ModalInputDropArea, ModalRow, ModalTitlebar } from "./Modal";
 import { ProgressBar } from "Components";
-import { useError, useTheme } from "Utils";
-import { StyledModalDrop } from "./UploadModal.styles";
+import { useError } from "Utils";
 
 const UploadModal = ({
   onSubmit,
@@ -20,12 +19,10 @@ const UploadModal = ({
   location: string;
   currentProject: string;
 }) => {
-  const theme = useTheme();
   const { error } = useError();
 
   const [uploadStatus, setUploadStatus] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
-  const [dropActive, setDropActive] = useState<boolean>(false);
 
   const uploadInputRef = useRef<any>(null);
   const uploadAreaRef = useRef<any>(null);
@@ -120,36 +117,17 @@ const UploadModal = ({
         }}
       />
       <ModalRow>
-        <StyledModalDrop
-          ref={uploadAreaRef}
-          htmlFor="uploadDropInput"
-          onDragOver={(e) => {
-            e.preventDefault();
-          }}
-          onDragEnter={() => setDropActive(true)}
-          onDragLeave={() => setDropActive(false)}
-          onDrop={(e) => handleDrop(e)}
-          text={theme.palette.text}
-          bgColor={theme.palette.background}
-          buttonColor={theme.palette.primary}
-          hoverColor={theme.palette.secondary}
-          borderColor={theme.palette.primary}
-          hoverBorderColor={theme.palette.background}
-          roundness={theme.roundness}
-          active={dropActive}
-        >
-          <span>Drop files here</span>
-          or
-          <input
-            ref={uploadInputRef}
-            id="uploadDropInput"
-            onChange={(e) => handleAcceptedFiles(e.target.files)}
-            type="file"
-            title="Upload folder contents"
-            multiple
-            required
-          />
-        </StyledModalDrop>
+        <ModalInputDropArea
+          areaRef={uploadAreaRef}
+          inputRef={uploadInputRef}
+          id="uploadDropInput"
+          dropTitle="Drop files here"
+          onChange={(e) => handleAcceptedFiles(e.target.files)}
+          onDrop={handleDrop}
+          type="file"
+          multiple
+          required
+        />
       </ModalRow>
       {uploadStatus !== "" && <ProgressBar completed={uploadPercentage} />}
     </Modal>

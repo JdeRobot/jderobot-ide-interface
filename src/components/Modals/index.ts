@@ -5,6 +5,7 @@ export {
   ModalRow,
   ModalInputDropdown,
   ModalEditableList,
+  ModalInputDropArea,
 } from "./Modal";
 export { default as DeleteModal } from "./DeleteModal";
 export { default as NewFileModal } from "./NewFileModal";

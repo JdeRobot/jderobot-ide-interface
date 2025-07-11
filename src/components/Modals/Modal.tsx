@@ -5,6 +5,7 @@ import {
   StyledModalButtonRow,
   StyledModalCloseButton,
   StyledModalContent,
+  StyledModalDropArea,
   StyledModalEditableList,
   StyledModalInput,
   StyledModalInputRowContainer,
@@ -326,5 +327,60 @@ export const ModalInputDropdown = ({
       </datalist>
       {description && <div>{description}</div>}
     </StyledModalInput>
+  );
+};
+
+interface ModalInputDropAreaProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  areaRef: React.RefObject<HTMLLabelElement>;
+  inputRef: React.RefObject<HTMLInputElement>;
+  id: string;
+  dropTitle: string;
+  onChange: (event: any) => void;
+  onDrop: (event: any) => void;
+}
+
+export const ModalInputDropArea = ({
+  areaRef,
+  inputRef,
+  id,
+  dropTitle,
+  onChange,
+  onDrop,
+  ...props
+}: ModalInputDropAreaProps) => {
+  const theme = useTheme();
+  const [dropActive, setDropActive] = useState<boolean>(false);
+
+  return (
+    <StyledModalDropArea
+      ref={areaRef}
+      htmlFor={id}
+      onDragOver={(e) => {
+        e.preventDefault();
+      }}
+      onDragEnter={() => setDropActive(true)}
+      onDragLeave={() => setDropActive(false)}
+      onDrop={(e) => onDrop(e)}
+      text={theme.palette.text}
+      bgColor={theme.palette.background}
+      buttonColor={theme.palette.primary}
+      hoverColor={theme.palette.secondary}
+      borderColor={theme.palette.primary}
+      hoverBorderColor={theme.palette.background}
+      roundness={theme.roundness}
+      active={dropActive}
+    >
+      <span className="bt-modal-drop-title">{dropTitle}</span>
+      or
+      <input
+        ref={inputRef}
+        id={id}
+        name={id}
+        title={dropTitle}
+        onChange={onChange}
+        {...props}
+      />
+    </StyledModalDropArea>
   );
 };
