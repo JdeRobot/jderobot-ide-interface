@@ -25,8 +25,8 @@ const defaultTheme: Theme = {
       info: "#134f53",
     },
     progressBar: {
-      background: "#ffe100",
-      color: "#772222",
+      background: "#134f53",
+      color: "#1d777c",
     },
     button: {
       error: "#9e2e2e",
