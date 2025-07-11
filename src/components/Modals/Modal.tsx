@@ -355,6 +355,7 @@ export const ModalInputDropArea = ({
   return (
     <StyledModalDropArea
       ref={areaRef}
+      id={id + '-area'}
       htmlFor={id}
       onDragOver={(e) => {
         e.preventDefault();
