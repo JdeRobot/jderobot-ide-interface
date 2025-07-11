@@ -1,4 +1,4 @@
-import { BackIcon, CloseIcon } from "Assets";
+import { BackIcon, CloseIcon, MinusIcon } from "Assets";
 import styled from "styled-components";
 
 const primaryColor = "#666";
@@ -79,26 +79,24 @@ export const StyledModalTitlebar = styled.div<StyledModalTitlebarProps>`
   }
 `;
 
-interface StyledModalCloseButtonProps {
+interface StyledModalButtonProps {
   color?: string;
 }
 
-export const StyledModalCloseButton = styled(
-  CloseIcon,
-)<StyledModalCloseButtonProps>`
+export const StyledModalCloseButton = styled(CloseIcon)<StyledModalButtonProps>`
   fill: ${(p) => p.color ?? primaryColor};
   margin-left: auto;
 `;
 
-interface StyledModalBackButtonProps {
-  color?: string;
-}
-
-export const StyledModalBackButton = styled(
-  BackIcon,
-)<StyledModalBackButtonProps>`
+export const StyledModalBackButton = styled(BackIcon)<StyledModalButtonProps>`
   fill: ${(p) => p.color ?? primaryColor};
   margin-right: auto;
+`;
+
+export const StyledModalDeleteButton = styled(
+  MinusIcon,
+)<StyledModalButtonProps>`
+  stroke: ${(p) => p.color ?? primaryColor};
 `;
 
 interface StyledModalRowProps {

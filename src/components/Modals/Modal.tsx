@@ -5,6 +5,7 @@ import {
   StyledModalButtonRow,
   StyledModalCloseButton,
   StyledModalContent,
+  StyledModalDeleteButton,
   StyledModalDropArea,
   StyledModalEditableList,
   StyledModalInput,
@@ -271,7 +272,7 @@ export const ModalEditableList = ({
         return (
           <div id={"project-" + entry} onClick={(e: any) => onSelect(e, entry)}>
             <label>{entry}</label>
-            <StyledModalCloseButton
+            <StyledModalDeleteButton
               viewBox="0 0 20 20"
               title="Delete"
               id={"delete-" + entry}
@@ -355,7 +356,7 @@ export const ModalInputDropArea = ({
   return (
     <StyledModalDropArea
       ref={areaRef}
-      id={id + '-area'}
+      id={id + "-area"}
       htmlFor={id}
       onDragOver={(e) => {
         e.preventDefault();

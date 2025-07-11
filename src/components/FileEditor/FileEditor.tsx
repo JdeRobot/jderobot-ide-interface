@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 
-import { SaveIcon } from "Assets";
+import { SaveIcon, MinusIcon, PlusIcon } from "Assets";
 import { useError, useTheme } from "Utils";
 import { CommsManager } from "jderobot-commsmanager";
 import { Entry, EditorsEntry } from "Types";
 import TextEditor from "./TextEditor";
 import {
   MenuButton,
+  MenuButtonStroke,
   StyledButtonsContainer,
   StyledSeparatedButtonsContainer,
 } from "Components";
@@ -229,20 +230,20 @@ const FileEditor = ({
           >
             <SaveIcon viewBox="0 0 .9375 .9375" />
           </MenuButton>
-          <MenuButton
+          <MenuButtonStroke
             id="zoom-in-button"
             onClick={handleZoomIn}
             title="Increase Zoom"
           >
-            +
-          </MenuButton>
-          <MenuButton
+            <PlusIcon viewBox="0 0 20 20" />
+          </MenuButtonStroke>
+          <MenuButtonStroke
             id="zoom-out-button"
             title="Decrease Zoom"
             onClick={handleZoomOut}
           >
-            -
-          </MenuButton>
+            <MinusIcon viewBox="0 0 20 20" />
+          </MenuButtonStroke>
           {(() => {
             for (const editor of extraEditors) {
               if (editor.language === language) {

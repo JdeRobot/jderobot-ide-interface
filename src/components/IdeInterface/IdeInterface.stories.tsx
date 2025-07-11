@@ -79,6 +79,7 @@ export const Main: Story = {
         api={api}
         extraEditors={[]}
         viewers={[gazeboViewer, terminalViewer]}
+        statusBarComponents={{ extras: [] }}
       />
     </div>
   ),
