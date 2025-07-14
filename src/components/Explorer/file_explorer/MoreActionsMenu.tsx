@@ -80,7 +80,7 @@ function MoreActionsMenu({
         <StyledExplorerExtraMenuEntry
           hoverColor={theme.palette.secondary}
           onClick={() => {
-            onDelete(menuProps.file!.path, menuProps.file!.is_dir);
+            onDelete(menuProps.file);
             closeMenu();
           }}
         >

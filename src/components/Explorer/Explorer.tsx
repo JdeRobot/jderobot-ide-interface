@@ -55,7 +55,7 @@ const Explorer = ({
   const [deleteEntry, setDeleteEntry] = useState<Entry | undefined>(undefined);
   const [renameEntry, setRenameEntry] = useState<Entry | undefined>(undefined);
   const [selectedEntry, setSelectedEntry] = useState<Entry | undefined>(
-    undefined,
+    undefined
   );
   const [selectedLocation, setSelectedLocation] = useState("");
 
@@ -156,10 +156,10 @@ const Explorer = ({
 
   ///////////////// DELETE FILES AND FOLDERS ///////////////////////////////////
 
-  const handleDeleteModal = (file: Entry, is_dir: boolean) => {
+  const handleDeleteModal = (file: Entry) => {
     if (file) {
       setDeleteEntry(file);
-      setDeleteType(is_dir);
+      setDeleteType(file.is_dir);
       setDeleteModalOpen(true);
     } else {
       warning("No file is currently selected.");
@@ -175,7 +175,7 @@ const Explorer = ({
   const handleSubmitDeleteModal = async () => {
     //currentFile === Absolute File path
     if (deleteEntry) {
-      console.log(deleteEntry)
+      console.log(deleteEntry);
       try {
         if (deleteType) {
           await api.folder.delete(project, deleteEntry.path);
@@ -207,7 +207,7 @@ const Explorer = ({
     //currentFile === Absolute File path
     if (currentFile) {
       if (inFileList(fileList, currentFile)) {
-        handleDeleteModal(currentFile, false);
+        handleDeleteModal(currentFile);
       }
     } else {
       warning("No file is currently selected.");
@@ -232,7 +232,7 @@ const Explorer = ({
 
   const handleCreateFolderSubmit = async (
     location: string,
-    folder_name: string,
+    folder_name: string
   ) => {
     if (folder_name !== "") {
       try {
@@ -434,7 +434,10 @@ const Explorer = ({
       {api.modals?.createFile ? (
         <api.modals.createFile.component
           isOpen={isNewFileModalOpen}
-          onSubmit={api.modals.createFile.onCreate}
+          onSubmit={(project: string, location: string, ...args: any[]) => {
+            api.modals!.createFile!.onCreate(project, location, ...args);
+            fetchFileList();
+          }}
           onClose={handleCloseNewFileModal}
           fileList={fileList}
           location={selectedLocation}
