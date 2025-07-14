@@ -447,3 +447,86 @@ export const StyledModalDropArea = styled.label<StyledModelDropAreaProps>`
 
   ${handleActive}
 `;
+
+export const StyledModalInputSelectorTitle = styled.label`
+  width: 100%;
+  display: block;
+  border: none;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0px;
+`;
+
+export const StyledModalInputSelector = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+interface StyledModalSelectIconProps {
+  hoverColor?: string;
+  selectedColor?: string;
+  color?: string;
+  roundness?: number;
+  icon: "fill" | "stroke";
+  active?: boolean;
+}
+
+const handleActiveSelectIcon = (p: StyledModalSelectIconProps) => {
+  if (p.active) {
+    return `
+      background-color: ${p.selectedColor ?? primaryColor} !important;
+    `;
+  }
+};
+
+const handleIconType = (p: StyledModalSelectIconProps) => {
+  switch (p.icon) {
+    case "fill":
+      return `
+      fill: ${p.color ?? primaryColor};
+    `;
+    case "stroke":
+      return `
+      stroke: ${p.color ?? primaryColor};
+    `;
+  }
+};
+
+export const StyledModalSelectIcon = styled.div<StyledModalSelectIconProps>`
+  float: left;
+  width: 30%;
+  border-radius: ${(p) => p.roundness ?? 1}px;
+
+  & div {
+    border-radius: ${(p) => p.roundness ?? 1}px;
+    cursor: pointer;
+    text-align: center;
+    margin: 3px;
+    padding: 5px;
+    ${handleActiveSelectIcon}
+
+    & svg {
+      height: 90px;
+      width: 100%;
+      ${handleIconType}
+    }
+  }
+
+  &:hover div {
+    background-color: ${(p) => p.hoverColor ?? primaryColor};
+  }
+
+  & p {
+    margin: 3px !important;
+    color: ${(p) => p.color ?? primaryColor};
+  }
+
+  & input[type="radio"] {
+    display: none;
+    z-index: 100;
+  }
+`;

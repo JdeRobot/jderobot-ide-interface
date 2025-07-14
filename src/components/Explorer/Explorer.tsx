@@ -430,13 +430,24 @@ const Explorer = ({
           onRename={handleRename}
         />
       </StyledSidebarEntry>
-      <NewFileModal
-        isOpen={isNewFileModalOpen}
-        onSubmit={handleNewActionSubmit}
-        onClose={handleCloseNewFileModal}
-        fileList={fileList}
-        location={selectedLocation}
-      />
+      {api.modals?.createFile ? (
+        <api.modals.createFile.component
+          isOpen={isNewFileModalOpen}
+          onSubmit={api.modals.createFile.onCreate}
+          onClose={handleCloseNewFileModal}
+          fileList={fileList}
+          location={selectedLocation}
+          project={project}
+        />
+      ) : (
+        <NewFileModal
+          isOpen={isNewFileModalOpen}
+          onSubmit={handleNewActionSubmit}
+          onClose={handleCloseNewFileModal}
+          fileList={fileList}
+          location={selectedLocation}
+        />
+      )}
       <NewFolderModal
         isOpen={isNewFolderModalOpen}
         onSubmit={handleCreateFolderSubmit}

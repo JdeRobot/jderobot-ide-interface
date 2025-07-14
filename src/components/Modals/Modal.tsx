@@ -10,11 +10,14 @@ import {
   StyledModalEditableList,
   StyledModalInput,
   StyledModalInputRowContainer,
+  StyledModalInputSelector,
+  StyledModalInputSelectorTitle,
   StyledModalRow,
+  StyledModalSelectIcon,
   StyledModalTitlebar,
 } from "./Modal.styles";
 import { useTheme } from "Utils";
-import { ModelRowTypes } from "Types";
+import { ModalInputSelectIconEntry, ModelRowTypes } from "Types";
 
 const Modal = ({
   id = "modal",
@@ -384,5 +387,58 @@ export const ModalInputDropArea = ({
         {...props}
       />
     </StyledModalDropArea>
+  );
+};
+
+interface ModalInputSelectIconProps {
+  id: string;
+  title: string;
+  onChange: (event: any) => void;
+  selected: string;
+  entries: ModalInputSelectIconEntry[];
+}
+
+export const ModalInputSelectIcon = ({
+  title,
+  id,
+  onChange,
+  selected,
+  entries,
+}: ModalInputSelectIconProps) => {
+  const theme = useTheme();
+
+  return (
+    <>
+      <StyledModalInputSelectorTitle htmlFor={id}>
+        {title}
+      </StyledModalInputSelectorTitle>
+      <StyledModalInputSelector>
+        {entries.map((entry) => (
+          <StyledModalSelectIcon
+            hoverColor={theme.palette.secondary}
+            selectedColor={theme.palette.primary}
+            color={theme.palette.text}
+            roundness={theme.roundness}
+            icon={entry.iconType}
+            active={selected === entry.id}
+          >
+            <label>
+              <input
+                type="radio"
+                name={id}
+                value={entry.id}
+                id={entry.id}
+                checked={selected === entry.id}
+                onChange={onChange}
+              />
+              <div id={"button-" + entry.id}>
+                {entry.icon}
+                <p> {entry.title} </p>
+              </div>
+            </label>
+          </StyledModalSelectIcon>
+        ))}
+      </StyledModalInputSelector>
+    </>
   );
 };

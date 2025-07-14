@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-webpack5";
 import UploadModal from "./UploadModal";
 
 type Story = StoryObj<typeof UploadModal>;

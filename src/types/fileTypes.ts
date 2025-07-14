@@ -24,6 +24,16 @@ export interface ExplorerEntry {
     rename(project: string, oldPath: string, newPath: string): Promise<void>;
     delete(project: string, path: string): Promise<void>;
   };
+  modals?: {
+    createFile?: {
+      component: any;
+      onCreate(
+        project: string,
+        location: string,
+        ...args: any[]
+      ): Promise<void>;
+    };
+  };
 }
 
 export interface ExtraApi {
