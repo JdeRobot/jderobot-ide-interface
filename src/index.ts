@@ -18,6 +18,7 @@ export {
   ModalInputDropdown,
   ModalEditableList,
   ModalInputDropArea,
+  ModalInputSelectIcon
 } from "./components";
 export {
   ThemeProvider,
@@ -41,4 +42,5 @@ export type {
   ExtraApi,
   StatusBarComponents,
   ModelRowTypes,
+  ModalInputSelectIconEntry
 } from "./types";
