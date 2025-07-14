@@ -264,7 +264,7 @@ const FileEditor = ({
           })()}
         </StyledButtonsContainer>
       </StyledEditorMenu>
-      {fileContent ? (
+      {fileContent !== undefined ? (
         <>
           {(() => {
             for (const editor of extraEditors) {
