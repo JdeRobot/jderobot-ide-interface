@@ -10,7 +10,7 @@ import {
 } from "Components";
 import FileExplorer from "./file_explorer/FileExplorer";
 
-import { newFileData, Entry, ExplorerEntry } from "Types";
+import { Entry, ExplorerEntry } from "Types";
 
 import {
   AddIcon,
@@ -138,12 +138,12 @@ const Explorer = ({
     }
   };
 
-  const handleNewActionSubmit = async (location: string, data: newFileData) => {
+  const handleNewActionSubmit = async (location: string, name: string) => {
     handleCloseNewFileModal();
 
-    if (data.fileName !== "") {
+    if (name !== "") {
       try {
-        await api.file.create(project, location, data);
+        await api.file.create(project, location, name);
         fetchFileList(); // Update the file list
       } catch (e) {
         if (e instanceof Error) {

@@ -18,7 +18,7 @@ export {
   ModalInputDropdown,
   ModalEditableList,
   ModalInputDropArea,
-  ModalInputSelectIcon
+  ModalInputSelectIcon,
 } from "./components";
 export {
   ThemeProvider,
@@ -38,9 +38,8 @@ export type {
   ExplorerEntry,
   EditorsEntry,
   ViewersEntry,
-  newFileData,
   ExtraApi,
   StatusBarComponents,
   ModelRowTypes,
-  ModalInputSelectIconEntry
+  ModalInputSelectIconEntry,
 } from "./types";

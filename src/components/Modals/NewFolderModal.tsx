@@ -1,17 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Modal, { ModalInputBox, ModalRow, ModalTitlebar } from "./Modal";
-import { useTheme } from "Utils";
-
-const initialNewFolderModalData = {
-  folderName: "",
-};
-
-interface Entry {
-  name: string;
-  is_dir: boolean;
-  path: string;
-  files: Entry[];
-}
+import { Entry } from "Types";
 
 const NewFolderModal = ({
   onSubmit,
@@ -27,7 +16,7 @@ const NewFolderModal = ({
   location: string;
 }) => {
   const focusInputRef = useRef<HTMLInputElement>(null);
-  const [formState, setFormState] = useState(initialNewFolderModalData);
+  const [folderName, setName] = useState<string>("");
   const [isCreationAllowed, allowCreation] = useState(false);
   const [searchList, setSearchList] = useState<Entry[]>([]);
 
@@ -63,10 +52,7 @@ const NewFolderModal = ({
     const { name, value } = event.target;
     var isValidName = true;
 
-    setFormState((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    setName(value);
 
     if (name === "folderName") {
       if (value !== "" && !value.includes(".")) {
@@ -87,8 +73,8 @@ const NewFolderModal = ({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit(location, formState.folderName);
-    setFormState(initialNewFolderModalData);
+    onSubmit(location, folderName);
+    setName("");
     allowCreation(false);
     onClose();
   };
@@ -98,7 +84,7 @@ const NewFolderModal = ({
       event.preventDefault();
     }
     onClose();
-    setFormState(initialNewFolderModalData);
+    setName("");
     allowCreation(false);
   };
 
@@ -120,7 +106,7 @@ const NewFolderModal = ({
       />
       <ModalRow type="input">
         <ModalInputBox
-          isInputValid={isCreationAllowed || formState.folderName === ""}
+          isInputValid={isCreationAllowed || folderName === ""}
           ref={focusInputRef}
           id="folderName"
           placeholder="Folder Name"

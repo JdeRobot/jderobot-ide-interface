@@ -1,6 +1,5 @@
 export type {
   Entry,
-  newFileData,
   ExplorerEntry,
   EditorsEntry,
   ViewersEntry,
