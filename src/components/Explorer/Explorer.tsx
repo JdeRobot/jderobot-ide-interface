@@ -175,6 +175,7 @@ const Explorer = ({
   const handleSubmitDeleteModal = async () => {
     //currentFile === Absolute File path
     if (deleteEntry) {
+      console.log(deleteEntry)
       try {
         if (deleteType) {
           await api.folder.delete(project, deleteEntry.path);
