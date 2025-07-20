@@ -257,7 +257,7 @@ export const ModalEditableList = ({
 }: {
   list: string[];
   onSelect: (event: any, entry: string) => void;
-  onDelete: (event: any, entry: string) => void;
+  onDelete?: (event: any, entry: string) => void;
 }) => {
   const theme = useTheme();
 
@@ -275,13 +275,15 @@ export const ModalEditableList = ({
         return (
           <div id={"project-" + entry} onClick={(e: any) => onSelect(e, entry)}>
             <label>{entry}</label>
-            <StyledModalDeleteButton
-              viewBox="0 0 20 20"
-              title="Delete"
-              id={"delete-" + entry}
-              onClick={(e: any) => onDelete(e, entry)}
-              color={theme.palette.text}
-            />
+            { onDelete && 
+              <StyledModalDeleteButton
+                viewBox="0 0 20 20"
+                title="Delete"
+                id={"delete-" + entry}
+                onClick={(e: any) => onDelete(e, entry)}
+                color={theme.palette.text}
+              />
+            }
           </div>
         );
       })}
