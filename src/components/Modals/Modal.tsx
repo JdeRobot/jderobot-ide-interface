@@ -252,42 +252,52 @@ export const ModalInputBox = ({
 
 export const ModalEditableList = ({
   list,
+  title,
   onSelect,
   onDelete,
 }: {
   list: string[];
+  title?: string;
   onSelect: (event: any, entry: string) => void;
   onDelete?: (event: any, entry: string) => void;
 }) => {
   const theme = useTheme();
 
   return (
-    <StyledModalEditableList
-      bgColor={theme.palette.background}
-      color={theme.palette.text}
-      scrollBarColor={theme.palette.scrollbar}
-      entryColor={theme.palette.primary}
-      hoverColor={theme.palette.secondary}
-      deleteColor={theme.palette.button.error}
-      roundness={theme.roundness}
-    >
-      {list.map((entry) => {
-        return (
-          <div id={"project-" + entry} onClick={(e: any) => onSelect(e, entry)}>
-            <label>{entry}</label>
-            { onDelete && 
-              <StyledModalDeleteButton
-                viewBox="0 0 20 20"
-                title="Delete"
-                id={"delete-" + entry}
-                onClick={(e: any) => onDelete(e, entry)}
-                color={theme.palette.text}
-              />
-            }
-          </div>
-        );
-      })}
-    </StyledModalEditableList>
+    <>
+      {title && (
+        <StyledModalInputSelectorTitle>{title}</StyledModalInputSelectorTitle>
+      )}
+      <StyledModalEditableList
+        bgColor={theme.palette.background}
+        color={theme.palette.text}
+        scrollBarColor={theme.palette.scrollbar}
+        entryColor={theme.palette.primary}
+        hoverColor={theme.palette.secondary}
+        deleteColor={theme.palette.button.error}
+        roundness={theme.roundness}
+      >
+        {list.map((entry) => {
+          return (
+            <div
+              id={"project-" + entry}
+              onClick={(e: any) => onSelect(e, entry)}
+            >
+              <label>{entry}</label>
+              {onDelete && (
+                <StyledModalDeleteButton
+                  viewBox="0 0 20 20"
+                  title="Delete"
+                  id={"delete-" + entry}
+                  onClick={(e: any) => onDelete(e, entry)}
+                  color={theme.palette.text}
+                />
+              )}
+            </div>
+          );
+        })}
+      </StyledModalEditableList>
+    </>
   );
 };
 
