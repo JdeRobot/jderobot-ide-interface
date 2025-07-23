@@ -368,6 +368,14 @@ export const StyledModalEditableList = styled.ul<StyledModalEditableListProps>`
   }
 `;
 
+interface StyledModalActionListProps {
+  bgColor?: string;
+}
+
+export const StyledModalActionList = styled.div<StyledModalActionListProps>`
+  background-color: ${(p) => p.bgColor ?? primaryColor} !important;
+`;
+
 interface StyledModelDropAreaProps {
   text?: string;
   bgColor?: string;
