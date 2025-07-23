@@ -371,6 +371,10 @@ export const StyledModalEntryList = styled.div<StyledModalEntryListProps>`
   }
 `;
 
+export const StyledModalActionEntry = styled(StyledModalEntryList)`
+  display: contents;
+`;
+
 interface StyledModelDropAreaProps {
   text?: string;
   bgColor?: string;

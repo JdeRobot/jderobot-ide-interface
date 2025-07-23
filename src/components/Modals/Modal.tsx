@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState, ReactNode } from "react";
 import {
   StyledModal,
+  StyledModalActionEntry,
   StyledModalBackButton,
   StyledModalButtonRow,
   StyledModalCloseButton,
@@ -346,7 +347,7 @@ export const ModalActionList = ({
                 <label>{entry.name}</label>
               </StyledModalEntryList>
               {isOpen === entry.name && (
-                <StyledModalEntryList
+                <StyledModalActionEntry
                   color={theme.palette.text}
                   entryColor={theme.palette.background}
                   hoverColor={theme.palette.secondary}
@@ -355,7 +356,7 @@ export const ModalActionList = ({
                   id={"list-open-" + entry.name}
                 >
                   {entry.component}
-                </StyledModalEntryList>
+                </StyledModalActionEntry>
               )}
             </>
           );
