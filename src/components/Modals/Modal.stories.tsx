@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-webpack5";
 import NewFileModal from "./NewFileModal";
-import Modal, { ModalEditableList, ModalRow, ModalTitlebar } from "./Modal";
+import Modal, {
+  ModalActionList,
+  ModalEditableList,
+  ModalRow,
+  ModalTitlebar,
+} from "./Modal";
 
 type Story = StoryObj<typeof ModalEditableList>;
 
@@ -50,7 +55,6 @@ export const Main: Story = {
               "acvsbhnj",
             ]}
             onSelect={() => {}}
-            onDelete={() => {}}
           />
         </ModalRow>
         <ModalRow type="buttons">

@@ -284,12 +284,7 @@ export const StyledModalInput = styled.div<StyledModalInputProps>`
 `;
 
 interface StyledModalEditableListProps {
-  color?: string;
   scrollBarColor?: string;
-  bgColor?: string;
-  entryColor?: string;
-  hoverColor?: string;
-  deleteColor?: string;
   roundness?: number;
 }
 
@@ -315,65 +310,65 @@ export const StyledModalEditableList = styled.ul<StyledModalEditableListProps>`
     background: ${(p) => p.scrollBarColor ?? primaryColor};
     border-radius: ${(p) => p.roundness ?? 1}px;
   }
+`;
 
-  & div {
-    width: 90%;
-    height: 3rem;
-    min-height: 3rem;
-    background-color: ${(p) => p.entryColor ?? primaryColor};
-    padding: 5px;
-    align-content: center;
-    color: ${(p) => p.color ?? primaryColor};
-    display: grid;
-    grid-gap: 5px;
-    grid-template-columns: auto 20px;
+interface StyledModalEntryListProps {
+  color?: string;
+  entryColor?: string;
+  hoverColor?: string;
+  deleteColor?: string;
+  roundness?: number;
+}
 
-    &:hover {
-      background-color: ${(p) => p.hoverColor ?? primaryColor};
+export const StyledModalEntryList = styled.div<StyledModalEntryListProps>`
+  width: 90%;
+  height: 3rem;
+  min-height: 3rem;
+  background-color: ${(p) => p.entryColor ?? primaryColor};
+  padding: 5px;
+  align-content: center;
+  color: ${(p) => p.color ?? primaryColor};
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: auto 20px;
 
-      & svg {
-        visibility: visible;
-      }
-    }
-
-    & label {
-      background-color: transparent !important;
-      margin-bottom: 0px !important;
-    }
+  &:hover {
+    background-color: ${(p) => p.hoverColor ?? primaryColor};
 
     & svg {
-      height: 100%;
-      opacity: 0.4;
-      width: 16px;
-      height: 16px;
-      padding: 2px;
-      border-radius: ${(p) => p.roundness ?? 1}px;
-      background-color: ${(p) => p.deleteColor ?? primaryColor};
-      visibility: hidden;
-
-      &:hover {
-        opacity: 0.8;
-      }
+      visibility: visible;
     }
   }
 
-  & div:first-of-type {
+  & label {
+    background-color: transparent !important;
+    margin-bottom: 0px !important;
+  }
+
+  & svg {
+    height: 100%;
+    opacity: 0.4;
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    border-radius: ${(p) => p.roundness ?? 1}px;
+    background-color: ${(p) => p.deleteColor ?? primaryColor};
+    visibility: hidden;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &:first-of-type {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
   }
 
-  & div:last-of-type {
+  &:last-of-type {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
   }
-`;
-
-interface StyledModalActionListProps {
-  bgColor?: string;
-}
-
-export const StyledModalActionList = styled.div<StyledModalActionListProps>`
-  background-color: ${(p) => p.bgColor ?? primaryColor} !important;
 `;
 
 interface StyledModelDropAreaProps {

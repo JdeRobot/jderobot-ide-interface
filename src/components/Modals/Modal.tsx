@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState, ReactNode } from "react";
 import {
   StyledModal,
-  StyledModalActionList,
   StyledModalBackButton,
   StyledModalButtonRow,
   StyledModalCloseButton,
@@ -9,6 +8,7 @@ import {
   StyledModalDeleteButton,
   StyledModalDropArea,
   StyledModalEditableList,
+  StyledModalEntryList,
   StyledModalInput,
   StyledModalInputRowContainer,
   StyledModalInputSelector,
@@ -270,17 +270,17 @@ export const ModalEditableList = ({
         <StyledModalInputSelectorTitle>{title}</StyledModalInputSelectorTitle>
       )}
       <StyledModalEditableList
-        bgColor={theme.palette.background}
-        color={theme.palette.text}
         scrollBarColor={theme.palette.scrollbar}
-        entryColor={theme.palette.primary}
-        hoverColor={theme.palette.secondary}
-        deleteColor={theme.palette.button.error}
         roundness={theme.roundness}
       >
         {list.map((entry) => {
           return (
-            <div
+            <StyledModalEntryList
+              color={theme.palette.text}
+              entryColor={theme.palette.primary}
+              hoverColor={theme.palette.secondary}
+              deleteColor={theme.palette.button.error}
+              roundness={theme.roundness}
               id={"project-" + entry}
               onClick={(e: any) => onSelect(e, entry)}
             >
@@ -294,7 +294,7 @@ export const ModalEditableList = ({
                   color={theme.palette.text}
                 />
               )}
-            </div>
+            </StyledModalEntryList>
           );
         })}
       </StyledModalEditableList>
@@ -307,7 +307,7 @@ export const ModalActionList = ({
   title,
   onSelect,
 }: {
-  list: {name: string, component: JSX.Element}[];
+  list: { name: string; component: JSX.Element }[];
   title?: string;
   onSelect: (event: any, entry: string) => void;
 }) => {
@@ -328,30 +328,34 @@ export const ModalActionList = ({
         <StyledModalInputSelectorTitle>{title}</StyledModalInputSelectorTitle>
       )}
       <StyledModalEditableList
-        bgColor={theme.palette.background}
-        color={theme.palette.text}
         scrollBarColor={theme.palette.scrollbar}
-        entryColor={theme.palette.primary}
-        hoverColor={theme.palette.secondary}
-        deleteColor={theme.palette.button.error}
         roundness={theme.roundness}
       >
         {list.map((entry) => {
           return (
             <>
-              <div
+              <StyledModalEntryList
+                color={theme.palette.text}
+                entryColor={theme.palette.primary}
+                hoverColor={theme.palette.secondary}
+                deleteColor={theme.palette.button.error}
+                roundness={theme.roundness}
                 id={"list-" + entry.name}
                 onClick={(e: any) => openActionModal(entry.name)}
               >
                 <label>{entry.name}</label>
-              </div>
+              </StyledModalEntryList>
               {isOpen === entry.name && (
-                <StyledModalActionList
+                <StyledModalEntryList
+                  color={theme.palette.text}
+                  entryColor={theme.palette.background}
+                  hoverColor={theme.palette.secondary}
+                  deleteColor={theme.palette.button.error}
+                  roundness={theme.roundness}
                   id={"list-open-" + entry.name}
-                  bgColor={theme.palette.background}
                 >
                   {entry.component}
-                </StyledModalActionList>
+                </StyledModalEntryList>
               )}
             </>
           );
