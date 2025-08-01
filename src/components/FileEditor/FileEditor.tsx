@@ -173,6 +173,7 @@ const FileEditor = ({
     setProjectToSave(currentProjectname);
     setFileContent(undefined);
     contentRef.current = "";
+    setLanguage("");
   }, [currentProjectname]);
 
   const handleSaveFile = async () => {
