@@ -99,10 +99,21 @@ const Explorer = ({
 
   const fetchFileListCallback = async (e: any) => {
     const project = e.detail.project;
-    await fetchFileList(project !== undefined ? project : "");
+    if (project !== undefined && project !== "") {
+      try {
+        const file_list = await api.list(project);
+        const files = JSON.parse(file_list);
+        setFileList(files);
+      } catch (e) {
+        if (e instanceof Error) {
+          console.error("Error fetching files:", e);
+          error("Error fetching files: " + e.message);
+        }
+      }
+    }
   };
 
-  const fetchFileList = async (project: string) => {
+  const fetchFileList = async () => {
     console.log("Fecthing file list, the project name is:", project);
     if (project !== "") {
       try {
@@ -157,7 +168,7 @@ const Explorer = ({
     if (name !== "") {
       try {
         await api.file.create(project, location, name);
-        fetchFileList(project); // Update the file list
+        fetchFileList(); // Update the file list
       } catch (e) {
         if (e instanceof Error) {
           console.error("Error creating file:", e);
@@ -196,7 +207,7 @@ const Explorer = ({
           await api.file.delete(project, deleteEntry.path);
         }
 
-        fetchFileList(project); // Update the file list
+        fetchFileList(); // Update the file list
 
         if (currentFile === deleteEntry) {
           setCurrentFile(undefined); // Unset the current file
@@ -250,7 +261,7 @@ const Explorer = ({
     if (folder_name !== "") {
       try {
         await api.folder.create(project, folder_name, location);
-        fetchFileList(project); // Update the file list
+        fetchFileList(); // Update the file list
       } catch (e) {
         if (e instanceof Error) {
           console.error("Error creating folder:", e.message);
@@ -289,7 +300,7 @@ const Explorer = ({
           await api.file.rename(project, renameEntry.path, new_path);
         }
 
-        fetchFileList(project); // Update the file list
+        fetchFileList(); // Update the file list
 
         if (currentFile && currentFile.path === renameEntry.path) {
           currentFile.path = new_path;
@@ -326,7 +337,7 @@ const Explorer = ({
 
   const handleCloseUploadModal = () => {
     setUploadModalOpen(false);
-    fetchFileList(project);
+    fetchFileList();
   };
 
   ///////////////// DOWNLOAD ///////////////////////////////////////////////////
@@ -404,7 +415,7 @@ const Explorer = ({
           </MenuButtonStroke>
           <MenuButtonStroke
             id="refresh-explorer-button"
-            onClick={() => fetchFileList(project)}
+            onClick={() => fetchFileList()}
             title="Refresh View"
           >
             <ResetIcon viewBox="0 0 20 20" />
@@ -449,7 +460,7 @@ const Explorer = ({
           isOpen={isNewFileModalOpen}
           onSubmit={(project: string, location: string, ...args: any[]) => {
             api.modals!.createFile!.onCreate(project, location, ...args);
-            fetchFileList(project);
+            fetchFileList();
           }}
           onClose={handleCloseNewFileModal}
           fileList={fileList}
