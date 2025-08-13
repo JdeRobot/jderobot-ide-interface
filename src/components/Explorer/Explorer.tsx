@@ -19,7 +19,7 @@ import {
   ResetIcon,
   RenameIcon,
 } from "Assets";
-import { useError, useTheme } from "Utils";
+import { subscribe, unsubscribe, useError, useTheme } from "Utils";
 import {
   StyledSidebarContainer,
   StyledSidebarEntry,
@@ -69,6 +69,14 @@ const Explorer = ({
   useEffect(() => {
     updateSelectedLocation(undefined);
   }, [selectedEntry]);
+
+  useEffect(() => {
+    subscribe(`updateExplorer-${api.name}`, fetchFileList);
+
+    return () => {
+      unsubscribe(`updateExplorer-${api.name}`, () => {});
+    };
+  }, []);
 
   // useEffect(() => {
   //   if (forceUpdate.value) {

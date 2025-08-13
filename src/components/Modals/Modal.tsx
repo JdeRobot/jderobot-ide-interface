@@ -306,11 +306,11 @@ export const ModalEditableList = ({
 export const ModalActionList = ({
   list,
   title,
-  onSelect,
+  selected,
 }: {
   list: { name: string; component: JSX.Element }[];
   title?: string;
-  onSelect: (event: any, entry: string) => void;
+  selected: string;
 }) => {
   const theme = useTheme();
   const [isOpen, open] = useState<string | undefined>(undefined);
