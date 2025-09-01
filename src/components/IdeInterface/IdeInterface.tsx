@@ -46,6 +46,7 @@ interface IdeInterfaceProps {
   layout: Layout;
   options?: Options;
   splashIcon?: JSX.Element;
+  baseFile?: Entry;
 }
 
 const IdeInterface = ({
@@ -60,8 +61,9 @@ const IdeInterface = ({
   layout,
   options,
   splashIcon,
+  baseFile
 }: IdeInterfaceProps) => {
-  const [currentFile, setCurrentFile] = useState<Entry | undefined>(undefined);
+  const [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
   const theme = useTheme();
 
   if (splashIcon === undefined) {
