@@ -46,6 +46,7 @@ export const StyledStatusBarEntry = styled.div<StyledStatusBarEntryProps>`
     color: ${(p) => p.text ?? primaryColor};
     display: flex;
     align-items: center;
+    margin: 0 0 0 0;
   }
 `;
 

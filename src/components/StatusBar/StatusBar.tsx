@@ -173,14 +173,8 @@ const DefaultUniverseSelector = ({
     try {
       const universeConfig = await api.universes.get_config(project, universe);
 
-      var tools = universeConfig.tools;
-
-      if (!tools.includes("state_monitor")) {
-        tools.push("state_monitor");
-      }
-
+      const tools = universeConfig.tools;
       const world_config = universeConfig.world;
-
       const robot_config = universeConfig.robot;
 
       const universe_config = {
