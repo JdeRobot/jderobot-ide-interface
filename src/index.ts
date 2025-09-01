@@ -19,7 +19,8 @@ export {
   ModalEditableList,
   ModalInputDropArea,
   ModalInputSelectIcon,
-  ModalActionList
+  ModalActionList,
+  ModalRowDataText,
 } from "./components";
 export {
   ThemeProvider,

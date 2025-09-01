@@ -1,4 +1,10 @@
-export type ModelRowTypes = "all" | "buttons" | "input" | "list";
+export type ModelRowTypes =
+  | "all"
+  | "buttons"
+  | "input"
+  | "list"
+  | "img"
+  | "text";
 
 export interface ModalInputSelectIconEntry {
   id: string;

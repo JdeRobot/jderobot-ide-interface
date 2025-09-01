@@ -8,6 +8,7 @@ export {
   ModalInputDropArea,
   ModalInputSelectIcon,
   ModalActionList,
+  ModalRowDataText,
 } from "./Modal";
 export { default as DeleteModal } from "./DeleteModal";
 export { default as NewFileModal } from "./NewFileModal";

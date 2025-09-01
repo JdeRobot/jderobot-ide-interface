@@ -10,11 +10,15 @@ import {
   StyledModalDropArea,
   StyledModalEditableList,
   StyledModalEntryList,
+  StyledModalImageRow,
   StyledModalInput,
   StyledModalInputRowContainer,
   StyledModalInputSelector,
   StyledModalInputSelectorTitle,
   StyledModalRow,
+  StyledModalRowDataText,
+  StyledModalRowDataTextEntries,
+  StyledModalRowDataTextTitle,
   StyledModalSelectIcon,
   StyledModalTitlebar,
 } from "./Modal.styles";
@@ -187,7 +191,16 @@ export const ModalRow = ({
       return (
         <StyledModalEditableList id={id}>{children}</StyledModalEditableList>
       );
-
+    case "img":
+      return (
+        <StyledModalImageRow
+          color={theme.palette.text}
+          roundness={theme.roundness}
+          id={id}
+        >
+          {children}
+        </StyledModalImageRow>
+      );
     default:
       return (
         <StyledModalRow
@@ -204,6 +217,41 @@ export const ModalRow = ({
 
 ModalRow.defaultProps = {
   type: "all",
+};
+
+export const ModalRowDataText = ({
+  id,
+  title,
+  data,
+}: {
+  id?: string;
+  title: string;
+  data: string[];
+}) => {
+  const theme = useTheme();
+
+  if (data.length == 0) {
+    return (
+      <StyledModalRowDataText>
+        <StyledModalRowDataTextTitle color={theme.palette.text}>
+          {`${title}:`}
+        </StyledModalRowDataTextTitle>
+      </StyledModalRowDataText>
+    );
+  }
+
+  return (
+    <StyledModalRowDataText>
+      <StyledModalRowDataTextTitle color={theme.palette.text}>
+        {`${title}:`}
+      </StyledModalRowDataTextTitle>
+      <StyledModalRowDataTextEntries>
+        {data.map((entry) => {
+          return <label>{entry}</label>;
+        })}
+      </StyledModalRowDataTextEntries>
+    </StyledModalRowDataText>
+  );
 };
 
 interface ModalInputBoxProps

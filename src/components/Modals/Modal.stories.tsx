@@ -4,6 +4,7 @@ import Modal, {
   ModalActionList,
   ModalEditableList,
   ModalRow,
+  ModalRowDataText,
   ModalTitlebar,
 } from "./Modal";
 
@@ -55,6 +56,27 @@ export const Main: Story = {
               "acvsbhnj",
             ]}
             onSelect={() => {}}
+          />
+        </ModalRow>
+        <ModalRow>
+          <ModalRowDataText
+            title="Subtrees"
+            data={[
+              "a",
+              "sfayguh",
+              "stavyjb",
+              "ycavybun",
+              "cavshbjn",
+              "acvsbhnj",
+              "acvsbhnj",
+              "acvsbhnj",
+              "acvsbhnj",
+              "acvsbhnj",
+              "acvsbhnj",
+              "acvsbhnj",
+              "acvsbhnj",
+              "acvsbhnj",
+            ]}
           />
         </ModalRow>
         <ModalRow type="buttons">

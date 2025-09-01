@@ -136,6 +136,33 @@ export const StyledModalRow = styled.div<StyledModalRowProps>`
   }
 `;
 
+export const StyledModalRowDataText = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background: none;
+  width: 100%;
+`;
+
+interface StyledModalRowDataTextTitleProps {
+  color?: string;
+  buttonColor?: string;
+  roundness?: number;
+}
+
+export const StyledModalRowDataTextTitle = styled.li<StyledModalRowDataTextTitleProps>`
+  color: ${(p) => p.color ?? primaryColor};
+`;
+
+export const StyledModalRowDataTextEntries = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background: none;
+  margin-left: auto;
+  opacity: 80%;
+`;
+
 interface StyledModalButtonRowProps {
   color?: string;
   buttonColor?: string;
@@ -166,6 +193,18 @@ export const StyledModalButtonRow = styled.div<StyledModalButtonRowProps>`
       opacity: 1;
     }
   }
+`;
+
+interface StyledModalImageRowProps {
+  color?: string;
+  roundness?: number;
+}
+
+export const StyledModalImageRow = styled.div<StyledModalImageRowProps>`
+  width: 100%;
+  margin: 10px;
+  background-color: ${(p) => p.color ?? primaryColor};
+  border-radius: ${(p) => p.roundness ?? 1}px;
 `;
 
 interface StyledModalButtonDeleteProps {
