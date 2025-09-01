@@ -15,11 +15,13 @@ const StatusBar = ({
   commsManager,
   resetManager,
   api,
+  baseUniverse,
   extraComponents,
 }: {
   project: string;
   commsManager: CommsManager | null;
   resetManager: Function;
+  baseUniverse?: string;
   api: ExtraApi;
   extraComponents: StatusBarComponents;
 }) => {
@@ -105,6 +107,7 @@ const StatusBar = ({
           project={project}
           commsManager={commsManager}
           api={api}
+          baseUniverse={baseUniverse}
         />
       )}
     </StyledStatusBarContainer>
@@ -117,10 +120,12 @@ const DefaultUniverseSelector = ({
   project,
   commsManager,
   api,
+  baseUniverse
 }: {
   project: string;
   commsManager: CommsManager | null;
   api: ExtraApi;
+  baseUniverse?: string;
 }) => {
   const { warning, error } = useError();
   const [universe, setUniverse] = useState<string | undefined>(
@@ -142,6 +147,9 @@ const DefaultUniverseSelector = ({
       setUniverseList(list);
     };
     get_universe_list();
+    if (baseUniverse) {
+      selectUniverse(baseUniverse)
+    }
   }, [project]);
 
   const terminateUniverse = async () => {
@@ -218,7 +226,7 @@ const DefaultUniverseSelector = ({
     <DropdownStatusBar
       id="open-settings-manager"
       title="Layout"
-      width={120}
+      width={300}
       baseHeight={24}
       down={false}
       setter={selectUniverse}

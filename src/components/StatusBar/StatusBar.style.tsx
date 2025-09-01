@@ -82,6 +82,7 @@ export const StyledStatusBarButton = styled.div<StyledStatusBarButtonProps>`
     color: ${(p) => p.text ?? primaryColor};
     display: flex;
     align-items: center;
+    margin: 0 0 0 0;
   }
 
   & svg {

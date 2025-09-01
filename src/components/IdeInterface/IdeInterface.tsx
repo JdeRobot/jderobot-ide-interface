@@ -47,6 +47,7 @@ interface IdeInterfaceProps {
   options?: Options;
   splashIcon?: JSX.Element;
   baseFile?: Entry;
+  baseUniverse?: string;
 }
 
 const IdeInterface = ({
@@ -61,7 +62,8 @@ const IdeInterface = ({
   layout,
   options,
   splashIcon,
-  baseFile
+  baseFile,
+  baseUniverse
 }: IdeInterfaceProps) => {
   const [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
   const theme = useTheme();
@@ -126,6 +128,7 @@ const IdeInterface = ({
           resetManager={resetManager}
           extraComponents={statusBarComponents}
           api={api}
+          baseUniverse={baseUniverse}
         />
       </StyledIdeHorizContainer>
     </OptionsProvider>
