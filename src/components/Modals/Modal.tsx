@@ -385,7 +385,11 @@ export const ModalActionList = ({
             <>
               <StyledModalEntryList
                 color={theme.palette.text}
-                entryColor={theme.palette.primary}
+                entryColor={
+                  selected == entry.name
+                    ? theme.palette.secondary
+                    : theme.palette.primary
+                }
                 hoverColor={theme.palette.secondary}
                 deleteColor={theme.palette.button.error}
                 roundness={theme.roundness}
@@ -398,7 +402,9 @@ export const ModalActionList = ({
                 <StyledModalActionEntry
                   color={theme.palette.text}
                   entryColor={
-                    selected == entry.name ? theme.palette.secondary : theme.palette.primary
+                    selected == entry.name
+                      ? theme.palette.secondary
+                      : theme.palette.primary
                   }
                   hoverColor={theme.palette.secondary}
                   deleteColor={theme.palette.button.error}
