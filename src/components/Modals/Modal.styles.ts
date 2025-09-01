@@ -141,7 +141,7 @@ export const StyledModalRowDataText = styled.div`
   flex-direction: row;
   align-items: flex-start;
   background: none;
-  width: 100%;
+  margin: 0 10px 0 10px;
 `;
 
 interface StyledModalRowDataTextTitleProps {

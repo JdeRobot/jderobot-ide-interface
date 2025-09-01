@@ -194,7 +194,7 @@ export const ModalRow = ({
     case "img":
       return (
         <StyledModalImageRow
-          color={theme.palette.primary}
+          color={theme.palette.background}
           roundness={theme.roundness}
           id={id}
         >
@@ -397,7 +397,7 @@ export const ModalActionList = ({
               {isOpen === entry.name && (
                 <StyledModalActionEntry
                   color={theme.palette.text}
-                  entryColor={theme.palette.background}
+                  entryColor={theme.palette.primary}
                   hoverColor={theme.palette.secondary}
                   deleteColor={theme.palette.button.error}
                   roundness={theme.roundness}
