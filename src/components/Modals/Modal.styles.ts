@@ -152,6 +152,7 @@ interface StyledModalRowDataTextTitleProps {
 
 export const StyledModalRowDataTextTitle = styled.li<StyledModalRowDataTextTitleProps>`
   color: ${(p) => p.color ?? primaryColor};
+  list-style-position: inside;
 `;
 
 export const StyledModalRowDataTextEntries = styled.div`
@@ -201,7 +202,6 @@ interface StyledModalImageRowProps {
 }
 
 export const StyledModalImageRow = styled.div<StyledModalImageRowProps>`
-  width: 100%;
   margin: 10px;
   background-color: ${(p) => p.color ?? primaryColor};
   border-radius: ${(p) => p.roundness ?? 1}px;

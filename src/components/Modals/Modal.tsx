@@ -194,7 +194,7 @@ export const ModalRow = ({
     case "img":
       return (
         <StyledModalImageRow
-          color={theme.palette.text}
+          color={theme.palette.primary}
           roundness={theme.roundness}
           id={id}
         >
