@@ -398,7 +398,7 @@ export const ModalActionList = ({
                 <StyledModalActionEntry
                   color={theme.palette.text}
                   entryColor={
-                    selected ? theme.palette.secondary : theme.palette.primary
+                    selected == entry.name ? theme.palette.secondary : theme.palette.primary
                   }
                   hoverColor={theme.palette.secondary}
                   deleteColor={theme.palette.button.error}
