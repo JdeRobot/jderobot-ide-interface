@@ -59,7 +59,7 @@ const FileEditor = ({
 
   useEffect(() => {
     subscribe("autoSave", async () => {
-      if (fileToSave && autosave) {
+      if (autosave) {
         await autoSave();
         publish("autoSaveCompleted")
       }
