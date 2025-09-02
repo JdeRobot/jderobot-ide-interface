@@ -52,14 +52,21 @@ const FileEditor = ({
   const [fileContent, setFileContent] = useState<string | undefined>(undefined);
   const [zoomLevel, changeZoomLevel] = useState(0);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
-  const [fileToSave, setFileToSave] = useState<Entry | undefined>(undefined);
+  const [fileToSave, _setFileToSave] = useState<Entry | undefined>(undefined);
   const [language, setLanguage] = useState("python");
   const [projectToSave, setProjectToSave] = useState(currentProjectname);
   const contentRef = useRef<string>(""); // In case some editors cannot update states
+  const fileToSaveRef = useRef<Entry | undefined>(undefined);
+
+  const setFileToSave = (data?: Entry) => {
+    fileToSaveRef.current = data;
+    _setFileToSave(data);
+  };
 
   useEffect(() => {
+    //TODO: acces the data
     subscribe("autoSave", async () => {
-      console.log("Auto saving file...",fileToSave, fileContent);
+      console.log("Auto saving file...",fileToSave, fileContent, contentRef, fileToSaveRef);
       if (autosave) {
         await autoSave();
         publish("autoSaveCompleted")
