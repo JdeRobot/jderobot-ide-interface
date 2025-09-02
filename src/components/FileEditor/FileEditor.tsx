@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { SaveIcon, MinusIcon, PlusIcon } from "Assets";
-import { useError, useTheme } from "Utils";
+import { publish, subscribe, unsubscribe, useError, useTheme } from "Utils";
 import { CommsManager } from "jderobot-commsmanager";
 import { Entry, EditorsEntry } from "Types";
 import TextEditor from "./TextEditor";
@@ -56,6 +56,19 @@ const FileEditor = ({
   const [language, setLanguage] = useState("python");
   const [projectToSave, setProjectToSave] = useState(currentProjectname);
   const contentRef = useRef<string>(""); // In case some editors cannot update states
+
+  useEffect(() => {
+    subscribe("autoSave", async () => {
+      if (fileToSave && autosave) {
+        await autoSave();
+        publish("autoSaveCompleted")
+      }
+    });
+
+    return () => {
+      unsubscribe("autoSave", () => {});
+    };
+  }, []);
 
   const initFile = async (file: Entry) => {
     try {
@@ -255,7 +268,7 @@ const FileEditor = ({
                       color={theme.palette?.secondary}
                     >
                       {b}
-                    </StyledSeparatedButtonsContainer>,
+                    </StyledSeparatedButtonsContainer>
                   );
                 }
                 return <>{list}</>;
