@@ -49,24 +49,31 @@ const FileEditor = ({
   const { error, warning } = useError();
   const theme = useTheme();
 
-  const [fileContent, setFileContent] = useState<string | undefined>(undefined);
+  const [fileContent, _setFileContent] = useState<string | undefined>(undefined);
   const [zoomLevel, changeZoomLevel] = useState(0);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [fileToSave, _setFileToSave] = useState<Entry | undefined>(undefined);
   const [language, setLanguage] = useState("python");
   const [projectToSave, setProjectToSave] = useState(currentProjectname);
   const contentRef = useRef<string>(""); // In case some editors cannot update states
+
+  // Autosave data
   const fileToSaveRef = useRef<Entry | undefined>(undefined);
+  const fileContentRef = useRef<string | undefined>(undefined);
 
   const setFileToSave = (data?: Entry) => {
     fileToSaveRef.current = data;
     _setFileToSave(data);
   };
 
+  const setFileContent = (data?: string) => {
+    fileContentRef.current = data;
+    _setFileContent(data);
+  };
+
+
   useEffect(() => {
-    //TODO: acces the data
     subscribe("autoSave", async () => {
-      console.log("Auto saving file...",fileToSave, fileContent, contentRef, fileToSaveRef);
       if (autosave) {
         await autoSave();
         publish("autoSaveCompleted")
@@ -125,23 +132,23 @@ const FileEditor = ({
   const autoSave = async () => {
     console.log("Auto saving file...");
 
-    if (fileContent === null) {
+    if (fileContentRef.current === undefined) {
       console.log("No content to save");
       return;
     }
 
-    if (fileToSave === undefined) {
+    if (fileToSaveRef.current === undefined) {
       console.log("No file to save");
       return;
     }
 
-    if (fileToSave.access === false) {
+    if (fileToSaveRef.current.access === false) {
       console.log("File is Read-Only");
       warning("File is Read-Only");
       return;
     }
 
-    var content = fileContent;
+    var content = fileContentRef.current;
 
     if (contentRef.current !== "") {
       content = contentRef.current;
@@ -153,7 +160,7 @@ const FileEditor = ({
     }
 
     try {
-      await api.file.save(currentProjectname, fileToSave, content);
+      await api.file.save(currentProjectname, fileToSaveRef.current, content);
       console.log("Auto save completed");
     } catch (e) {
       if (e instanceof Error) {
