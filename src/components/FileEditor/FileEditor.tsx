@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { SaveIcon, MinusIcon, PlusIcon } from "Assets";
 import { publish, subscribe, unsubscribe, useError, useTheme } from "Utils";
 import { CommsManager } from "jderobot-commsmanager";
-import { Entry, EditorsEntry } from "Types";
+import { Entry, EditorsEntry, Options } from "Types";
 import TextEditor from "./TextEditor";
 import {
   MenuButton,
@@ -36,6 +36,7 @@ const FileEditor = ({
   api,
   extraEditors,
   splashIcon,
+  options,
 }: {
   currentFile?: Entry;
   changeCurrentFile: Function;
@@ -45,11 +46,14 @@ const FileEditor = ({
   api: ExtraApi;
   splashIcon: JSX.Element;
   extraEditors: EditorsEntry[];
+  options?: Options;
 }) => {
   const { error, warning } = useError();
   const theme = useTheme();
 
-  const [fileContent, _setFileContent] = useState<string | undefined>(undefined);
+  const [fileContent, _setFileContent] = useState<string | undefined>(
+    undefined
+  );
   const [zoomLevel, changeZoomLevel] = useState(0);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [fileToSave, _setFileToSave] = useState<Entry | undefined>(undefined);
@@ -71,17 +75,25 @@ const FileEditor = ({
     _setFileContent(data);
   };
 
-
   useEffect(() => {
     subscribe("autoSave", async () => {
       if (autosave) {
         await autoSave();
-        publish("autoSaveCompleted")
+        publish("autoSaveCompleted");
       }
     });
 
+    if (options?.editor?.onlyOneFile) {
+      subscribe("uploadOnlyCode", (e: any) => {
+        setFileContent(e.detail.code);
+      });
+    }
+
     return () => {
       unsubscribe("autoSave", () => {});
+      if (options?.editor?.onlyOneFile) {
+        unsubscribe("uploadOnlyCode", () => {});
+      }
     };
   }, []);
 

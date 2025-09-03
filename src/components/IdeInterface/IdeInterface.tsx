@@ -67,11 +67,7 @@ const IdeInterface = ({
 }: IdeInterfaceProps) => {
   const theme = useTheme();
   
-  var [currentFile, setCurrentFile] = useState<Entry | undefined>(undefined);
-
-  if (baseFile && options?.editor?.onlyOneFile) {
-    setCurrentFile = () => {}
-  }
+  var [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
 
   if (splashIcon === undefined) {
     splashIcon = (
@@ -100,7 +96,7 @@ const IdeInterface = ({
               {explorers.map((explorer) => (
                 <Explorer
                   setCurrentFile={setCurrentFile}
-                  currentFile={baseFile && options?.editor?.onlyOneFile ? baseFile : currentFile}
+                  currentFile={currentFile}
                   project={project}
                   api={explorer}
                 />
@@ -110,7 +106,7 @@ const IdeInterface = ({
           <StyledIdeVertContainer bgColor={theme.palette?.primary}>
             <StyledIdeContainer bgColor={theme.palette?.background}>
               <FileEditor
-                currentFile={baseFile && options?.editor?.onlyOneFile ? baseFile : currentFile}
+                currentFile={currentFile}
                 changeCurrentFile={setCurrentFile}
                 currentProjectname={project}
                 autosave={true}
@@ -118,6 +114,7 @@ const IdeInterface = ({
                 api={api}
                 extraEditors={extraEditors}
                 splashIcon={splashIcon}
+                options={options}
               />
             </StyledIdeContainer>
           </StyledIdeVertContainer>
