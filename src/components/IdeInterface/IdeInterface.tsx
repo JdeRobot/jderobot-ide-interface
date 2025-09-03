@@ -70,7 +70,6 @@ const IdeInterface = ({
   var [currentFile, setCurrentFile] = useState<Entry | undefined>(undefined);
 
   if (baseFile && options?.editor?.onlyOneFile) {
-    currentFile = baseFile
     setCurrentFile = () => {}
   }
 
@@ -101,7 +100,7 @@ const IdeInterface = ({
               {explorers.map((explorer) => (
                 <Explorer
                   setCurrentFile={setCurrentFile}
-                  currentFile={currentFile}
+                  currentFile={baseFile && options?.editor?.onlyOneFile ? baseFile : currentFile}
                   project={project}
                   api={explorer}
                 />
@@ -111,7 +110,7 @@ const IdeInterface = ({
           <StyledIdeVertContainer bgColor={theme.palette?.primary}>
             <StyledIdeContainer bgColor={theme.palette?.background}>
               <FileEditor
-                currentFile={currentFile}
+                currentFile={baseFile && options?.editor?.onlyOneFile ? baseFile : currentFile}
                 changeCurrentFile={setCurrentFile}
                 currentProjectname={project}
                 autosave={true}
