@@ -145,7 +145,7 @@ const ViewersContainer = ({
   splashIcon: JSX.Element;
 }) => {
   const [visibility, setVisibility] = useState<boolean[]>(
-    Array(viewers.length).fill(false),
+    viewers.map((viewer) => viewer.active)
   );
   const theme = useTheme();
 
