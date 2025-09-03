@@ -76,7 +76,7 @@ export const DropdownStatusBar = ({
           hoverColor={theme.palette.secondary}
           roundness={theme.roundness}
           width={width}
-          height={baseHeight + possibleValues.length * 28}
+          height={baseHeight + possibleValues.length * 34}
           left={right}
           down={down}
         >

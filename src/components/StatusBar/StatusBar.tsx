@@ -110,6 +110,7 @@ const StatusBar = ({
           baseUniverse={baseUniverse}
         />
       )}
+      <div style={{"marginLeft": "auto"}}/>
       {extraComponents.extras.map((component: any) => {
         return component;
       })}

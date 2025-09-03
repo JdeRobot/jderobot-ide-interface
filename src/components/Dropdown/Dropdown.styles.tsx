@@ -30,13 +30,14 @@ export const StyledDropdown = styled.button<StyledDropdownProps>`
   left: ${(p) => p.left ?? 1}px;
   display: flex;
   position: absolute;
-  z-index: 3;
+  z-index: 300;
   flex-direction: column;
   background-color: ${(p) => p.bgColor ?? primaryColor};
   border: 1px black solid;
   ${handleDown}
 
   & button {
+    height: 34px;
     border-radius: 0 !important;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
