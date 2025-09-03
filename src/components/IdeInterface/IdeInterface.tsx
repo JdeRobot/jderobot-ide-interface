@@ -65,8 +65,14 @@ const IdeInterface = ({
   baseFile,
   baseUniverse
 }: IdeInterfaceProps) => {
-  const [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
   const theme = useTheme();
+  
+  var [currentFile, setCurrentFile] = useState<Entry | undefined>(undefined);
+
+  if (baseFile && options?.editor?.onlyOneFile) {
+    currentFile = baseFile
+    setCurrentFile = () => {}
+  }
 
   if (splashIcon === undefined) {
     splashIcon = (

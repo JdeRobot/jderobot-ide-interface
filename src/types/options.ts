@@ -1,5 +1,8 @@
 export interface Options {
-  explorer: {
+  explorer?: {
     showAccentColors?: boolean;
   };
+  editor?: {
+    onlyOneFile?: boolean;
+  }
 }
