@@ -110,6 +110,9 @@ const StatusBar = ({
           baseUniverse={baseUniverse}
         />
       )}
+      {extraComponents.extras.map((component: any) => {
+        return component;
+      })}
     </StyledStatusBarContainer>
   );
 };
