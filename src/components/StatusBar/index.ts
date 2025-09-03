@@ -2,3 +2,5 @@ export {
   default as StatusBar,
   StatusBarCustomUniverseSelector,
 } from "./StatusBar";
+
+export { StyledStatusBarEntry } from "./StatusBar.style";

@@ -2,7 +2,7 @@ import { IdeInterface } from "./components";
 export default IdeInterface;
 
 export { VncViewer } from "./components";
-export { StatusBarCustomUniverseSelector } from "./components";
+export { StatusBarCustomUniverseSelector, StyledStatusBarEntry } from "./components";
 export { ProgressBar } from "./components";
 export {
   Button,
