@@ -258,19 +258,23 @@ const FileEditor = ({
     <>
       <StyledEditorMenu bgColor={theme.palette?.primary}>
         <StyledButtonsContainer color={theme.palette?.secondary}>
-          {hasUnsavedChanges && (
-            <StyledChangeIndicator
-              color={theme.palette?.text}
-              id="unsaved-dot"
-            />
+          {!options?.editor?.notShowSave && (
+            <>
+              {hasUnsavedChanges && (
+                <StyledChangeIndicator
+                  color={theme.palette?.text}
+                  id="unsaved-dot"
+                />
+              )}
+              <MenuButton
+                id="save-button"
+                onClick={handleSaveFile}
+                title="Save File"
+              >
+                <SaveIcon viewBox="0 0 .9375 .9375" />
+              </MenuButton>
+            </>
           )}
-          <MenuButton
-            id="save-button"
-            onClick={handleSaveFile}
-            title="Save File"
-          >
-            <SaveIcon viewBox="0 0 .9375 .9375" />
-          </MenuButton>
           <MenuButtonStroke
             id="zoom-in-button"
             onClick={handleZoomIn}

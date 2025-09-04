@@ -4,5 +4,6 @@ export interface Options {
   };
   editor?: {
     onlyOneFile?: boolean;
+    notShowSave?: boolean;
   }
 }
