@@ -188,7 +188,9 @@ export const ResizableRow = ({
   if (children.length === 1) {
     return (
       <StyledHorizContiner bgColor={theme.palette?.primary}>
-        {children[0]}
+        <StyledHorizFillerContiner bgColor={theme.palette?.primary}>
+          {children[0]}
+        </StyledHorizFillerContiner>
       </StyledHorizContiner>
     );
   }
