@@ -151,10 +151,13 @@ const DefaultUniverseSelector = ({
       setUniverseList(list);
     };
     get_universe_list();
+  }, [project]);
+
+  useEffect(() => {
     if (baseUniverse !== undefined) {
       selectUniverse(baseUniverse)
     }
-  }, [project]);
+  }, [baseUniverse]);
 
   const terminateUniverse = async () => {
     if (!commsManager) {
