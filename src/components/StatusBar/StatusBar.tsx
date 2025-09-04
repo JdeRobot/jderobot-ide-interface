@@ -151,7 +151,7 @@ const DefaultUniverseSelector = ({
       setUniverseList(list);
     };
     get_universe_list();
-    if (baseUniverse) {
+    if (baseUniverse !== undefined) {
       selectUniverse(baseUniverse)
     }
   }, [project]);
@@ -207,8 +207,6 @@ const DefaultUniverseSelector = ({
 
   const selectUniverse = async (universeName: string) => {
     console.log(universeName);
-
-    if (!universeName) return;
 
     try {
       // Launch if new universe selected
