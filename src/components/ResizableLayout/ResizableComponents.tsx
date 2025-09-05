@@ -160,8 +160,6 @@ export const ResizableRow = ({
 }) => {
   const theme = useTheme();
 
-  console.log(children)
-
   if (layout === "only-editor") {
     // Remove viewers == Remove last element
     children.pop();
