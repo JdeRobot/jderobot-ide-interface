@@ -63,10 +63,10 @@ const IdeInterface = ({
   options,
   splashIcon,
   baseFile,
-  baseUniverse
+  baseUniverse,
 }: IdeInterfaceProps) => {
   const theme = useTheme();
-  
+
   var [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
 
   if (splashIcon === undefined) {
@@ -91,18 +91,16 @@ const IdeInterface = ({
           layout={layout}
           splashIcon={splashIcon}
         >
-          {explorers.length > 0 && (
-            <ResizableColumn>
-              {explorers.map((explorer) => (
-                <Explorer
-                  setCurrentFile={setCurrentFile}
-                  currentFile={currentFile}
-                  project={project}
-                  api={explorer}
-                />
-              ))}
-            </ResizableColumn>
-          )}
+          <ResizableColumn>
+            {explorers.map((explorer) => (
+              <Explorer
+                setCurrentFile={setCurrentFile}
+                currentFile={currentFile}
+                project={project}
+                api={explorer}
+              />
+            ))}
+          </ResizableColumn>
           <StyledIdeVertContainer bgColor={theme.palette?.primary}>
             <StyledIdeContainer bgColor={theme.palette?.background}>
               <FileEditor
@@ -159,7 +157,7 @@ const ViewersContainer = ({
         } else {
           return state;
         }
-      }),
+      })
     );
   };
 
