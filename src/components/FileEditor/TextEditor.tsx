@@ -151,7 +151,9 @@ const FileEditor = ({
     monacoRef.current = monaco;
     editorRef.current = editor;
 
-    editorRef.current.getDomNode().addEventListener("keydown", handleKeyDown);
+    if (editorRef.current) {
+      editorRef.current.getDomNode().addEventListener("keydown", handleKeyDown);
+    }
 
     monacoEditorSnippet(monaco, commsManager);
 
