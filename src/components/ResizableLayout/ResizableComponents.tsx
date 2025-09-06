@@ -223,17 +223,13 @@ export const CollapsableResizableColumn = ({
 }) => {
   const theme = useTheme();
 
-  //FIX: if remove the first one. It stops working
-
-  console.log(state, children, "First")
-
-  for (let index = state.length - 1; index >= 0; index--) {
-    if (!state[index]) {
-      children.splice(index, 1);
+  if (state.length === children.length) {
+    for (let index = state.length - 1; index >= 0; index--) {
+      if (!state[index]) {
+        children.splice(index, 1);
+      }
     }
   }
-  
-  console.log(state, children, "Second")
 
   if (children.length === 0) {
     return <>{splashIcon}</>;
