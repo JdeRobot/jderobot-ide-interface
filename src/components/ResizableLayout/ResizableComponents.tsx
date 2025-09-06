@@ -238,7 +238,9 @@ export const CollapsableResizableColumn = ({
   if (children.length === 1) {
     return (
       <StyledVertContiner bgColor={theme.palette?.background}>
-        {children[0]}
+        <StyledVertFillerContiner bgColor={theme.palette?.background}>
+          {children[0]}
+        </StyledVertFillerContiner>
       </StyledVertContiner>
     );
   }
