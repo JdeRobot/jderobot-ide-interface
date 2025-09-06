@@ -120,13 +120,13 @@ const FileEditor = ({
     };
   }, [commsManager]);
 
-  useEffect(() => {
-    return () => {
-      editorRef.current
-        .getDomNode()
-        .removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     editorRef.current
+  //       .getDomNode()
+  //       .removeEventListener("keydown", handleKeyDown);
+  //   };
+  // }, []);
 
   const handleEditorDidMount = (monaco: Monaco) => {
     monaco.editor.defineTheme("dark-theme", {
