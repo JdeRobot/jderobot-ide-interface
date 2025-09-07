@@ -159,41 +159,44 @@ export const ResizableRow = ({
   children: any[];
 }) => {
   const theme = useTheme();
+  var components = children;
+  var componentsBaseWidth = baseWidth;
+  var componentsMaxWidth = maxWidth;
 
   console.log("Before", children, baseWidth, maxWidth)
 
   if (layout === "only-editor") {
     // Remove viewers == Remove last element
-    children.pop();
-    baseWidth.pop();
-    maxWidth.pop();
+    components.pop();
+    componentsBaseWidth.pop();
+    componentsMaxWidth.pop();
   }
 
   if (layout === "only-viewers") {
     // Remove editors == Remove middle element
-    children.splice(1, 1);
-    baseWidth.splice(1, 1);
-    maxWidth.splice(1, 1);
+    components.splice(1, 1);
+    componentsBaseWidth.splice(1, 1);
+    componentsMaxWidth.splice(1, 1);
   }
 
   if (!showExplorer) {
     // Remove explorers == Remove first element
-    children = [...children.slice(0, 0), ...children.slice(1)];
-    baseWidth.shift();
-    maxWidth.shift();
+    components = [...components.slice(0, 0), ...components.slice(1)];
+    componentsBaseWidth.shift();
+    componentsMaxWidth.shift();
   }
 
   console.log("After", children, baseWidth, maxWidth)
 
-  if (children.length === 0) {
+  if (components.length === 0) {
     return <>{splashIcon}</>;
   }
 
-  if (children.length === 1) {
+  if (components.length === 1) {
     return (
       <StyledHorizContiner bgColor={theme.palette?.primary}>
         <StyledHorizFillerContiner bgColor={theme.palette?.primary}>
-          {children[0]}
+          {components[0]}
         </StyledHorizFillerContiner>
       </StyledHorizContiner>
     );
@@ -204,13 +207,13 @@ export const ResizableRow = ({
       id="styled-horiz-container"
       bgColor={theme.palette?.primary}
     >
-      {children.slice(0, children.length - 1).map((comp, i) => (
-        <ResizableHoriz width={baseWidth[i]} max={maxWidth[i]} snap={[0]}>
+      {components.slice(0, components.length - 1).map((comp, i) => (
+        <ResizableHoriz width={componentsBaseWidth[i]} max={componentsMaxWidth[i]} snap={[0]}>
           {comp}
         </ResizableHoriz>
       ))}
       <StyledHorizFillerContiner bgColor={theme.palette?.primary}>
-        {children[children.length - 1]}
+        {components[components.length - 1]}
       </StyledHorizFillerContiner>
     </StyledHorizContiner>
   );
