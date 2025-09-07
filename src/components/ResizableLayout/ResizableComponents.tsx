@@ -160,6 +160,8 @@ export const ResizableRow = ({
 }) => {
   const theme = useTheme();
 
+  console.log("Before", children, baseWidth, maxWidth)
+
   if (layout === "only-editor") {
     // Remove viewers == Remove last element
     children.pop();
@@ -180,6 +182,8 @@ export const ResizableRow = ({
     baseWidth.shift();
     maxWidth.shift();
   }
+
+  console.log("After", children, baseWidth, maxWidth)
 
   if (children.length === 0) {
     return <>{splashIcon}</>;
