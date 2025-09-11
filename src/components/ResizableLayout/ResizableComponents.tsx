@@ -159,9 +159,9 @@ export const ResizableRow = ({
   children: any[];
 }) => {
   const theme = useTheme();
-  var components = children;
-  var componentsBaseWidth = baseWidth;
-  var componentsMaxWidth = maxWidth;
+  var components = children.copyWithin(-1,0);
+  var componentsBaseWidth = baseWidth.copyWithin(-1,0);
+  var componentsMaxWidth = maxWidth.copyWithin(-1,0);
 
   console.log("Before", children, baseWidth, maxWidth)
 
