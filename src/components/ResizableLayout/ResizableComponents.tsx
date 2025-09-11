@@ -161,8 +161,8 @@ export const ResizableLayout = ({
 }) => {
   const theme = useTheme();
   var components = 0;
-  var oneIndex = showExplorer ? 0 : layout === "only-editor" ? 1 : 2;
-  var twoIndex = layout === "only-viewers" ? 2 : 1;
+  var oneIndex = 0;
+  var twoIndex = 0;
 
   console.log(oneIndex,twoIndex)
 
@@ -171,8 +171,16 @@ export const ResizableLayout = ({
   }
 
   if (layout === "both") {
+    oneIndex = showExplorer ? 0 : 1;
+    twoIndex = 2;
     components += 2;
+  } else if (layout === "only-editor") {
+    oneIndex = showExplorer ? 0 : 1;
+    twoIndex = 1;
+    components += 1;
   } else {
+    oneIndex = showExplorer ? 0 : 2;
+    twoIndex = 2;
     components += 1;
   }
 
