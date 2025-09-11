@@ -1,5 +1,5 @@
 export {
   CollapsableResizableColumn,
   ResizableColumn,
-  ResizableRow,
+  ResizableLayout,
 } from "./ResizableComponents";

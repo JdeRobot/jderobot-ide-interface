@@ -6,7 +6,7 @@ import {
   Explorer,
   CollapsableResizableColumn,
   ResizableColumn,
-  ResizableRow,
+  ResizableLayout,
   FileEditor,
   Button,
   StyledButtonsContainer,
@@ -84,7 +84,7 @@ const IdeInterface = ({
         id="styled-ide-container"
         bgColor={theme.palette?.primary}
       >
-        <ResizableRow
+        <ResizableLayout
           baseWidth={[20, 40, 40]}
           maxWidth={[40, 60, 60]}
           showExplorer={explorers.length > 0}
@@ -121,7 +121,7 @@ const IdeInterface = ({
               <ViewersContainer viewers={viewers} splashIcon={splashIcon} />
             </StyledIdeContainer>
           </StyledIdeVertContainer>
-        </ResizableRow>
+        </ResizableLayout>
         <StatusBar
           project={project}
           commsManager={commsManager}

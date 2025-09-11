@@ -1,3 +1,4 @@
+import { Layout } from "Types";
 import {
   StyledHorizContiner,
   StyledHorizFillerContiner,
@@ -143,7 +144,7 @@ export const ResizableColumn = ({ children }: { children: any[] }) => {
   );
 };
 
-export const ResizableRow = ({
+export const ResizableLayout = ({
   baseWidth,
   maxWidth,
   showExplorer,
@@ -154,66 +155,65 @@ export const ResizableRow = ({
   baseWidth: number[];
   maxWidth: number[];
   showExplorer: boolean;
-  layout: string;
+  layout: Layout;
   splashIcon: JSX.Element;
   children: any[];
 }) => {
   const theme = useTheme();
-  var components = children.copyWithin(-1,0);
-  var componentsBaseWidth = baseWidth.copyWithin(-1,0);
-  var componentsMaxWidth = maxWidth.copyWithin(-1,0);
+  var components = 0;
+  var oneIndex = showExplorer ? 0 : layout === "only-editor" ? 1 : 2;
+  var twoIndex = layout === "only-viewers" ? 2 : 1;
 
-  console.log("Before", children, baseWidth, maxWidth)
-
-  if (layout === "only-editor") {
-    // Remove viewers == Remove last element
-    components.pop();
-    componentsBaseWidth.pop();
-    componentsMaxWidth.pop();
+  if (showExplorer) {
+    components += 1;
   }
 
-  if (layout === "only-viewers") {
-    // Remove editors == Remove middle element
-    components.splice(1, 1);
-    componentsBaseWidth.splice(1, 1);
-    componentsMaxWidth.splice(1, 1);
+  if (layout === "both") {
+    components += 2;
+  } else {
+    components += 1;
   }
 
-  if (!showExplorer) {
-    // Remove explorers == Remove first element
-    components = [...components.slice(0, 0), ...components.slice(1)];
-    componentsBaseWidth.shift();
-    componentsMaxWidth.shift();
-  }
-
-  console.log("After", children, baseWidth, maxWidth)
-
-  if (components.length === 0) {
+  if (components === 0) {
     return <>{splashIcon}</>;
   }
 
-  if (components.length === 1) {
+  if (components === 1) {
     return (
       <StyledHorizContiner bgColor={theme.palette?.primary}>
         <StyledHorizFillerContiner bgColor={theme.palette?.primary}>
-          {components[0]}
+          {children[oneIndex]}
+        </StyledHorizFillerContiner>
+      </StyledHorizContiner>
+    );
+  }
+
+  if (components === 2) {
+    return (
+      <StyledHorizContiner bgColor={theme.palette?.primary}>
+        <ResizableHoriz
+          width={baseWidth[oneIndex]}
+          max={maxWidth[oneIndex]}
+          snap={[0]}
+        >
+          {children[oneIndex]}
+        </ResizableHoriz>
+        <StyledHorizFillerContiner bgColor={theme.palette?.primary}>
+          {children[twoIndex]}
         </StyledHorizFillerContiner>
       </StyledHorizContiner>
     );
   }
 
   return (
-    <StyledHorizContiner
-      id="styled-horiz-container"
-      bgColor={theme.palette?.primary}
-    >
-      {components.slice(0, components.length - 1).map((comp, i) => (
-        <ResizableHoriz width={componentsBaseWidth[i]} max={componentsMaxWidth[i]} snap={[0]}>
+    <StyledHorizContiner bgColor={theme.palette?.primary}>
+      {children.slice(0, children.length - 1).map((comp, i) => (
+        <ResizableHoriz width={baseWidth[i]} max={maxWidth[i]} snap={[0]}>
           {comp}
         </ResizableHoriz>
       ))}
       <StyledHorizFillerContiner bgColor={theme.palette?.primary}>
-        {components[components.length - 1]}
+        {children[children.length - 1]}
       </StyledHorizFillerContiner>
     </StyledHorizContiner>
   );
