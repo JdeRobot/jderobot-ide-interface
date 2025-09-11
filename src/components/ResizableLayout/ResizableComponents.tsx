@@ -164,6 +164,8 @@ export const ResizableLayout = ({
   var oneIndex = showExplorer ? 0 : layout === "only-editor" ? 1 : 2;
   var twoIndex = layout === "only-viewers" ? 2 : 1;
 
+  console.log(oneIndex,twoIndex)
+
   if (showExplorer) {
     components += 1;
   }
