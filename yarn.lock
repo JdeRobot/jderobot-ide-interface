@@ -3514,7 +3514,7 @@ isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha512-WhB9zCku7EGTj/HQQRz5aUQEUeoQZH2bWcltRErOpymJ4boYE6wL9Tbr23krRPSZ+C5zqNSrSw+Cc7sZZ4b7vg==
 
-jderobot-commsmanager@^1.0.4:
+jderobot-commsmanager@1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/jderobot-commsmanager/-/jderobot-commsmanager-1.0.4.tgz#c736e6019baac60cabf05964d330624c422e6dac"
   integrity sha512-lAmq10+oE1zPP39mQ1xi6LZgSFyAiAEyBLhpq4qUcJL5fGE1rp9nUWNvSarf3UHj0XTw/WQ3ldSBuGrQEOV25A==
