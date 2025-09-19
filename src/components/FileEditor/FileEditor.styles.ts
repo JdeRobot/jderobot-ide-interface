@@ -13,6 +13,7 @@ export const StyledEditorMenu = styled.div<StyledEditorMenuProps>`
   padding-left: 10px;
   height: 32px;
   max-height: 32px;
+  min-height: 32px;
   width: 100%;
   background-color: ${(p) => p.bgColor ?? primaryColor};
 `;

@@ -58,6 +58,7 @@ export const StyledViewerMenu = styled.div<StyledViewerMenuProps>`
   height: 32px;
   justify-content: space-between;
   max-height: 32px;
+  min-height: 32px;
   width: 100%;
   z-index: 5;
   padding-left: 10px;

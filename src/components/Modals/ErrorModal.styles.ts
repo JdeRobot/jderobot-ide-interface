@@ -86,6 +86,7 @@ export const StyledModalErrorRow = styled.div<StyledModalErrorRowProps>`
   & label {
     font-weight: 600;
     text-align: center;
+    white-space: pre-wrap;
   }
 
   ${handleVariant}

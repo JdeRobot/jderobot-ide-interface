@@ -27,6 +27,7 @@ export const StyledSidebarEntryMenu = styled.div<StyledSidebarEntryMenuProps>`
   display: flex;
   align-items: center;
   height: 32px;
+  min-height: 32px;
   padding: 0 10px 0 10px;
   gap: 5px;
   background-color: ${(p) => p.bgColor ?? primaryColor};
