@@ -22,14 +22,16 @@ const enabled = (state?: string): boolean => {
 
 const VncViewer = ({
   commsManager,
+  ip,
   port,
 }: {
   commsManager: CommsManager | null;
+  ip?: string;
   port: number;
 }) => {
   const theme = useTheme();
   const [state, setState] = useState<string | undefined>(
-    commsManager?.getState(),
+    commsManager?.getState()
   );
 
   const updateState = (e: any) => {
@@ -50,7 +52,7 @@ const VncViewer = ({
         <StyledVNCScreen
           title="VNC viewer"
           id={"vnc-viewer"}
-          src={`http://127.0.0.1:${port}/vnc.html?resize=remote&autoconnect=true&reconnect=true`}
+          src={`http://${ip ? ip : "127.0.0.1"}:${port}/vnc.html?resize=remote&autoconnect=true&reconnect=true`}
         />
       ) : (
         <StyledVNCViewerLoader>
