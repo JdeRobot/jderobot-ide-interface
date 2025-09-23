@@ -3,7 +3,7 @@ import { merge } from "lodash";
 import { Theme } from "Types";
 
 interface ThemeProviderProps {
-  theme?: Theme;
+  theme: Theme;
   children?: React.ReactNode;
 }
 
@@ -51,7 +51,7 @@ export const useTheme = () => useContext(ThemeContext) ?? defaultTheme;
 
 export const ThemeProvider = ({ theme, children }: ThemeProviderProps) => {
   return (
-    <ThemeContext.Provider value={merge(defaultTheme, theme)}>
+    <ThemeContext.Provider value={theme}>
       {children}
     </ThemeContext.Provider>
   );
