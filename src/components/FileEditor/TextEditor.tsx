@@ -120,13 +120,26 @@ const FileEditor = ({
     };
   }, [commsManager]);
 
-  // useEffect(() => {
-  //   return () => {
-  //     editorRef.current
-  //       .getDomNode()
-  //       .removeEventListener("keydown", handleKeyDown);
-  //   };
-  // }, []);
+  useEffect(() => {
+    if (monacoRef.current !== null && theme.monacoTheme) {
+      monacoRef.current.editor.defineTheme("dark-theme", {
+        base: "vs-dark",
+        inherit: true,
+        rules: [],
+        colors: {
+          "editor.background": theme.palette.background,
+        },
+      });
+      monacoRef.current.editor.defineTheme("light-theme", {
+        base: "vs",
+        inherit: true,
+        rules: [],
+        colors: {
+          "editor.background": theme.palette.background,
+        },
+      });
+    }
+  }, [theme.monacoTheme]);
 
   const handleEditorDidMount = (monaco: Monaco) => {
     monaco.editor.defineTheme("dark-theme", {
@@ -165,7 +178,7 @@ const FileEditor = ({
         if (commsManager && fileContent) {
           commsManager.code_format(fileContent);
         }
-      },
+      }
     );
 
     return () => {
@@ -247,7 +260,7 @@ const FileEditor = ({
         if (commsManager && fileContent) {
           commsManager.code_format(fileContent);
         }
-      },
+      }
     );
 
     if (language !== "python") return;
