@@ -1,6 +1,6 @@
 {
   "name": "jderobot-ide-interface",
-  "version": "0.2.17",
+  "version": "0.2.18",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "files": [

@@ -95,7 +95,7 @@ const IdeInterface = ({
             {explorers.map((explorer) => (
               <Explorer
                 setCurrentFile={setCurrentFile}
-                currentFile={currentFile}
+                currentFile={baseFile ? baseFile : currentFile}
                 project={project}
                 api={explorer}
               />
@@ -104,7 +104,7 @@ const IdeInterface = ({
           <StyledIdeVertContainer bgColor={theme.palette?.primary}>
             <StyledIdeContainer bgColor={theme.palette?.background}>
               <FileEditor
-                currentFile={currentFile}
+                currentFile={baseFile ? baseFile : currentFile}
                 changeCurrentFile={setCurrentFile}
                 currentProjectname={project}
                 autosave={true}
