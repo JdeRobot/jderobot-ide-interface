@@ -63,8 +63,9 @@ export const DropdownStatusBar = ({
         id={id}
         title={title}
         onClick={(e: any) => {
-          checkPosition(e.clientX);
           e.preventDefault();
+          onOpen();
+          checkPosition(e.clientX);
           setOpen(!open);
         }}
         text={theme.palette.text}
