@@ -227,6 +227,13 @@ const DefaultUniverseSelector = ({
     }
   };
 
+  const checkManager = () => {
+    if (commsManager === null) {
+      error("The Robotics Backend is disconnected. Make sure to reconnect.");
+      throw Error("The Robotics Backend is disconnected. Make sure to reconnect.")
+    }
+  }
+
   return (
     <DropdownStatusBar
       id="open-settings-manager"
@@ -235,6 +242,7 @@ const DefaultUniverseSelector = ({
       baseHeight={24}
       down={false}
       setter={selectUniverse}
+      onOpen={checkManager}
       possibleValues={universeList}
     >
       <label>

@@ -12,6 +12,7 @@ export const DropdownStatusBar = ({
   down,
   setter,
   possibleValues,
+  onOpen,
   children,
 }: {
   id: string;
@@ -21,6 +22,7 @@ export const DropdownStatusBar = ({
   down: boolean;
   setter: Function;
   possibleValues: any[];
+  onOpen: () => void;
   children: any;
 }) => {
   const theme = useTheme();
