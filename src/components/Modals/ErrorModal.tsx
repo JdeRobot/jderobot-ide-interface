@@ -78,59 +78,41 @@ const ErrorModal = () => {
       break;
   }
 
+  const styledProps = {
+    variant: type_str,
+    roundness: theme.roundness,
+    error: theme.palette.error,
+    errorBorder: theme.palette.border.error,
+    info: theme.palette.background,
+    infoBorder: theme.palette.border.info,
+    warning: theme.palette.warning,
+    warningBorder: theme.palette.border.warning,
+    errorButtonColor: theme.palette.button.error,
+    errorHoverColor: theme.palette.button.hoverError,
+    infoButtonColor: theme.palette.button.info,
+    infoHoverColor: theme.palette.button.hoverInfo,
+    warningButtonColor: theme.palette.button.warning,
+    warningHoverColor: theme.palette.button.hoverWarning,
+  };
+
   return (
     <StyledModalError
       id={`${type_str}-modal`}
       ref={modalRef}
       onKeyDown={handleKeyDown}
-      variant={type_str}
-      roundness={theme.roundness}
-      error={theme.palette.error}
-      errorBorder={theme.palette.border.error}
-      info={theme.palette.background}
-      infoBorder={theme.palette.border.info}
-      warning={theme.palette.warning}
-      warningBorder={theme.palette.border.warning}
+      {...styledProps}
     >
       <StyledModalContent id="bt-modal-contents">
-        <StyledModalErrorTitlebar
-          color={theme.palette.text}
-          darkColor={theme.palette.darkText}
-          hoverColor={theme.palette.secondary}
-          roundness={theme.roundness}
-          variant={type_str}
-        >
+        <StyledModalErrorTitlebar {...styledProps}>
           <label htmlFor="actionName">{type_header}</label>
         </StyledModalErrorTitlebar>
         <ModalRow>
-          <StyledModalErrorRow
-            roundness={theme.roundness}
-            variant={type_str}
-            lightText={theme.palette.text}
-            darkText={theme.palette.darkText}
-            errorButtonColor={theme.palette.button.error}
-            errorHoverColor={theme.palette.button.hoverError}
-            infoButtonColor={theme.palette.button.info}
-            infoHoverColor={theme.palette.button.hoverInfo}
-            warningButtonColor={theme.palette.button.warning}
-            warningHoverColor={theme.palette.button.hoverWarning}
-          >
+          <StyledModalErrorRow {...styledProps}>
             <label id="errorMsg">{msg}</label>
           </StyledModalErrorRow>
         </ModalRow>
         <ModalRow>
-          <StyledModalErrorRow
-            roundness={theme.roundness}
-            variant={type_str}
-            lightText={theme.palette.text}
-            darkText={theme.palette.darkText}
-            errorButtonColor={theme.palette.button.error}
-            errorHoverColor={theme.palette.button.hoverError}
-            infoButtonColor={theme.palette.button.info}
-            infoHoverColor={theme.palette.button.hoverInfo}
-            warningButtonColor={theme.palette.button.warning}
-            warningHoverColor={theme.palette.button.hoverWarning}
-          >
+          <StyledModalErrorRow {...styledProps}>
             <button onClick={() => onClose()}>Close</button>
           </StyledModalErrorRow>
         </ModalRow>

@@ -18,21 +18,21 @@ const hexToRgb = (hex: string) =>
 export const contrastSelector = (
   light?: string,
   dark?: string,
-  background?: string,
+  background?: string
 ) => {
   if (background === undefined) return dark;
+  if (light === undefined) light = "#fff";
+  if (dark === undefined) dark = "#000";
 
-  let rgb = hexToRgb(background)
+  let bgRgb = hexToRgb(background);
+  let bgLum = rgbToLuminance(bgRgb[0], bgRgb[1], bgRgb[2]);
+  let lightRgb = hexToRgb(light);
+  let lightLum = rgbToLuminance(lightRgb[0], lightRgb[1], lightRgb[2]);
+  let darkRgb = hexToRgb(light);
+  let darkLum = rgbToLuminance(darkRgb[0], darkRgb[1], darkRgb[2]);
 
-  let isDarkBg = rgbToLuminance(rgb[0], rgb[1], rgb[2]) <= 0.5;
+  let lightContrast = (bgLum - lightLum) * (bgLum - lightLum)
+  let darkContrast = (bgLum - darkLum) * (bgLum - darkLum)
 
-  if (light === undefined) {
-    light = "#fff";
-  }
-
-  if (dark === undefined) {
-    dark = "#000";
-  }
-
-  return isDarkBg ? light : dark;
+  return lightContrast > darkContrast ? light : dark;
 };

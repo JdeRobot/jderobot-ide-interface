@@ -6,24 +6,32 @@ import { contrastSelector } from "Utils";
 
 const primaryColor = "#666";
 
-interface StyledModalErrorRowProps {
-  roundness?: number;
+interface StyledModalErrorProps {
   variant: ErrorVariant;
-  errorButtonColor?: string;
-  errorHoverColor?: string;
-  infoButtonColor?: string;
-  infoHoverColor?: string;
-  warningButtonColor?: string;
-  warningHoverColor?: string;
+  roundness?: number;
   lightText?: string;
   darkText?: string;
+  error?: string;
+  errorBorder?: string;
+  errorButtonColor?: string;
+  errorHoverColor?: string;
+  info?: string;
+  infoBorder?: string;
+  infoButtonColor?: string;
+  infoHoverColor?: string;
+  warning?: string;
+  warningBorder?: string;
+  warningButtonColor?: string;
+  warningHoverColor?: string;
 }
 
-const handleVariant = (p: StyledModalErrorRowProps) => {
-  let text
+const handleVariant = (p: StyledModalErrorProps) => {
+  let text;
+  let button;
   switch (p.variant) {
     case "error":
-      text = contrastSelector(p.lightText, p.darkText,p.errorButtonColor)
+      text = contrastSelector(p.lightText, p.darkText, p.error);
+      button = contrastSelector(p.lightText, p.darkText, p.errorButtonColor);
       return `
         & button {
           background-color: ${p.errorButtonColor ?? primaryColor};
@@ -38,7 +46,8 @@ const handleVariant = (p: StyledModalErrorRowProps) => {
         }
       `;
     case "warning":
-      text = contrastSelector(p.lightText, p.darkText, p.warningButtonColor)
+      text = contrastSelector(p.lightText, p.darkText, p.warning);
+      button = contrastSelector(p.lightText, p.darkText, p.warningButtonColor);
       return `
         & button {
           background-color: ${p.warningButtonColor ?? primaryColor};
@@ -53,7 +62,8 @@ const handleVariant = (p: StyledModalErrorRowProps) => {
         }
       `;
     case "info":
-      text = contrastSelector(p.lightText, p.darkText,p.infoButtonColor)
+      text = contrastSelector(p.lightText, p.darkText, p.info);
+      button = contrastSelector(p.lightText, p.darkText, p.warningButtonColor);
       return `
         & button {
           background-color: ${p.infoButtonColor ?? primaryColor};
@@ -70,7 +80,7 @@ const handleVariant = (p: StyledModalErrorRowProps) => {
   }
 };
 
-export const StyledModalErrorRow = styled.div<StyledModalErrorRowProps>`
+export const StyledModalErrorRow = styled.div<StyledModalErrorProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -97,19 +107,6 @@ export const StyledModalErrorRow = styled.div<StyledModalErrorRowProps>`
 
   ${handleVariant}
 `;
-
-interface StyledModalErrorProps {
-  variant: ErrorVariant;
-  error?: string;
-  errorBorder?: string;
-  info?: string;
-  infoBorder?: string;
-  warning?: string;
-  warningBorder?: string;
-  bgColor?: string;
-  borderColor?: string;
-  roundness?: number;
-}
 
 const handleVariantModal = (p: StyledModalErrorProps) => {
   let text;
@@ -152,33 +149,28 @@ export const StyledModalError = styled.dialog<StyledModalErrorProps>`
   ${handleVariantModal}
 `;
 
-interface StyledModalErrorTitlebarProps {
-  variant: ErrorVariant;
-  color?: string;
-  darkColor?: string;
-  hoverColor?: string;
-  roundness?: number;
-}
-
-const handleVariantTitlebar = (p: StyledModalErrorTitlebarProps) => {
+const handleVariantTitlebar = (p: StyledModalErrorProps) => {
   let text;
   switch (p.variant) {
     case "error":
+      text = contrastSelector(p.lightText, p.darkText, p.error);
       return `
-        color: ${p.color ?? primaryColor} !important;
+        color: ${text} !important;
       `;
     case "warning":
+      text = contrastSelector(p.lightText, p.darkText, p.warning);
       return `
-        color: ${p.darkColor ?? primaryColor} !important;
+        color: ${text} !important;
       `;
     case "info":
+      text = contrastSelector(p.lightText, p.darkText, p.info);
       return `
-        color: ${p.color ?? primaryColor} !important;
+        color: ${text} !important;
       `;
   }
 };
 
-export const StyledModalErrorTitlebar = styled.div<StyledModalErrorTitlebarProps>`
+export const StyledModalErrorTitlebar = styled.div<StyledModalErrorProps>`
   font-size: large;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
