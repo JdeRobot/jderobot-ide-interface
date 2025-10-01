@@ -74,13 +74,15 @@ export const StyledModalErrorRow = styled.div<StyledModalErrorRowProps>`
   margin-top: 40px;
 
   & button {
+    display: flex;
     border-radius: ${(p) => p.roundness ?? 1}px;
     height: 45px;
     width: 175px;
     padding: 15px;
     font-weight: 600;
-    text-align: center;
     user-select: none;
+    align-items: center;
+    justify-content: center;
   }
 
   & label {
