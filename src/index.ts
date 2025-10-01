@@ -29,6 +29,7 @@ export {
   useOptions,
   ErrorProvider,
   useError,
+  contrastSelector
 } from "./utils";
 
 export type {

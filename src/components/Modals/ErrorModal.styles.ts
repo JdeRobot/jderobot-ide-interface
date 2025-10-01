@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ErrorVariant } from "./ErrorModal";
 import Modal, { ModalTitlebar } from "./Modal";
 import { StyledModalTitlebar } from "./Modal.styles";
+import { contrastSelector } from "Utils";
 
 const primaryColor = "#666";
 
@@ -10,57 +11,60 @@ interface StyledModalErrorRowProps {
   variant: ErrorVariant;
   errorButtonColor?: string;
   errorHoverColor?: string;
-  errorTextColor?: string;
   infoButtonColor?: string;
   infoHoverColor?: string;
-  infoTextColor?: string;
   warningButtonColor?: string;
   warningHoverColor?: string;
-  warningTextColor?: string;
+  lightText?: string;
+  darkText?: string;
 }
 
 const handleVariant = (p: StyledModalErrorRowProps) => {
+  let text
   switch (p.variant) {
     case "error":
+      text = contrastSelector(p.lightText, p.darkText,p.errorButtonColor)
       return `
         & button {
           background-color: ${p.errorButtonColor ?? primaryColor};
-          color: ${p.errorTextColor ?? primaryColor};
+          color: ${text};
           &:hover {
             background-color: ${p.errorHoverColor ?? primaryColor} !important;
           }
         }
 
         & label {
-          color: ${p.errorTextColor ?? primaryColor};
+          color: ${text};
         }
       `;
     case "warning":
+      text = contrastSelector(p.lightText, p.darkText, p.warningButtonColor)
       return `
         & button {
           background-color: ${p.warningButtonColor ?? primaryColor};
-          color: ${p.warningTextColor ?? primaryColor};
+          color: ${text};
           &:hover {
             background-color: ${p.warningHoverColor ?? primaryColor} !important;
           }
         }
 
         & label {
-          color: ${p.warningTextColor ?? primaryColor};
+          color: ${text};
         }
       `;
     case "info":
+      text = contrastSelector(p.lightText, p.darkText,p.infoButtonColor)
       return `
         & button {
           background-color: ${p.infoButtonColor ?? primaryColor};
-          color: ${p.infoTextColor ?? primaryColor};
+          color: ${text};
           &:hover {
             background-color: ${p.infoHoverColor ?? primaryColor} !important;
           }
         }
 
         & label {
-          color: ${p.infoTextColor ?? primaryColor};
+          color: ${text};
         }
       `;
   }
@@ -108,9 +112,9 @@ interface StyledModalErrorProps {
 }
 
 const handleVariantModal = (p: StyledModalErrorProps) => {
+  let text;
   switch (p.variant) {
     case "error":
-      console.log("Error");
       return `
         background-color: ${p.error ?? primaryColor} !important;
         border-color: ${p.errorBorder ?? primaryColor} !important;
@@ -157,6 +161,7 @@ interface StyledModalErrorTitlebarProps {
 }
 
 const handleVariantTitlebar = (p: StyledModalErrorTitlebarProps) => {
+  let text;
   switch (p.variant) {
     case "error":
       return `

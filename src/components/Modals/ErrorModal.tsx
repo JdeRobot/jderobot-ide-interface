@@ -106,15 +106,14 @@ const ErrorModal = () => {
           <StyledModalErrorRow
             roundness={theme.roundness}
             variant={type_str}
+            lightText={theme.palette.text}
+            darkText={theme.palette.darkText}
             errorButtonColor={theme.palette.button.error}
             errorHoverColor={theme.palette.button.hoverError}
-            errorTextColor={theme.palette.text}
             infoButtonColor={theme.palette.button.info}
             infoHoverColor={theme.palette.button.hoverInfo}
-            infoTextColor={theme.palette.text}
             warningButtonColor={theme.palette.button.warning}
             warningHoverColor={theme.palette.button.hoverWarning}
-            warningTextColor={theme.palette.darkText}
           >
             <label id="errorMsg">{msg}</label>
           </StyledModalErrorRow>
@@ -123,15 +122,14 @@ const ErrorModal = () => {
           <StyledModalErrorRow
             roundness={theme.roundness}
             variant={type_str}
+            lightText={theme.palette.text}
+            darkText={theme.palette.darkText}
             errorButtonColor={theme.palette.button.error}
             errorHoverColor={theme.palette.button.hoverError}
-            errorTextColor={theme.palette.text}
             infoButtonColor={theme.palette.button.info}
             infoHoverColor={theme.palette.button.hoverInfo}
-            infoTextColor={theme.palette.text}
             warningButtonColor={theme.palette.button.warning}
             warningHoverColor={theme.palette.button.hoverWarning}
-            warningTextColor={theme.palette.darkText}
           >
             <button onClick={() => onClose()}>Close</button>
           </StyledModalErrorRow>
