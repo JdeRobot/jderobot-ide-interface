@@ -36,7 +36,7 @@ export interface IdeInterfaceStyles {
 
 interface IdeInterfaceProps {
   commsManager: CommsManager | null;
-  resetManager: Function;
+  connectManager: (desiredState?: string, callback?: () => void) => Promise<void>;
   project: string;
   explorers: ExplorerEntry[];
   api: ExtraApi;
@@ -52,7 +52,7 @@ interface IdeInterfaceProps {
 
 const IdeInterface = ({
   commsManager,
-  resetManager,
+  connectManager,
   project,
   explorers,
   api,
@@ -125,7 +125,7 @@ const IdeInterface = ({
         <StatusBar
           project={project}
           commsManager={commsManager}
-          resetManager={resetManager}
+          connectManager={connectManager}
           extraComponents={statusBarComponents}
           api={api}
           baseUniverse={baseUniverse}

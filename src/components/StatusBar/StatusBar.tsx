@@ -1,5 +1,5 @@
 import { ResetIcon } from "Assets";
-import { CommsManager } from "jderobot-commsmanager";
+import { CommsManager, states } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
 import { subscribe, unsubscribe, useError, useTheme } from "Utils";
 import {
@@ -13,14 +13,14 @@ import { StatusBarComponents, ExtraApi } from "Types";
 const StatusBar = ({
   project,
   commsManager,
-  resetManager,
+  connectManager,
   api,
   baseUniverse,
   extraComponents,
 }: {
   project: string;
   commsManager: CommsManager | null;
-  resetManager: Function;
+  connectManager: (desiredState?: string, callback?: () => void) => Promise<void>;
   baseUniverse?: string;
   api: ExtraApi;
   extraComponents: StatusBarComponents;
@@ -79,14 +79,16 @@ const StatusBar = ({
           text={theme.palette.darkText}
           bgColor={theme.palette.warning}
           hoverColor={theme.palette.button.hoverWarning}
-          id={`reset-connection`}
+          id={`connect-with-rb`}
           onClick={() => {
-            // resetManager();
+            if (state === undefined || state === "idle") {
+              connectManager();
+            }
           }}
-          title="Connecting with Robotics Backend"
+          title="Connect to the Robotics Backend"
         >
           <ResetIcon viewBox="0 0 20 20" stroke={theme.palette.darkText} />
-          <label>Connecting ...</label>
+          <label>{`Connect${state === undefined || state === "idle" ? "" : "ing ..."}`}</label>
         </StyledStatusBarButton>
       )}
       <StyledStatusBarEntry
@@ -105,6 +107,7 @@ const StatusBar = ({
       ) : (
         <DefaultUniverseSelector
           project={project}
+          connectManager={connectManager}
           commsManager={commsManager}
           api={api}
           baseUniverse={baseUniverse}
@@ -122,16 +125,18 @@ export default StatusBar;
 
 const DefaultUniverseSelector = ({
   project,
+  connectManager,
   commsManager,
   api,
   baseUniverse,
 }: {
   project: string;
+  connectManager: (desiredState?: string, callback?: () => void) => Promise<void>;
   commsManager: CommsManager | null;
   api: ExtraApi;
   baseUniverse?: string;
 }) => {
-  const { warning, error } = useError();
+  const { warning, error, info } = useError();
   const [universe, setUniverse] = useState<string | undefined>(
     commsManager?.getUniverse()
   );
@@ -229,9 +234,10 @@ const DefaultUniverseSelector = ({
 
   const checkManager = () => {
     if (commsManager === null || commsManager.getState() === "idle") {
-      error("The Robotics Backend is disconnected. Make sure to reconnect.");
+      info("Connecting with the Robotics Backend ...")
+      connectManager(states.TOOLS_READY, () => {checkManager(); close()});
       throw Error(
-        "The Robotics Backend is disconnected. Make sure to reconnect."
+        "The Robotics Backend is disconnected. Make sure to connect."
       );
     }
   };
