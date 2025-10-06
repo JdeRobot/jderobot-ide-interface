@@ -24,3 +24,11 @@ export const StyledVNCScreen = styled.iframe`
   height: 100%;
   border: 0;
 `;
+
+interface StyledVNCMsgProps {
+  color?: string;
+}
+
+export const StyledVNCMsg = styled.h3<StyledVNCMsgProps>`
+  color: ${(p) => p.color ?? primaryColor};
+`;

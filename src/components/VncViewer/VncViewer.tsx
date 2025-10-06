@@ -3,6 +3,7 @@ import { CommsManager } from "jderobot-commsmanager";
 import BounceLoader from "react-spinners/BounceLoader";
 import { subscribe, unsubscribe, useTheme } from "Utils";
 import {
+  StyledVNCMsg,
   StyledVNCScreen,
   StyledVNCViewer,
   StyledVNCViewerLoader,
@@ -25,11 +26,13 @@ const VncViewer = ({
   isHttps,
   ip,
   port,
+  message,
 }: {
   commsManager: CommsManager | null;
   isHttps?: boolean;
   ip?: string;
   port: number;
+  message?: string;
 }) => {
   const theme = useTheme();
   const [state, setState] = useState<string | undefined>(
@@ -58,11 +61,17 @@ const VncViewer = ({
         />
       ) : (
         <StyledVNCViewerLoader>
-          <BounceLoader
-            color={theme.palette.primary}
-            size={80}
-            speedMultiplier={0.7}
-          />
+          {state === "idle" ? (
+            <StyledVNCMsg color={theme.palette.error}>
+              {message}
+            </StyledVNCMsg>
+          ) : (
+            <BounceLoader
+              color={theme.palette.primary}
+              size={80}
+              speedMultiplier={0.7}
+            />
+          )}
         </StyledVNCViewerLoader>
       )}
     </StyledVNCViewer>
