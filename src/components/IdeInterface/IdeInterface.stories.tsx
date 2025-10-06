@@ -73,7 +73,7 @@ export const Main: Story = {
       <IdeInterface
         {...args}
         commsManager={null}
-        resetManager={() => {}}
+        connectManager={async () => {return}}
         project={"currentProjectname"}
         explorers={[]}
         api={api}
