@@ -1,6 +1,6 @@
 {
   "name": "jderobot-ide-interface",
-  "version": "0.2.24",
+  "version": "0.2.25",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -50,8 +50,7 @@
     "lodash": "^4.17.21",
     "monaco-editor": "^0.52.2",
     "re-resizable": "^6.11.2",
-    "react-spinners": "^0.17.0",
-    "typescript": "^5.9.3"
+    "react-spinners": "^0.17.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
