@@ -28,7 +28,7 @@ export const contrastSelector = (
   let bgLum = rgbToLuminance(bgRgb[0], bgRgb[1], bgRgb[2]);
   let lightRgb = hexToRgb(light);
   let lightLum = rgbToLuminance(lightRgb[0], lightRgb[1], lightRgb[2]);
-  let darkRgb = hexToRgb(light);
+  let darkRgb = hexToRgb(dark);
   let darkLum = rgbToLuminance(darkRgb[0], darkRgb[1], darkRgb[2]);
 
   let lightContrast = (bgLum - lightLum) * (bgLum - lightLum)
