@@ -244,8 +244,8 @@ const DefaultUniverseSelector = ({
 
   return (
     <DropdownStatusBar
-      id="open-settings-manager"
-      title="Layout"
+      id="universe-selector"
+      title="Universe Selector"
       width={300}
       baseHeight={24}
       down={false}
