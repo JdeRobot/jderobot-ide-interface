@@ -95,7 +95,7 @@ const StatusBar = ({
         text={theme.palette.text}
         title="Robotics Backend state"
       >
-        <label>{state}</label>
+        <label id="robotics-backend-state">{state}</label>
       </StyledStatusBarEntry>
       {extraComponents.universeSelector ? (
         <StatusBarCustomUniverseSelector
