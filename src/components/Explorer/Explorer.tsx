@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from "react";
 import JSZip from "jszip";
 import {
@@ -33,7 +34,7 @@ function getParentDir(file: Entry) {
     return file.path;
   }
 
-  var split_path = file.path.split("/");
+  const split_path = file.path.split("/");
   return split_path.slice(0, split_path.length - 1).join("/");
 }
 
@@ -342,7 +343,7 @@ const Explorer = ({
 
   ///////////////// DOWNLOAD ///////////////////////////////////////////////////
   const zipFile = async (zip: JSZip, file_path: string, file_name: string) => {
-    var content = await api.file.get(project, file_path);
+    const content = await api.file.get(project, file_path);
     zip.file(file_name, content);
   };
 

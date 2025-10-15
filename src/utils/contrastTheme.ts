@@ -1,7 +1,7 @@
 const rgbToLuminance = (r: number, g: number, b: number) => {
   /* calculates perceived lightness using the sRGB Luma method 
   Luma = (red * 0.2126 + green * 0.7152 + blue * 0.0722) / 255 */
-  let luma = (r * 0.2126 + g * 0.7152 + b * 0.0722) / 255;
+  const luma = (r * 0.2126 + g * 0.7152 + b * 0.0722) / 255;
   return luma;
 };
 
@@ -24,15 +24,15 @@ export const contrastSelector = (
   if (light === undefined) light = "#fff";
   if (dark === undefined) dark = "#000";
 
-  let bgRgb = hexToRgb(background);
-  let bgLum = rgbToLuminance(bgRgb[0], bgRgb[1], bgRgb[2]);
-  let lightRgb = hexToRgb(light);
-  let lightLum = rgbToLuminance(lightRgb[0], lightRgb[1], lightRgb[2]);
-  let darkRgb = hexToRgb(dark);
-  let darkLum = rgbToLuminance(darkRgb[0], darkRgb[1], darkRgb[2]);
+  const bgRgb = hexToRgb(background);
+  const bgLum = rgbToLuminance(bgRgb[0], bgRgb[1], bgRgb[2]);
+  const lightRgb = hexToRgb(light);
+  const lightLum = rgbToLuminance(lightRgb[0], lightRgb[1], lightRgb[2]);
+  const darkRgb = hexToRgb(dark);
+  const darkLum = rgbToLuminance(darkRgb[0], darkRgb[1], darkRgb[2]);
 
-  let lightContrast = (bgLum - lightLum) * (bgLum - lightLum)
-  let darkContrast = (bgLum - darkLum) * (bgLum - darkLum)
+  const lightContrast = (bgLum - lightLum) * (bgLum - lightLum)
+  const darkContrast = (bgLum - darkLum) * (bgLum - darkLum)
 
   return lightContrast > darkContrast ? light : dark;
 };

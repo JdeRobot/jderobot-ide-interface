@@ -31,7 +31,7 @@ const NewFolderModal = ({
       let search_list = fileList;
 
       if (location) {
-        var path = location.split("/");
+        const path = location.split("/");
 
         for (let index = 0; index < path.length; index++) {
           search_list = search_list.find(
@@ -50,7 +50,7 @@ const NewFolderModal = ({
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    var isValidName = true;
+    let isValidName = true;
 
     setName(value);
 

@@ -1,20 +1,9 @@
+import React from 'react';
 import type { Meta, StoryObj } from "@storybook/react-webpack5";
 import Button, { MenuButtonStroke, MenuButton } from "./Button";
 import {
-  ActionTeplateIcon,
   BackIcon,
-  CloseIcon,
-  DeleteIcon,
-  EmptyTeplateIcon,
-  IOTeplateIcon,
-  OpenFolderIcon,
-  RenameIcon,
-  ResetIcon,
   SaveIcon,
-  BaseFileIcon,
-  ActionFileIcon,
-  ClosedFolderIcon,
-  ClosedArrowIcon,
   OpenArrowIcon,
   SplashIcon,
 } from "Assets";

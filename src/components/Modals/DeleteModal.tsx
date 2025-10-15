@@ -1,3 +1,4 @@
+import React from 'react';
 import Modal, { ModalRow, ModalTitlebar } from "./Modal";
 import { Entry } from "Types";
 import { StyledModalButtonDelete } from "./Modal.styles";

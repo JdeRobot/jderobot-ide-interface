@@ -1,6 +1,5 @@
+import React from 'react';
 import type { Meta, StoryObj } from "@storybook/react-webpack5";
-import NewFileModal from "./NewFileModal";
-import Modal, { ModalEditableList, ModalRow, ModalTitlebar } from "./Modal";
 import ErrorModal from "./ErrorModal";
 
 type Story = StoryObj<typeof ErrorModal>;

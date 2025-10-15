@@ -1,3 +1,4 @@
+import React from 'react';
 import { useTheme } from "Utils";
 import { StyledProgressBar } from "./ProgressBar.style";
 

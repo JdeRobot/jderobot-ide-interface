@@ -1,3 +1,4 @@
+import React from 'react';
 import { useRef, useEffect, useState, ReactNode } from "react";
 import {
   StyledModal,
@@ -247,7 +248,7 @@ export const ModalRowDataText = ({
       </StyledModalRowDataTextTitle>
       <StyledModalRowDataTextEntries>
         {data.map((entry) => {
-          return <label>{entry}</label>;
+          return <label key={entry}>{entry}</label>;
         })}
       </StyledModalRowDataTextEntries>
     </StyledModalRowDataText>
@@ -331,6 +332,7 @@ export const ModalEditableList = ({
               deleteColor={theme.palette.button.error}
               roundness={theme.roundness}
               id={"project-" + entry}
+              key={entry}
               onClick={(e: any) => onSelect(e, entry)}
             >
               <label>{entry}</label>
@@ -394,6 +396,7 @@ export const ModalActionList = ({
                 deleteColor={theme.palette.button.error}
                 roundness={theme.roundness}
                 id={"list-" + entry.name}
+                key={entry.name}
                 onClick={(e: any) => openActionModal(entry.name)}
               >
                 <label>{entry.name}</label>
@@ -460,7 +463,7 @@ export const ModalInputDropdown = ({
       />
       <label htmlFor={id}>{placeholder}</label>
       <datalist id={id + "-list"}>
-        {entries && entries.map((name) => <option value={name} />)}
+        {entries && entries.map((name) => <option key={name} value={name} />)}
       </datalist>
       {description && <div>{description}</div>}
     </StyledModalInput>
@@ -553,6 +556,7 @@ export const ModalInputSelectIcon = ({
             color={theme.palette.text}
             roundness={theme.roundness}
             icon={entry.iconType}
+            key={entry.id}
             active={selected === entry.id}
           >
             <label>

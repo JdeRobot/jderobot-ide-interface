@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useRef, useState } from "react";
 
 import { SaveIcon, MinusIcon, PlusIcon } from "Assets";
@@ -107,7 +108,7 @@ const FileEditor = ({
       const content = await api.file.get(currentProjectname, currentFile);
       const extension = file.name.split(".").pop();
       setFileContent(content);
-      var fileType = "textplain";
+      let fileType = "textplain";
       if (extension) {
         for (const key in fileTypes) {
           if (key === extension) {
@@ -160,7 +161,7 @@ const FileEditor = ({
       return;
     }
 
-    var content = fileContentRef.current;
+    let content = fileContentRef.current;
 
     if (contentRef.current !== "") {
       content = contentRef.current;
@@ -292,7 +293,7 @@ const FileEditor = ({
           {(() => {
             for (const editor of extraEditors) {
               if (editor.language === language) {
-                var list: any[] = [];
+                const list: any[] = [];
                 for (const b of editor.buttons) {
                   list.push(
                     <StyledSeparatedButtonsContainer

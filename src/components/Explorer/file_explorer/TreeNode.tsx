@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from "react";
 import FileIcon from "./FileIcon";
 import { ContextMenuProps } from "./MoreActionsMenu";
@@ -100,6 +101,7 @@ function TreeNode({
       {!isCollapsed &&
         node.files.map((x) => (
           <TreeNode
+            key={x.path}
             node={x}
             depth={depth + 1}
             currentFile={currentFile}

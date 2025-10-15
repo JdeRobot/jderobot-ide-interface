@@ -1,3 +1,4 @@
+import React from 'react';
 import { Layout } from "Types";
 import {
   StyledHorizContiner,
@@ -160,9 +161,9 @@ export const ResizableLayout = ({
   children: any[];
 }) => {
   const theme = useTheme();
-  var components = 0;
-  var oneIndex = 0;
-  var twoIndex = 0;
+  let components = 0;
+  let oneIndex = 0;
+  let twoIndex = 0;
 
   console.log(oneIndex,twoIndex)
 
@@ -218,7 +219,7 @@ export const ResizableLayout = ({
   return (
     <StyledHorizContiner bgColor={theme.palette?.primary}>
       {children.slice(0, children.length - 1).map((comp, i) => (
-        <ResizableHoriz width={baseWidth[i]} max={maxWidth[i]} snap={[0]}>
+        <ResizableHoriz key={`h-cont${i}`} width={baseWidth[i]} max={maxWidth[i]} snap={[0]}>
           {comp}
         </ResizableHoriz>
       ))}
@@ -265,7 +266,7 @@ export const CollapsableResizableColumn = ({
   return (
     <StyledVertContiner bgColor={theme.palette?.background}>
       {children.slice(0, children.length - 1).map((comp, i) => (
-        <ResizableVert height={100 / children.length} max={100} snap={[0]}>
+        <ResizableVert key={`v-cont${i}`} height={100 / children.length} max={100} snap={[0]}>
           {comp}
         </ResizableVert>
       ))}

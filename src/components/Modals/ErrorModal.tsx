@@ -1,3 +1,4 @@
+import React from 'react';
 import { useError, useTheme } from "Utils";
 import { ErrorType } from "Types";
 import {
@@ -48,10 +49,10 @@ const ErrorModal = () => {
     }
   }, [isModalOpen]);
 
-  var type_str: ErrorVariant = "error";
-  var type_header = "Error";
+  let type_str: ErrorVariant = "error";
+  let type_header = "Error";
 
-  var onClose = () => close();
+  let onClose = () => close();
 
   switch (type) {
     case ErrorType.ERROR:

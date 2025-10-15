@@ -1,3 +1,4 @@
+import React from "react";
 import { ResetIcon } from "Assets";
 import { CommsManager, states } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
@@ -20,7 +21,10 @@ const StatusBar = ({
 }: {
   project: string;
   commsManager: CommsManager | null;
-  connectManager: (desiredState?: string, callback?: () => void) => Promise<void>;
+  connectManager: (
+    desiredState?: string,
+    callback?: () => void
+  ) => Promise<void>;
   baseUniverse?: string;
   api: ExtraApi;
   extraComponents: StatusBarComponents;
@@ -131,7 +135,10 @@ const DefaultUniverseSelector = ({
   baseUniverse,
 }: {
   project: string;
-  connectManager: (desiredState?: string, callback?: () => void) => Promise<void>;
+  connectManager: (
+    desiredState?: string,
+    callback?: () => void
+  ) => Promise<void>;
   commsManager: CommsManager | null;
   api: ExtraApi;
   baseUniverse?: string;
@@ -152,7 +159,7 @@ const DefaultUniverseSelector = ({
 
   useEffect(() => {
     const get_universe_list = async () => {
-      var list = await api.universes.list(project);
+      const list = await api.universes.list(project);
       setUniverseList(list);
     };
     get_universe_list();
@@ -190,27 +197,23 @@ const DefaultUniverseSelector = ({
       return;
     }
 
-    try {
-      const universeConfig = await api.universes.get_config(project, universe);
+    const universeConfig = await api.universes.get_config(project, universe);
 
-      const tools = universeConfig.tools;
-      const world_config = universeConfig.world;
-      const robot_config = universeConfig.robot;
+    const tools = universeConfig.tools;
+    const world_config = universeConfig.world;
+    const robot_config = universeConfig.robot;
 
-      const universe_config = {
-        name: universe,
-        world: world_config,
-        robot: robot_config,
-      };
+    const universe_config = {
+      name: universe,
+      world: world_config,
+      robot: robot_config,
+    };
 
-      await commsManager.launchWorld(universe_config);
-      console.log("RB universe launched!");
-      // TODO: update to tools
-      await commsManager.prepareTools(tools, universeConfig.tools_config);
-      console.log("Viz ready!");
-    } catch (e: unknown) {
-      throw e; // rethrow
-    }
+    await commsManager.launchWorld(universe_config);
+    console.log("RB universe launched!");
+    // TODO: update to tools
+    await commsManager.prepareTools(tools, universeConfig.tools_config);
+    console.log("Viz ready!");
   };
 
   const selectUniverse = async (universeName: string) => {
@@ -234,8 +237,11 @@ const DefaultUniverseSelector = ({
 
   const checkManager = () => {
     if (commsManager === null || commsManager.getState() === "idle") {
-      info("Connecting with the Robotics Backend ...")
-      connectManager(states.TOOLS_READY, () => {checkManager(); close()});
+      info("Connecting with the Robotics Backend ...");
+      connectManager(states.TOOLS_READY, () => {
+        checkManager();
+        close();
+      });
       throw Error(
         "The Robotics Backend is disconnected. Make sure to connect."
       );
@@ -315,33 +321,29 @@ export const StatusBarCustomUniverseSelector = ({
       return;
     }
 
-    try {
-      const universeConfig = await api.universes.get_config(project, universe);
+    const universeConfig = await api.universes.get_config(project, universe);
 
-      var tools = universeConfig.tools;
+    const tools = universeConfig.tools;
 
-      if (!tools.includes("state_monitor")) {
-        tools.push("state_monitor");
-      }
-
-      const world_config = universeConfig.world;
-
-      const robot_config = universeConfig.robot;
-
-      const universe_config = {
-        name: universe,
-        world: world_config,
-        robot: robot_config,
-      };
-
-      await commsManager.launchWorld(universe_config);
-      console.log("RB universe launched!");
-      // TODO: update to tools
-      await commsManager.prepareTools(tools, universeConfig.tools_config);
-      console.log("Viz ready!");
-    } catch (e: unknown) {
-      throw e; // rethrow
+    if (!tools.includes("state_monitor")) {
+      tools.push("state_monitor");
     }
+
+    const world_config = universeConfig.world;
+
+    const robot_config = universeConfig.robot;
+
+    const universe_config = {
+      name: universe,
+      world: world_config,
+      robot: robot_config,
+    };
+
+    await commsManager.launchWorld(universe_config);
+    console.log("RB universe launched!");
+    // TODO: update to tools
+    await commsManager.prepareTools(tools, universeConfig.tools_config);
+    console.log("Viz ready!");
   };
 
   const selectUniverse = async (universeName: string) => {

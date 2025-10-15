@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ClosedArrowIcon,
   OpenArrowIcon,
@@ -21,7 +22,7 @@ function FileIcon({
 }) {
   const theme = useTheme();
 
-  var returnVal = (
+  let returnVal = (
     <>
       <BaseFileIcon viewBox="0 0 20 20" fill={theme.palette.text} />
     </>

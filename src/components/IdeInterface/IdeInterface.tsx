@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from "react";
 import { CommsManager } from "jderobot-commsmanager";
 
@@ -67,7 +68,7 @@ const IdeInterface = ({
 }: IdeInterfaceProps) => {
   const theme = useTheme();
 
-  var [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
+  const [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
 
   if (splashIcon === undefined) {
     splashIcon = (
@@ -94,6 +95,7 @@ const IdeInterface = ({
           <ResizableColumn>
             {explorers.map((explorer) => (
               <Explorer
+                key={explorer.name}
                 setCurrentFile={setCurrentFile}
                 currentFile={baseFile ? baseFile : currentFile}
                 project={project}
@@ -167,6 +169,7 @@ const ViewersContainer = ({
         <StyledButtonsContainer>
           {viewers.map((viewer, index) => (
             <Button
+              key={`viewer${index}`}
               active={visibility[index]}
               variant="tab"
               iconType="fill"

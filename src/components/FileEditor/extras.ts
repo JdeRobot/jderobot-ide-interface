@@ -46,24 +46,24 @@ export const monacoEditorSnippet = (
     ): Promise<languages.CompletionList> => {
       lock = true;
 
-      var word = model.getWordUntilPosition(position);
-      var prevWord = model.getWordUntilPosition({
+      const word = model.getWordUntilPosition(position);
+      const prevWord = model.getWordUntilPosition({
         lineNumber: position.lineNumber,
         column: position.column - 1,
       });
 
-      var range: Range = {
+      const range: Range = {
         startLineNumber: position.lineNumber,
         endLineNumber: position.lineNumber,
         startColumn: word.startColumn,
         endColumn: word.endColumn,
       };
 
+      let snippets: CompletionItem[] = [];
+
       // Add basic snippets only if not prevWord
       if (prevWord.word === "") {
-        var snippets: CompletionItem[] = snippetsBuilderV2(monaco, range);
-      } else {
-        var snippets: CompletionItem[] = [];
+        snippets = snippetsBuilderV2(monaco, range);
       }
 
       // Check if the Robotics Backend is connected
@@ -149,7 +149,7 @@ export const snippetKind = (kind: string, monaco: Monaco) => {
 
 export const snippetsBuilderV2 = (monaco: Monaco, range: Range) => {
   const snippets: CompletionItem[] = [];
-  let importSnippets: Snippet[] = my_snippets;
+  const importSnippets: Snippet[] = my_snippets;
 
   if (!importSnippets || !importSnippets.length) return [];
 

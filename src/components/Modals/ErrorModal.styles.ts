@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { ErrorVariant } from "./ErrorModal";
-import Modal, { ModalTitlebar } from "./Modal";
-import { StyledModalTitlebar } from "./Modal.styles";
 import { contrastSelector } from "Utils";
 
 const primaryColor = "#666";
@@ -109,7 +107,6 @@ export const StyledModalErrorRow = styled.div<StyledModalErrorProps>`
 `;
 
 const handleVariantModal = (p: StyledModalErrorProps) => {
-  let text;
   switch (p.variant) {
     case "error":
       return `

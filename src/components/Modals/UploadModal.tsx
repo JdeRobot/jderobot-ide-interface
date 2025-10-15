@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect, useRef } from "react";
 
 import Modal, { ModalInputDropArea, ModalRow, ModalTitlebar } from "./Modal";
@@ -53,10 +54,10 @@ const UploadModal = ({
   const handleZipFiles = async (file_array: File[]) => {
     // TODO: check if files are valid
     const n_files = file_array.length;
-    var n_files_uploaded = 0;
+    let n_files_uploaded = 0;
 
-    file_array.forEach((file: File, index: number) => {
-      var reader = new FileReader();
+    file_array.forEach((file: File) => {
+      const reader = new FileReader();
 
       reader.onprogress = (data) => {
         if (data.lengthComputable) {

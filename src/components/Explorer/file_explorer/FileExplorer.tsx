@@ -68,6 +68,7 @@ const FileExplorer = ({
       <StyledSidebarEntryContainer>
         {fileList.map((file) => (
           <TreeNode
+            key={file.path}
             node={file}
             depth={0}
             currentFile={currentFile}

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from "react";
 import { CommsManager } from "jderobot-commsmanager";
 import BounceLoader from "react-spinners/BounceLoader";

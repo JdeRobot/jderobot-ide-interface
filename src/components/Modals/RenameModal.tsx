@@ -1,7 +1,7 @@
+import React from 'react';
 import { useState, useEffect, useRef } from "react";
 import Modal, { ModalInputBox, ModalRow, ModalTitlebar } from "./Modal";
 import { Entry } from "Types";
-import { useTheme } from "Utils";
 
 const initialNewFolderModalData = {
   renameData: "",
@@ -44,7 +44,7 @@ const RenameModal = ({
         (rename as HTMLFormElement).value = selectedEntry.name;
       }
 
-      var path = selectedEntry.path.split("/");
+      const path = selectedEntry.path.split("/");
 
       if (path.length === 1) {
         return setSearchList(fileList);
@@ -68,7 +68,7 @@ const RenameModal = ({
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
-    var isValidName = true;
+    let isValidName = true;
 
     setFormState((prevFormData) => ({
       ...prevFormData,
@@ -77,7 +77,7 @@ const RenameModal = ({
 
     if (name === "renameData") {
       //TODO: improve check
-      var preCheck;
+      let preCheck;
       if (selectedEntry.is_dir) {
         preCheck = value !== "" && !value.includes(".");
       } else {
@@ -101,8 +101,8 @@ const RenameModal = ({
   };
 
   const getNewPath = (new_name: string) => {
-    var split_path = selectedEntry.path.split("/");
-    var parent_path = split_path.slice(0, split_path.length - 1).join("/");
+    const split_path = selectedEntry.path.split("/");
+    const parent_path = split_path.slice(0, split_path.length - 1).join("/");
     return parent_path + "/" + new_name;
   };
 

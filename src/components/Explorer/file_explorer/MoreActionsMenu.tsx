@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef } from "react";
 import { Entry } from "Types";
 import {
@@ -66,17 +67,15 @@ function MoreActionsMenu({
             <label>Rename</label>
           </StyledExplorerExtraMenuEntry>
         )}
-        {true && (
-          <StyledExplorerExtraMenuEntry
-            hoverColor={theme.palette.secondary}
-            onClick={() => {
-              onDownload(menuProps.file);
-              closeMenu();
-            }}
-          >
-            <label>Download</label>
-          </StyledExplorerExtraMenuEntry>
-        )}
+        <StyledExplorerExtraMenuEntry
+          hoverColor={theme.palette.secondary}
+          onClick={() => {
+            onDownload(menuProps.file);
+            closeMenu();
+          }}
+        >
+          <label>Download</label>
+        </StyledExplorerExtraMenuEntry>
         <StyledExplorerExtraMenuEntry
           hoverColor={theme.palette.secondary}
           onClick={() => {
@@ -86,9 +85,7 @@ function MoreActionsMenu({
         >
           <label>Delete</label>
         </StyledExplorerExtraMenuEntry>
-        {!menuProps.file!.is_dir &&
-          menuProps.file?.group === "Action" &&
-          false && ( // TODO: disabled
+        {/* {!menuProps.file!.is_dir && menuProps.file?.group === "Action" && ( // TODO: disabled
             <>
               <StyledExplorerExtraMenuDivider
                 bgColor={theme.palette.secondary}
@@ -104,7 +101,7 @@ function MoreActionsMenu({
                 <label>Edit Action</label>
               </StyledExplorerExtraMenuEntry>
             </>
-          )}
+          )} */}
         {menuProps.file?.group !== "Trees" && (
           <>
             <StyledExplorerExtraMenuDivider bgColor={theme.palette.secondary} />
@@ -158,7 +155,7 @@ export class ContextMenuProps {
     position: { x: number; y: number },
     setPositionCallback: Function,
     file: Entry | undefined,
-    setFile: Function,
+    setFile: Function
   ) {
     this.isShown = isShown;
     this.showCallback = showCallback;

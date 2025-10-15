@@ -1,7 +1,8 @@
+import React from 'react';
 import { useRef, useState } from "react";
 import { StyledDropdown } from "./Dropdown.styles";
 import { useTheme } from "Utils";
-import { Button, MenuButton } from "Components";
+import { MenuButton } from "Components";
 import { StyledStatusBarEntry } from "../StatusBar/StatusBar.style";
 
 export const DropdownStatusBar = ({
@@ -84,7 +85,7 @@ export const DropdownStatusBar = ({
           down={down}
         >
           {possibleValues.map((name, index) => (
-            <button onClick={(e: any) => changeValue(e, name)}>{name}</button>
+            <button key={`Dropdown${index}`} onClick={(e: any) => changeValue(e, name)}>{name}</button>
           ))}
         </StyledDropdown>
       )}
@@ -96,7 +97,6 @@ export const DropdownIcon = ({
   id,
   title,
   width,
-  down,
   setter,
   possibleValues,
   children,
@@ -164,7 +164,7 @@ export const DropdownIcon = ({
           left={right}
         >
           {possibleValues.map((name, index) => (
-            <button onClick={(e: any) => changeValue(e, name)}>{name}</button>
+            <button key={`Dropdown${index}`} onClick={(e: any) => changeValue(e, name)}>{name}</button>
           ))}
         </StyledDropdown>
       )}

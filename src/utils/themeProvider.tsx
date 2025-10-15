@@ -1,5 +1,4 @@
 import React, { createContext, useContext } from "react";
-import { merge } from "lodash";
 import { Theme } from "Types";
 
 interface ThemeProviderProps {
