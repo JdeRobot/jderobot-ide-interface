@@ -334,7 +334,7 @@ const FileEditor = ({
               <MenuButtonStroke
                 id="keybinds-button"
                 title="Keybinds Info"
-                onClick={handleZoomOut}
+                onClick={() => showKeybindsRef.current = true}
               >
                 <MinusIcon viewBox="0 0 20 20" />
               </MenuButtonStroke>
