@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import Editor, { Monaco } from "@monaco-editor/react";
 import type { editor } from "monaco-editor";
@@ -182,6 +182,25 @@ const FileEditor = ({
       }
     );
 
+    editorRef.current.addCommand(
+      monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyL,
+      function () {
+        if (language !== "python")
+          //TODO: only format for python. We could add more later
+          return;
+
+        if (commsManager && fileContent) {
+          commsManager.code_analysis(fileContent, [
+            ...pylint_error,
+            ...pylint_warning,
+            ...pylint_convention,
+            ...pylint_refactor,
+            ...pylint_fatal,
+          ]);
+        }
+      }
+    );
+
     return () => {
       editorRef.current
         .getDomNode()
@@ -241,39 +260,39 @@ const FileEditor = ({
   }, [zoomLevel]);
 
   // Code Analysis (with pylint)
-  useEffect(() => {
-    if (
-      !editorRef.current ||
-      !monacoRef.current ||
-      !fileContent ||
-      !commsManager
-    )
-      return;
+  // useEffect(() => {
+  //   if (
+  //     !editorRef.current ||
+  //     !monacoRef.current ||
+  //     !fileContent ||
+  //     !commsManager
+  //   )
+  //     return;
 
-    editorRef.current.addCommand(
-      monacoRef.current.KeyMod.CtrlCmd |
-        monacoRef.current.KeyMod.Shift |
-        monacoRef.current.KeyCode.KeyI,
-      function () {
-        //TODO: only format for python. We could add more later
-        if (language !== "python") return;
+  //   editorRef.current.addCommand(
+  //     monacoRef.current.KeyMod.CtrlCmd |
+  //       monacoRef.current.KeyMod.Shift |
+  //       monacoRef.current.KeyCode.KeyI,
+  //     function () {
+  //       //TODO: only format for python. We could add more later
+  //       if (language !== "python") return;
 
-        if (commsManager && fileContent) {
-          commsManager.code_format(fileContent);
-        }
-      }
-    );
+  //       if (commsManager && fileContent) {
+  //         commsManager.code_format(fileContent);
+  //       }
+  //     }
+  //   );
 
-    if (language !== "python") return;
+  //   if (language !== "python") return;
 
-    commsManager.code_analysis(fileContent, [
-      ...pylint_error,
-      ...pylint_warning,
-      ...pylint_convention,
-      ...pylint_refactor,
-      ...pylint_fatal,
-    ]);
-  }, [fileContent]);
+  //   commsManager.code_analysis(fileContent, [
+  //     ...pylint_error,
+  //     ...pylint_warning,
+  //     ...pylint_convention,
+  //     ...pylint_refactor,
+  //     ...pylint_fatal,
+  //   ]);
+  // }, [fileContent]);
 
   return (
     <Editor
