@@ -71,7 +71,7 @@ const FileEditor = ({
         if (monacoRef.current === null) return;
         return {
           startLineNumber: pylint.line,
-          startColumn: pylint.column,
+          startColumn: pylint.column + 1,
           endLineNumber:
             pylint.endLine === null ? pylint.column : pylint.endLine,
           endColumn:
@@ -169,37 +169,37 @@ const FileEditor = ({
 
     monacoEditorSnippet(monaco, commsManager);
 
-    editor.addCommand(
-      monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyI,
-      function () {
-        if (language !== "python")
-          //TODO: only format for python. We could add more later
-          return;
+    // editor.addCommand(
+    //   monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyI,
+    //   function () {
+    //     if (language !== "python")
+    //       //TODO: only format for python. We could add more later
+    //       return;
 
-        if (commsManager && fileContent) {
-          commsManager.code_format(fileContent);
-        }
-      }
-    );
+    //     if (commsManager && fileContent) {
+    //       commsManager.code_format(fileContent);
+    //     }
+    //   }
+    // );
 
-    editor.addCommand(
-      monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyL,
-      function () {
-        if (language !== "python")
-          //TODO: only format for python. We could add more later
-          return;
+    // editor.addCommand(
+    //   monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyL,
+    //   function () {
+    //     if (language !== "python")
+    //       //TODO: only format for python. We could add more later
+    //       return;
 
-        if (commsManager && fileContent) {
-          commsManager.code_analysis(fileContent, [
-            ...pylint_error,
-            ...pylint_warning,
-            ...pylint_convention,
-            ...pylint_refactor,
-            ...pylint_fatal,
-          ]);
-        }
-      }
-    );
+    //     if (commsManager && fileContent) {
+    //       commsManager.code_analysis(fileContent, [
+    //         ...pylint_error,
+    //         ...pylint_warning,
+    //         ...pylint_convention,
+    //         ...pylint_refactor,
+    //         ...pylint_fatal,
+    //       ]);
+    //     }
+    //   }
+    // );
 
     return () => {
       editorRef.current
@@ -303,16 +303,6 @@ const FileEditor = ({
         }
       }
     );
-
-    // if (language !== "python") return;
-
-    // commsManager.code_analysis(fileContent, [
-    //   ...pylint_error,
-    //   ...pylint_warning,
-    //   ...pylint_convention,
-    //   ...pylint_refactor,
-    //   ...pylint_fatal,
-    // ]);
   }, [fileContent]);
 
   return (

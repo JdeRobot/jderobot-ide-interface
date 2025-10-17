@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 
 import { SaveIcon, MinusIcon, PlusIcon } from "Assets";
@@ -7,6 +7,7 @@ import { CommsManager } from "jderobot-commsmanager";
 import { Entry, EditorsEntry, Options } from "Types";
 import TextEditor from "./TextEditor";
 import {
+  EditorKeybindModal,
   MenuButton,
   MenuButtonStroke,
   StyledButtonsContainer,
@@ -65,6 +66,7 @@ const FileEditor = ({
   const [language, setLanguage] = useState("python");
   const [projectToSave, setProjectToSave] = useState(currentProjectname);
   const contentRef = useRef<string>(""); // In case some editors cannot update states
+  const showKeybindsRef = useRef<boolean>(false);
 
   // Autosave data
   const fileToSaveRef = useRef<Entry | undefined>(undefined);
@@ -261,6 +263,24 @@ const FileEditor = ({
 
   return (
     <>
+      <EditorKeybindModal
+        isOpen={showKeybindsRef.current}
+        onClose={function (): void {
+          showKeybindsRef.current = false;
+        }}
+        keybinds={[
+          {
+            id: "format-code",
+            description: "Format Code",
+            keybind: ["Ctrl", "Shift", "I"],
+          },
+          {
+            id: "lint-code",
+            description: "Lint Code",
+            keybind: ["Ctrl", "Shift", "L"],
+          },
+        ]}
+      />
       <StyledEditorMenu bgColor={theme.palette?.primary}>
         <StyledButtonsContainer color={theme.palette?.secondary}>
           {!options?.editor?.notShowSave && (
@@ -310,7 +330,15 @@ const FileEditor = ({
                 return <>{list}</>;
               }
             }
-            return <></>;
+            return (
+              <MenuButtonStroke
+                id="keybinds-button"
+                title="Keybinds Info"
+                onClick={handleZoomOut}
+              >
+                <MinusIcon viewBox="0 0 20 20" />
+              </MenuButtonStroke>
+            );
           })()}
         </StyledButtonsContainer>
       </StyledEditorMenu>

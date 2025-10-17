@@ -16,3 +16,4 @@ export { default as NewFolderModal } from "./NewFolderModal";
 export { default as RenameModal } from "./RenameModal";
 export { default as UploadModal } from "./UploadModal";
 export { default as ErrorModal } from "./ErrorModal";
+export { default as EditorKeybindModal } from "./EditorKeybindModal";
