@@ -239,8 +239,8 @@ const DefaultUniverseSelector = ({
     if (commsManager === null || commsManager.getState() === "idle") {
       info("Connecting with the Robotics Backend ...");
       connectManager(states.TOOLS_READY, () => {
-        checkManager();
         close();
+        checkManager();
       });
       throw Error(
         "The Robotics Backend is disconnected. Make sure to connect."
