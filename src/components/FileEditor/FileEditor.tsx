@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { SaveIcon, MinusIcon, PlusIcon, KeyboardIcon } from "Assets";
 import { publish, subscribe, unsubscribe, useError, useTheme } from "Utils";
 import { CommsManager } from "jderobot-commsmanager";
-import { Entry, EditorsEntry, Options } from "Types";
+import { Entry, EditorsEntry, Options, ExtraSnippets } from "Types";
 import TextEditor from "./TextEditor";
 import {
   EditorKeybindModal,
@@ -43,6 +43,7 @@ const FileEditor = ({
   extraEditors,
   splashIcon,
   options,
+  extraSnippets
 }: {
   currentFile?: Entry;
   changeCurrentFile: Function;
@@ -53,6 +54,7 @@ const FileEditor = ({
   splashIcon: JSX.Element;
   extraEditors: EditorsEntry[];
   options?: Options;
+  extraSnippets?: ExtraSnippets;
 }) => {
   const { error, warning } = useError();
   const theme = useTheme();
@@ -371,6 +373,7 @@ const FileEditor = ({
                 saveFile={autoSave}
                 language={language}
                 zoomLevel={zoomLevel}
+                extraSnippets={extraSnippets}
               />
             );
           })()}

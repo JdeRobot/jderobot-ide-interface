@@ -5,6 +5,7 @@ import type { editor } from "monaco-editor";
 import { CommsManager } from "jderobot-commsmanager";
 import { monacoEditorSnippet } from "./extras";
 import { useTheme } from "Utils";
+import { ExtraSnippets } from "Types";
 
 const pylint_error: string[] = ["E0401", "E1101"];
 const pylint_warning: string[] = ["W0611"];
@@ -40,6 +41,7 @@ const FileEditor = ({
   saveFile,
   language,
   zoomLevel,
+  extraSnippets,
 }: {
   commsManager: CommsManager | null;
   fileContent: string;
@@ -47,6 +49,7 @@ const FileEditor = ({
   saveFile: Function;
   language: string;
   zoomLevel: number;
+  extraSnippets?: ExtraSnippets;
 }) => {
   const theme = useTheme();
 
@@ -67,7 +70,7 @@ const FileEditor = ({
       if (!data) return;
 
       const model = editorRef.current.getModel();
-      const pylint_data = data.pylint_output.map((pylint: any, i: number) => {
+      const pylint_data = data.pylint_output.map((pylint: any) => {
         if (monacoRef.current === null) return;
         return {
           startLineNumber: pylint.line,
@@ -167,7 +170,7 @@ const FileEditor = ({
 
     editorRef.current.getDomNode().addEventListener("keydown", handleKeyDown);
 
-    monacoEditorSnippet(monaco, commsManager);
+    monacoEditorSnippet(monaco, commsManager, extraSnippets);
 
     // editor.addCommand(
     //   monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyI,

@@ -1,7 +1,9 @@
 import { Monaco } from "@monaco-editor/react";
-import { my_snippets, Snippet } from "./snippets";
+import { my_snippets} from "./snippets";
 import { CommsManager } from "jderobot-commsmanager";
 import type { languages } from "monaco-editor";
+import { EventEmitter } from 'events'
+import { ExtraSnippets, Snippet } from "Types";
 
 interface Position {
   lineNumber: number;
@@ -29,10 +31,9 @@ interface CompletionItem {
 export const monacoEditorSnippet = (
   monaco: Monaco,
   manager: CommsManager | null,
+  extraSnippets?: ExtraSnippets,
 ) => {
   monaco.languages.register({ id: "python" });
-
-  const EventEmitter = require("events");
 
   const bus = new EventEmitter();
   let lock = true;
@@ -64,6 +65,11 @@ export const monacoEditorSnippet = (
       // Add basic snippets only if not prevWord
       if (prevWord.word === "") {
         snippets = snippetsBuilderV2(monaco, range);
+      }
+
+      if (extraSnippets && extraSnippets.triggers.includes(prevWord.word)) {
+        const suggestions = snippetsBuilderV2(monaco, range, () => {return extraSnippets.loader(prevWord.word)});
+        return { suggestions };
       }
 
       // Check if the Robotics Backend is connected
@@ -147,9 +153,9 @@ export const snippetKind = (kind: string, monaco: Monaco) => {
   }
 };
 
-export const snippetsBuilderV2 = (monaco: Monaco, range: Range) => {
+export const snippetsBuilderV2 = (monaco: Monaco, range: Range, callback?: () => Snippet[]) => {
   const snippets: CompletionItem[] = [];
-  const importSnippets: Snippet[] = my_snippets;
+  const importSnippets: Snippet[] = callback ? callback() : my_snippets;
 
   if (!importSnippets || !importSnippets.length) return [];
 

@@ -20,6 +20,7 @@ import {
   EditorsEntry,
   ViewersEntry,
   Options,
+  ExtraSnippets,
 } from "Types";
 
 import {
@@ -49,6 +50,7 @@ interface IdeInterfaceProps {
   splashIcon?: JSX.Element;
   baseFile?: Entry;
   baseUniverse?: string;
+  extraSnippets?: ExtraSnippets;
 }
 
 const IdeInterface = ({
@@ -65,6 +67,7 @@ const IdeInterface = ({
   splashIcon,
   baseFile,
   baseUniverse,
+  extraSnippets,
 }: IdeInterfaceProps) => {
   const theme = useTheme();
 
@@ -115,6 +118,7 @@ const IdeInterface = ({
                 extraEditors={extraEditors}
                 splashIcon={splashIcon}
                 options={options}
+                extraSnippets={extraSnippets}
               />
             </StyledIdeContainer>
           </StyledIdeVertContainer>

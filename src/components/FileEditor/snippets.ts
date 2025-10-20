@@ -1,10 +1,4 @@
-export interface Snippet {
-  label: string;
-  type: string;
-  detail?: string;
-  code: string;
-  docstring: string;
-}
+import { Snippet } from "Types";
 
 export const my_snippets: Snippet[] = [
   {

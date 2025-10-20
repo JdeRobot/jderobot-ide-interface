@@ -45,4 +45,6 @@ export type {
   StatusBarComponents,
   ModelRowTypes,
   ModalInputSelectIconEntry,
+  ExtraSnippets,
+  Snippet
 } from "./types";
