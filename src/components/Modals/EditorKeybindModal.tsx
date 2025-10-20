@@ -36,7 +36,7 @@ const NewFolderModal = ({
       onReset={handleCancel}
     >
       <ModalTitlebar
-        title="Editor Keybord Shortcuts"
+        title="Editor Keyboard Shortcuts"
         htmlFor="editor-keyboard-shortcuts"
         hasClose
         handleClose={() => {

@@ -338,7 +338,7 @@ const FileEditor = ({
                 title="Keybinds Info"
                 onClick={() => openKeybindsModal(true)}
               >
-                <KeyboardIcon viewBox="0 0 20 20" />
+                <KeyboardIcon />
               </MenuButton>
             );
           })()}

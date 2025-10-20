@@ -65,7 +65,7 @@ export const MenuButtons: Story = {
         <OpenArrowIcon />
       </MenuButtonStroke>
       <MenuButton {...args}>
-        <KeyboardIcon />
+        <KeyboardIcon/>
       </MenuButton>
     </>
   ),
