@@ -20,3 +20,4 @@ export { ReactComponent as SaveIcon } from "./save.svg";
 export { ReactComponent as SplashIcon } from "./logo_jderobot.svg";
 export { ReactComponent as MinusIcon } from "./minus.svg";
 export { ReactComponent as PlusIcon } from "./plus.svg";
+export { ReactComponent as KeyboardIcon } from "./keyboard.svg";

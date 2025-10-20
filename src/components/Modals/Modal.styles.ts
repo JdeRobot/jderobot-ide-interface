@@ -66,6 +66,7 @@ export const StyledModalTitlebar = styled.div<StyledModalTitlebarProps>`
     align-self: center;
     grid-column-start: 2;
     text-align: center;
+    margin: 0 !important;
   }
 
   & svg {

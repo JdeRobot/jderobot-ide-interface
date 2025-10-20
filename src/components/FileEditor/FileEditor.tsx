@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 
-import { SaveIcon, MinusIcon, PlusIcon } from "Assets";
+import { SaveIcon, MinusIcon, PlusIcon, KeyboardIcon } from "Assets";
 import { publish, subscribe, unsubscribe, useError, useTheme } from "Utils";
 import { CommsManager } from "jderobot-commsmanager";
 import { Entry, EditorsEntry, Options } from "Types";
@@ -331,13 +331,13 @@ const FileEditor = ({
               }
             }
             return (
-              <MenuButtonStroke
+              <MenuButton
                 id="keybinds-button"
                 title="Keybinds Info"
                 onClick={() => openKeybindsModal(true)}
               >
-                <MinusIcon viewBox="0 0 20 20" />
-              </MenuButtonStroke>
+                <KeyboardIcon viewBox="0 0 20 20" />
+              </MenuButton>
             );
           })()}
         </StyledButtonsContainer>
