@@ -1,5 +1,6 @@
 import { BackIcon, CloseIcon, MinusIcon } from "Assets";
 import styled from "styled-components";
+import { contrastSelector } from "Utils";
 
 const primaryColor = "#666";
 
@@ -45,6 +46,8 @@ export const StyledModalContent = styled.div`
 
 interface StyledModalTitlebarProps {
   color?: string;
+  altColor?: string;
+  bg?: string;
   hoverColor?: string;
   roundness?: number;
 }
@@ -58,7 +61,7 @@ export const StyledModalTitlebar = styled.div<StyledModalTitlebarProps>`
   align-items: center;
 
   & label {
-    color: ${(p) => p.color ?? primaryColor};
+    color: ${(p) => contrastSelector(p.color, p.altColor, p.bg) ?? primaryColor};
     font-weight: 600;
     align-self: center;
     grid-column-start: 2;
@@ -81,15 +84,17 @@ export const StyledModalTitlebar = styled.div<StyledModalTitlebarProps>`
 
 interface StyledModalButtonProps {
   color?: string;
+  altColor?: string;
+  bg?: string;
 }
 
 export const StyledModalCloseButton = styled(CloseIcon)<StyledModalButtonProps>`
-  fill: ${(p) => p.color ?? primaryColor};
+  fill: ${(p) => contrastSelector(p.color, p.altColor, p.bg) ?? primaryColor};
   margin-left: auto;
 `;
 
 export const StyledModalBackButton = styled(BackIcon)<StyledModalButtonProps>`
-  fill: ${(p) => p.color ?? primaryColor};
+  fill: ${(p) => contrastSelector(p.color, p.altColor, p.bg) ?? primaryColor};
   margin-right: auto;
 `;
 

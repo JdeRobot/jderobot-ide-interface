@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useRef, useEffect, useState, ReactNode } from "react";
 import {
   StyledModal,
@@ -118,6 +118,8 @@ export const ModalTitlebar = ({
   return (
     <StyledModalTitlebar
       color={theme.palette.text}
+      altColor={theme.palette.darkText}
+      bg={theme.palette.background}
       hoverColor={theme.palette.secondary}
       roundness={theme.roundness}
     >
@@ -129,6 +131,8 @@ export const ModalTitlebar = ({
             handleBack();
           }}
           color={theme.palette.text}
+          altColor={theme.palette.darkText}
+          bg={theme.palette.background}
         />
       )}
       <label htmlFor={htmlFor}>{title}</label>
@@ -140,6 +144,8 @@ export const ModalTitlebar = ({
             handleClose();
           }}
           color={theme.palette.text}
+          altColor={theme.palette.darkText}
+          bg={theme.palette.background}
         />
       )}
     </StyledModalTitlebar>
