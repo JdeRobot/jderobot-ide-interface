@@ -6,6 +6,7 @@ import {
   SaveIcon,
   OpenArrowIcon,
   SplashIcon,
+  KeyboardIcon,
 } from "Assets";
 
 type Story = StoryObj<typeof Button>;
@@ -19,7 +20,7 @@ export default meta;
 export const Main: Story = {
   render: (args) => (
     <Button {...args}>
-      <BackIcon />
+      <KeyboardIcon />
     </Button>
   ),
   args: {
@@ -64,7 +65,7 @@ export const MenuButtons: Story = {
         <OpenArrowIcon />
       </MenuButtonStroke>
       <MenuButton {...args}>
-        <SplashIcon />
+        <KeyboardIcon />
       </MenuButton>
     </>
   ),
