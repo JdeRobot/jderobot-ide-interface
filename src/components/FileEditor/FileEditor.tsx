@@ -66,7 +66,7 @@ const FileEditor = ({
   const [language, setLanguage] = useState("python");
   const [projectToSave, setProjectToSave] = useState(currentProjectname);
   const contentRef = useRef<string>(""); // In case some editors cannot update states
-  const showKeybindsRef = useRef<boolean>(false);
+  const [showKeybindsModal, openKeybindsModal] = useState<boolean>(false);
 
   // Autosave data
   const fileToSaveRef = useRef<Entry | undefined>(undefined);
@@ -264,9 +264,9 @@ const FileEditor = ({
   return (
     <>
       <EditorKeybindModal
-        isOpen={showKeybindsRef.current}
+        isOpen={showKeybindsModal}
         onClose={function (): void {
-          showKeybindsRef.current = false;
+          openKeybindsModal(false);
         }}
         keybinds={[
           {
@@ -334,7 +334,7 @@ const FileEditor = ({
               <MenuButtonStroke
                 id="keybinds-button"
                 title="Keybinds Info"
-                onClick={() => showKeybindsRef.current = true}
+                onClick={() => openKeybindsModal(true)}
               >
                 <MinusIcon viewBox="0 0 20 20" />
               </MenuButtonStroke>
