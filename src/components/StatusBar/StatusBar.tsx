@@ -152,6 +152,7 @@ const DefaultUniverseSelector = ({
 
   //TODO: Check disconnect RAM
   const resetUniverse = (e: any) => {
+    console.warn("AAAA",e)
     if (e.detail.state == states.IDLE) {
       setUniverse(baseUniverse);
     }
