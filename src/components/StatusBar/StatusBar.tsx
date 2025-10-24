@@ -150,6 +150,21 @@ const DefaultUniverseSelector = ({
 
   const [universeList, setUniverseList] = useState<string[]>([]);
 
+  //TODO: Check disconnect RAM
+  const resetUniverse = (e: any) => {
+    if (e.detail.state == states.IDLE) {
+      setUniverse(baseUniverse);
+    }
+  };
+
+  useEffect(() => {
+    subscribe("CommsManagerStateChange", resetUniverse);
+
+    return () => {
+      unsubscribe("CommsManagerStateChange", () => {});
+    };
+  }, []);
+
   useEffect(() => {
     if (commsManager) {
       console.log("Change Universe", commsManager.getUniverse());
@@ -287,6 +302,20 @@ export const StatusBarCustomUniverseSelector = ({
   const [universe, setUniverse] = useState<string | undefined>(
     commsManager?.getUniverse()
   );
+
+  const resetUniverse = (e: any) => {
+    if (e.detail.state == states.IDLE) {
+      setUniverse(undefined);
+    }
+  };
+
+  useEffect(() => {
+    subscribe("CommsManagerStateChange", resetUniverse);
+
+    return () => {
+      unsubscribe("CommsManagerStateChange", () => {});
+    };
+  }, []);
 
   useEffect(() => {
     if (commsManager) {
