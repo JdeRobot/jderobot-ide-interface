@@ -51,6 +51,10 @@ const StatusBar = ({
 
   const updateState = (e: any) => {
     setState(e.detail.state);
+    if (e.detail.state == states.IDLE) {
+      setDockerData(undefined);
+      connectWithRetry();
+    }
   };
 
   useEffect(() => {
@@ -150,9 +154,7 @@ const DefaultUniverseSelector = ({
 
   const [universeList, setUniverseList] = useState<string[]>([]);
 
-  //TODO: Check disconnect RAM
   const resetUniverse = (e: any) => {
-    console.warn("AAAA",e)
     if (e.detail.state == states.IDLE) {
       setUniverse(baseUniverse);
     }
