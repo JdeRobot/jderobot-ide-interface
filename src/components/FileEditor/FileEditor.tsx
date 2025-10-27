@@ -132,7 +132,7 @@ const FileEditor = ({
         for (const entry of editor.trigger) {
           if (
             entry.group === currentFile?.group &&
-            entry.extension === currentFile?.name.split(".").pop()
+            entry.extension === currentFile?.path.split(".").pop()
           ) {
             console.log("Loading new file ended");
             return setLanguage(editor.language);
