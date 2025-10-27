@@ -114,7 +114,7 @@ const FileEditor = ({
 
       console.log("Loading new file...");
       const content = await api.file.get(currentProjectname, currentFile);
-      const extension = file.name.split(".").pop();
+      const extension = file.path.split(".").pop();
       setFileContent(content);
       let fileType = "textplain";
       if (extension) {
