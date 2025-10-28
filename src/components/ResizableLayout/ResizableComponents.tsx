@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Layout } from "Types";
 import {
   StyledHorizContiner,
@@ -233,7 +233,7 @@ export const ResizableLayout = ({
   );
 };
 
-export const CollapsableResizableColumn = ({
+export const CollapsableResizableColumn = memo( function CollapsableResizableColumn({
   state,
   splashIcon,
   children,
@@ -241,7 +241,7 @@ export const CollapsableResizableColumn = ({
   state: boolean[];
   splashIcon: JSX.Element;
   children: any[];
-}) => {
+}) {
   const theme = useTheme();
 
   if (state.length === children.length) {
@@ -278,4 +278,4 @@ export const CollapsableResizableColumn = ({
       </StyledVertFillerContiner>
     </StyledVertContiner>
   );
-};
+});
