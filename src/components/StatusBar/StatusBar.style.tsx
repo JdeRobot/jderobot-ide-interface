@@ -81,7 +81,7 @@ const handleAnimation = (p: StyledStatusBarButtonProps) => {
   }
 };
 
-export const StyledStatusBarButton = styled.div<StyledStatusBarButtonProps>`
+export const StyledStatusBarButton = styled.button<StyledStatusBarButtonProps>`
   margin: 0 0 0 0;
   padding: 0 10px 0 10px;
   height: 24px;
@@ -114,5 +114,20 @@ export const StyledStatusBarButton = styled.div<StyledStatusBarButtonProps>`
     height: 24px;
     margin: 0 0 0 0;
   }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  #loading-spin {
+    animation: spin 2s linear infinite;
+    opacity: 50%;
+  }
+
   ${handleAnimation}
 `;

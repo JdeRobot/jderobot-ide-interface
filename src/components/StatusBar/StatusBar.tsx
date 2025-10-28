@@ -30,6 +30,7 @@ const StatusBar = ({
   extraComponents: StatusBarComponents;
 }) => {
   const theme = useTheme();
+  const [loading, setLoading] = useState<boolean>(false);
   const [dockerData, setDockerData] = useState<any>(
     commsManager?.getHostData()
   );
@@ -54,6 +55,10 @@ const StatusBar = ({
     if (e.detail.state == states.IDLE) {
       setDockerData(undefined);
       connectWithRetry();
+    } else {
+      if (loading) {
+        setLoading(false)
+      }
     }
   };
 
@@ -91,12 +96,17 @@ const StatusBar = ({
           id={`connect-with-rb`}
           onClick={() => {
             if (state === undefined || state === "idle") {
-              connectManager();
+              setLoading(true);
+              connectManager(states.CONNECTED, () => {
+                setLoading(false);
+                close();
+              });
             }
           }}
           title="Connect to the Robotics Backend"
+          disabled={loading}
         >
-          <ResetIcon viewBox="0 0 20 20" stroke={theme.palette.darkText} />
+          <ResetIcon viewBox="0 0 20 20" stroke={theme.palette.darkText} id={loading ? "loading-spin" : "loading"}/>
           <label>{`Connect${state === undefined || state === "idle" ? "" : "ing ..."}`}</label>
         </StyledStatusBarButton>
       )}

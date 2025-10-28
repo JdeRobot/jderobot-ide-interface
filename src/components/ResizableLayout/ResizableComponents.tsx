@@ -268,14 +268,14 @@ export const CollapsableResizableColumn = ({
 
   return (
     <StyledVertContiner bgColor={theme.palette?.background}>
-      <StyledVertFillerContiner bgColor={theme.palette?.background}>
-        {children[0]}
-      </StyledVertFillerContiner>
-      {children.slice(1, children.length).map((comp, i) => (
-        <ResizableVert key={`v-cont${i}`} height={100 / children.length} max={100} min={0} snap={[0]} top>
+      {children.slice(0, children.length - 1).map((comp, i) => (
+        <ResizableVert key={`v-cont${i}`} height={100 / children.length} max={100} min={0} snap={[0]}>
           {comp}
         </ResizableVert>
       ))}
+      <StyledVertFillerContiner bgColor={theme.palette?.background}>
+        {children[children.length - 1]}
+      </StyledVertFillerContiner>
     </StyledVertContiner>
   );
 };
