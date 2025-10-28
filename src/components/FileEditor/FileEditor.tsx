@@ -134,14 +134,14 @@ const FileEditor = ({
             entry.group === currentFile?.group &&
             entry.extension === currentFile?.path.split(".").pop()
           ) {
-            console.log("Loading new file ended");
+            console.log("Loading new file ended. Language:", editor.language);
             return setLanguage(editor.language);
           }
         }
       }
 
       setLanguage(fileType);
-      console.log("Loading new file ended");
+      console.log("Loading new file ended. Language:", fileType);
     } catch (e) {
       if (e instanceof Error) {
         console.error("Error fetching file content: " + e.message);
