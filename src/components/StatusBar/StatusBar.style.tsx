@@ -54,7 +54,32 @@ interface StyledStatusBarButtonProps {
   text?: string;
   bgColor?: string;
   hoverColor?: string;
+  animate?: boolean;
 }
+
+const handleAnimation = (p: StyledStatusBarButtonProps) => {
+  if (p.animate) {
+    return `
+      animation: pulse 3s infinite;
+      z-index:100000;
+
+      @keyframes pulse {
+        0% {
+          box-shadow: unset;
+        }
+
+        50% {
+          box-shadow: -10px 10px 35px 15px ${p.hoverColor ?? primaryColor};
+          background-color: ${p.hoverColor ?? primaryColor};
+        }
+
+        100% {
+          box-shadow: unset;
+        }
+      }
+    `;
+  }
+};
 
 export const StyledStatusBarButton = styled.div<StyledStatusBarButtonProps>`
   margin: 0 0 0 0;
@@ -89,4 +114,5 @@ export const StyledStatusBarButton = styled.div<StyledStatusBarButtonProps>`
     height: 24px;
     margin: 0 0 0 0;
   }
+  ${handleAnimation}
 `;

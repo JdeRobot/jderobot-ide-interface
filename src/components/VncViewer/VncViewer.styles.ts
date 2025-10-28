@@ -10,6 +10,7 @@ export const StyledVNCViewer = styled.div<StyledVNCViewerProps>`
   height: 100%;
   width: 100%;
   background-color: ${(p) => p.bgColor ?? primaryColor};
+  overflow: hidden;
 `;
 
 export const StyledVNCViewerLoader = styled.div`

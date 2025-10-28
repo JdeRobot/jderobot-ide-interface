@@ -87,6 +87,7 @@ const StatusBar = ({
           text={theme.palette.darkText}
           bgColor={theme.palette.warning}
           hoverColor={theme.palette.button.hoverWarning}
+          animate
           id={`connect-with-rb`}
           onClick={() => {
             if (state === undefined || state === "idle") {

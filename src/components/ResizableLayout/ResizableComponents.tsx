@@ -67,12 +67,14 @@ export const ResizableVert = ({
   min,
   max,
   snap,
+  top,
   children,
 }: {
   height: number;
   min: number;
   max: number;
   snap: number[];
+  top?: boolean;
   children: any;
 }) => {
   const theme = useTheme();
@@ -85,9 +87,9 @@ export const ResizableVert = ({
         height: `${height}%`,
       }}
       enable={{
-        top: false,
+        top: top === true,
         right: false,
-        bottom: true,
+        bottom: top !== true,
         left: false,
         topRight: false,
         bottomRight: false,
@@ -96,6 +98,7 @@ export const ResizableVert = ({
       }}
       bounds="parent"
       handleClasses={{
+        top: "vresize-handle",
         bottom: "vresize-handle",
       }}
       maxHeight={`${max}%`}
@@ -265,14 +268,14 @@ export const CollapsableResizableColumn = ({
 
   return (
     <StyledVertContiner bgColor={theme.palette?.background}>
-      {children.slice(0, children.length - 1).map((comp, i) => (
-        <ResizableVert key={`v-cont${i}`} height={100 / children.length} max={100} snap={[0]}>
+      <StyledVertFillerContiner bgColor={theme.palette?.background}>
+        {children[0]}
+      </StyledVertFillerContiner>
+      {children.slice(1, children.length).map((comp, i) => (
+        <ResizableVert key={`v-cont${i}`} height={100 / children.length} max={100} min={0} snap={[0]} top>
           {comp}
         </ResizableVert>
       ))}
-      <StyledVertFillerContiner bgColor={theme.palette?.background}>
-        {children[children.length - 1]}
-      </StyledVertFillerContiner>
     </StyledVertContiner>
   );
 };
