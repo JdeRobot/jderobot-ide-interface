@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { useEffect, useRef, useState } from "react";
 import Editor, { Monaco } from "@monaco-editor/react";
 import type { editor } from "monaco-editor";
@@ -52,8 +52,9 @@ const FileEditor = ({
   extraSnippets?: ExtraSnippets;
 }) => {
   const theme = useTheme();
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
 
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const monacoRef = useRef<Monaco | null>(null);
 
   const [fontSize, setFontSize] = useState(14);
@@ -65,11 +66,14 @@ const FileEditor = ({
 
     const drawMarker = async () => {
       if (monacoRef.current === null) return;
+      if (editorRef.current === null) return;
       const data = message.data;
 
       if (!data) return;
 
       const model = editorRef.current.getModel();
+      if (model === null) return;
+
       const pylint_data = data.pylint_output.map((pylint: any) => {
         if (monacoRef.current === null) return;
         return {
@@ -164,11 +168,14 @@ const FileEditor = ({
     });
   };
 
-  const handleEditorMount = async (editor: any, monaco: Monaco) => {
+  const handleEditorMount = async (
+    editor: editor.IStandaloneCodeEditor,
+    monaco: Monaco
+  ) => {
     monacoRef.current = monaco;
     editorRef.current = editor;
 
-    editorRef.current.getDomNode().addEventListener("keydown", handleKeyDown);
+    editorRef.current.getDomNode()!.addEventListener("keydown", handleKeyDown);
 
     monacoEditorSnippet(monaco, commsManager, extraSnippets);
 
@@ -205,9 +212,11 @@ const FileEditor = ({
     // );
 
     return () => {
-      editorRef.current
-        .getDomNode()
-        .removeEventListener("keydown", handleKeyDown);
+      if (editorRef.current !== null) {
+        editorRef.current
+          .getDomNode()!
+          .removeEventListener("keydown", handleKeyDown);
+      }
     };
   };
 
@@ -261,6 +270,10 @@ const FileEditor = ({
   useEffect(() => {
     setFontSize(Math.max(10, 14 + zoomLevel * 2));
   }, [zoomLevel]);
+
+  useEffect(() => {
+    forceUpdate()
+  }, [language]);
 
   // Code Analysis (with pylint)
   useEffect(() => {
