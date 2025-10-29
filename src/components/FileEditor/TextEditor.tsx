@@ -316,8 +316,6 @@ const FileEditor = ({
     );
   }, [fileContent]);
 
-  console.log(language)
-
   return (
     <>
       {language && (
