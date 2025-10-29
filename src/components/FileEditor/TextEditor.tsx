@@ -47,7 +47,7 @@ const FileEditor = ({
   fileContent: string;
   setFileContent: Function;
   saveFile: Function;
-  language: string;
+  language?: string;
   zoomLevel: number;
   extraSnippets?: ExtraSnippets;
 }) => {
@@ -165,9 +165,6 @@ const FileEditor = ({
         "editor.background": theme.palette.background,
       },
     });
-    console.log(
-      monaco.editor.getEditors()[0].getModel()?.getLanguageId()
-    )
   };
 
   const handleEditorMount = async (

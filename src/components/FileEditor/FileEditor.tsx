@@ -65,7 +65,7 @@ const FileEditor = ({
   const [zoomLevel, changeZoomLevel] = useState(0);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [fileToSave, _setFileToSave] = useState<Entry | undefined>(undefined);
-  const [language, setLanguage] = useState("python");
+  const [language, _setLanguage] = useState("python");
   const [projectToSave, setProjectToSave] = useState(currentProjectname);
   const contentRef = useRef<string>(""); // In case some editors cannot update states
   const [showKeybindsModal, openKeybindsModal] = useState<boolean>(false);
@@ -73,6 +73,7 @@ const FileEditor = ({
   // Autosave data
   const fileToSaveRef = useRef<Entry | undefined>(undefined);
   const fileContentRef = useRef<string | undefined>(undefined);
+  const fileLanguageRef = useRef<string | undefined>("textplain");
 
   const setFileToSave = (data?: Entry) => {
     fileToSaveRef.current = data;
@@ -82,6 +83,11 @@ const FileEditor = ({
   const setFileContent = (data?: string) => {
     fileContentRef.current = data;
     _setFileContent(data);
+  };
+
+  const setLanguage = (language?: string) => {
+    fileLanguageRef.current = language;
+    _setLanguage(language);
   };
 
   useEffect(() => {
@@ -380,7 +386,7 @@ const FileEditor = ({
                 fileContent={fileContent}
                 setFileContent={setFileContent}
                 saveFile={autoSave}
-                language={language}
+                language={fileLanguageRef.current}
                 zoomLevel={zoomLevel}
                 extraSnippets={extraSnippets}
               />
