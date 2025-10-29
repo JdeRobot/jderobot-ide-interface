@@ -53,6 +53,7 @@ const FileEditor = ({
 }) => {
   const theme = useTheme();
   const [, forceUpdate] = useReducer(x => x + 1, 0);
+  const [lang, setLang] = useState(language);
 
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const monacoRef = useRef<Monaco | null>(null);
@@ -272,7 +273,7 @@ const FileEditor = ({
   }, [zoomLevel]);
 
   useEffect(() => {
-    forceUpdate()
+    setLang(language)
   }, [language]);
 
   // Code Analysis (with pylint)
@@ -327,7 +328,7 @@ const FileEditor = ({
       height="100%"
       // defaultLanguage={language === "textplain" ? "python" : language}
       defaultValue=""
-      language={language}
+      language={lang}
       value={fileContent}
       theme={`${theme.monacoTheme}-theme`}
       onChange={(newContent: any) => {
