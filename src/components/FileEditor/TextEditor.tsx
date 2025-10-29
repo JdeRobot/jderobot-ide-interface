@@ -47,7 +47,7 @@ const FileEditor = ({
   fileContent: string;
   setFileContent: Function;
   saveFile: Function;
-  language?: string;
+  language: string;
   zoomLevel: number;
   extraSnippets?: ExtraSnippets;
 }) => {

@@ -73,7 +73,7 @@ const FileEditor = ({
   // Autosave data
   const fileToSaveRef = useRef<Entry | undefined>(undefined);
   const fileContentRef = useRef<string | undefined>(undefined);
-  const fileLanguageRef = useRef<string | undefined>("textplain");
+  const fileLanguageRef = useRef<string>("textplain");
 
   const setFileToSave = (data?: Entry) => {
     fileToSaveRef.current = data;
@@ -85,7 +85,7 @@ const FileEditor = ({
     _setFileContent(data);
   };
 
-  const setLanguage = (language?: string) => {
+  const setLanguage = (language: string) => {
     fileLanguageRef.current = language;
     _setLanguage(language);
   };
