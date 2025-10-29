@@ -308,6 +308,8 @@ const FileEditor = ({
     );
   }, [fileContent]);
 
+  console.log(language)
+
   return (
     <Editor
       width="100%"
