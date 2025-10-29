@@ -278,6 +278,8 @@ const FileEditor = ({
     changeZoomLevel((prevZoom) => prevZoom - 1);
   };
 
+  console.log(fileLanguageRef.current)
+
   return (
     <>
       <EditorKeybindModal
