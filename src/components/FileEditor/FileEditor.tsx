@@ -43,7 +43,7 @@ const FileEditor = ({
   extraEditors,
   splashIcon,
   options,
-  extraSnippets
+  extraSnippets,
 }: {
   currentFile?: Entry;
   changeCurrentFile: Function;
@@ -106,6 +106,35 @@ const FileEditor = ({
     };
   }, []);
 
+  const findExt = (extension?: string) => {
+    let fileType = "textplain";
+
+    if (extension === undefined) {
+      return fileType;
+    }
+
+    for (const key in fileTypes) {
+      if (key === extension) {
+        fileType = fileTypes[key as keyof typeof fileTypes];
+        break;
+      }
+    }
+
+    for (const editor of extraEditors) {
+      for (const entry of editor.trigger) {
+        if (
+          entry.group === currentFile?.group &&
+          entry.extension === currentFile?.path.split(".").pop()
+        ) {
+          console.log("Loading new file ended. Language:", editor.language);
+          return editor.language;
+        }
+      }
+    }
+
+    return fileType;
+  };
+
   const initFile = async (file: Entry) => {
     try {
       if (currentFile === undefined) {
@@ -113,34 +142,14 @@ const FileEditor = ({
       }
 
       console.log("Loading new file...");
+
+      const fileType = findExt(file.path.split(".").pop());
+      setLanguage(fileType);
+
       const content = await api.file.get(currentProjectname, currentFile);
-      const extension = file.path.split(".").pop();
       setFileContent(content);
-      let fileType = "textplain";
-      if (extension) {
-        for (const key in fileTypes) {
-          if (key === extension) {
-            fileType = fileTypes[key as keyof typeof fileTypes];
-            break;
-          }
-        }
-      }
 
       setHasUnsavedChanges(false); // Reset the unsaved changes flag when a new file is loaded
-
-      for (const editor of extraEditors) {
-        for (const entry of editor.trigger) {
-          if (
-            entry.group === currentFile?.group &&
-            entry.extension === currentFile?.path.split(".").pop()
-          ) {
-            console.log("Loading new file ended. Language:", editor.language);
-            return setLanguage(editor.language);
-          }
-        }
-      }
-
-      setLanguage(fileType);
       console.log("Loading new file ended. Language:", fileType);
     } catch (e) {
       if (e instanceof Error) {
