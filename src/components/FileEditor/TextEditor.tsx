@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import Editor, { Monaco } from "@monaco-editor/react";
 import type { editor } from "monaco-editor";
@@ -52,8 +52,6 @@ const FileEditor = ({
   extraSnippets?: ExtraSnippets;
 }) => {
   const theme = useTheme();
-  const [, forceUpdate] = useReducer(x => x + 1, 0);
-  const [lang, setLang] = useState(language);
 
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const monacoRef = useRef<Monaco | null>(null);
@@ -167,6 +165,9 @@ const FileEditor = ({
         "editor.background": theme.palette.background,
       },
     });
+    console.log(
+      monaco.editor.getEditors()[0].getModel()?.getLanguageId()
+    )
   };
 
   const handleEditorMount = async (
@@ -272,10 +273,6 @@ const FileEditor = ({
     setFontSize(Math.max(10, 14 + zoomLevel * 2));
   }, [zoomLevel]);
 
-  useEffect(() => {
-    setLang(language)
-  }, [language]);
-
   // Code Analysis (with pylint)
   useEffect(() => {
     if (
@@ -322,22 +319,27 @@ const FileEditor = ({
     );
   }, [fileContent]);
 
+  console.log(language)
+
   return (
-    <Editor
-      width="100%"
-      height="100%"
-      defaultLanguage={"python"}
-      defaultValue=""
-      language={lang}
-      value={fileContent}
-      theme={`${theme.monacoTheme}-theme`}
-      onChange={(newContent: any) => {
-        setFileContent(newContent);
-      }}
-      options={editorOptions}
-      beforeMount={handleEditorDidMount}
-      onMount={handleEditorMount}
-    />
+    <>
+      {language && (
+        <Editor
+          width="100%"
+          height="100%"
+          defaultValue=""
+          language={language}
+          value={fileContent}
+          theme={`${theme.monacoTheme}-theme`}
+          onChange={(newContent: any) => {
+            setFileContent(newContent);
+          }}
+          options={editorOptions}
+          beforeMount={handleEditorDidMount}
+          onMount={handleEditorMount}
+        />
+      )}
+    </>
   );
 };
 
