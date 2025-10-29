@@ -312,7 +312,7 @@ const FileEditor = ({
     <Editor
       width="100%"
       height="100%"
-      defaultLanguage={language}
+      // defaultLanguage={language === "textplain" ? "python" : language}
       defaultValue=""
       language={language}
       value={fileContent}
