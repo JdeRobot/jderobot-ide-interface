@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { useEffect, useState } from "react";
 import { CommsManager } from "jderobot-commsmanager";
 import BounceLoader from "react-spinners/BounceLoader";
@@ -39,6 +39,7 @@ const VncViewer = ({
   const [state, setState] = useState<string | undefined>(
     commsManager?.getState()
   );
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
 
   const updateState = (e: any) => {
     setState(e.detail.state);
@@ -52,12 +53,17 @@ const VncViewer = ({
     };
   }, []);
 
+  const handleError = () => {
+    forceUpdate();
+  };
+
   return (
     <StyledVNCViewer bgColor={theme.palette.background}>
       {enabled(state) ? (
         <StyledVNCScreen
           title="VNC viewer"
           id={"vnc-viewer"}
+          onError={handleError}
           src={`http${isHttps ? "s" : ""}://${ip ? ip : "127.0.0.1"}:${port}/vnc.html?resize=remote&autoconnect=true&reconnect=true`}
         />
       ) : (
