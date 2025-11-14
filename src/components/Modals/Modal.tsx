@@ -80,7 +80,7 @@ const Modal = ({
       id={id}
       ref={modalRef}
       onKeyDown={handleKeyDown}
-      bgColor={theme.palette.background}
+      bgColor={theme.palette.bg}
       borderColor={theme.palette.secondary}
       roundness={theme.roundness}
     >
@@ -119,7 +119,7 @@ export const ModalTitlebar = ({
     <StyledModalTitlebar
       color={theme.palette.text}
       altColor={theme.palette.darkText}
-      bg={theme.palette.background}
+      bg={theme.palette.bg}
       hoverColor={theme.palette.secondary}
       roundness={theme.roundness}
     >
@@ -132,7 +132,7 @@ export const ModalTitlebar = ({
           }}
           color={theme.palette.text}
           altColor={theme.palette.darkText}
-          bg={theme.palette.background}
+          bg={theme.palette.bg}
         />
       )}
       <label htmlFor={htmlFor}>{title}</label>
@@ -145,7 +145,7 @@ export const ModalTitlebar = ({
           }}
           color={theme.palette.text}
           altColor={theme.palette.darkText}
-          bg={theme.palette.background}
+          bg={theme.palette.bg}
         />
       )}
     </StyledModalTitlebar>
@@ -201,7 +201,7 @@ export const ModalRow = ({
     case "img":
       return (
         <StyledModalImageRow
-          color={theme.palette.background}
+          color={theme.palette.bg}
           roundness={theme.roundness}
           id={id}
         >
@@ -510,11 +510,11 @@ export const ModalInputDropArea = ({
       onDragLeave={() => setDropActive(false)}
       onDrop={(e) => onDrop(e)}
       text={theme.palette.text}
-      bgColor={theme.palette.background}
+      bgColor={theme.palette.bg}
       buttonColor={theme.palette.primary}
       hoverColor={theme.palette.secondary}
       borderColor={theme.palette.primary}
-      hoverBorderColor={theme.palette.background}
+      hoverBorderColor={theme.palette.bg}
       roundness={theme.roundness}
       active={dropActive}
     >

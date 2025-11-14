@@ -84,7 +84,7 @@ const ErrorModal = () => {
     roundness: theme.roundness,
     error: theme.palette.error,
     errorBorder: theme.palette.border.error,
-    info: theme.palette.background,
+    info: theme.palette.bg,
     infoBorder: theme.palette.border.info,
     warning: theme.palette.warning,
     warningBorder: theme.palette.border.warning,

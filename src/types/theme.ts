@@ -6,7 +6,9 @@ export interface Theme {
     success?: string;
     warning?: string;
     error?: string;
-    background: string;
+    bgDark: string;
+    bg: string;
+    bgLight: string;
     primary?: string;
     secondary?: string;
     scrollbar?: string;

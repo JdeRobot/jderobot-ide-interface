@@ -50,7 +50,7 @@ function MoreActionsMenu({
   return (
     <StyledExplorerExtraMenuBackdrop active={menuProps.isShown} ref={menuRef}>
       <StyledExplorerExtraMenu
-        bgColor={theme.palette.background}
+        bgColor={theme.palette.bg}
         borderColor={theme.palette.secondary}
         roundness={theme.roundness}
         top={menuProps.position.y}

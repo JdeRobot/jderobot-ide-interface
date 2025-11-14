@@ -48,7 +48,7 @@ const NewFolderModal = ({
           <StyledModalEditorKeybind
             lightText={theme.palette.text}
             darkText={theme.palette.darkText}
-            bg={theme.palette.background}
+            bg={theme.palette.bg}
           >
             <div> {keybind.description}</div>
             <div>

@@ -58,7 +58,7 @@ const VncViewer = ({
   };
 
   return (
-    <StyledVNCViewer bgColor={theme.palette.background}>
+    <StyledVNCViewer bgColor={theme.palette.bg}>
       {enabled(state) ? (
         <StyledVNCScreen
           title="VNC viewer"
