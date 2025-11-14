@@ -9,7 +9,7 @@ const ProgressBar = ({ completed }: { completed: number }) => {
     <StyledProgressBar
       text={theme.palette.text}
       color={theme.palette.progressBar.color}
-      bgColor={theme.palette.progressBar.background}
+      bgColor={theme.palette.progressBar.bg}
       progress={completed}
     >
       <div>

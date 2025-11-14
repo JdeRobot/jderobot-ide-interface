@@ -122,7 +122,7 @@ export const ResizableColumn = ({ children }: { children: any[] }) => {
 
   if (children.length === 1) {
     return (
-      <StyledVertContiner bgColor={theme.palette?.background}>
+      <StyledVertContiner bgColor={theme.palette?.bg}>
         {children[0]}
       </StyledVertContiner>
     );
@@ -130,11 +130,11 @@ export const ResizableColumn = ({ children }: { children: any[] }) => {
 
   if (children.length === 2) {
     return (
-      <StyledVertContiner bgColor={theme.palette?.background}>
+      <StyledVertContiner bgColor={theme.palette?.bg}>
         <ResizableVert height={100 / children.length} max={100} snap={[0]}>
           {children[0]}
         </ResizableVert>
-        <StyledVertFillerContiner bgColor={theme.palette?.background}>
+        <StyledVertFillerContiner bgColor={theme.palette?.bg}>
           {children[1]}
         </StyledVertFillerContiner>
       </StyledVertContiner>
@@ -143,7 +143,7 @@ export const ResizableColumn = ({ children }: { children: any[] }) => {
 
   return (
     <StyledVertContiner
-      bgColor={theme.palette?.background}
+      bgColor={theme.palette?.bg}
     ></StyledVertContiner>
   );
 };
@@ -258,8 +258,8 @@ export const CollapsableResizableColumn = memo( function CollapsableResizableCol
 
   // if (children.length === 1) {
   //   return (
-  //     <StyledVertContiner bgColor={theme.palette?.background}>
-  //       <StyledVertFillerContiner bgColor={theme.palette?.background}>
+  //     <StyledVertContiner bgColor={theme.palette?.bg}>
+  //       <StyledVertFillerContiner bgColor={theme.palette?.bg}>
   //         {children[0]}
   //       </StyledVertFillerContiner>
   //     </StyledVertContiner>
@@ -267,13 +267,13 @@ export const CollapsableResizableColumn = memo( function CollapsableResizableCol
   // }
 
   return (
-    <StyledVertContiner bgColor={theme.palette?.background}>
+    <StyledVertContiner bgColor={theme.palette?.bg}>
       {children.slice(0, children.length - 1).map((comp, i) => (
         <ResizableVert key={`v-cont${i}`} height={100 / children.length} max={100} min={0} snap={[0]}>
           {comp}
         </ResizableVert>
       ))}
-      <StyledVertFillerContiner bgColor={theme.palette?.background}>
+      <StyledVertFillerContiner bgColor={theme.palette?.bg}>
         {children[children.length - 1]}
       </StyledVertFillerContiner>
     </StyledVertContiner>

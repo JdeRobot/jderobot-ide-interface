@@ -134,7 +134,7 @@ const FileEditor = ({
         inherit: true,
         rules: [],
         colors: {
-          "editor.background": theme.palette.bg,
+          "editor.bg": theme.palette.bg,
         },
       });
       monacoRef.current.editor.defineTheme("light-theme", {
@@ -142,7 +142,7 @@ const FileEditor = ({
         inherit: true,
         rules: [],
         colors: {
-          "editor.background": theme.palette.bg,
+          "editor.bg": theme.palette.bg,
         },
       });
     }
@@ -154,7 +154,7 @@ const FileEditor = ({
       inherit: true,
       rules: [],
       colors: {
-        "editor.background": theme.palette.bg,
+        "editor.bg": theme.palette.bg,
       },
     });
     monaco.editor.defineTheme("light-theme", {
@@ -162,7 +162,7 @@ const FileEditor = ({
       inherit: true,
       rules: [],
       colors: {
-        "editor.background": theme.palette.bg,
+        "editor.bg": theme.palette.bg,
       },
     });
   };
