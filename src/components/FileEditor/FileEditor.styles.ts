@@ -35,4 +35,6 @@ export const StyledSplashEditor = styled.div<StyledEditorMenuProps>`
   width: 100%;
   border-radius: 20px;
   background-color: ${(p) => p.bgColor ?? primaryColor};
+  display:flex;
+  justify-content: center;
 `;

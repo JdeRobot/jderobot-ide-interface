@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 import { Layout } from "Types";
 import {
   StyledHorizContiner,
@@ -9,6 +9,7 @@ import {
   StyledVertFillerContiner,
 } from "./ResizableComponents.styles";
 import { useTheme } from "Utils";
+import { StyledSplashEditor } from "../FileEditor/FileEditor.styles";
 
 export const ResizableHoriz = ({
   width,
@@ -141,11 +142,7 @@ export const ResizableColumn = ({ children }: { children: any[] }) => {
     );
   }
 
-  return (
-    <StyledVertContiner
-      bgColor={theme.palette?.bg}
-    ></StyledVertContiner>
-  );
+  return <StyledVertContiner bgColor={theme.palette?.bg}></StyledVertContiner>;
 };
 
 export const ResizableLayout = ({
@@ -168,7 +165,7 @@ export const ResizableLayout = ({
   let oneIndex = 0;
   let twoIndex = 0;
 
-  console.log(oneIndex,twoIndex)
+  console.log(oneIndex, twoIndex);
 
   if (showExplorer) {
     components += 1;
@@ -222,7 +219,12 @@ export const ResizableLayout = ({
   return (
     <StyledHorizContiner bgColor={theme.palette?.primary}>
       {children.slice(0, children.length - 1).map((comp, i) => (
-        <ResizableHoriz key={`h-cont${i}`} width={baseWidth[i]} max={maxWidth[i]} snap={[0]}>
+        <ResizableHoriz
+          key={`h-cont${i}`}
+          width={baseWidth[i]}
+          max={maxWidth[i]}
+          snap={[0]}
+        >
           {comp}
         </ResizableHoriz>
       ))}
@@ -233,49 +235,61 @@ export const ResizableLayout = ({
   );
 };
 
-export const CollapsableResizableColumn = memo( function CollapsableResizableColumn({
-  state,
-  splashIcon,
-  children,
-}: {
-  state: boolean[];
-  splashIcon: JSX.Element;
-  children: any[];
-}) {
-  const theme = useTheme();
+export const CollapsableResizableColumn = memo(
+  function CollapsableResizableColumn({
+    state,
+    splashIcon,
+    children,
+  }: {
+    state: boolean[];
+    splashIcon: JSX.Element;
+    children: any[];
+  }) {
+    const theme = useTheme();
 
-  if (state.length === children.length) {
-    for (let index = state.length - 1; index >= 0; index--) {
-      if (!state[index]) {
-        children.splice(index, 1);
+    if (state.length === children.length) {
+      for (let index = state.length - 1; index >= 0; index--) {
+        if (!state[index]) {
+          children.splice(index, 1);
+        }
       }
     }
+
+    if (children.length === 0) {
+      return (
+        <StyledSplashEditor bgColor={theme.palette.bg}>
+          {splashIcon}
+        </StyledSplashEditor>
+      );
+    }
+
+    // if (children.length === 1) {
+    //   return (
+    //     <StyledVertContiner bgColor={theme.palette?.bg}>
+    //       <StyledVertFillerContiner bgColor={theme.palette?.bg}>
+    //         {children[0]}
+    //       </StyledVertFillerContiner>
+    //     </StyledVertContiner>
+    //   );
+    // }
+
+    return (
+      <StyledVertContiner bgColor={theme.palette?.bg}>
+        {children.slice(0, children.length - 1).map((comp, i) => (
+          <ResizableVert
+            key={`v-cont${i}`}
+            height={100 / children.length}
+            max={100}
+            min={0}
+            snap={[0]}
+          >
+            {comp}
+          </ResizableVert>
+        ))}
+        <StyledVertFillerContiner bgColor={theme.palette?.bg}>
+          {children[children.length - 1]}
+        </StyledVertFillerContiner>
+      </StyledVertContiner>
+    );
   }
-
-  if (children.length === 0) {
-    return <>{splashIcon}</>;
-  }
-
-  // if (children.length === 1) {
-  //   return (
-  //     <StyledVertContiner bgColor={theme.palette?.bg}>
-  //       <StyledVertFillerContiner bgColor={theme.palette?.bg}>
-  //         {children[0]}
-  //       </StyledVertFillerContiner>
-  //     </StyledVertContiner>
-  //   );
-  // }
-
-  return (
-    <StyledVertContiner bgColor={theme.palette?.bg}>
-      {children.slice(0, children.length - 1).map((comp, i) => (
-        <ResizableVert key={`v-cont${i}`} height={100 / children.length} max={100} min={0} snap={[0]}>
-          {comp}
-        </ResizableVert>
-      ))}
-      <StyledVertFillerContiner bgColor={theme.palette?.bg}>
-        {children[children.length - 1]}
-      </StyledVertFillerContiner>
-    </StyledVertContiner>
-  );
-});
+);
