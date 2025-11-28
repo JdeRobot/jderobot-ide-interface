@@ -34,6 +34,8 @@ interface StyledResizableVertProps {
 }
 
 export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
+  display: flex;
+  flex-direction: column;
   .vresize-handle {
     position: absolute;
     height: 5px !important;
@@ -42,8 +44,6 @@ export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
     cursor: ns-resize !important;
     user-select: none;
     z-index: 99;
-    display: flex;
-    flex-direction: column;
     &:hover,
     :active {
       background-color: ${(p) => p.hover ?? primaryColor};
