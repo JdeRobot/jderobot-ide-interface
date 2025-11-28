@@ -7,8 +7,9 @@ const ErrorContext = createContext<Error>({
   isOpen: false,
   msg: "",
   type: ErrorType.ERROR,
+  url: "..",
   error: (msg: string) => {},
-  error_critical: (msg: string) => {},
+  error_critical: (msg: string, url: string) => {},
   warning: (msg: string) => {},
   info: (msg: string) => {},
   close: () => {},
@@ -17,6 +18,7 @@ const ErrorContext = createContext<Error>({
 export const ErrorProvider = ({ children }: { children: any }) => {
   const [isOpen, open] = useState<boolean>(false);
   const [msg, setMsg] = useState<string>("");
+  const [url, setUrl] = useState<string>("..");
   const [type, setType] = useState<ErrorType>(ErrorType.ERROR);
 
   const showError = (msg: string) => {
@@ -25,8 +27,9 @@ export const ErrorProvider = ({ children }: { children: any }) => {
     open(true);
   };
 
-  const showErrorCritical = (msg: string) => {
+  const showErrorCritical = (msg: string, url: string) => {
     setMsg(msg);
+    setUrl(url)
     setType(ErrorType.ERROR_CRITICAL);
     open(true);
   };
@@ -51,8 +54,9 @@ export const ErrorProvider = ({ children }: { children: any }) => {
     isOpen: isOpen,
     msg: msg,
     type: type,
+    url: url,
     error: (msg: string) => showError(msg),
-    error_critical: (msg: string) => showErrorCritical(msg),
+    error_critical: (msg: string, url: string) => showErrorCritical(msg, url),
     warning: (msg: string) => showWarning(msg),
     info: (msg: string) => showInfo(msg),
     close: () => close(),

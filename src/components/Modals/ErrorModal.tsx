@@ -14,7 +14,7 @@ export type ErrorVariant = "error" | "warning" | "info";
 
 const ErrorModal = () => {
   const theme = useTheme();
-  const { isOpen, msg, type, close } = useError();
+  const { isOpen, msg, type, url, close } = useError();
 
   const [isModalOpen, setModalOpen] = useState<boolean>(isOpen);
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -63,7 +63,7 @@ const ErrorModal = () => {
       type_str = "error";
       type_header = "Error";
       onClose = () => {
-        document.location.href = "/apps";
+        document.location.href = url;
       };
       break;
     case ErrorType.WARNING:
