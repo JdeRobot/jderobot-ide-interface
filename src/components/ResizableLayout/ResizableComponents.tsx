@@ -274,7 +274,7 @@ export const CollapsableResizableColumn = memo(
     // }
 
     return (
-      <StyledVertContiner bgColor={theme.palette?.bg}>
+      <StyledVertContiner bgColor={theme.palette?.primary}>
         {children.slice(0, children.length - 1).map((comp, i) => (
           <ResizableVert
             key={`v-cont${i}`}

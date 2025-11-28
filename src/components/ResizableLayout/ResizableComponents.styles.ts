@@ -108,5 +108,8 @@ export const StyledVertFillerContiner = styled.div<StyledVertFillerContinerProps
   flex-shrink: 0;
   flex-grow: 1;
   z-index: 1;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
   background-color: ${(p) => p.bgColor ?? primaryColor};
 `;
