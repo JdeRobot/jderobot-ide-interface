@@ -123,7 +123,7 @@ const IdeInterface = ({
             </StyledIdeContainer>
           </StyledIdeVertContainer>
           <StyledIdeVertContainer bgColor={theme.palette?.primary}>
-            <StyledIdeContainer bgColor={theme.palette?.bg}>
+            <StyledIdeContainer bgColor={theme.palette?.primary}>
               <ViewersContainer viewers={viewers} splashIcon={splashIcon} />
             </StyledIdeContainer>
           </StyledIdeVertContainer>
