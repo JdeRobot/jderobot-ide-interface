@@ -362,6 +362,8 @@ const FileEditor = ({
           })()}
         </StyledButtonsContainer>
       </StyledEditorMenu>
+      <StyledSplashEditor bgColor={theme.palette.bg}>
+
       {fileContent !== undefined ? (
         <>
           {(() => {
@@ -397,10 +399,11 @@ const FileEditor = ({
           })()}
         </>
       ) : (
-        <StyledSplashEditor bgColor={theme.palette.bg}>
+        <>
           {splashIcon}
-        </StyledSplashEditor>
+        </>
       )}
+      </StyledSplashEditor>
     </>
   );
 };
