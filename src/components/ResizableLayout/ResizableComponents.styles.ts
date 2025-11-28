@@ -42,6 +42,8 @@ export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
     cursor: ns-resize !important;
     user-select: none;
     z-index: 99;
+    display: flex;
+    flex-direction: column;
     &:hover,
     :active {
       background-color: ${(p) => p.hover ?? primaryColor};
