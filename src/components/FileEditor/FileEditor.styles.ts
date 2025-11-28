@@ -37,4 +37,5 @@ export const StyledSplashEditor = styled.div<StyledEditorMenuProps>`
   background-color: ${(p) => p.bgColor ?? primaryColor};
   display:flex;
   justify-content: center;
+  overflow: hidden;
 `;
