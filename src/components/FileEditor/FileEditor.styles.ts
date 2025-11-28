@@ -29,3 +29,10 @@ export const StyledChangeIndicator = styled.div<StyledChangeIndicatorProps>`
   display: inline-block;
   background-color: ${(p) => p.color ?? primaryColor};
 `;
+
+export const StyledSplashEditor = styled.div<StyledEditorMenuProps>`
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  background-color: ${(p) => p.bgColor ?? primaryColor};
+`;

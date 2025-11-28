@@ -13,7 +13,11 @@ import {
   StyledButtonsContainer,
   StyledSeparatedButtonsContainer,
 } from "Components";
-import { StyledChangeIndicator, StyledEditorMenu } from "./FileEditor.styles";
+import {
+  StyledChangeIndicator,
+  StyledEditorMenu,
+  StyledSplashEditor,
+} from "./FileEditor.styles";
 import { ExtraApi } from "src/types/fileTypes";
 
 const fileTypes = {
@@ -393,7 +397,9 @@ const FileEditor = ({
           })()}
         </>
       ) : (
-        <>{splashIcon}</>
+        <StyledSplashEditor bgColor={theme.palette.bg}>
+          {splashIcon}
+        </StyledSplashEditor>
       )}
     </>
   );
