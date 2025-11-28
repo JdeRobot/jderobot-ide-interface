@@ -107,7 +107,7 @@ const IdeInterface = ({
             ))}
           </ResizableColumn>
           <StyledIdeVertContainer bgColor={theme.palette?.primary}>
-            <StyledIdeContainer bgColor={theme.palette?.bg}>
+            <StyledIdeContainer bgColor={theme.palette?.primary}>
               <FileEditor
                 currentFile={baseFile ? baseFile : currentFile}
                 changeCurrentFile={setCurrentFile}
