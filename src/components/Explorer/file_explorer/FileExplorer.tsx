@@ -3,6 +3,7 @@ import TreeNode from "./TreeNode";
 import MoreActionsMenu, { ContextMenuProps } from "./MoreActionsMenu";
 import { Entry } from "Types";
 import { StyledSidebarEntryContainer } from "./FileExplorer.styles";
+import { useTheme } from "Utils";
 
 const FileExplorer = ({
   setCurrentFile,
@@ -34,6 +35,7 @@ const FileExplorer = ({
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [menuFile, setMenuFile] = useState<Entry | undefined>(undefined);
   const [menuPosistion, setMenuPosistion] = React.useState({ x: 0, y: 0 });
+  const theme = useTheme();
 
   const MenuProps = new ContextMenuProps(
     showMenu,
@@ -65,7 +67,7 @@ const FileExplorer = ({
 
   if (Array.isArray(fileList)) {
     return (
-      <StyledSidebarEntryContainer>
+      <StyledSidebarEntryContainer bgColor={theme.palette.bg}>
         {fileList.map((file) => (
           <TreeNode
             key={file.path}

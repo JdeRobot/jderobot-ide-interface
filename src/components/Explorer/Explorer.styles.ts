@@ -10,18 +10,20 @@ export const StyledSidebarContainer = styled.div`
   flex: 1 1 1px;
 `;
 
-export const StyledSidebarEntry = styled.div`
+interface StyledSidebarEntryMenuProps {
+  bgColor?: string;
+}
+
+export const StyledSidebarEntry = styled.div<StyledSidebarEntryMenuProps>`
   height: fit-content;
   width: 100%;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: 4px;
+  padding-right: 2.5px;
+  background-color: ${(p) => p.bgColor ?? primaryColor};
 `;
 
-interface StyledSidebarEntryMenuProps {
-  bgColor?: string;
-}
 
 export const StyledSidebarEntryMenu = styled.div<StyledSidebarEntryMenuProps>`
   display: flex;

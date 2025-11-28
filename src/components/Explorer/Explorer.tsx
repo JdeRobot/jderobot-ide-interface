@@ -398,7 +398,7 @@ const Explorer = ({
 
   return (
     <StyledSidebarContainer id={api.name}>
-      <StyledSidebarEntry>
+      <StyledSidebarEntry bgColor={theme.palette.primary}>
         <StyledSidebarEntryMenu bgColor={theme.palette.primary}>
           <MenuButton
             id="new-file-button"

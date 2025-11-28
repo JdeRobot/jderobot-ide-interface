@@ -45,6 +45,7 @@ export const StyledIdeContainer = styled.div<StyledIdeContainerProps>`
   align-items: center;
   justify-content: center;
   z-index: 3;
+  margin: 0 2.5px 0 2.5px;
   background-color: ${(p) => p.bgColor ?? primaryColor};
 `;
 
