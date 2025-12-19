@@ -56,6 +56,17 @@ export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
   }
 `;
 
+interface StyledResizableVertBlockProps {
+  roundness?: number;
+}
+
+export const StyledResizableVertBlock = styled.div<StyledResizableVertBlockProps>`
+  height: 100%;
+  width: 100%;
+  border-radius: ${(p) => p.roundness ?? 20}px;
+  overflow: hidden;
+`;
+
 interface StyledHorizContinerProps {
   bgColor?: string;
 }
