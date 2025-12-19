@@ -5,6 +5,7 @@ import {
   StyledHorizFillerContiner,
   StyledResizableHoriz,
   StyledResizableVert,
+  StyledResizableVertBlock,
   StyledVertContiner,
   StyledVertFillerContiner,
 } from "./ResizableComponents.styles";
@@ -110,9 +111,9 @@ export const ResizableVert = ({
       snap={{ y: snap }}
       snapGap={100}
     >
-      <div style={{borderRadius:`${roundness}px`, overflow: "hidden", height:"100%", width:"100%"}}>
+      <StyledResizableVertBlock roundness={roundness}>
         {children}
-      </div>
+      </StyledResizableVertBlock>
     </StyledResizableVert>
   );
 };
