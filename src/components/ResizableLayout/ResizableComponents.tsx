@@ -69,6 +69,7 @@ export const ResizableVert = ({
   max,
   snap,
   top,
+  roundness,
   children,
 }: {
   height: number;
@@ -76,6 +77,7 @@ export const ResizableVert = ({
   max: number;
   snap: number[];
   top?: boolean;
+  roundness?: number;
   children: any;
 }) => {
   const theme = useTheme();
@@ -84,7 +86,7 @@ export const ResizableVert = ({
     <StyledResizableVert
       color={theme.palette?.primary}
       hover={theme.palette?.secondary}
-      roundness={theme.viewRoundness}
+      roundness={roundness}
       defaultSize={{
         height: `${height}%`,
       }}
@@ -133,10 +135,10 @@ export const ResizableColumn = ({ children }: { children: any[] }) => {
   if (children.length === 2) {
     return (
       <StyledVertContiner bgColor={theme.palette?.bg}>
-        <ResizableVert height={100 / children.length} max={100} snap={[0]}>
+        <ResizableVert height={100 / children.length} max={100} snap={[0]} roundness={0}>
           {children[0]}
         </ResizableVert>
-        <StyledVertFillerContiner bgColor={theme.palette?.bg}>
+        <StyledVertFillerContiner bgColor={theme.palette?.bg} roundness={0}>
           {children[1]}
         </StyledVertFillerContiner>
       </StyledVertContiner>
@@ -283,13 +285,14 @@ export const CollapsableResizableColumn = memo(
             max={100}
             min={0}
             snap={[0]}
+            roundness={theme.viewRoundness}
           >
             {comp}
           </ResizableVert>
         ))}
         <StyledVertFillerContiner
           bgColor={theme.palette?.primary}
-          roundness={theme.roundness}
+          roundness={theme.viewRoundness}
         >
           {children[children.length - 1]}
         </StyledVertFillerContiner>
