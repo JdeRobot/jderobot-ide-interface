@@ -31,12 +31,13 @@ export const StyledResizableHoriz = styled(
 interface StyledResizableVertProps {
   color?: string;
   hover?: string;
+  roundness?: number;
 }
 
 export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
   display: flex;
   flex-direction: column;
-  border-radius: 20px;
+  border-radius: ${(p) => p.roundness ?? 20}px;
   overflow: hidden;
 
   .vresize-handle {
@@ -101,6 +102,7 @@ export const StyledVertContiner = styled.div<StyledVertContinerProps>`
 
 interface StyledVertFillerContinerProps {
   bgColor?: string;
+  roundness?: number;
 }
 
 export const StyledVertFillerContiner = styled.div<StyledVertFillerContinerProps>`
@@ -117,4 +119,6 @@ export const StyledVertFillerContiner = styled.div<StyledVertFillerContinerProps
   display:flex;
   flex-direction:column;
   background-color: ${(p) => p.bgColor ?? primaryColor};
+  border-radius: ${(p) => p.roundness ?? 20}px;
+  overflow: hidden;
 `;

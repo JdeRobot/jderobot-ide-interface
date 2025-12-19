@@ -264,6 +264,7 @@ const FileEditor = ({
     // scroll
     smoothScrolling: true,
     scrollbar: scrollbar,
+    padding: {top: 10}
   };
 
   useEffect(() => {
