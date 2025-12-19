@@ -31,14 +31,11 @@ export const StyledResizableHoriz = styled(
 interface StyledResizableVertProps {
   color?: string;
   hover?: string;
-  roundness?: number;
 }
 
 export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
   display: flex;
   flex-direction: column;
-  // border-radius: ${(p) => p.roundness ?? 20}px;
-  // overflow: hidden;
 
   .vresize-handle {
     position: absolute;
