@@ -84,7 +84,7 @@ export const ResizableVert = ({
     <StyledResizableVert
       color={theme.palette?.primary}
       hover={theme.palette?.secondary}
-      roundness={theme.roundness}
+      roundness={theme.viewRoundness}
       defaultSize={{
         height: `${height}%`,
       }}
@@ -258,7 +258,7 @@ export const CollapsableResizableColumn = memo(
 
     if (children.length === 0) {
       return (
-        <StyledSplashEditor bgColor={theme.palette.bg} roundness={theme.roundness}>
+        <StyledSplashEditor bgColor={theme.palette.bg} roundness={theme.viewRoundness}>
           {splashIcon}
         </StyledSplashEditor>
       );

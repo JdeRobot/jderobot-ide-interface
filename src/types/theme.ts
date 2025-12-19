@@ -34,6 +34,7 @@ export interface Theme {
     selectedGradient: string;
   };
   roundness?: number;
+  viewRoundness?: number;
   transitionSpeed?: number;
   monacoTheme?: string;
 }

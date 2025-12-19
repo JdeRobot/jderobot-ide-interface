@@ -43,6 +43,7 @@ const defaultTheme: Theme = {
       "linear-gradient( -45deg, #12494c 0%, #584f42 50%, #909c7b 100%)",
   },
   roundness: 5,
+  viewRoundness: 20,
   transitionSpeed: 200,
   monacoTheme: "dark",
 };
