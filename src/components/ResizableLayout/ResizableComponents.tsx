@@ -87,7 +87,6 @@ export const ResizableVert = ({
     <StyledResizableVert
       color={theme.palette?.primary}
       hover={theme.palette?.secondary}
-      roundness={roundness}
       defaultSize={{
         height: `${height}%`,
       }}
