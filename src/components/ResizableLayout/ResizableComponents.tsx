@@ -110,7 +110,9 @@ export const ResizableVert = ({
       snap={{ y: snap }}
       snapGap={100}
     >
-      {children}
+      <div style={{borderRadius:roundness, overflow: "hidden"}}>
+        {children}
+      </div>
     </StyledResizableVert>
   );
 };
@@ -285,7 +287,6 @@ export const CollapsableResizableColumn = memo(
             max={100}
             min={0}
             snap={[0]}
-            roundness={theme.viewRoundness}
           >
             {comp}
           </ResizableVert>
