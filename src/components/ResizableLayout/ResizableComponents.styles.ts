@@ -36,6 +36,9 @@ interface StyledResizableVertProps {
 export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+
   .vresize-handle {
     position: absolute;
     height: 5px !important;
