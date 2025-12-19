@@ -84,6 +84,7 @@ export const ResizableVert = ({
     <StyledResizableVert
       color={theme.palette?.primary}
       hover={theme.palette?.secondary}
+      roundness={theme.roundness}
       defaultSize={{
         height: `${height}%`,
       }}
@@ -257,7 +258,7 @@ export const CollapsableResizableColumn = memo(
 
     if (children.length === 0) {
       return (
-        <StyledSplashEditor bgColor={theme.palette.bg}>
+        <StyledSplashEditor bgColor={theme.palette.bg} roundness={theme.roundness}>
           {splashIcon}
         </StyledSplashEditor>
       );
@@ -286,7 +287,10 @@ export const CollapsableResizableColumn = memo(
             {comp}
           </ResizableVert>
         ))}
-        <StyledVertFillerContiner bgColor={theme.palette?.primary}>
+        <StyledVertFillerContiner
+          bgColor={theme.palette?.primary}
+          roundness={theme.roundness}
+        >
           {children[children.length - 1]}
         </StyledVertFillerContiner>
       </StyledVertContiner>

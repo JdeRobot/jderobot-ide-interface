@@ -4,6 +4,7 @@ const primaryColor = "#666";
 
 interface StyledEditorMenuProps {
   bgColor?: string;
+  roundness?: number;
 }
 
 export const StyledEditorMenu = styled.div<StyledEditorMenuProps>`
@@ -33,7 +34,7 @@ export const StyledChangeIndicator = styled.div<StyledChangeIndicatorProps>`
 export const StyledSplashEditor = styled.div<StyledEditorMenuProps>`
   height: 100%;
   width: 100%;
-  border-radius: 20px;
+  border-radius: ${(p) => p.roundness ?? 20}px;
   background-color: ${(p) => p.bgColor ?? primaryColor};
   display:flex;
   justify-content: center;

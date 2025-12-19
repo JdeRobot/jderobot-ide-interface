@@ -362,7 +362,7 @@ const FileEditor = ({
           })()}
         </StyledButtonsContainer>
       </StyledEditorMenu>
-      <StyledSplashEditor bgColor={theme.palette.bg}>
+      <StyledSplashEditor bgColor={theme.palette.bg} roundness={theme.roundness}>
 
       {fileContent !== undefined ? (
         <>
