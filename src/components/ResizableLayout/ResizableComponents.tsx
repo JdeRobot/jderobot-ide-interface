@@ -287,6 +287,7 @@ export const CollapsableResizableColumn = memo(
             max={100}
             min={0}
             snap={[0]}
+            roundness={theme.viewRoundness}
           >
             {comp}
           </ResizableVert>
