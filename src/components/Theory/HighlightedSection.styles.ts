@@ -15,7 +15,7 @@ export const StyledHighlightContainer = styled.p<StyledHighlightContainerProps>`
   padding: 1rem 2.5rem 1rem 1rem;
   border-radius: ${(p) => p.roundness ?? 1}px;
 
-  & .icon-bulb {
+  & svg {
     position: absolute;
     top: 8px;
     right: 8px;
