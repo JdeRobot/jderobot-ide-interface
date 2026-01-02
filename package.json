@@ -52,7 +52,11 @@
     "webpack-dev-server": "^5.2.2"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@monaco-editor/react": "^4.7.0",
+    "@mui/icons-material": "^7.3.6",
+    "@mui/material": "^7.3.6",
     "jderobot-commsmanager": "^1.0.10",
     "jszip": "^3.10.1",
     "lodash": "^4.17.21",

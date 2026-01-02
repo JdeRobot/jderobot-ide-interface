@@ -6,6 +6,14 @@ interface ThemeProviderProps {
   children?: React.ReactNode;
 }
 
+// bgDark: "#0d0d0dff",
+// bg: "#1a1a1aff",
+// bgLight: "#262626ff",
+
+// bgDark: "#e6e6e6",
+// bg: "#f2f2f2",
+// bgLight: "#ffffff",
+
 const defaultTheme: Theme = {
   palette: {
     text: "#ededf2",
@@ -17,8 +25,8 @@ const defaultTheme: Theme = {
     bgDark: "#0d0d0dff",
     bg: "#1a1a1aff",
     bgLight: "#262626ff",
-    primary: "#134f53",
-    secondary: "#1d777c",
+    primary: "#ffa726",
+    secondary: "#ff8800",
     scrollbar: "#6f6f90",
     border: {
       warning: "#ffe100",

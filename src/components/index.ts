@@ -9,3 +9,4 @@ export * from "./Button";
 export * from "./ButtonsContainer";
 export * from "./ProgressBar";
 export * from "./Dropdown";
+export * from "./Theory";
