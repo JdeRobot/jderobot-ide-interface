@@ -17,8 +17,8 @@ export const StyledCarouselContainer = styled.div<StyledCarouselContainerProps>`
     0 1px 2px #00000030,
     0 2px 4px #00000015;
   margin: 2rem auto;
-  max-width: 700px;
   text-align: center;
+  width: 95%;
 `;
 
 interface StyledCarouselTitleProps {
@@ -72,6 +72,9 @@ export const StyledCarouselSection = styled.button<StyledCarouselSectionProps>`
   border: none;
   border-radius: ${(p) => p.roundness ?? 1}px;
   font-weight: bold;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
   cursor: pointer;
   transition:
     background-color 0.3s,
@@ -110,6 +113,7 @@ export const StyledCarouselImageContainer = styled.div<StyledCarouselImageContai
   flex-direction: column;
   align-items: center;
   text-align: center;
+  box-sizing: border-box;
   transition:
     transform 0.3s,
     box-shadow 0.3s;

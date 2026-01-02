@@ -4,6 +4,7 @@ import TheoryInterface from "./TheoryInterface";
 import {
   CarouselDisplay,
   HighlightedSection,
+  TheoryList,
   TheorySection,
   TheorySubsection,
 } from "../Theory";
@@ -122,16 +123,16 @@ export const Main: Story = {
                       img: aeolus,
                     },
                     {
-                      title: "ABB Robotics",
-                      desc: "Automation in multiple sectors",
-                      img: abb,
-                    },
-                    {
                       title: "FANUC",
                       desc: "Factory automation systems",
                       img: agrobot,
                     },
                     {
+                      title: "Yaskawa Motoman",
+                      desc: "Industrial handling robot",
+                      img: alexa,
+                    },
+                   {
                       title: "Yaskawa Motoman",
                       desc: "Industrial handling robot",
                       img: alexa,
@@ -174,7 +175,7 @@ export const Main: Story = {
               many areas:
             </p>
 
-            <ul className="list-disc list-inside ml-4">
+            <TheoryList>
               <li>Autonomous cars</li>
               <li>Drones</li>
               <li>Mapping, self-localization, and navigation</li>
@@ -186,7 +187,7 @@ export const Main: Story = {
                 Robotics championships: RoboCup (soccer, home, rescue, etc.),
                 DARPA, Rockin, etc.
               </li>
-            </ul>
+            </TheoryList>
           </TheorySubsection>
         </TheorySection>
 
