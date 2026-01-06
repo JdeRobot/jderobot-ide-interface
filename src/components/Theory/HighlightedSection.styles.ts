@@ -15,6 +15,11 @@ export const StyledHighlightContainer = styled.p<StyledHighlightContainerProps>`
   padding: 1rem 2.5rem 1rem 1rem;
   border-radius: ${(p) => p.roundness ?? 1}px;
 
+  box-shadow:
+    inset 0 1px 2px #ffffff30,
+    0 1px 2px #00000030,
+    0 2px 4px #00000015;
+
   & svg {
     position: absolute;
     top: 8px;

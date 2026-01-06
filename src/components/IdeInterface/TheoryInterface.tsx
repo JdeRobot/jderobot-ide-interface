@@ -18,12 +18,52 @@ interface TheoryIndex {
 
 interface IdeInterfaceProps {
   title: string;
-  index: TheoryIndex[];
-  children?: JSX.Element;
+  index?: TheoryIndex[];
+  children?: JSX.Element | JSX.Element[];
 }
+
+const findSections = (index: TheoryIndex[], children: JSX.Element) => {
+  if (children.type.name === "TheorySection") {
+    index.push({
+      href: `#${children.props.href}`,
+      title: children.props.title,
+      subsections: [],
+    });
+
+    if (Array.isArray(children.props.children)) {
+      children.props.children.forEach((child: JSX.Element) => {
+        findSubsections(index, child);
+      });
+    } else {
+      findSubsections(index, children.props.children);
+    }
+  }
+};
+
+const findSubsections = (index: TheoryIndex[], children: JSX.Element) => {
+  if (children.type.name === "TheorySubsection") {
+    index[index.length - 1].subsections?.push({
+      href: `#${children.props.href}`,
+      title: children.props.title,
+    });
+  }
+};
 
 const TheoryInterface = ({ title, index, children }: IdeInterfaceProps) => {
   const theme = useTheme();
+
+  if (index === undefined) {
+    index = [];
+    if (children) {
+      if (Array.isArray(children)) {
+        for (let i = 0; i < children.length; i++) {
+          findSections(index, children[i]);
+        }
+      } else {
+        findSections(index, children);
+      }
+    }
+  }
 
   const titleColor = contrastSelector(
     theme.palette.text,
@@ -43,9 +83,7 @@ const TheoryInterface = ({ title, index, children }: IdeInterfaceProps) => {
         {title}
       </StyledTheoryTitle>
       <StyledTheoryContainer>
-        <StyledTheoryContentContainer>
-          {children}
-        </StyledTheoryContentContainer>
+        <StyledTheoryContentContainer>{children}</StyledTheoryContentContainer>
         <StyledIndexContainer
           bg={theme.palette.bgLight}
           border={theme.palette.primary}
