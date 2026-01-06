@@ -13,24 +13,18 @@ import {
   StyledCarouselSections,
   StyledCarouselTitle,
 } from "./CarouselDisplay.styles";
-
-interface CarouselImage {
-  title: string;
-  desc: string;
-  img: string;
-}
-
-interface CarouselData {
-  section: string;
-  images: CarouselImage[];
-}
+import { CarouselData } from "Types";
 
 const CarouselDisplay = ({
   title,
   data,
+  comparison,
+  maxImageHeight,
 }: {
   title: string;
   data: CarouselData[];
+  comparison?: boolean;
+  maxImageHeight?: number;
 }) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -72,24 +66,26 @@ const CarouselDisplay = ({
       </StyledCarouselSections>
 
       <StyledCarouselContentContainer>
-        <StyledCarouselContent>
+        <StyledCarouselContent sideBySide={comparison}>
           {data[activeIndex].images.map((robot, i) => (
             <StyledCarouselImageContainer
               key={i}
               bg={"#ffffff"}
               color={sectionColor}
               roundness={theme.roundness}
+              sideBySide={comparison}
             >
               <StyledCarouselImageWrapper
                 bg={"#ffffff"}
                 roundness={theme.roundness}
+                maxHeight={maxImageHeight}
               >
                 {robot.img ? (
                   <StyledCarouselImage src={robot.img} alt={robot.title} />
                 ) : (
                   <>
-                  {/*TODO: change to placeholder icon*/}
-                  <div className="robot-image-placeholder">🤖</div>
+                    {/*TODO: change to placeholder icon*/}
+                    <div className="robot-image-placeholder">🤖</div>
                   </>
                 )}
               </StyledCarouselImageWrapper>

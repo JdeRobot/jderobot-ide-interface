@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-webpack5";
 import TheoryInterface from "./TheoryInterface";
 import {
   CarouselDisplay,
+  ComparisonDisplay,
   HighlightedSection,
   TheoryList,
   TheorySection,
@@ -14,6 +15,9 @@ import abb from "./tmp/ABB.png";
 import aeolus from "./tmp/aeolus.jpg";
 import agrobot from "./tmp/agrobot.jpg";
 import alexa from "./tmp/alexa.jpg";
+import mapLocal from "./tmp/mapLocal.png";
+import mapGlobal from "./tmp/mapGlobal.png";
+import mapDynamic from "./tmp/mapDynamic.png";
 
 type Story = StoryObj<typeof TheoryInterface>;
 
@@ -146,6 +150,42 @@ export const Main: Story = {
             ]}
           />
 
+          <ComparisonDisplay
+            title="Types of robots"
+            data={[
+              {
+                section: "Industry and manufacturing",
+                images: [
+                  {
+                    title: "KUKA",
+                    desc: "Robotic arms for industrial tasks",
+                    img: mapLocal,
+                  },
+                  {
+                    title: "FANUC",
+                    desc: "Factory automation systems",
+                    img: mapGlobal,
+                  }
+                ],
+              },
+              {
+                section: "Section2",
+                images: [
+                  {
+                    title: "KUKA",
+                    desc: "Robotic arms for industrial tasks",
+                    img: mapGlobal,
+                  },
+                  {
+                    title: "ABB Robotics",
+                    desc: "Automation in multiple sectors",
+                    img: mapDynamic,
+                  },
+                ],
+              },
+            ]}
+          />
+
           <TheorySubsection href={"intro1"} title="Robotic products">
             <p>
               Nowadays, there are many robots that surround and accompany us in
@@ -207,7 +247,6 @@ export const Main: Story = {
               computer science, psychology, ethology… In the future, every home
               may have a robot, much like we all have a PC today.
             </p>
-
             <p>
               Although movies and desires often outpace reality, work continues
               to bring these ideas to life, achieving real progress focused on

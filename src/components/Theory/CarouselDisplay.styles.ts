@@ -89,18 +89,35 @@ export const StyledCarouselContentContainer = styled.div`
   margin-top: 2rem;
 `;
 
-export const StyledCarouselContent = styled.div`
+interface StyledCarouselContentProps {
+  sideBySide?: boolean;
+}
+
+export const StyledCarouselContent = styled.div<StyledCarouselContentProps>`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
+  ${(p: StyledCarouselContentProps) => {
+    if (p.sideBySide) {
+      return `gap: 4%;`;
+    }
+    return `gap: 1.5rem;`;
+  }}
 `;
 
 interface StyledCarouselImageContainerProps {
   bg?: string;
   color?: string;
   roundness?: number;
+  sideBySide?: boolean;
 }
+
+const handleMode = (p: StyledCarouselImageContainerProps) => {
+  if (p.sideBySide) {
+    return `width: 48%;`;
+  }
+  return `width: 250px;`;
+};
 
 export const StyledCarouselImageContainer = styled.div<StyledCarouselImageContainerProps>`
   padding: 1rem;
@@ -108,7 +125,7 @@ export const StyledCarouselImageContainer = styled.div<StyledCarouselImageContai
   color: ${(p) => p.color ?? primaryColor};
   border-radius: ${(p) => p.roundness ?? 1}px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  width: 250px;
+  ${handleMode}
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -127,11 +144,17 @@ export const StyledCarouselImageContainer = styled.div<StyledCarouselImageContai
 interface StyledCarouselImageWrapperProps {
   bg?: string;
   roundness?: number;
+  maxHeight?: number;
 }
 
 export const StyledCarouselImageWrapper = styled.div<StyledCarouselImageWrapperProps>`
   width: 100%;
   aspect-ratio: 1/1;
+  ${(p: StyledCarouselImageWrapperProps) => {
+    if (p.maxHeight) {
+      return `height: ${p.maxHeight}vh;`;
+    }
+  }}
   display: flex;
   align-items: center;
   justify-content: center;

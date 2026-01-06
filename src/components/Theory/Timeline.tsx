@@ -12,7 +12,6 @@ import {
 } from "./Timeline.styles";
 import {
   StyledCarouselImage,
-  StyledCarouselImageDesc,
   StyledCarouselImageTitle,
   StyledCarouselImageWrapper,
 } from "./CarouselDisplay.styles";
