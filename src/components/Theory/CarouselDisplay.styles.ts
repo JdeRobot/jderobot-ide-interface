@@ -146,6 +146,7 @@ export const StyledCarouselImage = styled.img`
   height: 100%;
   object-fit: contain;
   display: block;
+  border-radius: inherit;
 `;
 
 export const StyledCarouselImageTitle = styled.p`

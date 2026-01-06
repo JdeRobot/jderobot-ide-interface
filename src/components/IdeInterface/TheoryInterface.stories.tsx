@@ -7,6 +7,7 @@ import {
   TheoryList,
   TheorySection,
   TheorySubsection,
+  Timeline,
 } from "../Theory";
 
 import abb from "./tmp/ABB.png";
@@ -106,6 +107,45 @@ export const Main: Story = {
             prefer not to perform.
           </p>
 
+          <Timeline
+            title="History of robotics"
+            timeline={[
+              {
+                title: "Automatons",
+                desc: [
+                  "Mechanical machines imitating humans",
+                  "Jaquemarts: bell-striking puppet",
+                  "Papamoscas: Burgos Cathedral, Spain",
+                  "Maillardet writing and drawing machine",
+                ],
+                image: aeolus,
+                link: "https://fi.edu/en/science-and-education/collection/maillardets-automaton",
+              },
+              {
+                title: "Early years",
+                desc: [
+                  "1947: first servo-controlled manipulator",
+                  "1952: first numerically controlled machine",
+                  "1954: first programmable manipulator",
+                  "1978: PUMA robot launched by Unimation",
+                ],
+                image: abb,
+                link: "https://spectrum.ieee.org/unimation-robot",
+              },
+              {
+                title: "Cybernetics (1950s)",
+                desc: [
+                  "Grey Walter invented small mobile robots",
+                  "nicknamed turtles with phototube eyes",
+                  "Detected lights and moved toward them",
+                  "Spun and searched for charging stations",
+                ],
+                image: alexa,
+                link: "https://spectrum.ieee.org/meet-roombas-ancestor-cybernetic-tortoise",
+              },
+            ]}
+          />
+
           <TheorySubsection href={"intro1"} title="Robotic products">
             <p>
               Nowadays, there are many robots that surround and accompany us in
@@ -132,7 +172,7 @@ export const Main: Story = {
                       desc: "Industrial handling robot",
                       img: alexa,
                     },
-                   {
+                    {
                       title: "Yaskawa Motoman",
                       desc: "Industrial handling robot",
                       img: alexa,
