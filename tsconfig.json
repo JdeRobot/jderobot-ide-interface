@@ -9,6 +9,7 @@
     "types": [
       "./svg.d.ts",
       "./png.d.ts",
+      "./jpg.d.ts",
     ],
     "paths": {
       "Assets": [ "src/assets"],
@@ -38,6 +39,7 @@
     "src",
     "svg.d.ts",
     "png.d.ts",
+    "jpg.d.ts",
   ]
 }
 
