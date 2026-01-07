@@ -11,6 +11,7 @@ import {
   Timeline,
   TimelineComparison,
   YoutubeVideo,
+  Image
 } from "../Theory";
 
 import abb from "./tmp/ABB.png";
@@ -112,6 +113,8 @@ export const Main: Story = {
             usually handle the “dull”, “dirty” and “dangerous” tasks that humans
             prefer not to perform.
           </p>
+
+          <Image title={"Test img"} caption={"Robot programming cycle"} src={abb}/>
 
           <YoutubeVideo title="Test" id="XzgfaQ20atY"/>
 
