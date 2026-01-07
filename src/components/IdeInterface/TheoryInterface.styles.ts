@@ -16,10 +16,8 @@ export const StyledTheoryTitle = styled.h1<StyledTheoryTitleProps>`
   color: ${(p) => p.color ?? primaryColor};
 `;
 
-
 interface StyledIndexProps {
   color?: string;
-  link?: string;
   depth: number;
 }
 
@@ -41,14 +39,7 @@ export const StyledIndex = styled.ol<StyledIndexProps>`
   }
 
   & a {
-    color: ${(p) => p.link ?? primaryColor};
-    text-decoration: none;
-    font-weight: bold;
     padding-left: 5px;
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 `;
 

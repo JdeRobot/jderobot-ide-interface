@@ -37,4 +37,3 @@ export const StyledImageContainer = styled.figure<StyledImageContainerProps>`
     opacity: 0.8;
   }
 `;
-

@@ -3,7 +3,10 @@ export default IdeInterface;
 
 export { VncViewer } from "./components";
 export { TheoryInterface } from "./components";
-export { StatusBarCustomUniverseSelector, StyledStatusBarEntry } from "./components";
+export {
+  StatusBarCustomUniverseSelector,
+  StyledStatusBarEntry,
+} from "./components";
 export { ProgressBar } from "./components";
 export {
   Button,
@@ -41,7 +44,7 @@ export {
   useOptions,
   ErrorProvider,
   useError,
-  contrastSelector
+  contrastSelector,
 } from "./utils";
 
 export type {
@@ -59,5 +62,5 @@ export type {
   ModalInputSelectIconEntry,
   ExtraSnippets,
   Snippet,
-  CarouselData
+  CarouselData,
 } from "./types";

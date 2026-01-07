@@ -24,7 +24,6 @@ export const StyledSidebarEntry = styled.div<StyledSidebarEntryMenuProps>`
   background-color: ${(p) => p.bgColor ?? primaryColor};
 `;
 
-
 export const StyledSidebarEntryMenu = styled.div<StyledSidebarEntryMenuProps>`
   display: flex;
   align-items: center;

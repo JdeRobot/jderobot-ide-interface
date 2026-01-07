@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-webpack5";
 import Button, { MenuButtonStroke, MenuButton } from "./Button";
 import {
@@ -65,7 +65,7 @@ export const MenuButtons: Story = {
         <OpenArrowIcon />
       </MenuButtonStroke>
       <MenuButton {...args}>
-        <KeyboardIcon/>
+        <KeyboardIcon />
       </MenuButton>
     </>
   ),

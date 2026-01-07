@@ -15,7 +15,6 @@ export const StyledTimelineComparisonContentContainer = styled.div`
   justify-self: center;
 `;
 
-
 export const StyledTimelineComparisonTabsContent = styled.div`
   display: flex;
   flex-direction: column;

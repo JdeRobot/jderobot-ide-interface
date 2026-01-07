@@ -64,7 +64,7 @@ const FileEditor = ({
   const theme = useTheme();
 
   const [fileContent, _setFileContent] = useState<string | undefined>(
-    undefined
+    undefined,
   );
   const [zoomLevel, changeZoomLevel] = useState(0);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
@@ -344,7 +344,7 @@ const FileEditor = ({
                       color={theme.palette?.secondary}
                     >
                       {b}
-                    </StyledSeparatedButtonsContainer>
+                    </StyledSeparatedButtonsContainer>,
                   );
                 }
                 return <>{list}</>;
@@ -362,47 +362,47 @@ const FileEditor = ({
           })()}
         </StyledButtonsContainer>
       </StyledEditorMenu>
-      <StyledSplashEditor bgColor={theme.palette.bg} roundness={theme.viewRoundness}>
-
-      {fileContent !== undefined ? (
-        <>
-          {(() => {
-            for (const editor of extraEditors) {
-              if (editor.language === language) {
-                return (
-                  <editor.component
-                    commsManager={manager}
-                    project={currentProjectname}
-                    file={currentFile}
-                    changeFile={changeCurrentFile}
-                    fileContent={fileContent}
-                    setFileContent={setFileContent}
-                    contentRef={contentRef}
-                    saveFile={autoSave}
-                    language={language}
-                    zoomLevel={zoomLevel}
-                  />
-                );
+      <StyledSplashEditor
+        bgColor={theme.palette.bg}
+        roundness={theme.viewRoundness}
+      >
+        {fileContent !== undefined ? (
+          <>
+            {(() => {
+              for (const editor of extraEditors) {
+                if (editor.language === language) {
+                  return (
+                    <editor.component
+                      commsManager={manager}
+                      project={currentProjectname}
+                      file={currentFile}
+                      changeFile={changeCurrentFile}
+                      fileContent={fileContent}
+                      setFileContent={setFileContent}
+                      contentRef={contentRef}
+                      saveFile={autoSave}
+                      language={language}
+                      zoomLevel={zoomLevel}
+                    />
+                  );
+                }
               }
-            }
-            return (
-              <TextEditor
-                commsManager={manager}
-                fileContent={fileContent}
-                setFileContent={setFileContent}
-                saveFile={autoSave}
-                language={fileLanguageRef.current}
-                zoomLevel={zoomLevel}
-                extraSnippets={extraSnippets}
-              />
-            );
-          })()}
-        </>
-      ) : (
-        <>
-          {splashIcon}
-        </>
-      )}
+              return (
+                <TextEditor
+                  commsManager={manager}
+                  fileContent={fileContent}
+                  setFileContent={setFileContent}
+                  saveFile={autoSave}
+                  language={fileLanguageRef.current}
+                  zoomLevel={zoomLevel}
+                  extraSnippets={extraSnippets}
+                />
+              );
+            })()}
+          </>
+        ) : (
+          <>{splashIcon}</>
+        )}
       </StyledSplashEditor>
     </>
   );

@@ -23,7 +23,7 @@ const StatusBar = ({
   commsManager: CommsManager | null;
   connectManager: (
     desiredState?: string,
-    callback?: () => void
+    callback?: () => void,
   ) => Promise<void>;
   baseUniverse?: string;
   api: ExtraApi;
@@ -32,10 +32,10 @@ const StatusBar = ({
   const theme = useTheme();
   const [loading, setLoading] = useState<boolean>(false);
   const [dockerData, setDockerData] = useState<any>(
-    commsManager?.getHostData()
+    commsManager?.getHostData(),
   );
   const [state, setState] = useState<string | undefined>(
-    commsManager?.getState()
+    commsManager?.getState(),
   );
   const connectWithRetry = async () => {
     const data = commsManager?.getHostData();
@@ -57,7 +57,7 @@ const StatusBar = ({
       connectWithRetry();
     } else {
       if (loading) {
-        setLoading(false)
+        setLoading(false);
       }
     }
   };
@@ -106,7 +106,11 @@ const StatusBar = ({
           title="Connect to the Robotics Backend"
           disabled={loading}
         >
-          <ResetIcon viewBox="0 0 20 20" stroke={theme.palette.darkText} id={loading ? "loading-spin" : "loading"}/>
+          <ResetIcon
+            viewBox="0 0 20 20"
+            stroke={theme.palette.darkText}
+            id={loading ? "loading-spin" : "loading"}
+          />
           <label>{`Connect${state === undefined || state === "idle" ? "" : "ing ..."}`}</label>
         </StyledStatusBarButton>
       )}
@@ -152,7 +156,7 @@ const DefaultUniverseSelector = ({
   project: string;
   connectManager: (
     desiredState?: string,
-    callback?: () => void
+    callback?: () => void,
   ) => Promise<void>;
   commsManager: CommsManager | null;
   api: ExtraApi;
@@ -160,7 +164,7 @@ const DefaultUniverseSelector = ({
 }) => {
   const { warning, error, info } = useError();
   const [universe, setUniverse] = useState<string | undefined>(
-    commsManager?.getUniverse()
+    commsManager?.getUniverse(),
   );
 
   const [universeList, setUniverseList] = useState<string[]>([]);
@@ -203,7 +207,7 @@ const DefaultUniverseSelector = ({
   const terminateUniverse = async () => {
     if (!commsManager) {
       warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected."
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
       );
       return;
     }
@@ -216,7 +220,7 @@ const DefaultUniverseSelector = ({
   const launchUniverse = async (universe: string) => {
     if (!commsManager) {
       warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected."
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
       );
       return;
     }
@@ -272,7 +276,7 @@ const DefaultUniverseSelector = ({
         checkManager();
       });
       throw Error(
-        "The Robotics Backend is disconnected. Make sure to connect."
+        "The Robotics Backend is disconnected. Make sure to connect.",
       );
     }
   };
@@ -314,7 +318,7 @@ export const StatusBarCustomUniverseSelector = ({
   const [open, setOpen] = useState<boolean>(false);
   const { warning, error } = useError();
   const [universe, setUniverse] = useState<string | undefined>(
-    commsManager?.getUniverse()
+    commsManager?.getUniverse(),
   );
 
   const resetUniverse = (e: any) => {
@@ -341,7 +345,7 @@ export const StatusBarCustomUniverseSelector = ({
   const terminateUniverse = async () => {
     if (!commsManager) {
       warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected."
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
       );
       return;
     }
@@ -354,7 +358,7 @@ export const StatusBarCustomUniverseSelector = ({
   const launchUniverse = async (universe: string) => {
     if (!commsManager) {
       warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected."
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
       );
       return;
     }

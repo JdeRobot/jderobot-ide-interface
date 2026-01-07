@@ -2,7 +2,7 @@ import React from "react";
 import { contrastSelector, useTheme } from "Utils";
 
 import { StyledHighlightContainer } from "./HighlightedSection.styles";
-import TipsAndUpdatesRoundedIcon from '@mui/icons-material/TipsAndUpdatesRounded';
+import TipsAndUpdatesRoundedIcon from "@mui/icons-material/TipsAndUpdatesRounded";
 
 const HighlightedSection = ({ children }: { children: any }) => {
   const theme = useTheme();
@@ -11,7 +11,7 @@ const HighlightedSection = ({ children }: { children: any }) => {
   const text = contrastSelector(
     theme.palette.text,
     theme.palette.darkText,
-    theme.palette.button.info
+    theme.palette.button.info,
   );
 
   return (
@@ -21,7 +21,7 @@ const HighlightedSection = ({ children }: { children: any }) => {
       roundness={theme.roundness}
     >
       {children}
-      <TipsAndUpdatesRoundedIcon htmlColor={theme.palette.primary}/>
+      <TipsAndUpdatesRoundedIcon htmlColor={theme.palette.primary} />
     </StyledHighlightContainer>
   );
 };

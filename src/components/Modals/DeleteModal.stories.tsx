@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-webpack5";
 import DeleteModal from "./DeleteModal";
 

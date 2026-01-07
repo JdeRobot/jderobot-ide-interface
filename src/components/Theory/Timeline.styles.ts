@@ -41,7 +41,7 @@ export const StyledTimelineTitle = styled.h3<StyledTimelineTitleProps>`
 export const StyledTimelineSection = styled.div`
   position: relative;
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
 `;
 
 interface StyledTimelineCardProps {
@@ -159,7 +159,7 @@ export const StyledTimelineControls = styled.div<StyledTimelineControlsProps>`
   gap: 0.5rem;
 
   & label:first-child {
-    justify-self: end; 
+    justify-self: end;
   }
 
   & label {

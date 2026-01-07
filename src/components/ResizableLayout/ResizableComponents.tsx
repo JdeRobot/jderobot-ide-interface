@@ -137,7 +137,12 @@ export const ResizableColumn = ({ children }: { children: any[] }) => {
   if (children.length === 2) {
     return (
       <StyledVertContiner bgColor={theme.palette?.bg}>
-        <ResizableVert height={100 / children.length} max={100} snap={[0]} roundness={0}>
+        <ResizableVert
+          height={100 / children.length}
+          max={100}
+          snap={[0]}
+          roundness={0}
+        >
           {children[0]}
         </ResizableVert>
         <StyledVertFillerContiner bgColor={theme.palette?.bg} roundness={0}>
@@ -262,7 +267,10 @@ export const CollapsableResizableColumn = memo(
 
     if (children.length === 0) {
       return (
-        <StyledSplashEditor bgColor={theme.palette.bg} roundness={theme.viewRoundness}>
+        <StyledSplashEditor
+          bgColor={theme.palette.bg}
+          roundness={theme.viewRoundness}
+        >
           {splashIcon}
         </StyledSplashEditor>
       );
@@ -300,5 +308,5 @@ export const CollapsableResizableColumn = memo(
         </StyledVertFillerContiner>
       </StyledVertContiner>
     );
-  }
+  },
 );

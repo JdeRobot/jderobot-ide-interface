@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useState } from "react";
 import { CommsManager } from "jderobot-commsmanager";
 
@@ -38,7 +38,10 @@ export interface IdeInterfaceStyles {
 
 interface IdeInterfaceProps {
   commsManager: CommsManager | null;
-  connectManager: (desiredState?: string, callback?: () => void) => Promise<void>;
+  connectManager: (
+    desiredState?: string,
+    callback?: () => void,
+  ) => Promise<void>;
   project: string;
   explorers: ExplorerEntry[];
   api: ExtraApi;
@@ -151,7 +154,7 @@ const ViewersContainer = ({
   splashIcon: JSX.Element;
 }) => {
   const [visibility, setVisibility] = useState<boolean[]>(
-    viewers.map((viewer) => viewer.active)
+    viewers.map((viewer) => viewer.active),
   );
   const theme = useTheme();
 
@@ -163,7 +166,7 @@ const ViewersContainer = ({
         } else {
           return state;
         }
-      })
+      }),
     );
   };
 

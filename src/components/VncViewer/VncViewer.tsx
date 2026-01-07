@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer } from "react";
 import { useEffect, useState } from "react";
 import { CommsManager } from "jderobot-commsmanager";
 import BounceLoader from "react-spinners/BounceLoader";
@@ -37,9 +37,9 @@ const VncViewer = ({
 }) => {
   const theme = useTheme();
   const [state, setState] = useState<string | undefined>(
-    commsManager?.getState()
+    commsManager?.getState(),
   );
-  const [, forceUpdate] = useReducer(x => x + 1, 0);
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
   const updateState = (e: any) => {
     setState(e.detail.state);
@@ -69,9 +69,7 @@ const VncViewer = ({
       ) : (
         <StyledVNCViewerLoader>
           {state === "idle" ? (
-            <StyledVNCMsg color={theme.palette.error}>
-              {message}
-            </StyledVNCMsg>
+            <StyledVNCMsg color={theme.palette.error}>{message}</StyledVNCMsg>
           ) : (
             <BounceLoader
               color={theme.palette.primary}

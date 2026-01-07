@@ -32,14 +32,14 @@ const CarouselDisplay = ({
   const titleColor = contrastSelector(
     theme.palette.text,
     theme.palette.darkText,
-    theme.palette.bgLight
+    theme.palette.bgLight,
   );
 
   // TODO: tmp
   const sectionColor = contrastSelector(
     theme.palette.text,
     theme.palette.darkText,
-    "#ffffff"
+    "#ffffff",
   );
 
   return (

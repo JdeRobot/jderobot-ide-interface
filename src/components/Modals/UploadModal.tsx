@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useState, useEffect, useRef } from "react";
 
 import Modal, { ModalInputDropArea, ModalRow, ModalTitlebar } from "./Modal";

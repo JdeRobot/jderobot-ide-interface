@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const StyledImageRow = styled.div`
   display: flex;
   justify-content: center;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useTheme } from "Utils";
 import { StyledButton } from "./Button.styles";
 export type ButtonVariant = "standard" | "colored" | "tab";

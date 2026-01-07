@@ -15,5 +15,4 @@ export interface Snippet {
 export interface ExtraSnippets {
   triggers: string[];
   loader: (prevWord: string) => Snippet[];
-
 }

@@ -12,7 +12,8 @@ import {
   TimelineComparison,
   YoutubeVideo,
   Image,
-  ImageRow
+  ImageRow,
+  Link,
 } from "../Theory";
 
 import abb from "./tmp/ABB.png";
@@ -110,19 +111,35 @@ export const Main: Story = {
             literature, often depicting technologies beyond what is currently
             possible in reality. On the other hand,{" "}
             <strong>real robotics</strong> is a rapidly growing field that
-            provides increasingly useful robotic applications to society. Robots
-            usually handle the “dull”, “dirty” and “dangerous” tasks that humans
-            prefer not to perform.
+            provides increasingly useful robotic{" "}
+            <Link
+              href="https://www.youtube.com/watch?v=lLULRlmXkKo&ab_channel=skitterbot"
+              title="applications"
+            />{" "}
+            to society. Robots usually handle the “dull”, “dirty” and
+            “dangerous” tasks that humans prefer not to perform.
           </p>
 
           <ImageRow>
-            <Image title={"Test img"} caption={"Robot programming cycle"} src={abb}/>
-            <Image title={"Test img"} caption={"Robot programming map"} src={mapDynamic}/>
+            <Image
+              title={"Test img"}
+              caption={"Robot programming cycle"}
+              src={abb}
+            />
+            <Image
+              title={"Test img"}
+              caption={"Robot programming map"}
+              src={mapDynamic}
+            />
           </ImageRow>
 
-          <Image title={"Test img"} caption={"Robot programming cycle"} src={abb}/>
+          <Image
+            title={"Test img"}
+            caption={"Robot programming cycle"}
+            src={abb}
+          />
 
-          <YoutubeVideo title="Test" id="XzgfaQ20atY"/>
+          <YoutubeVideo title="Test" id="XzgfaQ20atY" />
 
           <TimelineComparison
             title="Method comparison"

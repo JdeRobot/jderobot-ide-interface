@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useEffect, useState } from "react";
 import FileIcon from "./FileIcon";
 import { ContextMenuProps } from "./MoreActionsMenu";

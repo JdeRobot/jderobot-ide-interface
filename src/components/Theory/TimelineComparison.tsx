@@ -37,7 +37,7 @@ const TimelineComparison = ({
   const titleColor = contrastSelector(
     theme.palette.text,
     theme.palette.darkText,
-    theme.palette.bgLight
+    theme.palette.bgLight,
   );
 
   // const section = "#ffffff";
@@ -47,7 +47,7 @@ const TimelineComparison = ({
   const sectionColor = contrastSelector(
     theme.palette.text,
     theme.palette.darkText,
-    section
+    section,
   );
 
   if (active === undefined) {

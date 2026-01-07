@@ -61,7 +61,8 @@ export const StyledModalTitlebar = styled.div<StyledModalTitlebarProps>`
   align-items: center;
 
   & label {
-    color: ${(p) => contrastSelector(p.color, p.altColor, p.bg) ?? primaryColor};
+    color: ${(p) =>
+      contrastSelector(p.color, p.altColor, p.bg) ?? primaryColor};
     font-weight: 600;
     align-self: center;
     grid-column-start: 2;

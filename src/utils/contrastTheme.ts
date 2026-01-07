@@ -9,7 +9,7 @@ const hexToRgb = (hex: string) =>
   hex
     .replace(
       /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
-      (m, r, g, b) => "#" + r + r + g + g + b + b
+      (m, r, g, b) => "#" + r + r + g + g + b + b,
     )
     .substring(1)
     .match(/.{2}/g)!
@@ -18,7 +18,7 @@ const hexToRgb = (hex: string) =>
 export const contrastSelector = (
   light?: string,
   dark?: string,
-  background?: string
+  background?: string,
 ) => {
   if (background === undefined) return dark;
   if (light === undefined) light = "#fff";
@@ -31,8 +31,8 @@ export const contrastSelector = (
   const darkRgb = hexToRgb(dark);
   const darkLum = rgbToLuminance(darkRgb[0], darkRgb[1], darkRgb[2]);
 
-  const lightContrast = (bgLum - lightLum) * (bgLum - lightLum)
-  const darkContrast = (bgLum - darkLum) * (bgLum - darkLum)
+  const lightContrast = (bgLum - lightLum) * (bgLum - lightLum);
+  const darkContrast = (bgLum - darkLum) * (bgLum - darkLum);
 
   return lightContrast > darkContrast ? light : dark;
 };

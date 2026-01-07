@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useRef, useState } from "react";
 import { StyledDropdown } from "./Dropdown.styles";
 import { useTheme } from "Utils";
@@ -85,7 +85,12 @@ export const DropdownStatusBar = ({
           down={down}
         >
           {possibleValues.map((name, index) => (
-            <button key={`Dropdown${index}`} onClick={(e: any) => changeValue(e, name)}>{name}</button>
+            <button
+              key={`Dropdown${index}`}
+              onClick={(e: any) => changeValue(e, name)}
+            >
+              {name}
+            </button>
           ))}
         </StyledDropdown>
       )}
@@ -164,7 +169,12 @@ export const DropdownIcon = ({
           left={right}
         >
           {possibleValues.map((name, index) => (
-            <button key={`Dropdown${index}`} onClick={(e: any) => changeValue(e, name)}>{name}</button>
+            <button
+              key={`Dropdown${index}`}
+              onClick={(e: any) => changeValue(e, name)}
+            >
+              {name}
+            </button>
           ))}
         </StyledDropdown>
       )}

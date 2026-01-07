@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const StyledList = styled.ul`
   list-style-type: disc;
   padding-left: 1.5rem;

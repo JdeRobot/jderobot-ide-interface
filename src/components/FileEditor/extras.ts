@@ -1,8 +1,8 @@
 import { Monaco } from "@monaco-editor/react";
-import { my_snippets} from "./snippets";
+import { my_snippets } from "./snippets";
 import { CommsManager } from "jderobot-commsmanager";
 import type { languages } from "monaco-editor";
-import { EventEmitter } from 'events'
+import { EventEmitter } from "events";
 import { ExtraSnippets, Snippet } from "Types";
 
 interface Position {
@@ -68,7 +68,9 @@ export const monacoEditorSnippet = (
       }
 
       if (extraSnippets && extraSnippets.triggers.includes(prevWord.word)) {
-        const suggestions = snippetsBuilderV2(monaco, range, () => {return extraSnippets.loader(prevWord.word)});
+        const suggestions = snippetsBuilderV2(monaco, range, () => {
+          return extraSnippets.loader(prevWord.word);
+        });
         return { suggestions };
       }
 
@@ -153,7 +155,11 @@ export const snippetKind = (kind: string, monaco: Monaco) => {
   }
 };
 
-export const snippetsBuilderV2 = (monaco: Monaco, range: Range, callback?: () => Snippet[]) => {
+export const snippetsBuilderV2 = (
+  monaco: Monaco,
+  range: Range,
+  callback?: () => Snippet[],
+) => {
   const snippets: CompletionItem[] = [];
   const importSnippets: Snippet[] = callback ? callback() : my_snippets;
 

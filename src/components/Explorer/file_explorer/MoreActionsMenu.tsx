@@ -155,7 +155,7 @@ export class ContextMenuProps {
     position: { x: number; y: number },
     setPositionCallback: Function,
     file: Entry | undefined,
-    setFile: Function
+    setFile: Function,
   ) {
     this.isShown = isShown;
     this.showCallback = showCallback;

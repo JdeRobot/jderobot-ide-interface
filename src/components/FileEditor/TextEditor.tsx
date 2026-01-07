@@ -169,7 +169,7 @@ const FileEditor = ({
 
   const handleEditorMount = async (
     editor: editor.IStandaloneCodeEditor,
-    monaco: Monaco
+    monaco: Monaco,
   ) => {
     monacoRef.current = monaco;
     editorRef.current = editor;
@@ -264,7 +264,7 @@ const FileEditor = ({
     // scroll
     smoothScrolling: true,
     scrollbar: scrollbar,
-    padding: {top: 10}
+    padding: { top: 10 },
   };
 
   useEffect(() => {
@@ -292,7 +292,7 @@ const FileEditor = ({
         if (commsManager && fileContent) {
           commsManager.code_format(fileContent);
         }
-      }
+      },
     );
 
     editorRef.current.addCommand(
@@ -313,7 +313,7 @@ const FileEditor = ({
             ...pylint_fatal,
           ]);
         }
-      }
+      },
     );
   }, [fileContent]);
 

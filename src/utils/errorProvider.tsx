@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { createContext, useContext, useState } from "react";
 import { ErrorModal } from "Components";
 import { Error, ErrorType } from "Types";
@@ -29,7 +29,7 @@ export const ErrorProvider = ({ children }: { children: any }) => {
 
   const showErrorCritical = (msg: string, url: string) => {
     setMsg(msg);
-    setUrl(url)
+    setUrl(url);
     setType(ErrorType.ERROR_CRITICAL);
     open(true);
   };

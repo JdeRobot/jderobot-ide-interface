@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-webpack5";
 import IdeInterface from "./IdeInterface";
 import { VncViewer } from "Components";
@@ -74,7 +74,9 @@ export const Main: Story = {
       <IdeInterface
         {...args}
         commsManager={null}
-        connectManager={async () => {return}}
+        connectManager={async () => {
+          return;
+        }}
         project={"currentProjectname"}
         explorers={[]}
         api={api}

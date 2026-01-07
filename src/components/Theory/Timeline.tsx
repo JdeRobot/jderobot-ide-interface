@@ -31,7 +31,7 @@ const Timeline = ({
   const titleColor = contrastSelector(
     theme.palette.text,
     theme.palette.darkText,
-    theme.palette.bgLight
+    theme.palette.bgLight,
   );
 
   return (
@@ -96,7 +96,7 @@ const TimelineCard = ({
   const sectionColor = contrastSelector(
     theme.palette.text,
     theme.palette.darkText,
-    section
+    section,
   );
 
   return (
