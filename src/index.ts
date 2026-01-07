@@ -36,6 +36,11 @@ export {
   TheoryCanvas,
   Timeline,
   ComparisonDisplay,
+  TimelineComparison,
+  YoutubeVideo,
+  Image,
+  ImageRow,
+  Link
 } from "./components";
 export {
   ThemeProvider,
@@ -63,4 +68,6 @@ export type {
   ExtraSnippets,
   Snippet,
   CarouselData,
+  TimelineComparisonEntry,
+  TimelineEntry,
 } from "./types";
