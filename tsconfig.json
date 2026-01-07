@@ -7,7 +7,8 @@
       "esnext"
     ],
     "types": [
-      "./svg.d.ts"
+      "./svg.d.ts",
+      "./png.d.ts",
     ],
     "paths": {
       "Assets": [ "src/assets"],
@@ -35,7 +36,8 @@
   },
   "include": [
     "src",
-    "svg.d.ts"
+    "svg.d.ts",
+    "png.d.ts",
   ]
 }
 
