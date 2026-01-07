@@ -79,10 +79,25 @@ export const StyledCarouselSection = styled.button<StyledCarouselSectionProps>`
   transition:
     background-color 0.3s,
     color 0.3s;
+
+  box-shadow:
+    inset 0 1px 2px #ffffff30,
+    0 1px 2px #00000030,
+    0 2px 4px #00000015;
+
   ${handleChange}
   &:hover {
     opacity: 100%;
   }
+`;
+
+export const StyledCarouselSectionSpacer = styled.div`
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  visibility: hidden;
 `;
 
 export const StyledCarouselContentContainer = styled.div`
@@ -125,6 +140,7 @@ export const StyledCarouselImageContainer = styled.div<StyledCarouselImageContai
   color: ${(p) => p.color ?? primaryColor};
   border-radius: ${(p) => p.roundness ?? 1}px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
   ${handleMode}
   display: flex;
   flex-direction: column;
@@ -152,7 +168,7 @@ export const StyledCarouselImageWrapper = styled.div<StyledCarouselImageWrapperP
   aspect-ratio: 1/1;
   ${(p: StyledCarouselImageWrapperProps) => {
     if (p.maxHeight) {
-      return `height: ${p.maxHeight}vh;`;
+      return `height: ${p.maxHeight}vh; max-height: ${p.maxHeight}vh;`;
     }
   }}
   display: flex;
@@ -165,6 +181,14 @@ export const StyledCarouselImageWrapper = styled.div<StyledCarouselImageWrapperP
 `;
 
 export const StyledCarouselImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: inherit;
+`;
+
+export const StyledCarouselVideo = styled.video`
   width: 100%;
   height: 100%;
   object-fit: contain;

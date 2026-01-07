@@ -17,4 +17,4 @@ export type { Options } from "./options";
 export type { Theme } from "./theme";
 export type { ModelRowTypes, ModalInputSelectIconEntry } from "./modal";
 export type {EditorKeybind, Snippet, ExtraSnippets} from "./editor";
-export type {CarouselData, CarouselImage} from "./theory";
+export type {CarouselData, TimelineComparisonEntry, TimelineEntry} from "./theory";

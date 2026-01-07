@@ -9,6 +9,7 @@ import {
   TheorySection,
   TheorySubsection,
   Timeline,
+  TimelineComparison,
 } from "../Theory";
 
 import abb from "./tmp/ABB.png";
@@ -111,6 +112,63 @@ export const Main: Story = {
             prefer not to perform.
           </p>
 
+          <TimelineComparison
+            title="Method comparison"
+            timelines={[
+              {
+                title: "Section1",
+                timeline: [
+                  {
+                    title: "Automatons",
+                    desc: "Clear map",
+                    image: aeolus,
+                  },
+                  {
+                    title: "Early years",
+                    desc: "Place obstacles",
+                    image: abb,
+                  },
+                  {
+                    title: "Cybernetics (1950s)",
+                    desc: "Construction of the graph:\n- One node per vertex.\n- One arc for each pair of nodes (without intersecting objects)",
+                    image: alexa,
+                  },
+                ],
+              },
+              {
+                title: "Section2",
+                timeline: [
+                  {
+                    title: "Early years",
+                    desc: "Clear map",
+                    image: abb,
+                  },
+                  {
+                    title: "Cybernetics (1950s)",
+                    desc: "Construction of the rest of the graph:\n- One node for the start and another one for the goal.\n- One arc for each pair of nodes (without intersecting objects)",
+                    image: alexa,
+                  },
+                ],
+              },
+              undefined,
+              {
+                title: "Section3",
+                timeline: [
+                  {
+                    title: "Early years",
+                    desc: "Clear map",
+                    image: abb,
+                  },
+                  {
+                    title: "Cybernetics (1950s)",
+                    desc: "Construction of the rest of the graph:\n- One node for the start and another one for the goal.\n- One arc for each pair of nodes (without intersecting objects)",
+                    image: alexa,
+                  },
+                ],
+              },
+            ]}
+          />
+
           <Timeline
             title="History of robotics"
             timeline={[
@@ -165,7 +223,7 @@ export const Main: Story = {
                     title: "FANUC",
                     desc: "Factory automation systems",
                     img: mapGlobal,
-                  }
+                  },
                 ],
               },
               {

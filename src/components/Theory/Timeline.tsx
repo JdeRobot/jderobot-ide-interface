@@ -14,15 +14,9 @@ import {
   StyledCarouselImage,
   StyledCarouselImageTitle,
   StyledCarouselImageWrapper,
+  StyledCarouselVideo,
 } from "./CarouselDisplay.styles";
-
-interface TimelineEntry {
-  title: string;
-  era?: string;
-  desc: string[];
-  image: string;
-  link?: string;
-}
+import { TimelineEntry } from "Types";
 
 const Timeline = ({
   title,
@@ -117,22 +111,46 @@ const TimelineCard = ({
       {index - active === 0 ? ( // Solo si es la card activa
         <a href={data.link} target="_blank" rel="noopener noreferrer">
           <StyledCarouselImageWrapper bg={section} roundness={theme.roundness}>
-            <StyledCarouselImage src={data.image} alt={data.title} />
+            {data.type === "video" ? (
+              <StyledCarouselVideo src={data.image} controls />
+            ) : (
+              <StyledCarouselImage src={data.image} alt={data.title} />
+            )}
           </StyledCarouselImageWrapper>
           <StyledCarouselImageTitle>{data.title}</StyledCarouselImageTitle>
-          {data.desc.map((line, i) => (
-            <StyledTimelineImageDesc key={i}>{line}</StyledTimelineImageDesc>
-          ))}
+          {Array.isArray(data.desc) ? (
+            <>
+              {data.desc.map((line, i) => (
+                <StyledTimelineImageDesc key={i}>
+                  {line}
+                </StyledTimelineImageDesc>
+              ))}
+            </>
+          ) : (
+            <StyledTimelineImageDesc>{data.desc}</StyledTimelineImageDesc>
+          )}
         </a>
       ) : (
         <>
           <StyledCarouselImageWrapper bg={section} roundness={theme.roundness}>
-            <StyledCarouselImage src={data.image} alt={data.title} />
+            {data.type === "video" ? (
+              <StyledCarouselVideo src={data.image} controls />
+            ) : (
+              <StyledCarouselImage src={data.image} alt={data.title} />
+            )}
           </StyledCarouselImageWrapper>
           <StyledCarouselImageTitle>{data.title}</StyledCarouselImageTitle>
-          {data.desc.map((line, i) => (
-            <StyledTimelineImageDesc key={i}>{line}</StyledTimelineImageDesc>
-          ))}
+          {Array.isArray(data.desc) ? (
+            <>
+              {data.desc.map((line, i) => (
+                <StyledTimelineImageDesc key={i}>
+                  {line}
+                </StyledTimelineImageDesc>
+              ))}
+            </>
+          ) : (
+            <StyledTimelineImageDesc>{data.desc}</StyledTimelineImageDesc>
+          )}
         </>
       )}
     </StyledTimelineCard>
