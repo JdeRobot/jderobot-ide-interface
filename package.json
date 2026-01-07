@@ -1,6 +1,6 @@
 {
   "name": "jderobot-ide-interface",
-  "version": "0.2.89",
+  "version": "0.2.90",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -52,13 +52,18 @@
     "webpack-dev-server": "^5.2.2"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@monaco-editor/react": "^4.7.0",
+    "@mui/icons-material": "^7.3.6",
+    "@mui/material": "^7.3.6",
     "jderobot-commsmanager": "^1.0.10",
     "jszip": "^3.10.1",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.52.2",
     "re-resizable": "^6.11.2",
-    "react-spinners": "^0.17.0"
+    "react-spinners": "^0.17.0",
+    "react-youtube": "^10.1.0"
   },
   "peerDependencies": {
     "react": "18.2.0",

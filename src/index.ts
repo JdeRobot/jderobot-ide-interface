@@ -24,6 +24,17 @@ export {
   ModalRowDataText,
 } from "./components";
 export {
+  HighlightedSection,
+  Code,
+  TheorySection,
+  TheorySubsection,
+  CarouselDisplay,
+  TheoryList,
+  TheoryCanvas,
+  Timeline,
+  ComparisonDisplay,
+} from "./components";
+export {
   ThemeProvider,
   useTheme,
   OptionsProvider,
@@ -47,5 +58,6 @@ export type {
   ModelRowTypes,
   ModalInputSelectIconEntry,
   ExtraSnippets,
-  Snippet
+  Snippet,
+  CarouselData
 } from "./types";
