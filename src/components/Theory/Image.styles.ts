@@ -9,6 +9,10 @@ interface StyledImageContainerProps {
 }
 
 export const StyledImageContainer = styled.figure<StyledImageContainerProps>`
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   & img {
     max-height: ${(p) => p.height ?? 250}px;

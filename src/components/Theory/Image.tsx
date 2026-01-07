@@ -6,12 +6,12 @@ const Image = ({
   title,
   caption,
   src,
-  height
+  height,
 }: {
   title: string;
   caption: string;
   src: string;
-  height?: number; 
+  height?: number;
 }) => {
   const theme = useTheme();
 
@@ -22,7 +22,11 @@ const Image = ({
   );
 
   return (
-    <StyledImageContainer roundness={theme.roundness} color={text} height={height}>
+    <StyledImageContainer
+      roundness={theme.roundness}
+      color={text}
+      height={height}
+    >
       <img src={src} alt={title} />
       <figcaption>{caption}</figcaption>
     </StyledImageContainer>

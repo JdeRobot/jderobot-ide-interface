@@ -10,3 +10,4 @@ export { default as ComparisonDisplay } from "./ComparisonDisplay";
 export { default as TimelineComparison } from "./TimelineComparison";
 export { default as YoutubeVideo } from "./YoutubeVideo";
 export { default as Image } from "./Image";
+export { default as ImageRow } from "./ImageRow";
