@@ -10,6 +10,7 @@ import {
   TheorySubsection,
   Timeline,
   TimelineComparison,
+  YoutubeVideo,
 } from "../Theory";
 
 import abb from "./tmp/ABB.png";
@@ -111,6 +112,8 @@ export const Main: Story = {
             usually handle the “dull”, “dirty” and “dangerous” tasks that humans
             prefer not to perform.
           </p>
+
+          <YoutubeVideo title="Test" id="XzgfaQ20atY"/>
 
           <TimelineComparison
             title="Method comparison"

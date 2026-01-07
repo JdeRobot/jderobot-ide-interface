@@ -8,3 +8,4 @@ export { default as TheoryCanvas } from "./Canvas";
 export { default as Timeline } from "./Timeline";
 export { default as ComparisonDisplay } from "./ComparisonDisplay";
 export { default as TimelineComparison } from "./TimelineComparison";
+export { default as YoutubeVideo } from "./YoutubeVideo";
