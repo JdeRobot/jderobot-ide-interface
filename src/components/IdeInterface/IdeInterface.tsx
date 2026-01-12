@@ -173,6 +173,7 @@ const ViewersContainer = ({
   };
 
   const toggleVisibility = (index: number) => {
+    viewers[index].activate(!visibility[index])
     setVisibility(
       visibility.map((state, i) => {
         if (index === i) {
@@ -229,6 +230,7 @@ const ViewersContainer = ({
         if (visibility[index]) {
           isVisible = true;
           vis[index] = false;
+          viewers[index].activate(false)
         }
         if (element.name === tool) {
           newIndex = index;
@@ -237,6 +239,7 @@ const ViewersContainer = ({
     }
     if (isVisible) {
       vis[newIndex] = true;
+      viewers[newIndex].activate(true)
       setVisibility(
         visibility.map((state, i) => {
           return vis[i];
