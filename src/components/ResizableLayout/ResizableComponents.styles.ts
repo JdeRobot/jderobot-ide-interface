@@ -6,7 +6,25 @@ const primaryColor = "#007bff";
 interface StyledResizableHorizProps {
   color?: string;
   hover?: string;
+  expand?: boolean;
 }
+
+const handleExpandHor = (p: StyledResizableVertProps) => {
+  if (p.expand) {
+    return `
+      position: relative !important;
+      user-select: auto !important;
+      height: auto !important;
+      max-width: 100% !important;
+      min-width: 0% !important;
+      box-sizing: border-box !important;
+      flex-shrink: 0 !important;
+      flex-grow: 1 !important;
+      z-index: 1 !important;
+      // background-color: ${p.color ?? primaryColor};
+    `;
+  }
+};
 
 export const StyledResizableHoriz = styled(
   Resizable,
@@ -26,6 +44,7 @@ export const StyledResizableHoriz = styled(
     }
     background-color: ${(p) => p.color ?? primaryColor};
   }
+  ${handleExpandHor}
 `;
 
 interface StyledResizableVertProps {

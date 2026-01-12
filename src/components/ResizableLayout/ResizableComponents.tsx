@@ -18,12 +18,16 @@ export const ResizableHoriz = ({
   min,
   max,
   snap,
+  hidden,
+  expand,
   children,
 }: {
   width: number;
   min: number;
   max: number;
   snap: number[];
+  hidden?: boolean;
+  expand?: boolean;
   children: any;
 }) => {
   const theme = useTheme();
@@ -32,6 +36,7 @@ export const ResizableHoriz = ({
     <StyledResizableHoriz
       color={theme.palette?.primary}
       hover={theme.palette?.secondary}
+      expand={expand}
       defaultSize={{
         width: `${width}%`,
       }}
@@ -53,6 +58,7 @@ export const ResizableHoriz = ({
       minWidth={`${min}%`}
       snap={{ x: snap }}
       snapGap={100}
+      style={{ display: hidden ? "none" : "block" }}
     >
       {children}
     </StyledResizableHoriz>
@@ -178,76 +184,38 @@ export const ResizableLayout = ({
   children: any[];
 }) => {
   const theme = useTheme();
-  let components = 0;
-  let oneIndex = 0;
-  let twoIndex = 0;
+  const state = [showExplorer, true, true];
 
-  console.log(oneIndex, twoIndex);
-
-  if (showExplorer) {
-    components += 1;
+  if (layout === "only-editor") {
+    state[2] = false;
+  } else if (layout === "only-viewers") {
+    state[1] = false;
   }
 
-  if (layout === "both") {
-    oneIndex = showExplorer ? 0 : 1;
-    twoIndex = 2;
-    components += 2;
-  } else if (layout === "only-editor") {
-    oneIndex = showExplorer ? 0 : 1;
-    twoIndex = 1;
-    components += 1;
-  } else {
-    oneIndex = showExplorer ? 0 : 2;
-    twoIndex = 2;
-    components += 1;
-  }
-
-  if (components === 0) {
-    return <>{splashIcon}</>;
-  }
-
-  if (components === 1) {
-    return (
-      <StyledHorizContiner bgColor={theme.palette?.primary}>
-        <StyledHorizFillerContiner bgColor={theme.palette?.primary}>
-          {children[oneIndex]}
-        </StyledHorizFillerContiner>
-      </StyledHorizContiner>
-    );
-  }
-
-  if (components === 2) {
-    return (
-      <StyledHorizContiner bgColor={theme.palette?.primary}>
-        <ResizableHoriz
-          width={baseWidth[oneIndex]}
-          max={maxWidth[oneIndex]}
-          snap={[0]}
-        >
-          {children[oneIndex]}
-        </ResizableHoriz>
-        <StyledHorizFillerContiner bgColor={theme.palette?.primary}>
-          {children[twoIndex]}
-        </StyledHorizFillerContiner>
-      </StyledHorizContiner>
-    );
-  }
+  const lastVisible = state.lastIndexOf(true);
 
   return (
     <StyledHorizContiner bgColor={theme.palette?.primary}>
-      {children.slice(0, children.length - 1).map((comp, i) => (
+      {children.slice(0, children.length).map((comp, i) => (
         <ResizableHoriz
           key={`h-cont${i}`}
           width={baseWidth[i]}
           max={maxWidth[i]}
           snap={[0]}
+          hidden={!state[i]}
+          expand={i === lastVisible}
         >
           {comp}
         </ResizableHoriz>
       ))}
-      <StyledHorizFillerContiner bgColor={theme.palette?.primary}>
-        {children[children.length - 1]}
-      </StyledHorizFillerContiner>
+      {lastVisible === -1 && (
+        <StyledSplashEditor
+          bgColor={theme.palette.bg}
+          roundness={theme.viewRoundness}
+        >
+          {splashIcon}
+        </StyledSplashEditor>
+      )}
     </StyledHorizContiner>
   );
 };

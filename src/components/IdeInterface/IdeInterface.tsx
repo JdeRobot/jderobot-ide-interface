@@ -158,11 +158,6 @@ const ViewersContainer = ({
     viewers.map((viewer) => viewer.active),
   );
 
-  console.log(
-    "AA",
-    visibility,
-    viewers.map((viewer) => viewer.active),
-  );
   const theme = useTheme();
 
   useEffect(() => {
@@ -249,21 +244,6 @@ const ViewersContainer = ({
       );
     }
   }, [tool]);
-
-  const visible = [];
-
-  for (let index = 0; index < viewers.length; index++) {
-    const element = viewers[index];
-    if (visibility[index]) {
-      visible.push(element.component);
-    }
-  }
-
-  console.log(
-    visibility,
-    visible,
-    viewers.map((viewer) => viewer.active),
-  );
 
   return (
     <>
