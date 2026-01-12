@@ -253,9 +253,9 @@ const ViewersContainer = ({
     <>
       <StyledViewerMenu bgColor={theme.palette?.primary}>
         <StyledButtonsContainer>
-          {viewers.map((viewer, index) => (
-            <>
-              {!(viewer.group === toggleGroup && viewer.name !== tool) && (
+          {viewers.map((viewer, index) => {
+            if (toggleGroup === undefined) {
+              return (
                 <Button
                   key={`viewer${index}`}
                   active={visibility[index]}
@@ -268,9 +268,26 @@ const ViewersContainer = ({
                 >
                   {viewer.icon}
                 </Button>
-              )}
-            </>
-          ))}
+              );
+            }
+
+            if (!(viewer.group === toggleGroup && viewer.name !== tool)) {
+              return (
+                <Button
+                  key={`viewer${index}`}
+                  active={visibility[index]}
+                  variant="tab"
+                  iconType="fill"
+                  isLabel={false}
+                  title={`Toggle ${viewer.name}`}
+                  id={`${viewer.name}-toggle`}
+                  onClick={() => toggleVisibility(index)}
+                >
+                  {viewer.icon}
+                </Button>
+              );
+            }
+          })}
         </StyledButtonsContainer>
       </StyledViewerMenu>
       <CollapsableResizableColumn splashIcon={splashIcon}>
