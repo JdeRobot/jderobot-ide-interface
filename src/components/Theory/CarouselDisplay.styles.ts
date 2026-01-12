@@ -116,7 +116,7 @@ export const StyledCarouselContent = styled.div<StyledCarouselContentProps>`
     if (p.sideBySide) {
       return `gap: 4%;`;
     }
-    return `gap: 1.5rem;`;
+    return `gap: 1rem;`;
   }}
 `;
 

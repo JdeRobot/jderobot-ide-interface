@@ -2,17 +2,18 @@ import React from "react";
 import { ResetIcon } from "Assets";
 import { CommsManager, states } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
-import { subscribe, unsubscribe, useError, useTheme } from "Utils";
+import { publish, subscribe, unsubscribe, useError, useTheme } from "Utils";
 import {
   StyledStatusBarButton,
   StyledStatusBarContainer,
   StyledStatusBarEntry,
 } from "./StatusBar.style";
 import { DropdownStatusBar } from "Components";
-import { StatusBarComponents, ExtraApi } from "Types";
+import { StatusBarComponents, ExtraApi, ViewersEntry } from "Types";
 
 const StatusBar = ({
   project,
+  viewers,
   commsManager,
   connectManager,
   api,
@@ -23,19 +24,20 @@ const StatusBar = ({
   commsManager: CommsManager | null;
   connectManager: (
     desiredState?: string,
-    callback?: () => void,
+    callback?: () => void
   ) => Promise<void>;
   baseUniverse?: string;
   api: ExtraApi;
+  viewers: ViewersEntry[];
   extraComponents: StatusBarComponents;
 }) => {
   const theme = useTheme();
   const [loading, setLoading] = useState<boolean>(false);
   const [dockerData, setDockerData] = useState<any>(
-    commsManager?.getHostData(),
+    commsManager?.getHostData()
   );
   const [state, setState] = useState<string | undefined>(
-    commsManager?.getState(),
+    commsManager?.getState()
   );
   const connectWithRetry = async () => {
     const data = commsManager?.getHostData();
@@ -136,6 +138,7 @@ const StatusBar = ({
           baseUniverse={baseUniverse}
         />
       )}
+      <DefaultToolsSelector tools={viewers} />
       <div style={{ marginLeft: "auto" }} />
       {extraComponents.extras.map((component: any) => {
         return component;
@@ -156,7 +159,7 @@ const DefaultUniverseSelector = ({
   project: string;
   connectManager: (
     desiredState?: string,
-    callback?: () => void,
+    callback?: () => void
   ) => Promise<void>;
   commsManager: CommsManager | null;
   api: ExtraApi;
@@ -164,7 +167,7 @@ const DefaultUniverseSelector = ({
 }) => {
   const { warning, error, info } = useError();
   const [universe, setUniverse] = useState<string | undefined>(
-    commsManager?.getUniverse(),
+    commsManager?.getUniverse()
   );
 
   const [universeList, setUniverseList] = useState<string[]>([]);
@@ -207,7 +210,7 @@ const DefaultUniverseSelector = ({
   const terminateUniverse = async () => {
     if (!commsManager) {
       warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected."
       );
       return;
     }
@@ -220,7 +223,7 @@ const DefaultUniverseSelector = ({
   const launchUniverse = async (universe: string) => {
     if (!commsManager) {
       warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected."
       );
       return;
     }
@@ -276,7 +279,7 @@ const DefaultUniverseSelector = ({
         checkManager();
       });
       throw Error(
-        "The Robotics Backend is disconnected. Make sure to connect.",
+        "The Robotics Backend is disconnected. Make sure to connect."
       );
     }
   };
@@ -303,6 +306,57 @@ const DefaultUniverseSelector = ({
   );
 };
 
+const DefaultToolsSelector = ({ tools }: { tools: ViewersEntry[] }) => {
+  const [tool, setTool] = useState<string|undefined>(undefined);
+
+  const selectTools = (newTool: string) => {
+    setTool(newTool)
+    publish("changeToolGroup", { tool: newTool });
+  };
+
+  let toggleGroup = undefined;
+  const groups: string[] = [];
+
+  for (let index = 0; index < tools.length; index++) {
+    const element = tools[index];
+    if (element.group !== undefined) {
+      if (groups.includes(element.group)) {
+        toggleGroup = element.group;
+      } else {
+        groups.push(element.group);
+      }
+    }
+  }
+
+  const toggles = [];
+
+  if (toggleGroup !== undefined) {
+    for (let index = 0; index < tools.length; index++) {
+      const element = tools[index];
+      if (element.group === toggleGroup) {
+        toggles.push(element.name);
+      }
+    }
+  }
+
+  return (
+    <DropdownStatusBar
+      id="tools-selector"
+      title="Tools Selector"
+      width={300}
+      baseHeight={24}
+      down={false}
+      setter={selectTools}
+      onOpen={() => {}}
+      possibleValues={toggles}
+    >
+      <label>
+        {toggles.length > 1 ? `Tool: ${tool ? tool : toggles[0]}` : `No tools to select`}
+      </label>
+    </DropdownStatusBar>
+  );
+};
+
 export const StatusBarCustomUniverseSelector = ({
   project,
   commsManager,
@@ -318,7 +372,7 @@ export const StatusBarCustomUniverseSelector = ({
   const [open, setOpen] = useState<boolean>(false);
   const { warning, error } = useError();
   const [universe, setUniverse] = useState<string | undefined>(
-    commsManager?.getUniverse(),
+    commsManager?.getUniverse()
   );
 
   const resetUniverse = (e: any) => {
@@ -345,7 +399,7 @@ export const StatusBarCustomUniverseSelector = ({
   const terminateUniverse = async () => {
     if (!commsManager) {
       warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected."
       );
       return;
     }
@@ -358,7 +412,7 @@ export const StatusBarCustomUniverseSelector = ({
   const launchUniverse = async (universe: string) => {
     if (!commsManager) {
       warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
+        "Failed to connect with the Robotics Backend docker. Please make sure it is connected."
       );
       return;
     }

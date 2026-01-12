@@ -46,6 +46,7 @@ export interface ViewersEntry {
   icon: JSX.Element;
   name: string;
   active: boolean;
+  group?: string;
   activate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

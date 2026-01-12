@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { CommsManager } from "jderobot-commsmanager";
 
@@ -12,7 +12,7 @@ import {
   Button,
   StyledButtonsContainer,
 } from "Components";
-import { OptionsProvider, useTheme } from "Utils";
+import { OptionsProvider, subscribe, unsubscribe, useTheme } from "Utils";
 import {
   Entry,
   Layout,
@@ -40,7 +40,7 @@ interface IdeInterfaceProps {
   commsManager: CommsManager | null;
   connectManager: (
     desiredState?: string,
-    callback?: () => void,
+    callback?: () => void
   ) => Promise<void>;
   project: string;
   explorers: ExplorerEntry[];
@@ -133,6 +133,7 @@ const IdeInterface = ({
         </ResizableLayout>
         <StatusBar
           project={project}
+          viewers={viewers}
           commsManager={commsManager}
           connectManager={connectManager}
           extraComponents={statusBarComponents}
@@ -154,9 +155,21 @@ const ViewersContainer = ({
   splashIcon: JSX.Element;
 }) => {
   const [visibility, setVisibility] = useState<boolean[]>(
-    viewers.map((viewer) => viewer.active),
+    viewers.map((viewer) => viewer.active)
   );
   const theme = useTheme();
+
+  useEffect(() => {
+    subscribe("changeToolGroup", changeToolInGroup);
+
+    return () => {
+      unsubscribe("changeToolGroup", () => {});
+    };
+  }, []);
+
+  const changeToolInGroup = (e: any) => {
+    setTool(e.detail.tool);
+  };
 
   const toggleVisibility = (index: number) => {
     setVisibility(
@@ -166,32 +179,102 @@ const ViewersContainer = ({
         } else {
           return state;
         }
-      }),
+      })
     );
   };
+
+  let toggleGroup = undefined;
+  const groups: string[] = [];
+
+  for (let index = 0; index < viewers.length; index++) {
+    const element = viewers[index];
+    if (element.group !== undefined) {
+      if (groups.includes(element.group)) {
+        toggleGroup = element.group;
+      } else {
+        groups.push(element.group);
+      }
+    }
+  }
+
+  const toggles = [];
+
+  if (toggleGroup !== undefined) {
+    for (let index = 0; index < viewers.length; index++) {
+      const element = viewers[index];
+      if (element.group === toggleGroup) {
+        toggles.push(element.name);
+      }
+    }
+  } else {
+    toggles.push(undefined);
+  }
+
+  const [tool, setTool] = useState<string | undefined>(toggles[0]);
+
+  useEffect(() => {
+    let isVisible = false;
+    let newIndex = 0;
+
+    const vis = visibility;
+
+    for (let index = 0; index < viewers.length; index++) {
+      const element = viewers[index];
+      if (element.group === toggleGroup) {
+        if (visibility[index]) {
+          isVisible = true;
+          vis[index] = false;
+        }
+        if (element.name === tool) {
+          newIndex = index;
+        }
+      }
+    }
+    if (isVisible) {
+      vis[newIndex] = true;
+      setVisibility(
+        visibility.map((state, i) => {
+          return vis[i];
+        })
+      );
+    }
+  }, [tool]);
+
+  const visible = [];
+
+  for (let index = 0; index < viewers.length; index++) {
+    const element = viewers[index];
+    if (visibility[index]) {
+      visible.push(element.component);
+    }
+  }
 
   return (
     <>
       <StyledViewerMenu bgColor={theme.palette?.primary}>
         <StyledButtonsContainer>
           {viewers.map((viewer, index) => (
-            <Button
-              key={`viewer${index}`}
-              active={visibility[index]}
-              variant="tab"
-              iconType="fill"
-              isLabel={false}
-              title={`Toggle ${viewer.name}`}
-              id={`${viewer.name}-toggle`}
-              onClick={() => toggleVisibility(index)}
-            >
-              {viewer.icon}
-            </Button>
+            <>
+              {!(viewer.group === toggleGroup && viewer.name !== tool) && (
+                <Button
+                  key={`viewer${index}`}
+                  active={visibility[index]}
+                  variant="tab"
+                  iconType="fill"
+                  isLabel={false}
+                  title={`Toggle ${viewer.name}`}
+                  id={`${viewer.name}-toggle`}
+                  onClick={() => toggleVisibility(index)}
+                >
+                  {viewer.icon}
+                </Button>
+              )}
+            </>
           ))}
         </StyledButtonsContainer>
       </StyledViewerMenu>
-      <CollapsableResizableColumn state={visibility} splashIcon={splashIcon}>
-        {viewers.map((viewer) => viewer.component)}
+      <CollapsableResizableColumn splashIcon={splashIcon}>
+        {visible}
       </CollapsableResizableColumn>
     </>
   );

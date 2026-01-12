@@ -247,23 +247,14 @@ export const ResizableLayout = ({
 
 export const CollapsableResizableColumn = memo(
   function CollapsableResizableColumn({
-    state,
     splashIcon,
     children,
   }: {
-    state: boolean[];
     splashIcon: JSX.Element;
     children: any[];
   }) {
     const theme = useTheme();
-
-    if (state.length === children.length) {
-      for (let index = state.length - 1; index >= 0; index--) {
-        if (!state[index]) {
-          children.splice(index, 1);
-        }
-      }
-    }
+    // console.log(children)
 
     if (children.length === 0) {
       return (
