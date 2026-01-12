@@ -157,6 +157,8 @@ const ViewersContainer = ({
   const [visibility, setVisibility] = useState<boolean[]>(
     viewers.map((viewer) => viewer.active)
   );
+
+  console.log("AA",visibility, viewers.map((viewer) => viewer.active))
   const theme = useTheme();
 
   useEffect(() => {
@@ -218,6 +220,11 @@ const ViewersContainer = ({
 
     const vis = visibility;
 
+    if (toggleGroup === undefined) {
+      return
+    }
+
+
     for (let index = 0; index < viewers.length; index++) {
       const element = viewers[index];
       if (element.group === toggleGroup) {
@@ -248,6 +255,8 @@ const ViewersContainer = ({
       visible.push(element.component);
     }
   }
+
+  console.log(visibility, visible, viewers.map((viewer) => viewer.active))
 
   return (
     <>
