@@ -40,7 +40,7 @@ interface IdeInterfaceProps {
   commsManager: CommsManager | null;
   connectManager: (
     desiredState?: string,
-    callback?: () => void
+    callback?: () => void,
   ) => Promise<void>;
   project: string;
   explorers: ExplorerEntry[];
@@ -155,10 +155,14 @@ const ViewersContainer = ({
   splashIcon: JSX.Element;
 }) => {
   const [visibility, setVisibility] = useState<boolean[]>(
-    viewers.map((viewer) => viewer.active)
+    viewers.map((viewer) => viewer.active),
   );
 
-  console.log("AA",visibility, viewers.map((viewer) => viewer.active))
+  console.log(
+    "AA",
+    visibility,
+    viewers.map((viewer) => viewer.active),
+  );
   const theme = useTheme();
 
   useEffect(() => {
@@ -181,7 +185,7 @@ const ViewersContainer = ({
         } else {
           return state;
         }
-      })
+      }),
     );
   };
 
@@ -221,9 +225,8 @@ const ViewersContainer = ({
     const vis = visibility;
 
     if (toggleGroup === undefined) {
-      return
+      return;
     }
-
 
     for (let index = 0; index < viewers.length; index++) {
       const element = viewers[index];
@@ -242,7 +245,7 @@ const ViewersContainer = ({
       setVisibility(
         visibility.map((state, i) => {
           return vis[i];
-        })
+        }),
       );
     }
   }, [tool]);
@@ -256,7 +259,11 @@ const ViewersContainer = ({
     }
   }
 
-  console.log(visibility, visible, viewers.map((viewer) => viewer.active))
+  console.log(
+    visibility,
+    visible,
+    viewers.map((viewer) => viewer.active),
+  );
 
   return (
     <>
@@ -299,8 +306,8 @@ const ViewersContainer = ({
           })}
         </StyledButtonsContainer>
       </StyledViewerMenu>
-      <CollapsableResizableColumn splashIcon={splashIcon}>
-        {visible}
+      <CollapsableResizableColumn state={visibility} splashIcon={splashIcon}>
+        {viewers.map((viewer) => viewer.component)}
       </CollapsableResizableColumn>
     </>
   );

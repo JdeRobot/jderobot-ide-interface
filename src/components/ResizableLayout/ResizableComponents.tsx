@@ -8,6 +8,7 @@ import {
   StyledResizableVertBlock,
   StyledVertContiner,
   StyledVertFillerContiner,
+  StyledVertRContainer,
 } from "./ResizableComponents.styles";
 import { useTheme } from "Utils";
 import { StyledSplashEditor } from "../FileEditor/FileEditor.styles";
@@ -71,6 +72,8 @@ export const ResizableVert = ({
   snap,
   top,
   roundness,
+  hidden,
+  expand,
   children,
 }: {
   height: number;
@@ -79,6 +82,8 @@ export const ResizableVert = ({
   snap: number[];
   top?: boolean;
   roundness?: number;
+  hidden?: boolean;
+  expand?: boolean;
   children: any;
 }) => {
   const theme = useTheme();
@@ -87,6 +92,7 @@ export const ResizableVert = ({
     <StyledResizableVert
       color={theme.palette?.primary}
       hover={theme.palette?.secondary}
+      expand={expand}
       defaultSize={{
         height: `${height}%`,
       }}
@@ -109,6 +115,7 @@ export const ResizableVert = ({
       minHeight={`${min}%`}
       snap={{ y: snap }}
       snapGap={100}
+      style={{ display: hidden ? "none" : "block" }}
     >
       <StyledResizableVertBlock roundness={roundness}>
         {children}
@@ -247,57 +254,45 @@ export const ResizableLayout = ({
 
 export const CollapsableResizableColumn = memo(
   function CollapsableResizableColumn({
+    state,
     splashIcon,
     children,
   }: {
+    state: boolean[];
     splashIcon: JSX.Element;
     children: any[];
   }) {
     const theme = useTheme();
-    // console.log(children)
 
-    if (children.length === 0) {
-      return (
-        <StyledSplashEditor
-          bgColor={theme.palette.bg}
-          roundness={theme.viewRoundness}
-        >
-          {splashIcon}
-        </StyledSplashEditor>
-      );
-    }
-
-    // if (children.length === 1) {
-    //   return (
-    //     <StyledVertContiner bgColor={theme.palette?.bg}>
-    //       <StyledVertFillerContiner bgColor={theme.palette?.bg}>
-    //         {children[0]}
-    //       </StyledVertFillerContiner>
-    //     </StyledVertContiner>
-    //   );
-    // }
+    const lastVisible = state.lastIndexOf(true);
 
     return (
-      <StyledVertContiner bgColor={theme.palette?.primary}>
-        {children.slice(0, children.length - 1).map((comp, i) => (
-          <ResizableVert
-            key={`v-cont${i}`}
-            height={100 / children.length}
-            max={100}
-            min={0}
-            snap={[0]}
-            roundness={theme.viewRoundness}
-          >
-            {comp}
-          </ResizableVert>
-        ))}
-        <StyledVertFillerContiner
-          bgColor={theme.palette?.primary}
-          roundness={theme.viewRoundness}
-        >
-          {children[children.length - 1]}
-        </StyledVertFillerContiner>
-      </StyledVertContiner>
+      <StyledVertRContainer roundness={theme.viewRoundness}>
+        <StyledVertContiner bgColor={theme.palette?.primary}>
+          {children.slice(0, children.length).map((comp, i) => (
+            <ResizableVert
+              key={`v-cont${i}`}
+              height={100 / children.length}
+              max={100}
+              min={0}
+              snap={[0]}
+              roundness={theme.viewRoundness}
+              hidden={!state[i]}
+              expand={i === lastVisible}
+            >
+              {comp}
+            </ResizableVert>
+          ))}
+          {lastVisible === -1 && (
+            <StyledSplashEditor
+              bgColor={theme.palette.bg}
+              roundness={theme.viewRoundness}
+            >
+              {splashIcon}
+            </StyledSplashEditor>
+          )}
+        </StyledVertContiner>
+      </StyledVertRContainer>
     );
   },
 );

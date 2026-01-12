@@ -40,7 +40,7 @@ export {
   YoutubeVideo,
   Image,
   ImageRow,
-  Link
+  Link,
 } from "./components";
 export {
   ThemeProvider,

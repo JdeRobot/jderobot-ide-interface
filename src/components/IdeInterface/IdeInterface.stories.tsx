@@ -61,7 +61,13 @@ const gazeboViewer = {
 };
 
 const terminalViewer = {
-  component: <VncViewer commsManager={null} port={1108} message={"Click Play to connect "}/>,
+  component: (
+    <VncViewer
+      commsManager={null}
+      port={1108}
+      message={"Click Play to connect "}
+    />
+  ),
   icon: <SaveIcon />,
   name: "Terminal",
   group: "a",
@@ -70,7 +76,13 @@ const terminalViewer = {
 };
 
 const terminalViewer2 = {
-  component: <VncViewer commsManager={null} port={1108} message={"Click Play to connect to the Robotics Backend"}/>,
+  component: (
+    <VncViewer
+      commsManager={null}
+      port={1108}
+      message={"Click Play to connect to the Robotics Backend"}
+    />
+  ),
   icon: <SaveIcon />,
   name: "Terminal 2",
   active: false,
@@ -79,14 +91,13 @@ const terminalViewer2 = {
 };
 
 const terminalViewer3 = {
-  component: <VncViewer commsManager={null} port={1108} message={"3"}/>,
+  component: <VncViewer commsManager={null} port={1108} message={"3"} />,
   icon: <SaveIcon />,
   name: "Terminal 3",
   active: false,
   group: "a",
   activate: () => {},
 };
-
 
 export const Main: Story = {
   render: (args) => (
@@ -101,7 +112,12 @@ export const Main: Story = {
         explorers={[]}
         api={api}
         extraEditors={[]}
-        viewers={[gazeboViewer, terminalViewer, terminalViewer2, terminalViewer3]}
+        viewers={[
+          gazeboViewer,
+          terminalViewer,
+          terminalViewer2,
+          terminalViewer3,
+        ]}
         statusBarComponents={{ extras: [] }}
       />
     </div>

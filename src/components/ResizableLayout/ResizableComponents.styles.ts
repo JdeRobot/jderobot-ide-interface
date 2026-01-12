@@ -31,12 +31,34 @@ export const StyledResizableHoriz = styled(
 interface StyledResizableVertProps {
   color?: string;
   hover?: string;
+  expand?: boolean;
 }
 
-export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
-  display: flex;
-  flex-direction: column;
+const handleExpand = (p: StyledResizableVertProps) => {
+  if (p.expand) {
+    return `
+      position: relative !important;
+      user-select: auto !important;
+      width: auto !important;
+      max-height: 100% !important;
+      min-height: 0% !important;
+      box-sizing: border-box !important;
+      flex-shrink: 0 !important;
+      flex-grow: 1 !important;
+      z-index: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      height: unset !important;
+    `;
+  } else {
+    return `
+      display: flex;
+      flex-direction: column;
+    `;
+  }
+};
 
+export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
   .vresize-handle {
     position: absolute;
     height: 5px !important;
@@ -51,6 +73,8 @@ export const StyledResizableVert = styled(Resizable)<StyledResizableVertProps>`
     }
     background-color: ${(p) => p.color ?? primaryColor};
   }
+
+  ${handleExpand}
 `;
 
 interface StyledResizableVertBlockProps {
@@ -108,6 +132,22 @@ export const StyledVertContiner = styled.div<StyledVertContinerProps>`
   background-color: ${(p) => p.bgColor ?? primaryColor};
 `;
 
+interface StyledVertRContainerProps {
+  roundness?: number;
+}
+
+export const StyledVertRContainer = styled.div<StyledVertRContainerProps>`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-grow: 1;
+  z-index: 3;
+  border-radius: ${(p) => p.roundness ?? 20}px;
+  overflow: hidden;
+`;
+
 interface StyledVertFillerContinerProps {
   bgColor?: string;
   roundness?: number;
@@ -123,10 +163,9 @@ export const StyledVertFillerContiner = styled.div<StyledVertFillerContinerProps
   flex-shrink: 0;
   flex-grow: 1;
   z-index: 1;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   background-color: ${(p) => p.bgColor ?? primaryColor};
   border-radius: ${(p) => p.roundness ?? 20}px;
-  overflow: hidden;
 `;
