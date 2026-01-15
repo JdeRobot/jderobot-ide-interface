@@ -31,6 +31,7 @@ export {
   Code,
   TheorySection,
   TheorySubsection,
+  TheorySubsubsection,
   CarouselDisplay,
   TheoryList,
   TheoryCanvas,

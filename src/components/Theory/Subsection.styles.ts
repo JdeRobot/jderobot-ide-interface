@@ -9,6 +9,9 @@ interface StyledSubsectionProps {
 export const StyledSubsection = styled.section<StyledSubsectionProps>`
   margin-top: 2rem;
   color: ${(p) => p.color ?? primaryColor};
+  counter-reset: subsubsection;
+  margin-left: -1rem;
+
 `;
 
 export const StyledSubsectionTitle = styled.h4`

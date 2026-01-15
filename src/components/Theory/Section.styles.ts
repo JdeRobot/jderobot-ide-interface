@@ -11,7 +11,7 @@ export const StyledSection = styled.section<StyledSectionProps>`
   margin-bottom: 7rem;
   color: ${(p) => p.color ?? primaryColor};
   counter-reset: subsection;
-  margin-left: 2rem;
+  margin-left: 3rem;
 
   & p {
     text-align: justify;
@@ -24,7 +24,7 @@ export const StyledSectionTitle = styled.h3`
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
-  margin-left: -2rem;
+  margin-left: -3rem;
 
   &:before {
     counter-increment: section;
