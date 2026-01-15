@@ -1,9 +1,9 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, ReactNode, useContext } from "react";
 import { Theme } from "Types";
 
 interface ThemeProviderProps {
   theme: Theme;
-  children?: React.ReactNode;
+  children: ReactNode;
 }
 
 const defaultTheme: Theme = {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { contrastSelector, useTheme } from "Utils";
 import { StyledSubsection, StyledSubsectionTitle } from "./Subsection.styles";
 
@@ -9,7 +9,7 @@ const TheorySubsection = ({
 }: {
   title: string;
   href: string;
-  children: any;
+  children: ReactNode;
 }) => {
   const theme = useTheme();
 

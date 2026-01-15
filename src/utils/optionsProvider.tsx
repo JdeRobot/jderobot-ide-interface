@@ -1,10 +1,10 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, ReactNode, useContext } from "react";
 import { merge } from "lodash";
 import { Options } from "Types";
 
 interface OptionsProviderProps {
   options?: Options;
-  children?: React.ReactNode;
+  children: ReactNode;
 }
 
 const defaultOptions: Options = {

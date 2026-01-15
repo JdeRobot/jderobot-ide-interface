@@ -1,10 +1,10 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { contrastSelector, useTheme } from "Utils";
 
 import { StyledHighlightContainer } from "./HighlightedSection.styles";
 import TipsAndUpdatesRoundedIcon from "@mui/icons-material/TipsAndUpdatesRounded";
 
-const HighlightedSection = ({ children }: { children: any }) => {
+const HighlightedSection = ({ children }: { children: ReactNode }) => {
   const theme = useTheme();
 
   // TODO: temp

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { StyledImageRow } from "./ImageRow.styles";
 
-const ImageRow = ({ children }: { children?: JSX.Element | JSX.Element[] }) => {
+const ImageRow = ({ children }: { children: ReactNode }) => {
   return <StyledImageRow>{children}</StyledImageRow>;
 };
 

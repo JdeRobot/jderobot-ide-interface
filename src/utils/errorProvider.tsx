@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { createContext, useContext, useState } from "react";
 import { ErrorModal } from "Components";
 import { Error, ErrorType } from "Types";
@@ -15,7 +15,7 @@ const ErrorContext = createContext<Error>({
   close: () => {},
 });
 
-export const ErrorProvider = ({ children }: { children: any }) => {
+export const ErrorProvider = ({ children }: { children: ReactNode }) => {
   const [isOpen, open] = useState<boolean>(false);
   const [msg, setMsg] = useState<string>("");
   const [url, setUrl] = useState<string>("..");

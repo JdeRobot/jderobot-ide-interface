@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { contrastSelector, useTheme } from "Utils";
 import { StyledSection, StyledSectionTitle } from "./Section.styles";
 
@@ -9,7 +9,7 @@ const TheorySection = ({
 }: {
   title: string;
   href: string;
-  children: any;
+  children: ReactNode;
 }) => {
   const theme = useTheme();
 
