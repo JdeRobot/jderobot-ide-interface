@@ -13,3 +13,4 @@ export { default as YoutubeVideo } from "./YoutubeVideo";
 export { default as Image } from "./Image";
 export { default as ImageRow } from "./ImageRow";
 export { default as Link } from "./Link";
+export { default as FormulaSection} from "./FormulaSection";
