@@ -1,8 +1,8 @@
-import React from "react";
+import React, {ReactNode} from "react";
 import { contrastSelector, useTheme } from "Utils";
 import {StyledFormulaContainer } from "./FormulaSection.styles"
 
-const FormulaSection = () => {
+const FormulaSection = ({ children }: { children: ReactNode }) => {
     const theme = useTheme();
 
     const text = contrastSelector(
