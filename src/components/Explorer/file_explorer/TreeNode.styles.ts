@@ -70,6 +70,7 @@ export const StyledExplorerItem = styled.div<StyledExplorerItemProps>`
     padding: 3px;
     font-size: 0.9em;
     color: ${(p) => p.color ?? primaryColor};
+    margin: 0;
   }
 
   & svg {
