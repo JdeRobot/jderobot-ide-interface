@@ -15,6 +15,7 @@ import {
   ImageRow,
   Link,
   TheorySubsubsection,
+  FormulaSection,
 } from "../Theory";
 
 import abb from "./tmp/ABB.png";
@@ -107,6 +108,11 @@ export const Main: Story = {
           href={"intro"}
           title="Robotics fiction, robotic products, and research"
         >
+          <FormulaSection>
+            Y = y<sub>a</sub> + m<sub>y</sub>λ
+            <br />X = x<sub>a</sub> + m<sub>x</sub>λ
+          </FormulaSection>
+
           <p>
             <strong>Robotics fiction</strong> appears in movies, TV series and
             literature, often depicting technologies beyond what is currently
