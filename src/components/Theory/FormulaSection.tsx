@@ -6,16 +6,17 @@ import { StyledFormulaContainer } from "./FormulaSection.styles";
 const FormulaSection = ({ children }: { children: ReactNode }) => {
   const theme = useTheme();
 
-  // TODO: temp
   const text = contrastSelector(
     theme.palette.text,
-    theme.palette.bg,
+    theme.palette.darkText,
+    theme.palette.bgLight,
   );
 
   return (
     <StyledFormulaContainer
       color={text}
-      bg={theme.palette.bg}
+      bg={theme.palette.bgLight}
+      roundness={theme.roundness}
     >
       {children}
     </StyledFormulaContainer>
