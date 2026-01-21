@@ -15,7 +15,8 @@ const FormulaSection = ({ children }: { children: ReactNode }) => {
         <StyledFormulaContainer
             color = {text}
             bg = {theme.palette.bg}
-        >            
+        >
+            {children}   
         </StyledFormulaContainer>
     );
 };
