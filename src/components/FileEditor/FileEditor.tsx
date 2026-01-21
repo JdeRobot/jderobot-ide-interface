@@ -113,6 +113,9 @@ const FileEditor = ({
       if (options?.editor?.onlyOneFile) {
         unsubscribe("uploadOnlyCode", () => {});
       }
+      if (autosave) {
+        autoSave();
+      }
     };
   }, []);
 

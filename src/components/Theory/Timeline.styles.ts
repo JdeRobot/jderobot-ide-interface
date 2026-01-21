@@ -86,6 +86,7 @@ const handleVisibility = (p: StyledTimelineCardProps) => {
     return `
       visibility: hidden;
       position: relative !important;
+      display: unset !important;
     `;
   }
 };
