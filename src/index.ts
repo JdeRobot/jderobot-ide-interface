@@ -39,6 +39,7 @@ export {
   ComparisonDisplay,
   TimelineComparison,
   YoutubeVideo,
+  LocalVideo,
   Image,
   ImageRow,
   Link,
