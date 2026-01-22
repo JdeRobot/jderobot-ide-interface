@@ -11,6 +11,7 @@ import {
   Timeline,
   TimelineComparison,
   YoutubeVideo,
+  LocalVideo,
   Image,
   ImageRow,
   Link,
@@ -25,6 +26,8 @@ import alexa from "./tmp/alexa.jpg";
 import mapLocal from "./tmp/mapLocal.png";
 import mapGlobal from "./tmp/mapGlobal.png";
 import mapDynamic from "./tmp/mapDynamic.png";
+
+const videoTest = new URL("./tmp/video-test.mp4", import.meta.url).href;
 
 type Story = StoryObj<typeof TheoryInterface>;
 
@@ -147,6 +150,10 @@ export const Main: Story = {
           />
 
           <YoutubeVideo title="Test" id="XzgfaQ20atY" />
+
+          <p>And now, the local video test:</p>
+
+          <LocalVideo src={videoTest}/>
 
           <TimelineComparison
             title="Method comparison"
