@@ -515,6 +515,7 @@ const Explorer = ({
         onSubmit={handleSubmitUploadModal}
         onClose={handleCloseUploadModal}
         upload={api.file.upload}
+        fetchFiles={fetchFileList}
         location={selectedLocation}
         currentProject={project}
       />

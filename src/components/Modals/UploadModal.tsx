@@ -11,12 +11,14 @@ const UploadModal = ({
   onClose,
   upload,
   location,
+  fetchFiles,
   currentProject,
 }: {
   onSubmit: () => void;
   isOpen: boolean;
   onClose: Function;
   upload: Function;
+  fetchFiles: Function;
   location: string;
   currentProject: string;
 }) => {
@@ -66,10 +68,11 @@ const UploadModal = ({
         }
       };
 
-      reader.onload = (e: any) => {
+      reader.onload = async (e: any) => {
         const base64String = e.target.result.split(",")[1]; // Remove the data URL prefix
         try {
-          upload(currentProject, location, file.name, base64String);
+          await upload(currentProject, location, file.name, base64String);
+          fetchFiles()
           console.log("Uploading file Completed");
         } catch (e) {
           if (e instanceof Error) {
@@ -86,7 +89,7 @@ const UploadModal = ({
       n_files_uploaded++;
     });
 
-    onSubmit();
+    onClose();
   };
 
   const handleSubmit = (event: any) => {
