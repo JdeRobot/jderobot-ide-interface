@@ -144,9 +144,7 @@ export const ResizableColumn = ({ children }: { children: any[] }) => {
   if (children.length === 1) {
     return (
       <StyledVertContiner bgColor={theme.palette?.bg}>
-        <StyledVertIdeContainer bgColor={theme.palette?.bg}>
           {children[0]}
-        </StyledVertIdeContainer>
       </StyledVertContiner>
     );
   }

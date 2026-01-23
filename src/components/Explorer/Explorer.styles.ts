@@ -3,6 +3,7 @@ import styled from "styled-components";
 const primaryColor = "#666";
 
 export const StyledSidebarContainer = styled.div`
+  position: relative;
   margin-right: 2.5px;
   height: 100%;
   width: 100%;
@@ -16,7 +17,7 @@ interface StyledSidebarEntryMenuProps {
 }
 
 export const StyledSidebarEntry = styled.div<StyledSidebarEntryMenuProps>`
-  height: fit-content;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
