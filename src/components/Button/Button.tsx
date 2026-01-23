@@ -28,11 +28,9 @@ const Button = ({
   return (
     <StyledButton
       bgColor={theme.palette?.secondary}
-      color={theme.palette?.text}
       roundness={theme.roundness}
       variant={variant}
       isLabel={isLabel}
-      iconType={iconType}
       title={title}
       id={id}
       active={active}

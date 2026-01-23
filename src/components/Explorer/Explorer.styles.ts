@@ -3,7 +3,7 @@ import styled from "styled-components";
 const primaryColor = "#666";
 
 export const StyledSidebarContainer = styled.div`
-  width: 100%;
+  margin-right: 2.5px;
   height: 100%;
   display: flex;
   flex-direction: column;

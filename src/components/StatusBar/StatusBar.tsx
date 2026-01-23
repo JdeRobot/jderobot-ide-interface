@@ -2,7 +2,7 @@ import React from "react";
 import { ResetIcon } from "Assets";
 import { CommsManager, states } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
-import { publish, subscribe, unsubscribe, useError, useTheme } from "Utils";
+import { contrastSelector, publish, subscribe, unsubscribe, useError, useTheme } from "Utils";
 import {
   StyledStatusBarButton,
   StyledStatusBarContainer,
@@ -39,6 +39,13 @@ const StatusBar = ({
   const [state, setState] = useState<string | undefined>(
     commsManager?.getState(),
   );
+
+  const text = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.warning,
+  );
+
   const connectWithRetry = async () => {
     const data = commsManager?.getHostData();
     if (data) {
@@ -91,7 +98,7 @@ const StatusBar = ({
         </>
       ) : (
         <StyledStatusBarButton
-          text={theme.palette.darkText}
+          text={text}
           bgColor={theme.palette.warning}
           hoverColor={theme.palette.button.hoverWarning}
           animate
@@ -109,8 +116,7 @@ const StatusBar = ({
           disabled={loading}
         >
           <ResetIcon
-            viewBox="0 0 20 20"
-            stroke={theme.palette.darkText}
+            htmlColor={text}
             id={loading ? "loading-spin" : "loading"}
           />
           <label>{`Connect${state === undefined || state === "idle" ? "" : "ing ..."}`}</label>

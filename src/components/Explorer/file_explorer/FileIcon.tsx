@@ -14,17 +14,19 @@ function FileIcon({
   is_collapsed,
   name,
   group,
+  color,
 }: {
   is_dir: boolean;
   is_collapsed: boolean;
   name: string;
   group: string;
+  color?: string;
 }) {
   const theme = useTheme();
 
   let returnVal = (
     <>
-      <BaseFileIcon viewBox="0 0 20 20" fill={theme.palette.text} />
+      <BaseFileIcon htmlColor={color} />
     </>
   );
 
@@ -32,15 +34,15 @@ function FileIcon({
     if (is_collapsed) {
       return (
         <>
-          <ClosedArrowIcon viewBox="0 0 20 20" stroke={theme.palette.text} />
-          <ClosedFolderIcon viewBox="0 0 20 20" fill={theme.palette.text} />
+          <ClosedArrowIcon htmlColor={color} />
+          <ClosedFolderIcon htmlColor={color} />
         </>
       );
     } else {
       return (
         <>
-          <OpenArrowIcon viewBox="0 0 20 20" stroke={theme.palette.text} />
-          <OpenFolderIcon viewBox="0 0 20 20" fill={theme.palette.text} />
+          <OpenArrowIcon htmlColor={color} />
+          <OpenFolderIcon htmlColor={color} />
         </>
       );
     }
@@ -50,7 +52,7 @@ function FileIcon({
     case "Action":
       returnVal = (
         <>
-          <ActionFileIcon viewBox="0 0 20 20" fill={theme.palette.text} />
+          <ActionFileIcon htmlColor={color}/>
         </>
       );
       break;

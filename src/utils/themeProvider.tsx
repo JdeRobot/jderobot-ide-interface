@@ -8,12 +8,12 @@ interface ThemeProviderProps {
 
 const defaultTheme: Theme = {
   palette: {
-    text: "#ededf2",
-    darkText: "#000000",
+    darkText: "#ededf2",
+    text: "#000000ff",
     placeholderText: "#a6a6bf",
     success: "#29ac29",
-    warning: "#f9e86d",
-    error: "#802626",
+    warning: "#b87a09",
+    error: "#b91c1cff",
     bgDark: "#0d0d0dff",
     bg: "#1a1a1aff",
     bgLight: "#262626ff",
@@ -21,7 +21,7 @@ const defaultTheme: Theme = {
     secondary: "#ff8800",
     scrollbar: "#6f6f90",
     border: {
-      warning: "#ffe100",
+      warning: "#af5500",
       error: "#772222",
       info: "#134f53",
     },
@@ -32,11 +32,11 @@ const defaultTheme: Theme = {
     button: {
       error: "#9e2e2e",
       success: "#29ac29",
-      warning: "#ffe100",
+      warning: "#af5500",
       info: "#134f53",
       hoverError: "#c63939",
       hoverSuccess: "#29ac29",
-      hoverWarning: "#ccb400",
+      hoverWarning: "#e05a00",
       hoverInfo: "#1d777c",
     },
     selectedGradient:

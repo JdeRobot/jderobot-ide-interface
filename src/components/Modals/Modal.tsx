@@ -7,7 +7,6 @@ import {
   StyledModalButtonRow,
   StyledModalCloseButton,
   StyledModalContent,
-  StyledModalDeleteButton,
   StyledModalDropArea,
   StyledModalEditableList,
   StyledModalEntryList,
@@ -23,8 +22,9 @@ import {
   StyledModalSelectIcon,
   StyledModalTitlebar,
 } from "./Modal.styles";
-import { useTheme } from "Utils";
+import { contrastSelector, useTheme } from "Utils";
 import { ModalInputSelectIconEntry, ModelRowTypes } from "Types";
+import { MinusIcon } from "Assets";
 
 const Modal = ({
   id = "modal",
@@ -115,6 +115,13 @@ export const ModalTitlebar = ({
   handleBack: Function;
 }) => {
   const theme = useTheme();
+
+  const text = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.bg,
+  );
+
   return (
     <StyledModalTitlebar
       color={theme.palette.text}
@@ -125,27 +132,21 @@ export const ModalTitlebar = ({
     >
       {hasBack && (
         <StyledModalBackButton
-          viewBox="-2.4 -2.4 36 36"
           id="back-modal"
           onClick={() => {
             handleBack();
           }}
-          color={theme.palette.text}
-          altColor={theme.palette.darkText}
-          bg={theme.palette.bg}
+          htmlColor={text}
         />
       )}
       <label htmlFor={htmlFor}>{title}</label>
       {hasClose && (
         <StyledModalCloseButton
-          viewBox="0 0 20 20"
           id="close-modal"
           onClick={() => {
             handleClose();
           }}
-          color={theme.palette.text}
-          altColor={theme.palette.darkText}
-          bg={theme.palette.bg}
+          htmlColor={text}
         />
       )}
     </StyledModalTitlebar>
@@ -343,12 +344,11 @@ export const ModalEditableList = ({
             >
               <label>{entry}</label>
               {onDelete && (
-                <StyledModalDeleteButton
-                  viewBox="0 0 20 20"
-                  title="Delete"
+                <MinusIcon
+                  // title="Delete"
                   id={"delete-" + entry}
                   onClick={(e: any) => onDelete(e, entry)}
-                  color={theme.palette.text}
+                  htmlColor={theme.palette.text}
                 />
               )}
             </StyledModalEntryList>

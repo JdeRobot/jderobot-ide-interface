@@ -20,6 +20,7 @@ interface StyledExplorerItemContainerProps {
   bgColor?: string;
   hoverColor?: string;
   active?: boolean;
+  roundness?: number; 
 }
 
 const handleActive = (p: StyledExplorerItemContainerProps) => {
@@ -33,6 +34,7 @@ const handleActive = (p: StyledExplorerItemContainerProps) => {
 export const StyledExplorerItemContainer = styled.div<StyledExplorerItemContainerProps>`
   padding-left: 5px;
   padding-right: 5px;
+  border-radius: ${(p) => p.roundness ?? 1}px;
 
   &:hover {
     background-color: ${(p) => p.hoverColor ?? primaryColor};
@@ -56,39 +58,36 @@ export const StyledExplorerItem = styled.div<StyledExplorerItemProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 20px;
+  height: 28px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   position: relative;
   z-index: 1;
   padding-left: ${(p) => 20 * p.depth}px;
+  gap: 2px;
 
   & label {
     cursor: pointer;
     list-style-type: none;
-    padding: 3px;
+    padding: 4px;
     font-size: 0.9em;
     color: ${(p) => p.color ?? primaryColor};
     margin: 0;
   }
 
   & svg {
-    height: 16px;
-    width: 16px;
-    min-width: 16px;
-    min-height: 16px;
+    height: 20px;
+    width: 20px;
+    min-width: 20px;
+    min-height: 20px;
   }
 `;
 
-interface StyledActionIconProps {
-  color?: string;
-}
 
-export const StyledActionIcon = styled(ActionIcon)<StyledActionIconProps>`
+export const StyledActionIcon = styled(ActionIcon)`
   margin-left: auto;
   visibility: hidden;
-  stroke: ${(p) => p.color ?? primaryColor};
 `;
 
 interface StyledExplorerAccentProps {

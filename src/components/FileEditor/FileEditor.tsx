@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 
-import { SaveIcon, MinusIcon, PlusIcon, KeyboardIcon } from "Assets";
-import { publish, subscribe, unsubscribe, useError, useTheme } from "Utils";
+import { SaveIcon, ZoomOutIcon, PlusIcon, KeyboardIcon } from "Assets";
+import { contrastSelector, publish, subscribe, unsubscribe, useError, useTheme } from "Utils";
 import { CommsManager } from "jderobot-commsmanager";
 import { Entry, EditorsEntry, Options, ExtraSnippets } from "Types";
 import TextEditor from "./TextEditor";
@@ -62,7 +62,12 @@ const FileEditor = ({
 }) => {
   const { error, warning } = useError();
   const theme = useTheme();
-
+  const iconColor = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.primary,
+  );
+  
   const [fileContent, _setFileContent] = useState<string | undefined>(
     undefined,
   );
@@ -319,7 +324,7 @@ const FileEditor = ({
                 onClick={handleSaveFile}
                 title="Save File"
               >
-                <SaveIcon viewBox="0 0 .9375 .9375" />
+                <SaveIcon htmlColor={iconColor} />
               </MenuButton>
             </>
           )}
@@ -328,14 +333,14 @@ const FileEditor = ({
             onClick={handleZoomIn}
             title="Increase Zoom"
           >
-            <PlusIcon viewBox="0 0 20 20" />
+            <PlusIcon htmlColor={iconColor} />
           </MenuButtonStroke>
           <MenuButtonStroke
             id="zoom-out-button"
             title="Decrease Zoom"
             onClick={handleZoomOut}
           >
-            <MinusIcon viewBox="0 0 20 20" />
+            <ZoomOutIcon htmlColor={iconColor} />
           </MenuButtonStroke>
           {(() => {
             for (const editor of extraEditors) {

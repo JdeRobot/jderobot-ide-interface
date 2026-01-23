@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ButtonVariant, IconVariant } from "./Button";
+import { ButtonVariant} from "./Button";
 
 const primaryColor = "#666";
 
@@ -8,7 +8,6 @@ interface StyledButtonProps {
   color?: string;
   roundness?: number;
   variant: ButtonVariant;
-  iconType: IconVariant;
   active: boolean;
   isLabel: boolean;
 }
@@ -27,23 +26,6 @@ const handleVariant = (p: StyledButtonProps) => {
       return `
         background-color: transparent;
         width: 48px !important;
-      `;
-  }
-};
-
-const handleIcon = (p: StyledButtonProps) => {
-  switch (p.iconType) {
-    case "fill":
-      return `
-        & svg {
-          fill: ${p.color ?? primaryColor};
-        }
-      `;
-    case "stroke":
-      return `
-        & svg {
-          stroke: ${p.color ?? primaryColor};
-        }
       `;
   }
 };
@@ -93,7 +75,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
   ${handleLabel}
   ${handleVariant}
   ${handleActive}
-  ${handleIcon}
 
   & svg {
     width: 20px;

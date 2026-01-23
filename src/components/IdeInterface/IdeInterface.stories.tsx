@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-webpack5";
 import IdeInterface from "./IdeInterface";
 import { VncViewer } from "Components";
 import { SaveIcon } from "Assets";
-import { ExtraApi, Entry } from "Types";
+import { ExtraApi, Entry, ExplorerEntry } from "Types";
 
 type Story = StoryObj<typeof IdeInterface>;
 
@@ -32,6 +32,46 @@ const meta: Meta<typeof IdeInterface> = {
 };
 
 export default meta;
+
+
+export const fileExplorer: ExplorerEntry = {
+  name: "Code",
+  list: (project: string) => {
+    const func = async () => {
+      return '[{"is_dir": true, "name": "actions", "path": "actions", "group": "Code", "access": true, "files": []}, {"is_dir": true, "name": "trees", "path": "trees", "group": "Trees", "access": true, "files": [{"is_dir": true, "name": "subtrees", "path": "trees/subtrees", "group": "Trees", "access": true, "files": []}, {"is_dir": false, "name": "main.json", "path": "trees/main.json", "group": "Trees", "access": true, "files": []}]}]'
+      return '[{"is_dir": false, "name": "academy.cpp", "path": "academy.cpp", "group": "Code", "access": true, "files": []}, {"is_dir": false, "name": "academy.py", "path": "academy.py", "group": "Code", "access": true, "files": []}]'
+    }
+    return func()
+  },
+  file: {
+    create: (project: string, location: string, name: string) => {
+      return new Promise(() => {});
+    },
+    get: (project: string, path: string) => {
+      return new Promise(() => {return ""});
+    },
+    rename: (project: string, oldPath: string, newPath: string) => {
+      return new Promise(() => {});
+    },
+    delete: (project: string, path: string) => {
+      return new Promise(() => {});
+    },
+    upload: (project: string, path: string, name: string, content: string) => {
+      return new Promise(() => {});
+    },
+  },
+  folder: {
+    create: (project: string, location: string, name: string) => {
+      return new Promise(() => {});
+    },
+    rename: (project: string, oldPath: string, newPath: string) => {
+      return new Promise(() => {});
+    },
+    delete: (project: string, path: string) => {
+      return new Promise(() => {});
+    },
+  },
+};
 
 const api: ExtraApi = {
   file: {
@@ -109,7 +149,7 @@ export const Main: Story = {
           return;
         }}
         project={"currentProjectname"}
-        explorers={[]}
+        explorers={[fileExplorer]}
         api={api}
         extraEditors={[]}
         viewers={[
@@ -126,3 +166,4 @@ export const Main: Story = {
     layout: "both",
   },
 };
+

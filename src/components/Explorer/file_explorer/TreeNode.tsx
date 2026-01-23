@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import FileIcon from "./FileIcon";
 import { ContextMenuProps } from "./MoreActionsMenu";
-import { subscribe, unsubscribe, useOptions, useTheme } from "Utils";
+import { contrastSelector, subscribe, unsubscribe, useOptions, useTheme } from "Utils";
 import { Entry, AccentColorEventData } from "Types";
 import {
   StyledActionIcon,
@@ -31,6 +31,12 @@ function TreeNode({
   const [update, setUpdate] = useState<boolean>(false);
   const [accentColor, setAccentColor] = useState<string | undefined>(undefined);
   const settings = useOptions();
+
+  const text = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.bg,
+  );
 
   const callback = (e: AccentColorEventData) => {
     if (e.detail === undefined) {
@@ -72,23 +78,24 @@ function TreeNode({
     <>
       <StyledExplorerItemContainer
         active={currentFile && currentFile.path === node.path}
-        bgColor={theme.palette.primary}
-        hoverColor={theme.palette.primary}
+        bgColor={theme.palette.bgLight}
+        hoverColor={theme.palette.bgLight}
+        roundness={theme.roundness}
         onClick={() => handleClick()}
       >
-        <StyledExplorerItem color={theme.palette.text} depth={depth}>
+        <StyledExplorerItem color={text} depth={depth}>
           <FileIcon
             is_dir={node.is_dir}
             is_collapsed={isCollapsed}
             name={node.name}
             group={node.group}
+            color={text}
           />
           <label>{node.name}</label>
           <StyledActionIcon
-            stroke={theme.palette.text}
+            htmlColor={text}
             id="explorer-action-button"
             title={"More"}
-            viewBox="0 0 20 20"
             onClick={(e) => {
               menuProps.showMoreActionsMenu(e, node);
             }}

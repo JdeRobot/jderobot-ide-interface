@@ -20,7 +20,7 @@ import {
   ResetIcon,
   RenameIcon,
 } from "Assets";
-import { subscribe, unsubscribe, useError, useTheme } from "Utils";
+import { contrastSelector, subscribe, unsubscribe, useError, useTheme } from "Utils";
 import {
   StyledSidebarContainer,
   StyledSidebarEntry,
@@ -51,6 +51,11 @@ const Explorer = ({
 }) => {
   const { warning, error } = useError();
   const theme = useTheme();
+  const iconColor = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.primary,
+  );
 
   const [fileList, setFileList] = useState<Entry[]>([]);
   const [deleteEntry, setDeleteEntry] = useState<Entry | undefined>(undefined);
@@ -405,21 +410,21 @@ const Explorer = ({
             onClick={() => handleCreateFile(undefined)}
             title="Create a new file"
           >
-            <AddIcon viewBox="0 0 20 20" />
+            <AddIcon htmlColor={iconColor} />
           </MenuButton>
           <MenuButtonStroke
             id="new-folder-button"
             onClick={() => handleCreateFolder(undefined)}
             title="Create a new folder"
           >
-            <AddFolderIcon viewBox="0 0 20 20" />
+            <AddFolderIcon htmlColor={iconColor} />
           </MenuButtonStroke>
           <MenuButtonStroke
             id="refresh-explorer-button"
             onClick={() => fetchFileList()}
             title="Refresh View"
           >
-            <ResetIcon viewBox="0 0 20 20" />
+            <ResetIcon htmlColor={iconColor}/>
           </MenuButtonStroke>
           <div style={{ marginLeft: "auto" }} />
           {currentFile && (
@@ -429,14 +434,14 @@ const Explorer = ({
                 onClick={handleRenameCurrentFile}
                 title="Rename file"
               >
-                <RenameIcon viewBox="0 0 20 20" />
+                <RenameIcon htmlColor={iconColor} />
               </MenuButtonStroke>
               <MenuButton
                 id="delete-file-button"
                 onClick={handleDeleteCurrentFile}
                 title="Delete file"
               >
-                <DeleteIcon viewBox="0 0 .9375 .9375" />
+                <DeleteIcon htmlColor={iconColor} />
               </MenuButton>
             </>
           )}

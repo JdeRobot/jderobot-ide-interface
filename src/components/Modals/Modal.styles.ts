@@ -1,4 +1,4 @@
-import { BackIcon, CloseIcon, MinusIcon } from "Assets";
+import { BackIcon, CloseIcon} from "Assets";
 import styled from "styled-components";
 import { contrastSelector } from "Utils";
 
@@ -84,26 +84,12 @@ export const StyledModalTitlebar = styled.div<StyledModalTitlebarProps>`
   }
 `;
 
-interface StyledModalButtonProps {
-  color?: string;
-  altColor?: string;
-  bg?: string;
-}
-
-export const StyledModalCloseButton = styled(CloseIcon)<StyledModalButtonProps>`
-  fill: ${(p) => contrastSelector(p.color, p.altColor, p.bg) ?? primaryColor};
+export const StyledModalCloseButton = styled(CloseIcon)`
   margin-left: auto;
 `;
 
-export const StyledModalBackButton = styled(BackIcon)<StyledModalButtonProps>`
-  fill: ${(p) => contrastSelector(p.color, p.altColor, p.bg) ?? primaryColor};
+export const StyledModalBackButton = styled(BackIcon)`
   margin-right: auto;
-`;
-
-export const StyledModalDeleteButton = styled(
-  MinusIcon,
-)<StyledModalButtonProps>`
-  stroke: ${(p) => p.color ?? primaryColor};
 `;
 
 interface StyledModalRowProps {
