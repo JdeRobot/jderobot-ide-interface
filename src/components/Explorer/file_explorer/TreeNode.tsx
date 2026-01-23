@@ -95,7 +95,7 @@ function TreeNode({
           <StyledActionIcon
             htmlColor={text}
             id="explorer-action-button"
-            title={"More"}
+            // title={"More"}
             onClick={(e) => {
               menuProps.showMoreActionsMenu(e, node);
             }}
