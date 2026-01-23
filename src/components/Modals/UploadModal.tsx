@@ -86,7 +86,7 @@ const UploadModal = ({
       n_files_uploaded++;
     });
 
-    onClose();
+    onSubmit();
   };
 
   const handleSubmit = (event: any) => {
