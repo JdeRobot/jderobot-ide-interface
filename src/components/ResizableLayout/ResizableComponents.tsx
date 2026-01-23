@@ -12,6 +12,7 @@ import {
 } from "./ResizableComponents.styles";
 import { useTheme } from "Utils";
 import { StyledSplashEditor } from "../FileEditor/FileEditor.styles";
+import { StyledIdeContainer } from "../IdeInterface/IdeInterface.styles";
 
 export const ResizableHoriz = ({
   width,
@@ -142,7 +143,9 @@ export const ResizableColumn = ({ children }: { children: any[] }) => {
   if (children.length === 1) {
     return (
       <StyledVertContiner bgColor={theme.palette?.bg}>
-        {children[0]}
+        <StyledIdeContainer bgColor={theme.palette?.bg}>
+          {children[0]}
+        </StyledIdeContainer>
       </StyledVertContiner>
     );
   }
@@ -156,10 +159,14 @@ export const ResizableColumn = ({ children }: { children: any[] }) => {
           snap={[0]}
           roundness={0}
         >
+        <StyledIdeContainer bgColor={theme.palette?.bg}>
           {children[0]}
+        </StyledIdeContainer>
         </ResizableVert>
         <StyledVertFillerContiner bgColor={theme.palette?.bg} roundness={0}>
+        <StyledIdeContainer bgColor={theme.palette?.bg}>
           {children[1]}
+        </StyledIdeContainer>
         </StyledVertFillerContiner>
       </StyledVertContiner>
     );

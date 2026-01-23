@@ -20,7 +20,6 @@ export const StyledSidebarEntry = styled.div<StyledSidebarEntryMenuProps>`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding-right: 2.5px;
   background-color: ${(p) => p.bgColor ?? primaryColor};
 `;
 
