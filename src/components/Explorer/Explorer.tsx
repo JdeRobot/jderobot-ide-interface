@@ -342,9 +342,13 @@ const Explorer = ({
     setUploadModalOpen(true);
   };
 
-  const handleCloseUploadModal = () => {
+  const handleSubmitUploadModal = () => {
     setUploadModalOpen(false);
     fetchFileList();
+  };
+
+  const handleCloseUploadModal = () => {
+    setUploadModalOpen(false);
   };
 
   ///////////////// DOWNLOAD ///////////////////////////////////////////////////
@@ -508,7 +512,7 @@ const Explorer = ({
       )}
       <UploadModal
         isOpen={isUploadModalOpen}
-        onSubmit={handleCloseUploadModal}
+        onSubmit={handleSubmitUploadModal}
         onClose={handleCloseUploadModal}
         upload={api.file.upload}
         location={selectedLocation}
