@@ -19,6 +19,7 @@ import {
   DeleteIcon,
   ResetIcon,
   RenameIcon,
+  UploadIcon,
 } from "Assets";
 import { contrastSelector, subscribe, unsubscribe, useError, useTheme } from "Utils";
 import {
@@ -186,7 +187,7 @@ const Explorer = ({
 
   ///////////////// DELETE FILES AND FOLDERS ///////////////////////////////////
 
-  const handleDeleteModal = (file: Entry) => {
+  const handleDeleteModal = (file?: Entry) => {
     if (file) {
       setDeleteEntry(file);
       setDeleteType(file.is_dir);
@@ -336,7 +337,7 @@ const Explorer = ({
 
   ///////////////// UPLOAD /////////////////////////////////////////////////////
 
-  const handleUpload = (file: Entry) => {
+  const handleUpload = (file?: Entry) => {
     updateSelectedLocation(file);
     setUploadModalOpen(true);
   };
@@ -418,6 +419,13 @@ const Explorer = ({
             title="Create a new folder"
           >
             <AddFolderIcon htmlColor={iconColor} />
+          </MenuButtonStroke>
+          <MenuButtonStroke
+            id="upload-button"
+            onClick={() => handleUpload()}
+            title="Upload new files"
+          >
+            <UploadIcon htmlColor={iconColor} />
           </MenuButtonStroke>
           <MenuButtonStroke
             id="refresh-explorer-button"

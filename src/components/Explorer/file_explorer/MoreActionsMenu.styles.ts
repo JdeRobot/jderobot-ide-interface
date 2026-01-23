@@ -22,7 +22,9 @@ export const StyledExplorerExtraMenuBackdrop = styled.div<StyledExplorerExtraMen
 `;
 
 interface StyledExplorerExtraMenuProps {
+  color?: string;
   bgColor?: string;
+  hoverColor?: string;
   borderColor?: string;
   roundness?: number;
   top: number;
@@ -33,6 +35,7 @@ export const StyledExplorerExtraMenu = styled.div<StyledExplorerExtraMenuProps>`
   position: absolute;
   width: auto;
   z-index: 100;
+  overflow: hidden;
 
   display: flex;
   flex-direction: column;
@@ -43,15 +46,19 @@ export const StyledExplorerExtraMenu = styled.div<StyledExplorerExtraMenuProps>`
   border-radius: ${(p) => p.roundness ?? 1}px;
   box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
   background-color: ${(p) => p.bgColor ?? primaryColor};
-  top: ${(p) => p.top};
-  left: ${(p) => p.left};
+  top: ${(p) => p.top}px;
+  left: ${(p) => p.left}px;
+
+  & label {
+    color: ${(p) => p.color ?? primaryColor};
+  }
+
+  & div:hover {
+    background-color: ${(p) => p.hoverColor ?? primaryColor};
+  }
 `;
 
-interface StyledExplorerExtraMenuEntryProps {
-  hoverColor?: string;
-}
-
-export const StyledExplorerExtraMenuEntry = styled.div<StyledExplorerExtraMenuEntryProps>`
+export const StyledExplorerExtraMenuEntry = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.2rem;
@@ -68,10 +75,6 @@ export const StyledExplorerExtraMenuEntry = styled.div<StyledExplorerExtraMenuEn
 
   &:last-of-type {
     margin-bottom: 0.4rem;
-  }
-
-  &:hover {
-    background-color: ${(p) => p.hoverColor ?? primaryColor};
   }
 `;
 

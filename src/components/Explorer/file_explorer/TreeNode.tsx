@@ -2,14 +2,21 @@ import React from "react";
 import { useEffect, useState } from "react";
 import FileIcon from "./FileIcon";
 import { ContextMenuProps } from "./MoreActionsMenu";
-import { contrastSelector, subscribe, unsubscribe, useOptions, useTheme } from "Utils";
+import {
+  contrastSelector,
+  subscribe,
+  unsubscribe,
+  useOptions,
+  useTheme,
+} from "Utils";
 import { Entry, AccentColorEventData } from "Types";
 import {
-  StyledActionIcon,
   StyledExplorerAccent,
   StyledExplorerItem,
   StyledExplorerItemContainer,
+  StyledExtraIcon,
 } from "./TreeNode.styles";
+import { ActionIcon } from "Assets";
 
 function TreeNode({
   node,
@@ -92,17 +99,18 @@ function TreeNode({
             color={text}
           />
           <label>{node.name}</label>
-          <StyledActionIcon
-            htmlColor={text}
+          <StyledExtraIcon
             id="explorer-action-button"
-            // title={"More"}
+            title="More"
             onClick={(e) => {
               menuProps.showMoreActionsMenu(e, node);
             }}
-          />
-          {settings.explorer?.showAccentColors && (
+          >
+            <ActionIcon htmlColor={text} />
+          </StyledExtraIcon>
+          {/* {settings.explorer?.showAccentColors && (
             <StyledExplorerAccent color={accentColor ? accentColor : "none"} />
-          )}
+          )} */}
         </StyledExplorerItem>
       </StyledExplorerItemContainer>
       {!isCollapsed &&

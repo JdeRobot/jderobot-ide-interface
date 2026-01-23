@@ -72,8 +72,8 @@ export const StyledModalTitlebar = styled.div<StyledModalTitlebarProps>`
 
   & svg {
     height: 100%;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     padding: 2px;
     border-radius: ${(p) => p.roundness ?? 1}px;
     background-color: transparent;
@@ -178,10 +178,15 @@ export const StyledModalButtonRow = styled.div<StyledModalButtonRowProps>`
     color: ${(p) => p.color ?? primaryColor};
     font-size: medium;
     background-color: ${(p) => p.buttonColor ?? primaryColor};
-    opacity: 0.6;
+    opacity: 0.75;
     border-radius: ${(p) => p.roundness ?? 1}px;
     height: 2em;
     font-size: medium;
+    transition: opacity 0.3s ease-in-out;
+
+    &:disabled {
+      opacity: 0.3;
+    }
 
     &:hover:enabled {
       opacity: 1;
@@ -201,11 +206,13 @@ export const StyledModalImageRow = styled.div<StyledModalImageRowProps>`
 `;
 
 interface StyledModalButtonDeleteProps {
-  bgColor?: string;
+  color?: string;
+  bg?: string;
 }
 
 export const StyledModalButtonDelete = styled.button<StyledModalButtonDeleteProps>`
-  background-color: ${(p) => p.bgColor ?? primaryColor} !important;
+  color: ${(p) => p.color ?? primaryColor} !important;
+  background-color: ${(p) => p.bg ?? primaryColor} !important;
 `;
 
 export const StyledModalInputRowContainer = styled.div`
@@ -243,12 +250,13 @@ export const StyledModalInput = styled.div<StyledModalInputProps>`
 
   & label {
     position: absolute;
+    opacity: 0.5;
     top: 15px;
     left: 17px;
     display: block;
     transition: 0.2s;
     font-size: 1rem;
-    color: ${(p) => p.placeholderColor ?? primaryColor};
+    color: ${(p) => p.color ?? primaryColor};
     user-select: none;
   }
 
@@ -409,11 +417,9 @@ export const StyledModalActionEntry = styled(StyledModalEntryList)`
 
 interface StyledModelDropAreaProps {
   text?: string;
-  bgColor?: string;
-  hoverColor?: string;
-  buttonColor?: string;
-  borderColor?: string;
-  hoverBorderColor?: string;
+  altText?: string;
+  bg?: string;
+  altBg?: string;
   roundness?: number;
   active?: boolean;
 }
@@ -421,8 +427,8 @@ interface StyledModelDropAreaProps {
 const handleActive = (p: StyledModelDropAreaProps) => {
   if (p.active) {
     return `
-      background-color: ${p.borderColor ?? primaryColor} !important;
-      border-color: ${p.hoverBorderColor ?? primaryColor} !important;
+      background-color: ${p.altBg ?? primaryColor} !important;
+      color: ${contrastSelector(p.text, p.altText, p.altBg) ?? primaryColor};
     `;
   }
 };
@@ -438,19 +444,23 @@ export const StyledModalDropArea = styled.label<StyledModelDropAreaProps>`
   padding: 20px;
   border-radius: ${(p) => p.roundness ?? 1}px;
   margin-bottom: 10px;
-  border: 2px dashed ${(p) => p.borderColor ?? primaryColor};
-  color: ${(p) => p.text ?? primaryColor};
+
+  color: ${(p) => contrastSelector(p.text, p.altText, p.bg) ?? primaryColor} !important;
+  background: ${(p) => p.bg ?? primaryColor};
+  border: 2px dashed ${(p) => p.altBg ?? primaryColor};
+
   cursor: pointer;
   transition:
-    background 0.2s ease-in-out,
-    border 0.2s ease-in-out;
+    background 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    border 0.3s ease-in-out;
+
   &:hover {
-    background: ${(p) => p.borderColor ?? primaryColor};
-    border-color: ${(p) => p.hoverBorderColor ?? primaryColor};
+    background: ${(p) => p.altBg ?? primaryColor};
+    color: ${(p) => contrastSelector(p.text, p.altText, p.altBg) ?? primaryColor} !important;
   }
 
   & span {
-    color: ${(p) => p.text ?? primaryColor};
     font-size: 20px;
     font-weight: bold;
     text-align: center;
@@ -459,11 +469,11 @@ export const StyledModalDropArea = styled.label<StyledModelDropAreaProps>`
 
   & input {
     width: 350px;
-    border: 2px solid ${(p) => p.borderColor ?? primaryColor};
-    color: ${(p) => p.text ?? primaryColor};
-    font-size: medium;
-    background-color: ${(p) => p.bgColor ?? primaryColor};
+    color: ${(p) => contrastSelector(p.text, p.altText, p.bg) ?? primaryColor};
+    background-color: ${(p) => p.bg ?? primaryColor};
+    border: 2px solid ${(p) => p.altBg ?? primaryColor};
     border-radius: ${(p) => p.roundness ?? 1}px;
+    font-size: medium;
     padding: 5px;
     font-size: medium;
     outline: none;
@@ -471,16 +481,17 @@ export const StyledModalDropArea = styled.label<StyledModelDropAreaProps>`
     &::file-selector-button {
       margin-right: 20px;
       border: none;
-      background: ${(p) => p.buttonColor ?? primaryColor};
-      padding: 10px 20px;
-      border-radius: ${(p) => p.roundness ?? 1}px;
       color: ${(p) => p.text ?? primaryColor};
+      background: ${(p) => p.altBg ?? primaryColor};
+      border-radius: ${(p) => p.roundness ?? 1}px;
+      padding: 10px 20px;
       cursor: pointer;
       transition: background 0.2s ease-in-out;
+      opacity: 70%;
     }
 
     &::file-selector-button:hover {
-      background: ${(p) => p.hoverColor ?? primaryColor};
+      opacity: 1;
     }
   }
 

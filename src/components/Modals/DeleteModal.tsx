@@ -2,7 +2,7 @@ import React from "react";
 import Modal, { ModalRow, ModalTitlebar } from "./Modal";
 import { Entry } from "Types";
 import { StyledModalButtonDelete } from "./Modal.styles";
-import { useTheme } from "Utils";
+import { contrastSelector, useTheme } from "Utils";
 import styled from "styled-components";
 
 const StyledModal = styled(Modal)`
@@ -21,6 +21,11 @@ const DeleteModal = ({
   selectedEntry: Entry;
 }) => {
   const theme = useTheme();
+  const text = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.button.error,
+  );
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -58,7 +63,8 @@ const DeleteModal = ({
           Cancel
         </button>
         <StyledModalButtonDelete
-          bgColor={theme.palette.button.error}
+          color={text}
+          bg={theme.palette.button.error}
           type="submit"
           id="delete-selected-button"
         >

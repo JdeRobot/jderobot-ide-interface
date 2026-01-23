@@ -23,3 +23,4 @@ export { default as CloseIcon } from '@mui/icons-material/CloseRounded';
 export { default as BackIcon } from '@mui/icons-material/ArrowBackRounded';
 export { default as RenameIcon } from '@mui/icons-material/DriveFileRenameOutlineRounded';
 export { default as DeleteIcon } from '@mui/icons-material/DeleteForeverRounded';
+export { default as UploadIcon } from '@mui/icons-material/UploadRounded';

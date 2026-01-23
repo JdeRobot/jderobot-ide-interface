@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import Modal, { ModalInputBox, ModalRow, ModalTitlebar } from "./Modal";
 import { Entry } from "Types";
+import { StyledModalButtonDelete } from "./Modal.styles";
+import { contrastSelector, useTheme } from "Utils";
 
 const initialNewFolderModalData = {
   renameData: "",
@@ -20,6 +22,13 @@ const RenameModal = ({
   fileList: Entry[];
   selectedEntry: Entry;
 }) => {
+  const theme = useTheme();
+  const text = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.button.error,
+  );
+  
   const focusInputRef = useRef<HTMLInputElement>(null);
   const [formState, setFormState] = useState(initialNewFolderModalData);
   const [isCreationAllowed, allowCreation] = useState(false);
@@ -152,7 +161,14 @@ const RenameModal = ({
         />
       </ModalRow>
       <ModalRow type="buttons">
-        <button type="reset">Cancel</button>
+        <StyledModalButtonDelete
+          color={text}
+          bg={theme.palette.button.error}
+          type="reset"
+          id="delete-selected-button"
+        >
+          Cancel
+        </StyledModalButtonDelete>
         <button
           type="submit"
           id="create-new-action"

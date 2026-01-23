@@ -127,7 +127,7 @@ export const ModalTitlebar = ({
       color={theme.palette.text}
       altColor={theme.palette.darkText}
       bg={theme.palette.bg}
-      hoverColor={theme.palette.secondary}
+      hoverColor={theme.palette.bgLight}
       roundness={theme.roundness}
     >
       {hasBack && (
@@ -171,17 +171,29 @@ export const ModalRow = ({
 }) => {
   const theme = useTheme();
 
+  const buttonText = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.primary,
+  );
+
+  const text = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.bg,
+  );
+
   switch (type) {
     case "buttons":
       return (
         <StyledModalRow
           id={id}
-          color={theme.palette.text}
+          color={buttonText}
           buttonColor={theme.palette.primary}
           roundness={theme.roundness}
         >
           <StyledModalButtonRow
-            color={theme.palette.text}
+            color={buttonText}
             buttonColor={theme.palette.primary}
             roundness={theme.roundness}
           >
@@ -213,7 +225,7 @@ export const ModalRow = ({
       return (
         <StyledModalRow
           id={id}
-          color={theme.palette.text}
+          color={text}
           buttonColor={theme.palette.primary}
           roundness={theme.roundness}
         >
@@ -282,11 +294,22 @@ export const ModalInputBox = ({
   ...props
 }: ModalInputBoxProps) => {
   const theme = useTheme();
+  const text = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.primary,
+  );
+
+  const altText = contrastSelector(
+    theme.palette.text,
+    theme.palette.placeholderText,
+    theme.palette.bg,
+  );
 
   return (
     <StyledModalInput
-      color={theme.palette.text}
-      placeholderColor={theme.palette.placeholderText}
+      color={text}
+      placeholderColor={altText}
       bgColor={theme.palette.primary}
       borderColor={theme.palette.text}
       focusBorderColor={theme.palette.secondary}
@@ -510,11 +533,9 @@ export const ModalInputDropArea = ({
       onDragLeave={() => setDropActive(false)}
       onDrop={(e) => onDrop(e)}
       text={theme.palette.text}
-      bgColor={theme.palette.bg}
-      buttonColor={theme.palette.primary}
-      hoverColor={theme.palette.secondary}
-      borderColor={theme.palette.primary}
-      hoverBorderColor={theme.palette.bg}
+      altText={theme.palette.darkText}
+      bg={theme.palette.bg}
+      altBg={theme.palette.primary}
       roundness={theme.roundness}
       active={dropActive}
     >

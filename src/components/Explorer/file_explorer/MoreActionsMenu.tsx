@@ -7,7 +7,7 @@ import {
   StyledExplorerExtraMenuDivider,
   StyledExplorerExtraMenuEntry,
 } from "./MoreActionsMenu.styles";
-import { useTheme } from "Utils";
+import { contrastSelector, useTheme } from "Utils";
 
 function MoreActionsMenu({
   menuProps,
@@ -28,6 +28,11 @@ function MoreActionsMenu({
 }) {
   const menuRef = useRef<HTMLDivElement>(null);
   const theme = useTheme();
+  const text = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.bg,
+  );
 
   useEffect(() => {
     if (menuProps.isShown) {
@@ -50,15 +55,16 @@ function MoreActionsMenu({
   return (
     <StyledExplorerExtraMenuBackdrop active={menuProps.isShown} ref={menuRef}>
       <StyledExplorerExtraMenu
+        color={text}
         bgColor={theme.palette.bg}
-        borderColor={theme.palette.secondary}
+        hoverColor={theme.palette.bgLight}
+        borderColor={theme.palette.primary}
         roundness={theme.roundness}
         top={menuProps.position.y}
         left={menuProps.position.x}
       >
         {menuProps.file?.group !== "Trees" && (
           <StyledExplorerExtraMenuEntry
-            hoverColor={theme.palette.secondary}
             onClick={() => {
               onRename(menuProps.file);
               closeMenu();
@@ -68,7 +74,6 @@ function MoreActionsMenu({
           </StyledExplorerExtraMenuEntry>
         )}
         <StyledExplorerExtraMenuEntry
-          hoverColor={theme.palette.secondary}
           onClick={() => {
             onDownload(menuProps.file);
             closeMenu();
@@ -77,7 +82,6 @@ function MoreActionsMenu({
           <label>Download</label>
         </StyledExplorerExtraMenuEntry>
         <StyledExplorerExtraMenuEntry
-          hoverColor={theme.palette.secondary}
           onClick={() => {
             onDelete(menuProps.file);
             closeMenu();
@@ -104,9 +108,8 @@ function MoreActionsMenu({
           )} */}
         {menuProps.file?.group !== "Trees" && (
           <>
-            <StyledExplorerExtraMenuDivider bgColor={theme.palette.secondary} />
+            <StyledExplorerExtraMenuDivider bgColor={theme.palette.bgLight} />
             <StyledExplorerExtraMenuEntry
-              hoverColor={theme.palette.secondary}
               onClick={() => {
                 onCreateFile(menuProps.file);
                 closeMenu();
@@ -115,7 +118,6 @@ function MoreActionsMenu({
               <label>New File</label>
             </StyledExplorerExtraMenuEntry>
             <StyledExplorerExtraMenuEntry
-              hoverColor={theme.palette.secondary}
               onClick={() => {
                 onCreateFolder(menuProps.file);
                 closeMenu();
@@ -124,7 +126,6 @@ function MoreActionsMenu({
               <label>New Folder</label>
             </StyledExplorerExtraMenuEntry>
             <StyledExplorerExtraMenuEntry
-              hoverColor={theme.palette.secondary}
               onClick={() => {
                 onUpload(menuProps.file);
                 closeMenu();

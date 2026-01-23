@@ -85,9 +85,14 @@ export const StyledExplorerItem = styled.div<StyledExplorerItemProps>`
 `;
 
 
-export const StyledActionIcon = styled(ActionIcon)`
-  margin-left: auto;
+export const StyledExtraIcon = styled.button`
   visibility: hidden;
+  margin: 0 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: inherit;
+  display: flex;
+  justify-content: center;
 `;
 
 interface StyledExplorerAccentProps {
