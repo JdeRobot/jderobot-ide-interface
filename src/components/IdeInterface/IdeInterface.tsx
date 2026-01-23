@@ -74,7 +74,7 @@ const IdeInterface = ({
 }: IdeInterfaceProps) => {
   const theme = useTheme();
 
-  const [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
+  const [currentFile, setCurrentFile] = useState<Entry | undefined>(undefined);
 
   if (splashIcon === undefined) {
     splashIcon = (
