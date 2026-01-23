@@ -74,7 +74,7 @@ const IdeInterface = ({
 }: IdeInterfaceProps) => {
   const theme = useTheme();
 
-  const [currentFile, setCurrentFile] = useState<Entry | undefined>(undefined);
+  const [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
 
   if (splashIcon === undefined) {
     splashIcon = (
@@ -103,7 +103,7 @@ const IdeInterface = ({
               <Explorer
                 key={explorer.name}
                 setCurrentFile={setCurrentFile}
-                currentFile={baseFile ? baseFile : currentFile}
+                currentFile={currentFile}
                 project={project}
                 api={explorer}
               />
@@ -112,7 +112,7 @@ const IdeInterface = ({
           <StyledIdeVertContainer bgColor={theme.palette?.primary}>
             <StyledIdeContainer bgColor={theme.palette?.primary}>
               <FileEditor
-                currentFile={baseFile ? baseFile : currentFile}
+                currentFile={currentFile}
                 changeCurrentFile={setCurrentFile}
                 currentProjectname={project}
                 autosave={true}
