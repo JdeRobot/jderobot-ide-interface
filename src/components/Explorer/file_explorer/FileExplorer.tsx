@@ -48,7 +48,6 @@ const FileExplorer = ({
 
   useEffect(() => {
     fetchFileList();
-    setCurrentFile(undefined);
     setSelectedEntry(undefined);
     console.log("The file list is: ", fileList);
     if (Array.isArray(fileList)) {
