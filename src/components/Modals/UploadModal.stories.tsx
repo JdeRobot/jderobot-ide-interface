@@ -23,6 +23,7 @@ export const Main: Story = {
         isOpen
         onClose={() => {}}
         upload={() => {}}
+        fetchFiles={() => {}}
         currentProject=""
         location={""}
       />
