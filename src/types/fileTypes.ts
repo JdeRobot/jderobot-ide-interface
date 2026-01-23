@@ -56,6 +56,7 @@ export interface Entry {
   path: string;
   group: string;
   access: boolean;
+  binary?: boolean;
   files: Entry[];
 }
 
