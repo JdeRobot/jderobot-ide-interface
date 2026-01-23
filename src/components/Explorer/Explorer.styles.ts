@@ -5,6 +5,7 @@ const primaryColor = "#666";
 export const StyledSidebarContainer = styled.div`
   margin-right: 2.5px;
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   flex: 1 1 1px;

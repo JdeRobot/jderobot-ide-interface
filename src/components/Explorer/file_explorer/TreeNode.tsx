@@ -89,6 +89,9 @@ function TreeNode({
         hoverColor={theme.palette.bgLight}
         roundness={theme.roundness}
         onClick={() => handleClick()}
+        onContextMenu={(e) => {
+          menuProps.showMoreActionsMenu(e, node);
+        }}
       >
         <StyledExplorerItem color={text} depth={depth}>
           <FileIcon

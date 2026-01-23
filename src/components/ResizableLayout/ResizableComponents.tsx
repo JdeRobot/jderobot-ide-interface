@@ -8,6 +8,7 @@ import {
   StyledResizableVertBlock,
   StyledVertContiner,
   StyledVertFillerContiner,
+  StyledVertIdeContainer,
   StyledVertRContainer,
 } from "./ResizableComponents.styles";
 import { useTheme } from "Utils";
@@ -143,9 +144,9 @@ export const ResizableColumn = ({ children }: { children: any[] }) => {
   if (children.length === 1) {
     return (
       <StyledVertContiner bgColor={theme.palette?.bg}>
-        <StyledIdeContainer bgColor={theme.palette?.bg}>
+        <StyledVertIdeContainer bgColor={theme.palette?.bg}>
           {children[0]}
-        </StyledIdeContainer>
+        </StyledVertIdeContainer>
       </StyledVertContiner>
     );
   }
@@ -159,14 +160,14 @@ export const ResizableColumn = ({ children }: { children: any[] }) => {
           snap={[0]}
           roundness={0}
         >
-        <StyledIdeContainer bgColor={theme.palette?.bg}>
-          {children[0]}
-        </StyledIdeContainer>
+          <StyledVertIdeContainer bgColor={theme.palette?.bg}>
+            {children[0]}
+          </StyledVertIdeContainer>
         </ResizableVert>
         <StyledVertFillerContiner bgColor={theme.palette?.bg} roundness={0}>
-        <StyledIdeContainer bgColor={theme.palette?.bg}>
-          {children[1]}
-        </StyledIdeContainer>
+          <StyledVertIdeContainer bgColor={theme.palette?.bg}>
+            {children[1]}
+          </StyledVertIdeContainer>
         </StyledVertFillerContiner>
       </StyledVertContiner>
     );

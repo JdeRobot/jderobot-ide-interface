@@ -151,6 +151,17 @@ export const StyledVertContiner = styled.div<StyledVertContinerProps>`
   background-color: ${(p) => p.bgColor ?? primaryColor};
 `;
 
+export const StyledVertIdeContainer = styled.div<StyledVertContinerProps>`
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-right: 2.5px;
+  z-index: 3;
+  background-color: ${(p) => p.bgColor ?? primaryColor};
+`;
+
 interface StyledVertRContainerProps {
   roundness?: number;
 }
