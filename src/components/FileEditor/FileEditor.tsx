@@ -222,10 +222,10 @@ const FileEditor = ({
   };
 
   const resetFileContents = async () => {
-    if (currentFile) {
+    if (fileToSaveRef.current) {
       contentRef.current = "";
       setFileContent(undefined);
-      await initFile(currentFile);
+      await initFile(fileToSaveRef.current);
       setHasUnsavedChanges(false);
     }
   }
