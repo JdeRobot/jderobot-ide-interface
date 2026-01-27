@@ -2,7 +2,14 @@ import React from "react";
 import { useEffect, useRef, useState } from "react";
 
 import { SaveIcon, ZoomOutIcon, PlusIcon, KeyboardIcon } from "Assets";
-import { contrastSelector, publish, subscribe, unsubscribe, useError, useTheme } from "Utils";
+import {
+  contrastSelector,
+  publish,
+  subscribe,
+  unsubscribe,
+  useError,
+  useTheme,
+} from "Utils";
 import { CommsManager } from "jderobot-commsmanager";
 import { Entry, EditorsEntry, Options, ExtraSnippets } from "Types";
 import TextEditor from "./TextEditor";
@@ -67,7 +74,7 @@ const FileEditor = ({
     theme.palette.darkText,
     theme.palette.primary,
   );
-  
+
   const [fileContent, _setFileContent] = useState<string | undefined>(
     undefined,
   );
@@ -113,7 +120,7 @@ const FileEditor = ({
       });
     }
 
-    subscribe("resetFileContents", resetFileContents)
+    subscribe("resetFileContents", resetFileContents);
 
     return () => {
       unsubscribe("autoSave", () => {});
@@ -225,10 +232,24 @@ const FileEditor = ({
     if (fileToSaveRef.current) {
       contentRef.current = "";
       setFileContent(undefined);
-      await initFile(fileToSaveRef.current);
-      setHasUnsavedChanges(false);
+      try {
+        const fileType = findExt(fileToSaveRef.current.path.split(".").pop());
+        setLanguage(fileType);
+
+        const content = await api.file.get(
+          currentProjectname,
+          fileToSaveRef.current,
+        );
+        setFileContent(content);
+        setHasUnsavedChanges(false);
+      } catch (e) {
+        if (e instanceof Error) {
+          console.error("Error fetching file content: " + e.message);
+          error("Error fetching file content: " + e.message);
+        }
+      }
     }
-  }
+  };
 
   useEffect(() => {
     setHasUnsavedChanges(fileContent !== undefined);
