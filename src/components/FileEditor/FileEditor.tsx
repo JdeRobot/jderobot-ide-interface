@@ -113,8 +113,11 @@ const FileEditor = ({
       });
     }
 
+    subscribe("resetFileContents", resetFileContents)
+
     return () => {
       unsubscribe("autoSave", () => {});
+      unsubscribe("resetFileContents", () => {});
       if (options?.editor?.onlyOneFile) {
         unsubscribe("uploadOnlyCode", () => {});
       }
@@ -217,6 +220,15 @@ const FileEditor = ({
       }
     }
   };
+
+  const resetFileContents = async () => {
+    if (currentFile) {
+      contentRef.current = "";
+      setFileContent(undefined);
+      await initFile(currentFile);
+      setHasUnsavedChanges(false);
+    }
+  }
 
   useEffect(() => {
     setHasUnsavedChanges(fileContent !== undefined);
