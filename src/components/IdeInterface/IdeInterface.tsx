@@ -12,7 +12,13 @@ import {
   Button,
   StyledButtonsContainer,
 } from "Components";
-import { OptionsProvider, subscribe, unsubscribe, useTheme } from "Utils";
+import {
+  OptionsProvider,
+  publish,
+  subscribe,
+  unsubscribe,
+  useTheme,
+} from "Utils";
 import {
   Entry,
   Layout,
@@ -75,6 +81,10 @@ const IdeInterface = ({
   const theme = useTheme();
 
   const [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
+
+  useEffect(() => {
+    publish("currentFile", { file: currentFile });
+  }, [currentFile]);
 
   if (splashIcon === undefined) {
     splashIcon = (
@@ -173,7 +183,7 @@ const ViewersContainer = ({
   };
 
   const toggleVisibility = (index: number) => {
-    viewers[index].activate(!visibility[index])
+    viewers[index].activate(!visibility[index]);
     setVisibility(
       visibility.map((state, i) => {
         if (index === i) {
@@ -230,7 +240,7 @@ const ViewersContainer = ({
         if (visibility[index]) {
           isVisible = true;
           vis[index] = false;
-          viewers[index].activate(false)
+          viewers[index].activate(false);
         }
         if (element.name === tool) {
           newIndex = index;
@@ -239,7 +249,7 @@ const ViewersContainer = ({
     }
     if (isVisible) {
       vis[newIndex] = true;
-      viewers[newIndex].activate(true)
+      viewers[newIndex].activate(true);
       setVisibility(
         visibility.map((state, i) => {
           return vis[i];
