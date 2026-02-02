@@ -2,7 +2,11 @@ import React from "react";
 import { StyledCanvas } from "./Canvas.styles";
 import { useTheme } from "Utils";
 
-const Canvas = ({ ref }: { ref: React.RefObject<HTMLCanvasElement> }) => {
+const Canvas = ({
+  reference,
+}: {
+  reference: React.RefObject<HTMLCanvasElement>;
+}) => {
   const theme = useTheme();
 
   // TODO: add proper theme
@@ -10,7 +14,7 @@ const Canvas = ({ ref }: { ref: React.RefObject<HTMLCanvasElement> }) => {
 
   return (
     <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
-      <StyledCanvas ref={ref} bg={bg} roundness={theme.roundness} />
+      <StyledCanvas ref={reference} bg={bg} roundness={theme.roundness} />
     </div>
   );
 };
