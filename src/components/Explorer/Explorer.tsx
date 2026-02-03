@@ -148,7 +148,6 @@ const Explorer = ({
     }
 
     for (const entry of list) {
-      console.log(file, entry, entry === file);
       if (entry.path === file.path) {
         return true;
       }
@@ -348,7 +347,6 @@ const Explorer = ({
 
   const handleRenameCurrentFile = async () => {
     if (currentFile) {
-      console.log(fileList, currentFile, inFileList(fileList, currentFile));
       if (inFileList(fileList, currentFile)) {
         handleRename(currentFile);
       }
