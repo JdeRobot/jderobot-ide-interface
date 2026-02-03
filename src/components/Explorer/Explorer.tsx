@@ -303,7 +303,10 @@ const Explorer = ({
     setRenameModalOpen(false);
   };
 
-  const handleSubmitRenameModal = async (new_path: string) => {
+  const handleSubmitRenameModal = async (
+    new_name: string,
+    new_path: string,
+  ) => {
     if (renameEntry) {
       try {
         console.log(renameEntry);
@@ -317,11 +320,13 @@ const Explorer = ({
 
         if (currentFile && currentFile.path === renameEntry.path) {
           currentFile.path = new_path;
+          currentFile.name = new_name;
           setCurrentFile(currentFile); // Unset the current file
         }
 
         if (selectedEntry && selectedEntry.path === renameEntry.path) {
           selectedEntry.path = new_path;
+          selectedEntry.name = new_name;
           setSelectedEntry(selectedEntry);
         }
       } catch (e) {

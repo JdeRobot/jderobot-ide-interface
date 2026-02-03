@@ -121,7 +121,7 @@ const RenameModal = ({
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    onSubmit(getNewPath(formState.renameData));
+    onSubmit(formState.renameData, getNewPath(formState.renameData));
     setFormState(initialNewFolderModalData);
     allowCreation(false);
     onClose();
