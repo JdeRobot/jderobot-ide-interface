@@ -149,7 +149,7 @@ const Explorer = ({
 
     for (const entry of list) {
       console.log(file, entry, entry === file);
-      if (entry === file) {
+      if (entry.path === file.path) {
         return true;
       }
       if (entry.is_dir) {
