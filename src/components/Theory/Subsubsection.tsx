@@ -19,7 +19,7 @@ const TheorySubsubsection = ({
   const text = contrastSelector(
     theme.palette.text,
     theme.palette.darkText,
-    theme.palette.bg
+    theme.palette.bg,
   );
 
   return (

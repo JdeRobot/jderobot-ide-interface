@@ -22,6 +22,7 @@ export const StyledSubsubsectionTitle = styled.h4`
 
   &:before {
     counter-increment: subsubsection;
-    content: counter(section) "." counter(subsection) "." counter(subsubsection) ". ";
+    content: counter(section) "." counter(subsection) "." counter(subsubsection)
+      ". ";
   }
 `;

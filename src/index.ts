@@ -43,7 +43,7 @@ export {
   Image,
   ImageRow,
   Link,
-  FormulaSection
+  FormulaSection,
 } from "./components";
 export {
   ThemeProvider,

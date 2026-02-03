@@ -2,7 +2,14 @@ import React from "react";
 import { ResetIcon } from "Assets";
 import { CommsManager, states } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
-import { contrastSelector, publish, subscribe, unsubscribe, useError, useTheme } from "Utils";
+import {
+  contrastSelector,
+  publish,
+  subscribe,
+  unsubscribe,
+  useError,
+  useTheme,
+} from "Utils";
 import {
   StyledStatusBarButton,
   StyledStatusBarContainer,

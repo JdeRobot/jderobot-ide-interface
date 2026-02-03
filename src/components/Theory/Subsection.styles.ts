@@ -11,7 +11,6 @@ export const StyledSubsection = styled.section<StyledSubsectionProps>`
   color: ${(p) => p.color ?? primaryColor};
   counter-reset: subsubsection;
   margin-left: -1rem;
-
 `;
 
 export const StyledSubsectionTitle = styled.h4`

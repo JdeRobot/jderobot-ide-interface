@@ -72,7 +72,7 @@ const UploadModal = ({
         const base64String = e.target.result.split(",")[1]; // Remove the data URL prefix
         try {
           await upload(currentProject, location, file.name, base64String);
-          fetchFiles()
+          fetchFiles();
           console.log("Uploading file Completed");
         } catch (e) {
           if (e instanceof Error) {

@@ -21,7 +21,13 @@ import {
   RenameIcon,
   UploadIcon,
 } from "Assets";
-import { contrastSelector, subscribe, unsubscribe, useError, useTheme } from "Utils";
+import {
+  contrastSelector,
+  subscribe,
+  unsubscribe,
+  useError,
+  useTheme,
+} from "Utils";
 import {
   StyledSidebarContainer,
   StyledSidebarEntry,
@@ -309,6 +315,7 @@ const Explorer = ({
 
         fetchFileList(); // Update the file list
 
+        // TODO: recheck this
         if (currentFile && currentFile.path === renameEntry.path) {
           currentFile.path = new_path;
           setCurrentFile(currentFile); // Unset the current file
@@ -436,7 +443,7 @@ const Explorer = ({
             onClick={() => fetchFileList()}
             title="Refresh View"
           >
-            <ResetIcon htmlColor={iconColor}/>
+            <ResetIcon htmlColor={iconColor} />
           </MenuButtonStroke>
           <div style={{ marginLeft: "auto" }} />
           {currentFile && (

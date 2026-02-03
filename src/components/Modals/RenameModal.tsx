@@ -28,7 +28,7 @@ const RenameModal = ({
     theme.palette.darkText,
     theme.palette.button.error,
   );
-  
+
   const focusInputRef = useRef<HTMLInputElement>(null);
   const [formState, setFormState] = useState(initialNewFolderModalData);
   const [isCreationAllowed, allowCreation] = useState(false);
@@ -112,6 +112,10 @@ const RenameModal = ({
   const getNewPath = (new_name: string) => {
     const split_path = selectedEntry.path.split("/");
     const parent_path = split_path.slice(0, split_path.length - 1).join("/");
+    if (parent_path === "") {
+      return new_name;
+    }
+
     return parent_path + "/" + new_name;
   };
 

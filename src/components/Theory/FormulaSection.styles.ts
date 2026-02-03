@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const primaryColor = "#666";
 
-interface StyledFormulaContainerProps{
+interface StyledFormulaContainerProps {
   color?: string;
   bg?: string;
   roundness?: number;
@@ -14,7 +14,7 @@ export const StyledFormulaContainer = styled.p<StyledFormulaContainerProps>`
   color: ${(p) => p.color ?? primaryColor};
   padding: 1rem 1.5rem;
   border-radius: ${(p) => p.roundness ?? 1}px;
-  
+
   display: block;
   width: fit-content;
   margin: 1rem auto;

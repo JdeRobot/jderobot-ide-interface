@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ButtonVariant} from "./Button";
+import { ButtonVariant } from "./Button";
 
 const primaryColor = "#666";
 

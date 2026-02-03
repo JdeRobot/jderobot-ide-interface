@@ -52,7 +52,7 @@ function FileIcon({
     case "Action":
       returnVal = (
         <>
-          <ActionFileIcon htmlColor={color}/>
+          <ActionFileIcon htmlColor={color} />
         </>
       );
       break;

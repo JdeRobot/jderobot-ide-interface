@@ -153,7 +153,7 @@ export const Main: Story = {
 
           <p>And now, the local video test:</p>
 
-          <LocalVideo src={videoTest}/>
+          <LocalVideo src={videoTest} />
 
           <TimelineComparison
             title="Method comparison"

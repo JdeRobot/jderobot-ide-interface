@@ -23,7 +23,7 @@ export const StyledSidebarEntry = styled.div<StyledSidebarEntryMenuProps>`
   flex-direction: column;
   flex-grow: 1;
   background-color: ${(p) => p.bgColor ?? primaryColor};
-  position:absolute;
+  position: absolute;
 `;
 
 export const StyledSidebarEntryMenu = styled.div<StyledSidebarEntryMenuProps>`

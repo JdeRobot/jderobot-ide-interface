@@ -20,7 +20,7 @@ interface StyledExplorerItemContainerProps {
   bgColor?: string;
   hoverColor?: string;
   active?: boolean;
-  roundness?: number; 
+  roundness?: number;
 }
 
 const handleActive = (p: StyledExplorerItemContainerProps) => {
@@ -83,7 +83,6 @@ export const StyledExplorerItem = styled.div<StyledExplorerItemProps>`
     min-height: 20px;
   }
 `;
-
 
 export const StyledExtraIcon = styled.button`
   visibility: hidden;

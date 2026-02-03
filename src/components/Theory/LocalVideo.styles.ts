@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 interface StyledLocalVideoProps {
-    roundness?: number;
-    position?: string;
+  roundness?: number;
+  position?: string;
 }
 
 const handlePosition = (p: StyledLocalVideoProps) => {

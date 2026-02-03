@@ -1,4 +1,4 @@
-import { BackIcon, CloseIcon} from "Assets";
+import { BackIcon, CloseIcon } from "Assets";
 import styled from "styled-components";
 import { contrastSelector } from "Utils";
 
@@ -445,7 +445,8 @@ export const StyledModalDropArea = styled.label<StyledModelDropAreaProps>`
   border-radius: ${(p) => p.roundness ?? 1}px;
   margin-bottom: 10px;
 
-  color: ${(p) => contrastSelector(p.text, p.altText, p.bg) ?? primaryColor} !important;
+  color: ${(p) =>
+    contrastSelector(p.text, p.altText, p.bg) ?? primaryColor} !important;
   background: ${(p) => p.bg ?? primaryColor};
   border: 2px dashed ${(p) => p.altBg ?? primaryColor};
 
@@ -457,7 +458,8 @@ export const StyledModalDropArea = styled.label<StyledModelDropAreaProps>`
 
   &:hover {
     background: ${(p) => p.altBg ?? primaryColor};
-    color: ${(p) => contrastSelector(p.text, p.altText, p.altBg) ?? primaryColor} !important;
+    color: ${(p) =>
+      contrastSelector(p.text, p.altText, p.altBg) ?? primaryColor} !important;
   }
 
   & span {
