@@ -57,7 +57,9 @@ const FileExplorer = ({
 
   const handleFileClick = (file: Entry) => {
     console.log(currentFile, file);
-    setCurrentFile(file);
+    if (file.path !== currentFile?.path) {
+      setCurrentFile(file);
+    }
     setSelectedEntry(file);
   };
 
