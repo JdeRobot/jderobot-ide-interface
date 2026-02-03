@@ -56,7 +56,6 @@ const FileExplorer = ({
   }, [currentProjectname]);
 
   const handleFileClick = (file: Entry) => {
-    console.log(currentFile, file);
     if (file.path !== currentFile?.path) {
       setCurrentFile(file);
     }
