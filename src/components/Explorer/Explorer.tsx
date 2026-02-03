@@ -315,10 +315,14 @@ const Explorer = ({
 
         fetchFileList(); // Update the file list
 
-        // TODO: recheck this
         if (currentFile && currentFile.path === renameEntry.path) {
           currentFile.path = new_path;
           setCurrentFile(currentFile); // Unset the current file
+        }
+
+        if (selectedEntry && selectedEntry.path === renameEntry.path) {
+          selectedEntry.path = new_path;
+          setSelectedEntry(selectedEntry);
         }
       } catch (e) {
         if (e instanceof Error) {
