@@ -344,7 +344,7 @@ const Explorer = ({
 
   const handleRenameCurrentFile = async () => {
     if (currentFile) {
-      console.log(fileList, currentFile);
+      console.log(fileList, currentFile, inFileList(fileList, currentFile));
       if (inFileList(fileList, currentFile)) {
         handleRename(currentFile);
       }
