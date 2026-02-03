@@ -148,6 +148,7 @@ const Explorer = ({
     }
 
     for (const entry of list) {
+      console.log(list, entry, entry === file);
       if (entry === file) {
         return true;
       }
@@ -157,6 +158,7 @@ const Explorer = ({
         }
       }
     }
+    return false;
   };
 
   ///////////////// CREATE FILES ///////////////////////////////////////////////
