@@ -256,6 +256,7 @@ const FileEditor = ({
   }, [fileContent]);
 
   useEffect(() => {
+    //TODO: do not autosave on rename
     const func = async () => {
       if (currentFile) {
         if (fileToSave && autosave) {

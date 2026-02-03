@@ -309,15 +309,6 @@ const Explorer = ({
   ) => {
     if (renameEntry) {
       try {
-        console.log(renameEntry);
-        if (renameEntry.is_dir) {
-          await api.folder.rename(project, renameEntry.path, new_path);
-        } else {
-          await api.file.rename(project, renameEntry.path, new_path);
-        }
-
-        fetchFileList(); // Update the file list
-
         if (currentFile && currentFile.path === renameEntry.path) {
           setCurrentFile({ ...currentFile, path: new_path, name: new_name }); // Unset the current file
         }
@@ -329,7 +320,17 @@ const Explorer = ({
             name: new_name,
           });
         }
+
+        if (renameEntry.is_dir) {
+          await api.folder.rename(project, renameEntry.path, new_path);
+        } else {
+          await api.file.rename(project, renameEntry.path, new_path);
+        }
+
+        fetchFileList(); // Update the file list
       } catch (e) {
+        setCurrentFile(undefined);
+        setSelectedEntry(undefined);
         if (e instanceof Error) {
           console.error("Error deleting file:", e);
           error("Error deleting file: " + e.message);
