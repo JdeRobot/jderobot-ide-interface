@@ -148,7 +148,7 @@ const Explorer = ({
     }
 
     for (const entry of list) {
-      console.log(list, entry, entry === file);
+      console.log(file, entry, entry === file);
       if (entry === file) {
         return true;
       }
