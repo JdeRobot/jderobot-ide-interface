@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef, useState } from "react";
 import { StyledDropdown } from "./Dropdown.styles";
-import { useTheme } from "Utils";
+import { contrastSelector, useTheme } from "Utils";
 import { MenuButton } from "Components";
 import { StyledStatusBarEntry } from "../StatusBar/StatusBar.style";
 
@@ -30,6 +30,12 @@ export const DropdownStatusBar = ({
   const [open, setOpen] = useState<boolean>(false);
   const [right, setRight] = useState<any>(width / 2 + 13);
   const dropdown = useRef<HTMLDivElement>(null);
+
+  const text = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.primary,
+  );
 
   const changeValue = (e: any, value: any) => {
     e.preventDefault();
@@ -69,13 +75,13 @@ export const DropdownStatusBar = ({
           checkPosition(e.clientX);
           setOpen(!open);
         }}
-        text={theme.palette.text}
+        text={text}
       >
         {children}
       </StyledStatusBarEntry>
       {open && possibleValues.length > 0 && (
         <StyledDropdown
-          color={theme.palette.text}
+          color={text}
           bgColor={theme.palette.primary}
           hoverColor={theme.palette.secondary}
           roundness={theme.roundness}

@@ -53,6 +53,12 @@ const StatusBar = ({
     theme.palette.warning,
   );
 
+  const statusText = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.primary,
+  );
+
   const connectWithRetry = async () => {
     const data = commsManager?.getHostData();
     if (data) {
@@ -90,14 +96,14 @@ const StatusBar = ({
     <StyledStatusBarContainer bgColor={theme.palette.primary}>
       {dockerData ? (
         <>
-          <StyledStatusBarEntry text={theme.palette.text} title="ROS 2 version">
+          <StyledStatusBarEntry text={statusText} title="ROS 2 version">
             <label>{`ROS 2: ${dockerData.ros_version}`}</label>
           </StyledStatusBarEntry>
-          <StyledStatusBarEntry text={theme.palette.text} title="GPU status">
+          <StyledStatusBarEntry text={statusText} title="GPU status">
             <label>{`GPU: ${dockerData.gpu_avaliable}`}</label>
           </StyledStatusBarEntry>
           <StyledStatusBarEntry
-            text={theme.palette.text}
+            text={statusText}
             title="Robotics Backend version"
           >
             <label>{`Robotics Backend: ${dockerData.robotics_backend_version}`}</label>
@@ -129,10 +135,7 @@ const StatusBar = ({
           <label>{`Connect${state === undefined || state === "idle" ? "" : "ing ..."}`}</label>
         </StyledStatusBarButton>
       )}
-      <StyledStatusBarEntry
-        text={theme.palette.text}
-        title="Robotics Backend state"
-      >
+      <StyledStatusBarEntry text={statusText} title="Robotics Backend state">
         <label id="robotics-backend-state">{state}</label>
       </StyledStatusBarEntry>
       {extraComponents.universeSelector ? (
@@ -390,6 +393,12 @@ export const StatusBarCustomUniverseSelector = ({
     commsManager?.getUniverse(),
   );
 
+  const statusText = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.primary,
+  );
+
   const resetUniverse = (e: any) => {
     if (e.detail.state == states.IDLE) {
       setUniverse(undefined);
@@ -490,7 +499,7 @@ export const StatusBarCustomUniverseSelector = ({
         id="universe-selector"
         title="Universe selector"
         onClick={() => setOpen(true)}
-        text={theme.palette.text}
+        text={statusText}
       >
         <label>
           {universe ? `Universe: ${universe}` : "Click to select universe"}

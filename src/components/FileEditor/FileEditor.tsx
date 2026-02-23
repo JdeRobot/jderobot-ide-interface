@@ -376,6 +376,13 @@ const FileEditor = ({
           >
             <ZoomOutIcon htmlColor={iconColor} />
           </MenuButtonStroke>
+          <MenuButton
+            id="keybinds-button"
+            title="Keybinds Info"
+            onClick={() => openKeybindsModal(true)}
+          >
+            <KeyboardIcon htmlColor={iconColor} />
+          </MenuButton>
           {(() => {
             for (const editor of extraEditors) {
               if (editor.language === language) {
@@ -392,15 +399,6 @@ const FileEditor = ({
                 return <>{list}</>;
               }
             }
-            return (
-              <MenuButton
-                id="keybinds-button"
-                title="Keybinds Info"
-                onClick={() => openKeybindsModal(true)}
-              >
-                <KeyboardIcon />
-              </MenuButton>
-            );
           })()}
         </StyledButtonsContainer>
       </StyledEditorMenu>
