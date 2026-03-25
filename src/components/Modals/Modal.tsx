@@ -570,6 +570,18 @@ export const ModalInputSelectIcon = ({
 }: ModalInputSelectIconProps) => {
   const theme = useTheme();
 
+  const color = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.bg,
+  );
+
+  const selColor = contrastSelector(
+    theme.palette.text,
+    theme.palette.darkText,
+    theme.palette.primary,
+  );
+
   return (
     <>
       <StyledModalInputSelectorTitle htmlFor={id}>
@@ -580,7 +592,7 @@ export const ModalInputSelectIcon = ({
           <StyledModalSelectIcon
             hoverColor={theme.palette.secondary}
             selectedColor={theme.palette.primary}
-            color={theme.palette.text}
+            color={selected === entry.id ? selColor : color}
             roundness={theme.roundness}
             icon={entry.iconType}
             key={entry.id}
