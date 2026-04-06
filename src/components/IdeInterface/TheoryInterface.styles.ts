@@ -18,14 +18,13 @@ export const StyledTheoryTitle = styled.h1<StyledTheoryTitleProps>`
 
 interface StyledIndexProps {
   color?: string;
-  depth: number;
 }
 
 export const StyledIndex = styled.ol<StyledIndexProps>`
   color: ${(p) => p.color ?? primaryColor};
   padding: 0;
   margin: 0.5rem 0 0;
-  padding-left: ${(p) => p.depth * 1.5}rem;
+  padding-left: 1.5rem;
   counter-reset: item;
 
   & li {

@@ -1,6 +1,6 @@
 {
   "name": "jderobot-ide-interface",
-  "version": "0.2.139",
+  "version": "0.2.141",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -36,6 +36,7 @@
     "@typescript-eslint/eslint-plugin": "^8.46.1",
     "@typescript-eslint/parser": "^8.46.1",
     "babel-loader": "^10.0.0",
+    "baseline-browser-mapping": "^2.10.10",
     "eslint": "^9.37.0",
     "eslint-plugin-react": "^7.37.5",
     "file-loader": "^6.2.0",
@@ -65,11 +66,11 @@
     "react-youtube": "^10.1.0"
   },
   "peerDependencies": {
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
     "jderobot-commsmanager": "^1.0.10",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "@types/react": "18.2.0",
-    "typescript": "^5.9.3",
-    "@types/react-dom": "18.2.0"
+    "typescript": "^5.9.3"
   }
 }

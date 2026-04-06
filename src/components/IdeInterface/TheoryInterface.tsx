@@ -93,14 +93,9 @@ const TheoryInterface = ({ title, index, children }: IdeInterfaceProps) => {
           <StyledIndexTitle color={indexColor}>
             Table of contents
           </StyledIndexTitle>
-          <StyledIndex depth={0} color={indexColor}>
+          <StyledIndex color={indexColor}>
             {index.map((data) => (
-              <IndexEntry
-                key={data.title}
-                index={data}
-                depth={0}
-                color={indexColor}
-              />
+              <IndexEntry key={data.title} index={data} color={indexColor} />
             ))}
           </StyledIndex>
         </StyledIndexContainer>
@@ -112,20 +107,18 @@ const TheoryInterface = ({ title, index, children }: IdeInterfaceProps) => {
 const IndexEntry = ({
   index,
   color,
-  depth,
 }: {
   index: TheoryIndex;
   color?: string;
-  depth: number;
 }) => {
   return (
     <>
       <li>
         <Link href={index.href} title={index.title} />
         {index.subsections !== undefined && (
-          <StyledIndex color={color} depth={depth + 1}>
+          <StyledIndex color={color}>
             {index.subsections.map((data) => (
-              <IndexEntry key={data.title} index={data} depth={depth + 1} />
+              <IndexEntry key={data.title} index={data} color={color} />
             ))}
           </StyledIndex>
         )}

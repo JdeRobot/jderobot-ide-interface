@@ -102,7 +102,24 @@ export const Main: Story = {
               },
               { href: "#history8", title: "Developments cince the 2000s" },
               { href: "#history9", title: "The future" },
-              { href: "#history10", title: "Timeline" },
+              {
+                href: "#history10",
+                title: "Timeline",
+                subsections: [
+                  {
+                    href: "#monoslam1",
+                    title: "MonoSLAM (Simultaneous Localization and Mapping)",
+                  },
+                  {
+                    href: "#ptam",
+                    title: "PTAM (Parallel Tracking and Mapping)",
+                  },
+                  {
+                    href: "#svo",
+                    title: "SVO (Semi-Direct Monocular Visual Odometry)",
+                  },
+                ],
+              },
             ],
           },
         ]}
