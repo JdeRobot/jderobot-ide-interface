@@ -6,6 +6,7 @@ export { default as TheorySubsection } from "./Subsection";
 export { default as TheorySubsubsection } from "./Subsubsection";
 export { default as CarouselDisplay } from "./CarouselDisplay";
 export { default as TheoryList } from "./List";
+export { default as TheoryNumberedList } from "./NumberedList";
 export { default as TheoryCanvas } from "./Canvas";
 export { default as Timeline } from "./Timeline";
 export { default as ComparisonDisplay } from "./ComparisonDisplay";

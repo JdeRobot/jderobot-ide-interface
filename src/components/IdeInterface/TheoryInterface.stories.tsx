@@ -6,6 +6,7 @@ import {
   ComparisonDisplay,
   HighlightedSection,
   TheoryList,
+  TheoryNumberedList,
   TheorySection,
   TheorySubsection,
   Timeline,
@@ -388,6 +389,19 @@ export const Main: Story = {
                 DARPA, Rockin, etc.
               </li>
             </TheoryList>
+            <TheoryNumberedList>
+              <li>Autonomous cars</li>
+              <li>Drones</li>
+              <li>Mapping, self-localization, and navigation</li>
+              <li>Humanoids</li>
+              <li>Human interaction</li>
+              <li>Cooperative robot groups</li>
+              <li>Robot vision</li>
+              <li>
+                Robotics championships: RoboCup (soccer, home, rescue, etc.),
+                DARPA, Rockin, etc.
+              </li>
+            </TheoryNumberedList>
           </TheorySubsection>
         </TheorySection>
 
