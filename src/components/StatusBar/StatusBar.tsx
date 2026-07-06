@@ -1,5 +1,4 @@
 import React from "react";
-import { ResetIcon } from "Assets";
 import { CommsManager, states } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
 import {
@@ -11,7 +10,6 @@ import {
   useTheme,
 } from "Utils";
 import {
-  StyledStatusBarButton,
   StyledStatusBarContainer,
   StyledStatusBarEntry,
 } from "./StatusBar.style";
@@ -22,35 +20,23 @@ const StatusBar = ({
   project,
   viewers,
   commsManager,
-  connectManager,
   api,
   baseUniverse,
   extraComponents,
 }: {
   project: string;
   commsManager: CommsManager | null;
-  connectManager: (
-    desiredState?: string,
-    callback?: () => void,
-  ) => Promise<void>;
   baseUniverse?: string;
   api: ExtraApi;
   viewers: ViewersEntry[];
   extraComponents: StatusBarComponents;
 }) => {
   const theme = useTheme();
-  const [loading, setLoading] = useState<boolean>(false);
   const [dockerData, setDockerData] = useState<any>(
     commsManager?.getHostData(),
   );
   const [state, setState] = useState<string | undefined>(
     commsManager?.getState(),
-  );
-
-  const text = contrastSelector(
-    theme.palette.text,
-    theme.palette.darkText,
-    theme.palette.warning,
   );
 
   const statusText = contrastSelector(
@@ -59,27 +45,23 @@ const StatusBar = ({
     theme.palette.primary,
   );
 
-  const connectWithRetry = async () => {
+  const getDockerDataWithRetry = async () => {
     const data = commsManager?.getHostData();
     if (data) {
       setDockerData(data);
       return;
     }
-    setTimeout(connectWithRetry, 1000);
+    setTimeout(getDockerDataWithRetry, 1000);
   };
 
-  if (dockerData === undefined) {
-    connectWithRetry();
-  }
-
-  const updateState = (e: any) => {
-    setState(e.detail.state);
-    if (e.detail.state == states.IDLE) {
-      setDockerData(undefined);
-      connectWithRetry();
-    } else {
-      if (loading) {
-        setLoading(false);
+  const updateState = (e: unknown) => {
+    const T = CustomEvent<{ detail: unknown }>;
+    if (e instanceof T) {
+      setState(e.detail.state);
+      if (e.detail.state == states.IDLE) {
+        setDockerData(undefined);
+      } else if (dockerData === undefined) {
+        getDockerDataWithRetry();
       }
     }
   };
@@ -94,7 +76,7 @@ const StatusBar = ({
 
   return (
     <StyledStatusBarContainer bgColor={theme.palette.primary}>
-      {dockerData ? (
+      {dockerData && (
         <>
           <StyledStatusBarEntry text={statusText} title="ROS 2 version">
             <label>{`ROS 2: ${dockerData.ros_version}`}</label>
@@ -109,31 +91,6 @@ const StatusBar = ({
             <label>{`Robotics Backend: ${dockerData.robotics_backend_version}`}</label>
           </StyledStatusBarEntry>
         </>
-      ) : (
-        <StyledStatusBarButton
-          text={text}
-          bgColor={theme.palette.warning}
-          hoverColor={theme.palette.button.hoverWarning}
-          animate
-          id={`connect-with-rb`}
-          onClick={() => {
-            if (state === undefined || state === "idle") {
-              setLoading(true);
-              connectManager(states.CONNECTED, () => {
-                setLoading(false);
-                close();
-              });
-            }
-          }}
-          title="Connect to the Robotics Backend"
-          disabled={loading}
-        >
-          <ResetIcon
-            htmlColor={text}
-            id={loading ? "loading-spin" : "loading"}
-          />
-          <label>{`Connect${state === undefined || state === "idle" ? "" : "ing ..."}`}</label>
-        </StyledStatusBarButton>
       )}
       <StyledStatusBarEntry text={statusText} title="Robotics Backend state">
         <label id="robotics-backend-state">{state}</label>
@@ -148,7 +105,6 @@ const StatusBar = ({
       ) : (
         <DefaultUniverseSelector
           project={project}
-          connectManager={connectManager}
           commsManager={commsManager}
           api={api}
           baseUniverse={baseUniverse}
@@ -167,26 +123,23 @@ export default StatusBar;
 
 const DefaultUniverseSelector = ({
   project,
-  connectManager,
   commsManager,
   api,
   baseUniverse,
 }: {
   project: string;
-  connectManager: (
-    desiredState?: string,
-    callback?: () => void,
-  ) => Promise<void>;
   commsManager: CommsManager | null;
   api: ExtraApi;
   baseUniverse?: string;
 }) => {
-  const { warning, error, info } = useError();
+  const { warning, error } = useError();
   const [universe, setUniverse] = useState<string | undefined>(
     commsManager?.getUniverse(),
   );
 
   const [universeList, setUniverseList] = useState<string[]>([]);
+  const wrnMsg =
+    "Failed to connect with the Robotics Backend. Please make sure it is connected.";
 
   const resetUniverse = (e: any) => {
     if (e.detail.state == states.IDLE) {
@@ -225,9 +178,7 @@ const DefaultUniverseSelector = ({
 
   const terminateUniverse = async () => {
     if (!commsManager) {
-      warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
-      );
+      warning(wrnMsg);
       return;
     }
     // Down the RB ladder
@@ -238,9 +189,7 @@ const DefaultUniverseSelector = ({
 
   const launchUniverse = async (universe: string) => {
     if (!commsManager) {
-      warning(
-        "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
-      );
+      warning(wrnMsg);
       return;
     }
 
@@ -289,14 +238,10 @@ const DefaultUniverseSelector = ({
 
   const checkManager = () => {
     if (commsManager === null || commsManager.getState() === "idle") {
-      info("Connecting with the Robotics Backend ...");
-      connectManager(states.TOOLS_READY, () => {
-        close();
-        checkManager();
-      });
-      throw Error(
-        "The Robotics Backend is disconnected. Make sure to connect.",
-      );
+      const msg =
+        "The Robotics Backend is disconnected. Make sure to connect by clicking on the button at the top right corner.";
+      error(msg);
+      throw Error(msg);
     }
   };
 
