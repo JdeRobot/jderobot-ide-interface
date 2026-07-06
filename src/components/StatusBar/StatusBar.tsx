@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { CommsManager, states } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
 import {
@@ -10,6 +10,7 @@ import {
   useTheme,
 } from "Utils";
 import {
+  DummySpacer,
   StyledStatusBarContainer,
   StyledStatusBarEntry,
 } from "./StatusBar.style";
@@ -45,23 +46,26 @@ const StatusBar = ({
     theme.palette.primary,
   );
 
-  const getDockerDataWithRetry = async () => {
+  const connectWithRetry = async () => {
     const data = commsManager?.getHostData();
     if (data) {
       setDockerData(data);
       return;
     }
-    setTimeout(getDockerDataWithRetry, 1000);
+    setTimeout(connectWithRetry, 1000);
   };
 
-  const updateState = (e: unknown) => {
+  if (dockerData === undefined) {
+    connectWithRetry();
+  }
+
+  const updateState = (e: any) => {
     const T = CustomEvent<{ detail: unknown }>;
     if (e instanceof T) {
       setState(e.detail.state);
       if (e.detail.state == states.IDLE) {
         setDockerData(undefined);
-      } else if (dockerData === undefined) {
-        getDockerDataWithRetry();
+        connectWithRetry();
       }
     }
   };
@@ -76,7 +80,7 @@ const StatusBar = ({
 
   return (
     <StyledStatusBarContainer bgColor={theme.palette.primary}>
-      {dockerData && (
+      {dockerData !== undefined ? (
         <>
           <StyledStatusBarEntry text={statusText} title="ROS 2 version">
             <label>{`ROS 2: ${dockerData.ros_version}`}</label>
@@ -91,6 +95,8 @@ const StatusBar = ({
             <label>{`Robotics Backend: ${dockerData.robotics_backend_version}`}</label>
           </StyledStatusBarEntry>
         </>
+      ) : (
+        <DummySpacer />
       )}
       <StyledStatusBarEntry text={statusText} title="Robotics Backend state">
         <label id="robotics-backend-state">{state}</label>
