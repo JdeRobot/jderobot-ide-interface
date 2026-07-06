@@ -146,9 +146,6 @@ export const Main: Story = {
       <IdeInterface
         {...args}
         commsManager={null}
-        connectManager={async () => {
-          return;
-        }}
         project={"currentProjectname"}
         explorers={[fileExplorer]}
         api={api}
