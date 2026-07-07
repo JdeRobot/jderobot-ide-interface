@@ -4,7 +4,7 @@ export default IdeInterface;
 export { VncViewer } from "./components";
 export { TheoryInterface } from "./components";
 export {
-  StatusBarCustomUniverseSelector,
+  StatusBarCustomWorldSelector,
   StyledStatusBarEntry,
 } from "./components";
 export { ProgressBar } from "./components";

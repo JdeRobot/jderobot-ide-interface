@@ -24,7 +24,7 @@ export const Main: Story = {
       }}
     >
       <Modal
-        id="universes-modal"
+        id="worlds-modal"
         isOpen={true}
         onClose={() => {}}
         onSubmit={() => {}}

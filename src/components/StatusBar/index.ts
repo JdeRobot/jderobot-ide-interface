@@ -1,6 +1,6 @@
 export {
   default as StatusBar,
-  StatusBarCustomUniverseSelector,
+  StatusBarCustomWorldSelector,
 } from "./StatusBar";
 
 export { StyledStatusBarEntry } from "./StatusBar.style";
