@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { CommsManager, states } from "jderobot-commsmanager";
 import { useEffect, useState } from "react";
 import {
@@ -22,12 +22,12 @@ const StatusBar = ({
   viewers,
   commsManager,
   api,
-  baseUniverse,
+  baseWorld,
   extraComponents,
 }: {
   project: string;
   commsManager: CommsManager | null;
-  baseUniverse?: string;
+  baseWorld?: string;
   api: ExtraApi;
   viewers: ViewersEntry[];
   extraComponents: StatusBarComponents;
@@ -101,19 +101,19 @@ const StatusBar = ({
       <StyledStatusBarEntry text={statusText} title="Robotics Backend state">
         <label id="robotics-backend-state">{state}</label>
       </StyledStatusBarEntry>
-      {extraComponents.universeSelector ? (
-        <StatusBarCustomUniverseSelector
+      {extraComponents.worldSelector ? (
+        <StatusBarCustomWorldSelector
           project={project}
           commsManager={commsManager}
           api={api}
           components={extraComponents}
         />
       ) : (
-        <DefaultUniverseSelector
+        <DefaultWorldSelector
           project={project}
           commsManager={commsManager}
           api={api}
-          baseUniverse={baseUniverse}
+          baseWorld={baseWorld}
         />
       )}
       <DefaultToolsSelector tools={viewers} />
@@ -127,34 +127,34 @@ const StatusBar = ({
 
 export default StatusBar;
 
-const DefaultUniverseSelector = ({
+const DefaultWorldSelector = ({
   project,
   commsManager,
   api,
-  baseUniverse,
+  baseWorld,
 }: {
   project: string;
   commsManager: CommsManager | null;
   api: ExtraApi;
-  baseUniverse?: string;
+  baseWorld?: string;
 }) => {
   const { warning, error } = useError();
-  const [universe, setUniverse] = useState<string | undefined>(
-    commsManager?.getUniverse(),
+  const [world, setWorld] = useState<string | undefined>(
+    commsManager?.getWorld(),
   );
 
-  const [universeList, setUniverseList] = useState<string[]>([]);
+  const [worldList, setWorldList] = useState<string[]>([]);
   const wrnMsg =
     "Failed to connect with the Robotics Backend. Please make sure it is connected.";
 
-  const resetUniverse = (e: any) => {
+  const resetWorld = (e: any) => {
     if (e.detail.state == states.IDLE) {
-      setUniverse(baseUniverse);
+      setWorld(baseWorld);
     }
   };
 
   useEffect(() => {
-    subscribe("CommsManagerStateChange", resetUniverse);
+    subscribe("CommsManagerStateChange", resetWorld);
 
     return () => {
       unsubscribe("CommsManagerStateChange", () => {});
@@ -163,26 +163,26 @@ const DefaultUniverseSelector = ({
 
   useEffect(() => {
     if (commsManager) {
-      console.log("Change Universe", commsManager.getUniverse());
-      setUniverse(commsManager.getUniverse());
+      console.log("Change World", commsManager.getWorld());
+      setWorld(commsManager.getWorld());
     }
-  }, [commsManager?.getUniverse()]);
+  }, [commsManager?.getWorld()]);
 
   useEffect(() => {
-    const get_universe_list = async () => {
-      const list = await api.universes.list(project);
-      setUniverseList(list);
+    const get_world_list = async () => {
+      const list = await api.worlds.list(project);
+      setWorldList(list);
     };
-    get_universe_list();
+    get_world_list();
   }, [project]);
 
   useEffect(() => {
-    if (baseUniverse !== undefined) {
-      selectUniverse(baseUniverse);
+    if (baseWorld !== undefined) {
+      selectWorld(baseWorld);
     }
-  }, [baseUniverse]);
+  }, [baseWorld]);
 
-  const terminateUniverse = async () => {
+  const terminateWorld = async () => {
     if (!commsManager) {
       warning(wrnMsg);
       return;
@@ -190,10 +190,10 @@ const DefaultUniverseSelector = ({
     // Down the RB ladder
     await commsManager.terminateApplication();
     await commsManager.terminateTools();
-    await commsManager.terminateUniverse();
+    await commsManager.terminateWorld();
   };
 
-  const launchUniverse = async (universe: string) => {
+  const launchWorld = async (world: string) => {
     if (!commsManager) {
       warning(wrnMsg);
       return;
@@ -204,40 +204,39 @@ const DefaultUniverseSelector = ({
       return;
     }
 
-    const universeConfig = await api.universes.get_config(project, universe);
+    const worldConfig = await api.worlds.get_config(project, world);
 
-    const tools = universeConfig.tools;
-    const world_config = universeConfig.world;
-    const robot_config = universeConfig.robot;
+    const tools = worldConfig.tools;
+    const scene_config = worldConfig.scene;
+    const robot_config = worldConfig.robot;
 
-    const universe_config = {
-      name: universe,
-      world: world_config,
+    const world_config = {
+      name: world,
+      scene: scene_config,
       robot: robot_config,
     };
 
-    await commsManager.launchWorld(universe_config);
-    console.log("RB universe launched!");
-    // TODO: update to tools
-    await commsManager.prepareTools(tools, universeConfig.tools_config);
-    console.log("Viz ready!");
+    await commsManager.launchWorld(world_config);
+    console.log("RB world launched!");
+    await commsManager.prepareTools(tools, worldConfig.tools_config);
+    console.log("Tools ready!");
   };
 
-  const selectUniverse = async (universeName: string) => {
-    console.log(universeName);
+  const selectWorld = async (worldName: string) => {
+    console.log(worldName);
 
     try {
-      // Launch if new universe selected
-      if (universeName !== universe) {
-        if (universe) await api.universes.list(project);
-        if (universe) await terminateUniverse();
-        await launchUniverse(universeName);
-        console.log("Launch universe successful");
+      // Launch if new world selected
+      if (worldName !== world) {
+        if (world) await api.worlds.list(project);
+        if (world) await terminateWorld();
+        await launchWorld(worldName);
+        console.log("Launch world successful");
       }
     } catch (e: unknown) {
       if (e instanceof Error) {
-        console.error("Unable to retrieve universe config: " + e.message);
-        error("Unable to retrieve universe config: " + e.message);
+        console.error("Unable to retrieve world config: " + e.message);
+        error("Unable to retrieve world config: " + e.message);
       }
     }
   };
@@ -253,21 +252,21 @@ const DefaultUniverseSelector = ({
 
   return (
     <DropdownStatusBar
-      id="universe-selector"
-      title="Universe Selector"
+      id="world-selector"
+      title="world Selector"
       width={300}
       baseHeight={24}
       down={false}
-      setter={selectUniverse}
+      setter={selectWorld}
       onOpen={checkManager}
-      possibleValues={universeList}
+      possibleValues={worldList}
     >
       <label>
-        {universe
-          ? `Universe: ${universe}`
-          : universeList.length === 0
-            ? `No universes to select`
-            : "Click to select universe"}
+        {world
+          ? `World: ${world}`
+          : worldList.length === 0
+            ? `No worlds to select`
+            : "Click to select world"}
       </label>
     </DropdownStatusBar>
   );
@@ -326,7 +325,7 @@ const DefaultToolsSelector = ({ tools }: { tools: ViewersEntry[] }) => {
   );
 };
 
-export const StatusBarCustomUniverseSelector = ({
+export const StatusBarCustomWorldSelector = ({
   project,
   commsManager,
   api,
@@ -340,8 +339,8 @@ export const StatusBarCustomUniverseSelector = ({
   const theme = useTheme();
   const [open, setOpen] = useState<boolean>(false);
   const { warning, error } = useError();
-  const [universe, setUniverse] = useState<string | undefined>(
-    commsManager?.getUniverse(),
+  const [world, setWorld] = useState<string | undefined>(
+    commsManager?.getWorld(),
   );
 
   const statusText = contrastSelector(
@@ -350,14 +349,14 @@ export const StatusBarCustomUniverseSelector = ({
     theme.palette.primary,
   );
 
-  const resetUniverse = (e: any) => {
+  const resetWorld = (e: any) => {
     if (e.detail.state == states.IDLE) {
-      setUniverse(undefined);
+      setWorld(undefined);
     }
   };
 
   useEffect(() => {
-    subscribe("CommsManagerStateChange", resetUniverse);
+    subscribe("CommsManagerStateChange", resetWorld);
 
     return () => {
       unsubscribe("CommsManagerStateChange", () => {});
@@ -366,12 +365,12 @@ export const StatusBarCustomUniverseSelector = ({
 
   useEffect(() => {
     if (commsManager) {
-      console.log("Change Universe", commsManager.getUniverse());
-      setUniverse(commsManager.getUniverse());
+      console.log("Change World", commsManager.getWorld());
+      setWorld(commsManager.getWorld());
     }
-  }, [commsManager?.getUniverse()]);
+  }, [commsManager?.getWorld()]);
 
-  const terminateUniverse = async () => {
+  const terminateWorld = async () => {
     if (!commsManager) {
       warning(
         "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
@@ -381,10 +380,10 @@ export const StatusBarCustomUniverseSelector = ({
     // Down the RB ladder
     await commsManager.terminateApplication();
     await commsManager.terminateTools();
-    await commsManager.terminateUniverse();
+    await commsManager.terminateWorld();
   };
 
-  const launchUniverse = async (universe: string) => {
+  const launchWorld = async (world: string) => {
     if (!commsManager) {
       warning(
         "Failed to connect with the Robotics Backend docker. Please make sure it is connected.",
@@ -397,49 +396,47 @@ export const StatusBarCustomUniverseSelector = ({
       return;
     }
 
-    const universeConfig = await api.universes.get_config(project, universe);
+    const worldConfig = await api.worlds.get_config(project, world);
 
-    const tools = universeConfig.tools;
+    const tools = worldConfig.tools;
 
     if (!tools.includes("state_monitor")) {
       tools.push("state_monitor");
     }
 
-    const world_config = universeConfig.world;
+    const scene_config = worldConfig.scene;
+    const robot_config = worldConfig.robot;
 
-    const robot_config = universeConfig.robot;
-
-    const universe_config = {
-      name: universe,
-      world: world_config,
+    const world_config = {
+      name: world,
+      scene: scene_config,
       robot: robot_config,
     };
 
-    await commsManager.launchWorld(universe_config);
-    console.log("RB universe launched!");
-    // TODO: update to tools
-    await commsManager.prepareTools(tools, universeConfig.tools_config);
-    console.log("Viz ready!");
+    await commsManager.launchWorld(world_config);
+    console.log("RB world launched!");
+    await commsManager.prepareTools(tools, worldConfig.tools_config);
+    console.log("Tools ready!");
   };
 
-  const selectUniverse = async (universeName: string) => {
-    console.log(universeName);
+  const selectWorld = async (worldName: string) => {
+    console.log(worldName);
     setOpen(false);
 
-    if (!universeName) return;
+    if (!worldName) return;
 
     try {
-      // Launch if new universe selected
-      if (universeName !== universe) {
-        if (universe) await api.universes.list(project);
-        if (universe) await terminateUniverse();
-        await launchUniverse(universeName);
-        console.log("Launch universe successful");
+      // Launch if new world selected
+      if (worldName !== world) {
+        if (world) await api.worlds.list(project);
+        if (world) await terminateWorld();
+        await launchWorld(worldName);
+        console.log("Launch world successful");
       }
     } catch (e: unknown) {
       if (e instanceof Error) {
-        console.error("Unable to retrieve universe config: " + e.message);
-        error("Unable to retrieve universe config: " + e.message);
+        console.error("Unable to retrieve world config: " + e.message);
+        error("Unable to retrieve world config: " + e.message);
       }
     }
   };
@@ -447,19 +444,17 @@ export const StatusBarCustomUniverseSelector = ({
   return (
     <div>
       <StyledStatusBarEntry
-        id="universe-selector"
-        title="Universe selector"
+        id="world-selector"
+        title="world selector"
         onClick={() => setOpen(true)}
         text={statusText}
       >
-        <label>
-          {universe ? `Universe: ${universe}` : "Click to select universe"}
-        </label>
+        <label>{world ? `World: ${world}` : "Click to select world"}</label>
       </StyledStatusBarEntry>
       {open && (
-        <components.universeSelector
+        <components.worldSelector
           isOpen={open}
-          onSelect={selectUniverse}
+          onSelect={selectWorld}
           onClose={() => setOpen(false)}
           project={project}
         />

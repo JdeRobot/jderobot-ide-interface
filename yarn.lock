@@ -4656,10 +4656,10 @@ iterator.prototype@^1.1.4:
     has-symbols "^1.1.0"
     set-function-name "^2.0.2"
 
-jderobot-commsmanager@1.0.26:
-  version "1.0.26"
-  resolved "https://registry.yarnpkg.com/jderobot-commsmanager/-/jderobot-commsmanager-1.0.26.tgz#e80c271119461330c815a13cdb40bc5ff9683b00"
-  integrity sha512-svFpYN994k5eHba/VZcleNXfL7SNB5/x4ApH1MTvljL5P5DKkxQdaH8aH7jU1mMxLxUj+RySsrIlIcXNAAKzJw==
+jderobot-commsmanager@1.0.27:
+  version "1.0.27"
+  resolved "https://registry.yarnpkg.com/jderobot-commsmanager/-/jderobot-commsmanager-1.0.27.tgz#1e3359e845cc1c5393ff3e67cac2973c074f64ae"
+  integrity sha512-gyl7ayKVABUGPXVFourKqoUeylK2WTT4MpuQWYn6QKhcVqv+XnnHGqvuwEy5yPoeWoYxlIJVA8DAwjtBqKtiVg==
   dependencies:
     uuid "^11.1.0"
 

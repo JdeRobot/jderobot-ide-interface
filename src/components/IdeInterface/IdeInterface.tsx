@@ -54,7 +54,7 @@ interface IdeInterfaceProps {
   options?: Options;
   splashIcon?: JSX.Element;
   baseFile?: Entry;
-  baseUniverse?: string;
+  baseWorld?: string;
   extraSnippets?: ExtraSnippets;
 }
 
@@ -70,7 +70,7 @@ const IdeInterface = ({
   options,
   splashIcon,
   baseFile,
-  baseUniverse,
+  baseWorld,
   extraSnippets,
 }: IdeInterfaceProps) => {
   const theme = useTheme();
@@ -142,7 +142,7 @@ const IdeInterface = ({
           commsManager={commsManager}
           extraComponents={statusBarComponents}
           api={api}
-          baseUniverse={baseUniverse}
+          baseWorld={baseWorld}
         />
       </StyledIdeHorizContainer>
     </OptionsProvider>
@@ -189,7 +189,7 @@ const ViewersContainer = ({
     );
   };
 
-  let toggleGroup = undefined;
+  let toggleGroup: string | undefined = undefined;
   const groups: string[] = [];
 
   for (let index = 0; index < viewers.length; index++) {

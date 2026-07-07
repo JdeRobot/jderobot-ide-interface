@@ -35,9 +35,9 @@ export interface ExtraApi {
     save(project: string, file: Entry, content: string): Promise<void>;
     get(project: string, file: Entry): Promise<string>;
   };
-  universes: {
+  worlds: {
     list(project: string): Promise<string[]>;
-    get_config(project: string, universe: string): Promise<any>;
+    get_config(project: string, world: string): Promise<any>;
   };
 }
 
@@ -84,6 +84,6 @@ export interface EditorsEntry {
 export type Layout = "only-editor" | "only-viewers" | "both";
 
 export interface StatusBarComponents {
-  universeSelector?: any;
+  worldSelector?: any;
   extras: JSX.Element[];
 }

@@ -31,7 +31,7 @@ export const Main: Story = {
         onReset={() => {}}
       >
         <ModalTitlebar
-          title="Manage your Universes"
+          title="Manage your Worlds"
           htmlFor="actionName"
           hasClose
           handleClose={() => {}}
@@ -80,7 +80,7 @@ export const Main: Story = {
         </ModalRow>
         <ModalRow type="buttons">
           <button type="button" onClick={() => {}}>
-            New custom universe
+            New custom world
           </button>
           <button type="button" onClick={() => {}}>
             Import from zip

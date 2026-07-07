@@ -83,11 +83,11 @@ const api: ExtraApi = {
       return new Promise(() => {});
     },
   },
-  universes: {
+  worlds: {
     list: (project: string) => {
       return new Promise(() => {});
     },
-    get_config: (universe: string) => {
+    get_config: (world: string) => {
       return new Promise(() => {});
     },
   },
