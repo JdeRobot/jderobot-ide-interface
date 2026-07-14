@@ -170,9 +170,10 @@ export class ContextMenuProps {
     event.preventDefault();
     event.stopPropagation();
     this.showCallback(false);
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
     const positionChange = {
-      x: 200 + 20, // The width is set to 200
-      y: event.pageY,
+      x: rect.right - 200,   
+      y: rect.bottom,
     };
     this.setPositionCallback(positionChange);
     this.showCallback(true);
