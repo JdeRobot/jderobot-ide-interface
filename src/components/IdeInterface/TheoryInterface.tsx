@@ -1,4 +1,4 @@
-import React from "react";
+import React, { JSX, ReactElement } from "react";
 import { contrastSelector, useTheme } from "Utils";
 import {
   StyledIndex,

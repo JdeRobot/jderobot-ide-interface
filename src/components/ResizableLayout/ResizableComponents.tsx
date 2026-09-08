@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { JSX, memo } from "react";
 import { Layout } from "Types";
 import {
   StyledHorizContiner,
@@ -57,7 +57,7 @@ export const ResizableHoriz = ({
         right: "hresize-handle",
       }}
       maxWidth={`${max}%`}
-      minWidth={`${min}%`}
+      // minWidth={`${min}%`}
       snap={{ x: snap }}
       snapGap={100}
       style={{ display: hidden ? "none" : "block" }}

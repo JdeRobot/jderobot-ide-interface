@@ -1,10 +1,7 @@
+import { JSX } from "react";
+
 export type ModelRowTypes =
-  | "all"
-  | "buttons"
-  | "input"
-  | "list"
-  | "img"
-  | "text";
+  "all" | "buttons" | "input" | "list" | "img" | "text";
 
 export interface ModalInputSelectIconEntry {
   id: string;

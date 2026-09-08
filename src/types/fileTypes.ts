@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 export interface ExplorerEntry {
   name: string;
   list(project: string): Promise<string>;
