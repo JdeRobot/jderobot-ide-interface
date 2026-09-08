@@ -1,4 +1,4 @@
-import React from "react";
+import React, { JSX } from "react";
 import { useRef, useEffect, useState, ReactNode } from "react";
 import {
   StyledModal,

@@ -1,32 +1,23 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "types": [
-      "./svg.d.ts",
-      "./png.d.ts",
-      "./jpg.d.ts",
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["./svg.d.ts", "./png.d.ts", "./jpg.d.ts"],
     "paths": {
-      "Assets": [ "src/assets"],
-      "Components": [ "src/components"],
-      "Utils": [ "src/utils"],
-      "Types": [ "src/types"],
+      "Assets": ["./src/assets"],
+      "Components": ["./src/components"],
+      "Utils": ["./src/utils"],
+      "Types": ["./src/types"]
     },
     "jsx": "react-jsx",
-    "module": "esnext",
+    "module": "nodenext",
+    "target": "es2025",
     "rootDir": "./src",
-    "moduleResolution": "node",
-    "baseUrl": "./",
+    "moduleResolution": "nodenext",
     "declaration": true,
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
@@ -35,11 +26,5 @@
     "noEmit": false,
     "emitDeclarationOnly": false
   },
-  "include": [
-    "src",
-    "svg.d.ts",
-    "png.d.ts",
-    "jpg.d.ts",
-  ]
+  "include": ["src", "svg.d.ts", "png.d.ts", "jpg.d.ts"]
 }
-

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { JSX } from "react";
 import { useEffect, useRef, useState } from "react";
 
 import { SaveIcon, ZoomOutIcon, PlusIcon, KeyboardIcon } from "Assets";
@@ -11,7 +11,7 @@ import {
   useTheme,
 } from "Utils";
 import { CommsManager } from "jderobot-commsmanager";
-import { Entry, EditorsEntry, Options, ExtraSnippets } from "Types";
+import { Entry, EditorsEntry, Options, ExtraSnippets, ExtraApi } from "Types";
 import TextEditor from "./TextEditor";
 import {
   EditorKeybindModal,
@@ -25,7 +25,6 @@ import {
   StyledEditorMenu,
   StyledSplashEditor,
 } from "./FileEditor.styles";
-import { ExtraApi } from "src/types/fileTypes";
 
 const fileTypes = {
   json: "json",
