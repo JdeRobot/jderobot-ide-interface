@@ -11,7 +11,14 @@ import {
   useTheme,
 } from "Utils";
 import { CommsManager } from "jderobot-commsmanager";
-import { Entry, EditorsEntry, Options, ExtraSnippets, ExtraApi } from "Types";
+import {
+  Entry,
+  EditorsEntry,
+  Options,
+  ExtraSnippets,
+  ExtraApi,
+  Layout,
+} from "Types";
 import TextEditor from "./TextEditor";
 import {
   EditorKeybindModal,
@@ -54,6 +61,7 @@ const FileEditor = ({
   splashIcon,
   options,
   extraSnippets,
+  layout,
 }: {
   currentFile?: Entry;
   changeCurrentFile: Function;
@@ -65,6 +73,7 @@ const FileEditor = ({
   extraEditors: EditorsEntry[];
   options?: Options;
   extraSnippets?: ExtraSnippets;
+  layout: Layout;
 }) => {
   const { error, warning } = useError();
   const theme = useTheme();
@@ -342,7 +351,10 @@ const FileEditor = ({
           },
         ]}
       />
-      <StyledEditorMenu bgColor={theme.palette?.primary}>
+      <StyledEditorMenu
+        bgColor={theme.palette?.primary}
+        style={{ gridArea: "header" }}
+      >
         <StyledButtonsContainer color={theme.palette?.secondary}>
           {!options?.editor?.notShowSave && (
             <>
@@ -404,6 +416,8 @@ const FileEditor = ({
       <StyledSplashEditor
         bgColor={theme.palette.bg}
         roundness={theme.viewRoundness}
+        layout={layout}
+        style={{ gridArea: "content" }}
       >
         {fileContent !== undefined ? (
           <>

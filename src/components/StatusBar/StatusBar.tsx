@@ -79,7 +79,10 @@ const StatusBar = ({
   }, []);
 
   return (
-    <StyledStatusBarContainer bgColor={theme.palette.primary}>
+    <StyledStatusBarContainer
+      bgColor={theme.palette.primary}
+      style={{ gridArea: "statusbar" }}
+    >
       {dockerData !== undefined ? (
         <>
           <StyledStatusBarEntry text={statusText} title="ROS 2 version">

@@ -25,11 +25,11 @@ interface StyledModalErrorProps {
 
 const handleVariant = (p: StyledModalErrorProps) => {
   let text;
-  let button;
+  // let button;
   switch (p.variant) {
     case "error":
       text = contrastSelector(p.lightText, p.darkText, p.error);
-      button = contrastSelector(p.lightText, p.darkText, p.errorButtonColor);
+      // button = contrastSelector(p.lightText, p.darkText, p.errorButtonColor);
       return `
         & button {
           background-color: ${p.errorButtonColor ?? primaryColor};
@@ -45,7 +45,7 @@ const handleVariant = (p: StyledModalErrorProps) => {
       `;
     case "warning":
       text = contrastSelector(p.lightText, p.darkText, p.warning);
-      button = contrastSelector(p.lightText, p.darkText, p.warningButtonColor);
+      // button = contrastSelector(p.lightText, p.darkText, p.warningButtonColor);
       return `
         & button {
           background-color: ${p.warningButtonColor ?? primaryColor};
@@ -61,7 +61,7 @@ const handleVariant = (p: StyledModalErrorProps) => {
       `;
     case "info":
       text = contrastSelector(p.lightText, p.darkText, p.info);
-      button = contrastSelector(p.lightText, p.darkText, p.warningButtonColor);
+      // button = contrastSelector(p.lightText, p.darkText, p.warningButtonColor);
       return `
         & button {
           background-color: ${p.infoButtonColor ?? primaryColor};

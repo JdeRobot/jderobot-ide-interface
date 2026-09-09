@@ -7,23 +7,18 @@ import {
   BaseFileIcon,
   ActionFileIcon,
 } from "Assets";
-import { useTheme } from "Utils";
 
 function FileIcon({
   is_dir,
   is_collapsed,
-  name,
   group,
   color,
 }: {
   is_dir: boolean;
   is_collapsed: boolean;
-  name: string;
   group: string;
   color?: string;
 }) {
-  const theme = useTheme();
-
   let returnVal = (
     <>
       <BaseFileIcon htmlColor={color} />

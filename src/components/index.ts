@@ -2,7 +2,6 @@ export * from "./IdeInterface";
 export * from "./VncViewer";
 export * from "./StatusBar";
 export * from "./Explorer";
-export * from "./ResizableLayout";
 export * from "./FileEditor";
 export * from "./Modals";
 export * from "./Button";

@@ -97,7 +97,7 @@ const gazeboViewer = {
   component: <VncViewer commsManager={null} port={6080} />,
   icon: <SaveIcon />,
   name: "Gazebo",
-  active: false,
+  active: true,
   activate: () => {},
 };
 
@@ -112,7 +112,7 @@ const terminalViewer = {
   icon: <SaveIcon />,
   name: "Terminal",
   group: "a",
-  active: false,
+  active: true,
   activate: () => {},
 };
 
@@ -126,8 +126,8 @@ const terminalViewer2 = {
   ),
   icon: <SaveIcon />,
   name: "Terminal 2",
-  active: false,
-  group: "a",
+  active: true,
+  group: "b",
   activate: () => {},
 };
 
@@ -135,8 +135,8 @@ const terminalViewer3 = {
   component: <VncViewer commsManager={null} port={1108} message={"3"} />,
   icon: <SaveIcon />,
   name: "Terminal 3",
-  active: false,
-  group: "a",
+  active: true,
+  group: "b",
   activate: () => {},
 };
 

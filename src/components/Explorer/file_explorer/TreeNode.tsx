@@ -11,7 +11,6 @@ import {
 } from "Utils";
 import { Entry, AccentColorEventData } from "Types";
 import {
-  StyledExplorerAccent,
   StyledExplorerItem,
   StyledExplorerItemContainer,
   StyledExtraIcon,
@@ -97,7 +96,6 @@ function TreeNode({
           <FileIcon
             is_dir={node.is_dir}
             is_collapsed={isCollapsed}
-            name={node.name}
             group={node.group}
             color={text}
           />

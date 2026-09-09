@@ -49,7 +49,6 @@ export interface ViewersEntry {
   name: string;
   active: boolean;
   group?: string;
-  activate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface Entry {

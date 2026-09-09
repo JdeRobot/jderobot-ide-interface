@@ -86,7 +86,7 @@ export const monacoEditorSnippet = (
           position.lineNumber,
           word.endColumn - 1,
         );
-      } catch (error) {
+      } catch {
         return { suggestions: snippets };
       }
 

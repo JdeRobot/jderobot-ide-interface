@@ -5,9 +5,6 @@ import { CommsManager } from "jderobot-commsmanager";
 import {
   StatusBar,
   Explorer,
-  CollapsableResizableColumn,
-  ResizableColumn,
-  ResizableLayout,
   FileEditor,
   Button,
   StyledButtonsContainer,
@@ -30,13 +27,16 @@ import {
 } from "Types";
 
 import {
-  StyledIdeContainer,
-  StyledIdeHorizContainer,
-  StyledIdeVertContainer,
+  RoundedPanel,
+  StyledIdeGrid,
   StyledMonocolorSplashIcon,
+  StyledPanel,
+  StyledSeparator,
+  StyledSplashViewers,
   StyledViewerMenu,
 } from "./IdeInterface.styles";
 import { ExtraApi, StatusBarComponents } from "Types";
+import { Group, Panel, useDefaultLayout } from "react-resizable-panels";
 
 export interface IdeInterfaceStyles {
   bgColor?: string;
@@ -74,8 +74,20 @@ const IdeInterface = ({
   extraSnippets,
 }: IdeInterfaceProps) => {
   const theme = useTheme();
-
   const [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
+
+  const { defaultLayout, onLayoutChanged } = useDefaultLayout({
+    id: "main-layout-id",
+
+    panelIds:
+      layout === "both"
+        ? ["explorers", "editor", "viewers"]
+        : layout === "only-editor"
+          ? ["explorers", "editor"]
+          : ["explorers", "viewers"],
+
+    storage: localStorage,
+  });
 
   useEffect(() => {
     publish("currentFile", { file: currentFile });
@@ -90,20 +102,23 @@ const IdeInterface = ({
     );
   }
 
+  const Separator = (
+    <StyledSeparator
+      bg={theme.palette?.primary}
+      hover={theme.palette?.secondary}
+    />
+  );
+
   return (
     <OptionsProvider options={options}>
-      <StyledIdeHorizContainer
-        id="styled-ide-container"
-        bgColor={theme.palette?.primary}
-      >
-        <ResizableLayout
-          baseWidth={[20, 40, 40]}
-          maxWidth={[40, 60, 60]}
-          showExplorer={explorers.length > 0}
-          layout={layout}
-          splashIcon={splashIcon}
+      <StyledIdeGrid id="styled-ide-container" bgColor={theme.palette?.primary}>
+        <Group
+          orientation="horizontal"
+          style={{ gridArea: "content" }}
+          defaultLayout={defaultLayout}
+          onLayoutChanged={onLayoutChanged}
         >
-          <ResizableColumn>
+          <Panel collapsible minSize="10%" defaultSize="20%" id="explorers">
             {explorers.map((explorer) => (
               <Explorer
                 key={explorer.name}
@@ -113,29 +128,34 @@ const IdeInterface = ({
                 api={explorer}
               />
             ))}
-          </ResizableColumn>
-          <StyledIdeVertContainer bgColor={theme.palette?.primary}>
-            <StyledIdeContainer bgColor={theme.palette?.primary}>
-              <FileEditor
-                currentFile={currentFile}
-                changeCurrentFile={setCurrentFile}
-                currentProjectname={project}
-                autosave={true}
-                manager={commsManager}
-                api={api}
-                extraEditors={extraEditors}
-                splashIcon={splashIcon}
-                options={options}
-                extraSnippets={extraSnippets}
-              />
-            </StyledIdeContainer>
-          </StyledIdeVertContainer>
-          <StyledIdeVertContainer bgColor={theme.palette?.primary}>
-            <StyledIdeContainer bgColor={theme.palette?.primary}>
-              <ViewersContainer viewers={viewers} splashIcon={splashIcon} />
-            </StyledIdeContainer>
-          </StyledIdeVertContainer>
-        </ResizableLayout>
+          </Panel>
+          {Separator}
+          {layout === "only-viewers" || (
+            <>
+              <StyledPanel minSize="25%" id="editor">
+                <FileEditor
+                  currentFile={currentFile}
+                  changeCurrentFile={setCurrentFile}
+                  currentProjectname={project}
+                  autosave={true}
+                  manager={commsManager}
+                  api={api}
+                  extraEditors={extraEditors}
+                  splashIcon={splashIcon}
+                  options={options}
+                  extraSnippets={extraSnippets}
+                  layout={layout}
+                />
+              </StyledPanel>
+            </>
+          )}
+          {layout === "both" && <>{Separator}</>}
+          <ViewersContainer
+            viewers={viewers}
+            splashIcon={splashIcon}
+            layout={layout}
+          />
+        </Group>
         <StatusBar
           project={project}
           viewers={viewers}
@@ -144,7 +164,7 @@ const IdeInterface = ({
           api={api}
           baseWorld={baseWorld}
         />
-      </StyledIdeHorizContainer>
+      </StyledIdeGrid>
     </OptionsProvider>
   );
 };
@@ -154,15 +174,16 @@ export default IdeInterface;
 const ViewersContainer = ({
   viewers,
   splashIcon,
+  layout,
 }: {
   viewers: ViewersEntry[];
   splashIcon: JSX.Element;
+  layout: Layout;
 }) => {
+  const theme = useTheme();
   const [visibility, setVisibility] = useState<boolean[]>(
     viewers.map((viewer) => viewer.active),
   );
-
-  const theme = useTheme();
 
   useEffect(() => {
     subscribe("changeToolGroup", changeToolInGroup);
@@ -177,7 +198,6 @@ const ViewersContainer = ({
   };
 
   const toggleVisibility = (index: number) => {
-    viewers[index].activate(!visibility[index]);
     setVisibility(
       visibility.map((state, i) => {
         if (index === i) {
@@ -234,7 +254,6 @@ const ViewersContainer = ({
         if (visibility[index]) {
           isVisible = true;
           vis[index] = false;
-          viewers[index].activate(false);
         }
         if (element.name === tool) {
           newIndex = index;
@@ -243,7 +262,6 @@ const ViewersContainer = ({
     }
     if (isVisible) {
       vis[newIndex] = true;
-      viewers[newIndex].activate(true);
       setVisibility(
         visibility.map((state, i) => {
           return vis[i];
@@ -252,9 +270,24 @@ const ViewersContainer = ({
     }
   }, [tool]);
 
+  const Separator = (
+    <StyledSeparator
+      bg={theme.palette?.primary}
+      hover={theme.palette?.secondary}
+      orientation="horizontal"
+    />
+  );
+
+  if (layout === "only-editor") {
+    return <></>;
+  }
+
   return (
-    <>
-      <StyledViewerMenu bgColor={theme.palette?.primary}>
+    <StyledPanel minSize="25%" id="viewers">
+      <StyledViewerMenu
+        bgColor={theme.palette?.primary}
+        style={{ gridArea: "header" }}
+      >
         <StyledButtonsContainer>
           {viewers.map((viewer, index) => {
             if (toggleGroup === undefined) {
@@ -263,7 +296,6 @@ const ViewersContainer = ({
                   key={`viewer${index}`}
                   active={visibility[index]}
                   variant="tab"
-                  iconType="fill"
                   isLabel={false}
                   title={`Toggle ${viewer.name}`}
                   id={`${viewer.name}-toggle`}
@@ -280,7 +312,6 @@ const ViewersContainer = ({
                   key={`viewer${index}`}
                   active={visibility[index]}
                   variant="tab"
-                  iconType="fill"
                   isLabel={false}
                   title={`Toggle ${viewer.name}`}
                   id={`${viewer.name}-toggle`}
@@ -293,9 +324,26 @@ const ViewersContainer = ({
           })}
         </StyledButtonsContainer>
       </StyledViewerMenu>
-      <CollapsableResizableColumn state={visibility} splashIcon={splashIcon}>
-        {viewers.map((viewer) => viewer.component)}
-      </CollapsableResizableColumn>
-    </>
+      <Group orientation="vertical" style={{ gridArea: "content" }}>
+        {viewers.map((viewer, i) => (
+          <>
+            {visibility[i] && (
+              <>
+                <RoundedPanel>{viewer.component}</RoundedPanel>
+                {i !== viewers.length - 1 && <>{Separator}</>}
+              </>
+            )}
+          </>
+        ))}
+        {visibility.filter(Boolean).length === 0 && (
+          <StyledSplashViewers
+            bgColor={theme.palette.bg}
+            roundness={theme.viewRoundness}
+          >
+            {splashIcon}
+          </StyledSplashViewers>
+        )}
+      </Group>
+    </StyledPanel>
   );
 };

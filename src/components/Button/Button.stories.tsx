@@ -33,7 +33,6 @@ export const Main: Story = {
       console.log("click");
     },
     children: undefined,
-    iconType: "fill",
   },
 };
 
@@ -43,7 +42,6 @@ export const Tabbed: Story = {
     variant: "tab",
     title: "My Button",
     id: "id",
-    iconType: "fill",
   },
 
   render: (args) => (

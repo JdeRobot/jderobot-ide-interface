@@ -8,7 +8,6 @@ const Button = ({
   active = false,
   isLabel = false,
   variant = "standard",
-  iconType,
   title,
   id,
   onClick,
@@ -17,7 +16,6 @@ const Button = ({
   active: boolean;
   isLabel: boolean;
   variant: ButtonVariant;
-  iconType: IconVariant;
   title: string;
   id: string;
   onClick: Function;
@@ -58,7 +56,6 @@ export const MenuButton = ({
     <Button
       active={false}
       variant="standard"
-      iconType="fill"
       isLabel={false}
       title={title}
       id={id}
@@ -84,7 +81,6 @@ export const MenuButtonStroke = ({
     <Button
       active={false}
       variant="standard"
-      iconType="stroke"
       isLabel={false}
       title={title}
       id={id}
@@ -110,7 +106,6 @@ export const MenuButtonLabel = ({
     <Button
       active={false}
       variant="standard"
-      iconType="fill"
       isLabel={true}
       title={title}
       id={id}
