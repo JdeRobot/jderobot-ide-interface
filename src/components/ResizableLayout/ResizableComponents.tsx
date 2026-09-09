@@ -57,7 +57,7 @@ export const ResizableHoriz = ({
         right: "hresize-handle",
       }}
       maxWidth={`${max}%`}
-      // minWidth={`${min}%`}
+      minWidth={0}
       snap={{ x: snap }}
       snapGap={100}
       style={{ display: hidden ? "none" : "block" }}
