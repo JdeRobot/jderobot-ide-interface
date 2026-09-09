@@ -70,6 +70,11 @@ export const StyledPanel = styled(Panel)`
     "content" 1fr / 1fr;
 `;
 
+export const StyledHeadlessPanel = styled(Panel)`
+  display: inline-flex;
+  flex-direction: column;
+`;
+
 export const RoundedPanel = styled(Panel)<StyledPanelProps>`
   overflow: hidden;
   border-radius: ${(p) => p.roundness ?? 20}px 0 0 ${(p) => p.roundness ?? 20}px;

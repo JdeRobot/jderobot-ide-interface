@@ -8,6 +8,7 @@ interface BGProps {
 
 export const StyledSidebarEntryContainer = styled.div<BGProps>`
   overflow-y: auto;
+  scrollbar-width: none;
   border-radius: 0 20px 20px 0;
   flex-grow: 1;
   padding: 5px;

@@ -28,6 +28,7 @@ import {
 
 import {
   RoundedPanel,
+  StyledHeadlessPanel,
   StyledIdeGrid,
   StyledMonocolorSplashIcon,
   StyledPanel,
@@ -118,7 +119,12 @@ const IdeInterface = ({
           defaultLayout={defaultLayout}
           onLayoutChanged={onLayoutChanged}
         >
-          <Panel collapsible minSize="10%" defaultSize="20%" id="explorers">
+          <StyledHeadlessPanel
+            collapsible
+            minSize="10%"
+            defaultSize="20%"
+            id="explorers"
+          >
             {explorers.map((explorer) => (
               <Explorer
                 key={explorer.name}
@@ -128,7 +134,7 @@ const IdeInterface = ({
                 api={explorer}
               />
             ))}
-          </Panel>
+          </StyledHeadlessPanel>
           {Separator}
           {layout === "only-viewers" || (
             <>

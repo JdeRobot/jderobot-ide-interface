@@ -147,7 +147,7 @@ export const Main: Story = {
         {...args}
         commsManager={null}
         project={"currentProjectname"}
-        explorers={[fileExplorer]}
+        explorers={[fileExplorer, fileExplorer]}
         api={api}
         extraEditors={[]}
         viewers={[
