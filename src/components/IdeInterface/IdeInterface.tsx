@@ -1,31 +1,12 @@
-import React, { JSX, useEffect } from "react";
-import { useState } from "react";
 import { CommsManager } from "jderobot-commsmanager";
+import { Activity, JSX, useEffect, useState } from "react";
 
-import {
-  StatusBar,
-  Explorer,
-  FileEditor,
-  Button,
-  StyledButtonsContainer,
-} from "Components";
-import {
-  OptionsProvider,
-  publish,
-  subscribe,
-  unsubscribe,
-  useTheme,
-} from "Utils";
-import {
-  Entry,
-  Layout,
-  ExplorerEntry,
-  EditorsEntry,
-  ViewersEntry,
-  Options,
-  ExtraSnippets,
-} from "Types";
+import { Button, Explorer, FileEditor, StatusBar, StyledButtonsContainer } from "Components";
+import { EditorsEntry, Entry, ExplorerEntry, ExtraSnippets, Layout, Options, ViewersEntry } from "Types";
+import { OptionsProvider, publish, subscribe, unsubscribe, useTheme } from "Utils";
 
+import { ExtraApi, StatusBarComponents } from "Types";
+import { Group, useDefaultLayout } from "react-resizable-panels";
 import {
   RoundedPanel,
   StyledHeadlessPanel,
@@ -36,8 +17,6 @@ import {
   StyledSplashViewers,
   StyledViewerMenu,
 } from "./IdeInterface.styles";
-import { ExtraApi, StatusBarComponents } from "Types";
-import { Group, Panel, useDefaultLayout } from "react-resizable-panels";
 
 export interface IdeInterfaceStyles {
   bgColor?: string;
@@ -95,20 +74,10 @@ const IdeInterface = ({
   }, [currentFile]);
 
   if (splashIcon === undefined) {
-    splashIcon = (
-      <StyledMonocolorSplashIcon
-        color={theme.palette.primary}
-        viewBox="0 0 200 200"
-      />
-    );
+    splashIcon = <StyledMonocolorSplashIcon color={theme.palette.primary} viewBox="0 0 200 200" />;
   }
 
-  const Separator = (
-    <StyledSeparator
-      bg={theme.palette?.primary}
-      hover={theme.palette?.secondary}
-    />
-  );
+  const Separator = <StyledSeparator bg={theme.palette?.primary} hover={theme.palette?.secondary} />;
 
   return (
     <OptionsProvider options={options}>
@@ -119,13 +88,8 @@ const IdeInterface = ({
           defaultLayout={defaultLayout}
           onLayoutChanged={onLayoutChanged}
         >
-          <StyledHeadlessPanel
-            collapsible
-            minSize="10%"
-            defaultSize="20%"
-            id="explorers"
-          >
-            {explorers.map((explorer) => (
+          <StyledHeadlessPanel collapsible minSize="10%" defaultSize="20%" id="explorers">
+            {explorers.map(explorer => (
               <Explorer
                 key={explorer.name}
                 setCurrentFile={setCurrentFile}
@@ -156,11 +120,7 @@ const IdeInterface = ({
             </>
           )}
           {layout === "both" && <>{Separator}</>}
-          <ViewersContainer
-            viewers={viewers}
-            splashIcon={splashIcon}
-            layout={layout}
-          />
+          <ViewersContainer viewers={viewers} splashIcon={splashIcon} layout={layout} />
         </Group>
         <StatusBar
           project={project}
@@ -187,15 +147,13 @@ const ViewersContainer = ({
   layout: Layout;
 }) => {
   const theme = useTheme();
-  const [visibility, setVisibility] = useState<boolean[]>(
-    viewers.map((viewer) => viewer.active),
-  );
+  const [visibility, setVisibility] = useState<boolean[]>(viewers.map(viewer => viewer.active));
 
   useEffect(() => {
     subscribe("changeToolGroup", changeToolInGroup);
 
     return () => {
-      unsubscribe("changeToolGroup", () => {});
+      unsubscribe("changeToolGroup", () => { });
     };
   }, []);
 
@@ -277,11 +235,7 @@ const ViewersContainer = ({
   }, [tool]);
 
   const Separator = (
-    <StyledSeparator
-      bg={theme.palette?.primary}
-      hover={theme.palette?.secondary}
-      orientation="horizontal"
-    />
+    <StyledSeparator bg={theme.palette?.primary} hover={theme.palette?.secondary} orientation="horizontal" />
   );
 
   if (layout === "only-editor") {
@@ -290,10 +244,7 @@ const ViewersContainer = ({
 
   return (
     <StyledPanel minSize="25%" id="viewers">
-      <StyledViewerMenu
-        bgColor={theme.palette?.primary}
-        style={{ gridArea: "header" }}
-      >
+      <StyledViewerMenu bgColor={theme.palette?.primary} style={{ gridArea: "header" }}>
         <StyledButtonsContainer>
           {viewers.map((viewer, index) => {
             if (toggleGroup === undefined) {
@@ -333,19 +284,14 @@ const ViewersContainer = ({
       <Group orientation="vertical" style={{ gridArea: "content" }}>
         {viewers.map((viewer, i) => (
           <>
-            {visibility[i] && (
-              <>
-                <RoundedPanel>{viewer.component}</RoundedPanel>
-                {i !== viewers.length - 1 && <>{Separator}</>}
-              </>
-            )}
+            <Activity mode={visibility[i] ? "visible" : "hidden"}>
+              <RoundedPanel>{viewer.component}</RoundedPanel>
+            </Activity>
+            {visibility[i] && i !== viewers.length - 1 && <>{Separator}</>}
           </>
         ))}
         {visibility.filter(Boolean).length === 0 && (
-          <StyledSplashViewers
-            bgColor={theme.palette.bg}
-            roundness={theme.viewRoundness}
-          >
+          <StyledSplashViewers bgColor={theme.palette.bg} roundness={theme.viewRoundness}>
             {splashIcon}
           </StyledSplashViewers>
         )}
