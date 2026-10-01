@@ -36,6 +36,7 @@ interface IdeInterfaceProps {
   baseFile?: Entry;
   baseWorld?: string;
   extraSnippets?: ExtraSnippets;
+  onCodeChange?: () => void;
 }
 
 const IdeInterface = ({
@@ -52,6 +53,7 @@ const IdeInterface = ({
   baseFile,
   baseWorld,
   extraSnippets,
+  onCodeChange,
 }: IdeInterfaceProps) => {
   const theme = useTheme();
   const [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
@@ -115,6 +117,7 @@ const IdeInterface = ({
                   options={options}
                   extraSnippets={extraSnippets}
                   layout={layout}
+                  onCodeChange={onCodeChange}
                 />
               </StyledPanel>
             </>
