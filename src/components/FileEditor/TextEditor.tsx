@@ -42,6 +42,7 @@ const FileEditor = ({
   language,
   zoomLevel,
   extraSnippets,
+  onCodeChange,
 }: {
   commsManager: CommsManager | null;
   fileContent: string;
@@ -50,6 +51,7 @@ const FileEditor = ({
   language: string;
   zoomLevel: number;
   extraSnippets?: ExtraSnippets;
+  onCodeChange?: () => void;
 }) => {
   const theme = useTheme();
 
@@ -329,6 +331,9 @@ const FileEditor = ({
           theme={`${theme.monacoTheme}-theme`}
           onChange={(newContent: any) => {
             setFileContent(newContent);
+            if (onCodeChange) {
+              onCodeChange();
+            }
           }}
           options={editorOptions}
           beforeMount={handleEditorDidMount}
