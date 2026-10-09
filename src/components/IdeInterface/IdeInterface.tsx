@@ -38,7 +38,6 @@ interface IdeInterfaceProps {
   baseFile?: Entry;
   baseWorld?: string;
   extraSnippets?: ExtraSnippets;
-  onCodeChange?: () => void;
 }
 
 const IdeInterface = ({
@@ -55,7 +54,6 @@ const IdeInterface = ({
   baseFile,
   baseWorld,
   extraSnippets,
-  onCodeChange,
 }: IdeInterfaceProps) => {
   const theme = useTheme();
   const [currentFile, setCurrentFile] = useState<Entry | undefined>(baseFile);
@@ -119,7 +117,6 @@ const IdeInterface = ({
                   options={options}
                   extraSnippets={extraSnippets}
                   layout={layout}
-                  onCodeChange={onCodeChange}
                 />
               </StyledPanel>
             </>
@@ -167,6 +164,7 @@ const ViewersContainer = ({
   };
 
   const toggleVisibility = (index: number) => {
+    viewers[index].activate(!visibility[index]);
     setVisibility(
       visibility.map((state, i) => {
         if (index === i) {
@@ -223,6 +221,7 @@ const ViewersContainer = ({
         if (visibility[index]) {
           isVisible = true;
           vis[index] = false;
+          viewers[index].activate(false);
         }
         if (element.name === tool) {
           newIndex = index;
@@ -231,6 +230,7 @@ const ViewersContainer = ({
     }
     if (isVisible) {
       vis[newIndex] = true;
+      viewers[newIndex].activate(true);
       setVisibility(
         visibility.map((state, i) => {
           return vis[i];
@@ -251,33 +251,17 @@ const ViewersContainer = ({
     <StyledPanel minSize="25%" id="viewers">
       <StyledViewerMenu bgColor={theme.palette?.primary} style={{ gridArea: "header" }}>
         <StyledButtonsContainer>
-          {viewers.map((viewer, index) => {
-            if (toggleGroup === undefined) {
+          {viewers.map((viewer, i) => {
+            if (toggleGroup === undefined || !(viewer.group === toggleGroup && viewer.name !== tool)) {
               return (
                 <Button
-                  key={`viewer${index}`}
-                  active={visibility[index]}
+                  key={`viewer${i}`}
+                  active={visibility[i]}
                   variant="tab"
                   isLabel={false}
                   title={`Toggle ${viewer.name}`}
                   id={`${viewer.name}-toggle`}
-                  onClick={() => toggleVisibility(index)}
-                >
-                  {viewer.icon}
-                </Button>
-              );
-            }
-
-            if (!(viewer.group === toggleGroup && viewer.name !== tool)) {
-              return (
-                <Button
-                  key={`viewer${index}`}
-                  active={visibility[index]}
-                  variant="tab"
-                  isLabel={false}
-                  title={`Toggle ${viewer.name}`}
-                  id={`${viewer.name}-toggle`}
-                  onClick={() => toggleVisibility(index)}
+                  onClick={() => toggleVisibility(i)}
                 >
                   {viewer.icon}
                 </Button>
@@ -287,20 +271,22 @@ const ViewersContainer = ({
         </StyledButtonsContainer>
       </StyledViewerMenu>
       <ToggleGroup orientation="vertical" style={{ gridArea: "content" }}>
-        {viewers.map((viewer, i) => (
-          <>
-            {!(viewer.group === toggleGroup && viewer.name !== tool) &&
+        {viewers.map((viewer, i) => {
+          if (toggleGroup === undefined || !(viewer.group === toggleGroup && viewer.name !== tool)) {
+            return (
               <>
                 <RoundedPanel id={visibility[i] ? viewer.name : `h-${viewer.name}`}>{viewer.component}</RoundedPanel>
-                {visibility[i] &&
+                {
+                  visibility[i] &&
                   <>
                     {i !== viewers.length - 1 && <>{Separator}</>}
                   </>
                 }
               </>
-            }
-          </>
-        ))}
+            )
+          }
+        }
+        )}
         {visibility.filter(Boolean).length === 0 && (
           <StyledSplashViewers bgColor={theme.palette.bg} roundness={theme.viewRoundness}>
             {splashIcon}
