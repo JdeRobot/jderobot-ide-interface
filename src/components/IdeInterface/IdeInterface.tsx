@@ -1,5 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { CommsManager } from "jderobot-commsmanager";
-import { Activity, JSX, useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 
 import { Button, Explorer, FileEditor, StatusBar, StyledButtonsContainer } from "Components";
 import { EditorsEntry, Entry, ExplorerEntry, ExtraSnippets, Layout, Options, ViewersEntry } from "Types";
@@ -16,6 +17,7 @@ import {
   StyledSeparator,
   StyledSplashViewers,
   StyledViewerMenu,
+  ToggleGroup
 } from "./IdeInterface.styles";
 
 export interface IdeInterfaceStyles {
@@ -281,13 +283,19 @@ const ViewersContainer = ({
           })}
         </StyledButtonsContainer>
       </StyledViewerMenu>
-      <Group orientation="vertical" style={{ gridArea: "content" }}>
+      <ToggleGroup orientation="vertical" style={{ gridArea: "content" }}>
         {viewers.map((viewer, i) => (
           <>
-            <Activity mode={visibility[i] ? "visible" : "hidden"}>
-              <RoundedPanel>{viewer.component}</RoundedPanel>
-            </Activity>
-            {visibility[i] && i !== viewers.length - 1 && <>{Separator}</>}
+            {!(viewer.group === toggleGroup && viewer.name !== tool) &&
+              <>
+                <RoundedPanel id={visibility[i] ? viewer.name : `h-${viewer.name}`}>{viewer.component}</RoundedPanel>
+                {visibility[i] &&
+                  <>
+                    {i !== viewers.length - 1 && <>{Separator}</>}
+                  </>
+                }
+              </>
+            }
           </>
         ))}
         {visibility.filter(Boolean).length === 0 && (
@@ -295,7 +303,7 @@ const ViewersContainer = ({
             {splashIcon}
           </StyledSplashViewers>
         )}
-      </Group>
-    </StyledPanel>
+      </ToggleGroup>
+    </StyledPanel >
   );
 };
