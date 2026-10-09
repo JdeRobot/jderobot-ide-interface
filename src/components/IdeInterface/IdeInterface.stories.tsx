@@ -1,9 +1,8 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-webpack5";
-import IdeInterface from "./IdeInterface";
-import { VncViewer } from "Components";
 import { SaveIcon } from "Assets";
-import { ExtraApi, Entry, ExplorerEntry } from "Types";
+import { VncViewer } from "Components";
+import { Entry, ExplorerEntry, ExtraApi } from "Types";
+import IdeInterface from "./IdeInterface";
 
 type Story = StoryObj<typeof IdeInterface>;
 
@@ -44,7 +43,7 @@ export const fileExplorer: ExplorerEntry = {
   },
   file: {
     create: (project: string, location: string, name: string) => {
-      return new Promise(() => {});
+      return new Promise(() => { });
     },
     get: (project: string, path: string) => {
       return new Promise(() => {
@@ -52,24 +51,24 @@ export const fileExplorer: ExplorerEntry = {
       });
     },
     rename: (project: string, oldPath: string, newPath: string) => {
-      return new Promise(() => {});
+      return new Promise(() => { });
     },
     delete: (project: string, path: string) => {
-      return new Promise(() => {});
+      return new Promise(() => { });
     },
     upload: (project: string, path: string, name: string, content: string) => {
-      return new Promise(() => {});
+      return new Promise(() => { });
     },
   },
   folder: {
     create: (project: string, location: string, name: string) => {
-      return new Promise(() => {});
+      return new Promise(() => { });
     },
     rename: (project: string, oldPath: string, newPath: string) => {
-      return new Promise(() => {});
+      return new Promise(() => { });
     },
     delete: (project: string, path: string) => {
-      return new Promise(() => {});
+      return new Promise(() => { });
     },
   },
 };
@@ -77,18 +76,18 @@ export const fileExplorer: ExplorerEntry = {
 const api: ExtraApi = {
   file: {
     save: (project: string, file: Entry, content: string) => {
-      return new Promise(() => {});
+      return new Promise(() => { });
     },
     get: (project: string, file: Entry) => {
-      return new Promise(() => {});
+      return new Promise(() => { });
     },
   },
   worlds: {
     list: (project: string) => {
-      return new Promise(() => {});
+      return new Promise(() => { });
     },
     get_config: (world: string) => {
-      return new Promise(() => {});
+      return new Promise(() => { });
     },
   },
 };
@@ -98,7 +97,7 @@ const gazeboViewer = {
   icon: <SaveIcon />,
   name: "Gazebo",
   active: true,
-  activate: () => {},
+  activate: () => { },
 };
 
 const terminalViewer = {
@@ -113,7 +112,7 @@ const terminalViewer = {
   name: "Terminal",
   group: "a",
   active: true,
-  activate: () => {},
+  activate: () => { },
 };
 
 const terminalViewer2 = {
@@ -128,7 +127,7 @@ const terminalViewer2 = {
   name: "Terminal 2",
   active: true,
   group: "b",
-  activate: () => {},
+  activate: () => { },
 };
 
 const terminalViewer3 = {
@@ -137,7 +136,7 @@ const terminalViewer3 = {
   name: "Terminal 3",
   active: true,
   group: "b",
-  activate: () => {},
+  activate: () => { },
 };
 
 export const Main: Story = {

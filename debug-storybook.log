@@ -1,0 +1,27 @@
+[18:54:26.374] [INFO] storybook v10.4.6
+[18:54:27.161] [DEBUG] Getting package.json info for /home/javizqh/jderobot/jderobot-ide-interface/package.json...
+[18:54:27.497] [INFO] Starting...
+[18:54:27.509] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
+[18:54:27.521] [WARN] No story files found for the specified pattern: [34msrc/**/*.mdx[39m
+[18:54:27.630] [DEBUG] Starting preview..
+[18:54:27.643] [INFO] Addon-docs: using MDX3
+[18:54:27.661] [INFO] Using implicit CSS loaders
+[18:54:27.665] [INFO] Using default Webpack5 setup
+[18:54:27.928] [DEBUG] Using tsconfig paths for react-docgen
+[18:54:32.948] [ERROR] Failed to build the preview
+[18:54:32.949] [WARN] Force closed preview build
+[18:54:32.949] [ERROR] [38;2;241;97;97mSB_BUILDER-WEBPACK5_0003 (WebpackCompilationError): There were problems when compiling your code with Webpack.
+Run Storybook with --debug-webpack for more information.[39m
+    at starter (file://./node_modules/@storybook/builder-webpack5/dist/index.js:857:11)
+    at starter.next (<anonymous>)
+    at Module.start (file://./node_modules/@storybook/builder-webpack5/dist/index.js:915:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async storybookDevServer (file://./node_modules/storybook/dist/core-server/index.js:11496:158)
+    at async buildOrThrow (file://./node_modules/storybook/dist/core-server/index.js:8205:12)
+    at async buildDevStandalone (file://./node_modules/storybook/dist/core-server/index.js:12057:41)
+    at async withTelemetry (file://./node_modules/storybook/dist/_node-chunks/chunk-G7NXW2C2.js:650:12)
+    at async dev (file://./node_modules/storybook/dist/bin/core.js:2735:3)
+    at async _Command.<anonymous> (file://./node_modules/storybook/dist/bin/core.js:2805:92)
+[18:54:32.950] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.
+[18:54:35.279] [PROMPT] Would you like to send anonymous crash reports to improve Storybook and fix bugs faster? {"choice":false}

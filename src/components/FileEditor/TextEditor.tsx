@@ -1,11 +1,13 @@
-import React from "react";
-import { useEffect, useRef, useState } from "react";
 import Editor, { Monaco } from "@monaco-editor/react";
-import type { editor } from "monaco-editor";
 import { CommsManager } from "jderobot-commsmanager";
-import { monacoEditorSnippet } from "./extras";
-import { useTheme } from "Utils";
+import type { editor } from "monaco-editor";
+import { useEffect, useRef, useState } from "react";
 import { ExtraSnippets } from "Types";
+import { useTheme } from "Utils";
+import { monacoEditorSnippet } from "./extras";
+import { initWebSocketAndStartClient } from "./lsp-client";
+// import { toSocket, WebSocketMessageReader, WebSocketMessageWriter } from 'vscode-ws-jsonrpc';
+
 
 const pylint_error: string[] = ["E0401", "E1101"];
 const pylint_warning: string[] = ["W0611"];
@@ -115,17 +117,57 @@ const FileEditor = ({
     }
   };
 
+  // useEffect(() => {
+  //   const url = "ws://localhost:7163/py_server";
+  //   const webSocket = new WebSocket(url);
+
+  //   webSocket.onopen = async () => {
+  //     const socket = toSocket(webSocket);
+  //     const reader = new WebSocketMessageReader(socket);
+  //     const writer = new WebSocketMessageWriter(socket);
+
+  //     const { MonacoLanguageClient } = await import("monaco-languageclient");
+  //     const { ErrorAction, CloseAction } = await import(
+  //       "vscode-languageclient"
+  //     );
+
+  //     // Initialize language client
+  //     const languageClient = new MonacoLanguageClient({
+  //       name: "Python Language Client",
+  //       clientOptions: {
+  //         documentSelector: ["python"],
+  //         errorHandler: {
+  //           error: () => ({ action: ErrorAction.Continue }),
+  //           closed: () => ({ action: CloseAction.DoNotRestart }),
+  //         },
+  //       },
+  //       connectionProvider: {
+  //         get: () => Promise.resolve({ reader, writer }),
+  //       },
+  //     });
+
+  //     languageClient.start();
+  //     reader.onClose(() => languageClient.stop());
+  //   };
+
+  //   webSocket.onerror = (event) => {
+  //     console.error("WebSocket error observed:", event);
+  //   };
+
+  //   webSocket.onclose = (event) => {
+  //     console.log("WebSocket closed:", event);
+  //   };
+
+  //   return () => {
+  //     webSocket.close();
+  //   };
+  // }, []);
+
   useEffect(() => {
     if (commsManager === null) {
       return;
     }
-
-    commsManager.subscribe("code-format", code_format);
-    commsManager.subscribe("code-analysis", code_analysis);
-
     return () => {
-      commsManager.unsubscribe("code-format", code_format);
-      commsManager.unsubscribe("code-analysis", code_analysis);
     };
   }, [commsManager]);
 
@@ -212,6 +254,7 @@ const FileEditor = ({
     //   }
     // );
 
+    initWebSocketAndStartClient("ws://localhost:7163/py_server/")
     return () => {
       if (editorRef.current !== null) {
         editorRef.current
