@@ -62,6 +62,7 @@ const FileEditor = ({
   options,
   extraSnippets,
   layout,
+  onCodeChange,
 }: {
   currentFile?: Entry;
   changeCurrentFile: Function;
@@ -74,6 +75,7 @@ const FileEditor = ({
   options?: Options;
   extraSnippets?: ExtraSnippets;
   layout: Layout;
+  onCodeChange?: () => void;
 }) => {
   const { error, warning } = useError();
   const theme = useTheme();
@@ -449,6 +451,7 @@ const FileEditor = ({
                   language={fileLanguageRef.current}
                   zoomLevel={zoomLevel}
                   extraSnippets={extraSnippets}
+                  onCodeChange={onCodeChange}
                 />
               );
             })()}
