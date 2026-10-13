@@ -42,6 +42,7 @@ module.exports = {
       amd: "react-dom",
       root: "ReactDOM",
     },
+    'node:fs': {}
   },
   module: {
     rules: [
