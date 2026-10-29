@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["./svg.d.ts", "./png.d.ts", "./jpg.d.ts"],
+    "types": ["vite/client","./svg.d.ts", "./png.d.ts", "./jpg.d.ts"],
     "paths": {
       "Assets": ["./src/assets"],
       "Components": ["./src/components"],
@@ -12,6 +12,7 @@
     "module": "nodenext",
     "target": "es2025",
     "rootDir": "./src",
+    "moduleDetection": "force",
     "moduleResolution": "nodenext",
     "declaration": true,
     "outDir": "./dist",

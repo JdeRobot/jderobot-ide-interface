@@ -7,7 +7,9 @@ import { useTheme } from "Utils";
 import { monacoEditorSnippet } from "./extras";
 import { initWebSocketAndStartClient } from "./lsp-client";
 // import { toSocket, WebSocketMessageReader, WebSocketMessageWriter } from 'vscode-ws-jsonrpc';
-
+import { initialize } from '@codingame/monaco-vscode-api';
+import getLanguagesServiceOverride from "@codingame/monaco-vscode-languages-service-override";
+import "vscode/localExtensionHost";
 
 const pylint_error: string[] = ["E0401", "E1101"];
 const pylint_warning: string[] = ["W0611"];
@@ -35,6 +37,7 @@ const getMarkerSeverity = (type: string, monaco: Monaco) => {
       return monaco.MarkerSeverity.Error;
   }
 };
+
 
 const FileEditor = ({
   commsManager,
@@ -251,6 +254,8 @@ const FileEditor = ({
     //     }
     //   }
     // );
+
+    await initialize({...getLanguagesServiceOverride(),});
 
     initWebSocketAndStartClient("ws://localhost:7163/py_server/")
     return () => {
